@@ -1,0 +1,39 @@
+development:
+  adapter: mysql
+  encoding: utf8
+  database: compreingressos_development
+  username: root
+  password: 123
+  pool: 20
+  timeout: 50000
+  host: cpnglcsql1001
+
+test:
+  adapter: mysql
+  encoding: utf8
+  database: compreingressos_development
+  username: root
+  password: 123
+  pool: 20
+  timeout: 50000
+  host: localhost
+
+production:
+  adapter: mysql
+  encoding: utf8
+  database: compreingressos_production
+  username: compreingressos
+  password: SNq3mhh5Tyb59J
+  pool: 100
+  timeout: 50000
+  host: 186.202.34.138
+
+staging:
+  adapter: mysql
+  encoding: utf8
+  database: compreingressos_staging
+  username: root
+  password: S4c1FufuB4nc0
+  pool: 100
+  timeout: 50000
+  host: localhost

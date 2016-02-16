@@ -1,0 +1,13 @@
+<p>
+  <b>Nome:</b>
+  <%=h @pacote_filtro.nome %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%=h @pacote_filtro.url %>
+</p>
+
+
+<%= link_to 'Edit', edit_pacote_filtro_path(@pacote_filtro) %> |
+<%= link_to 'Back', pacote_filtros_path %>

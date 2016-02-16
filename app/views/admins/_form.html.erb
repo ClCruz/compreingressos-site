@@ -1,0 +1,19 @@
+<% form_for(@admin) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :nome %><br />
+    <%= f.text_field :nome %>
+  </p>
+  <p>
+    <%= f.label :senha %><br />
+    <%= f.password_field :senha %>
+  </p>
+  <p>
+    <%= f.label :senha_confirmation %><br />
+    <%= f.password_field :senha_confirmation %>
+  </p>
+  <p>
+    <%= f.submit 'Salvar' %>
+  </p>
+<% end %>

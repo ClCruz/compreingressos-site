@@ -1,0 +1,23 @@
+<h1>Autentique-se</h1>
+
+<span style="color:red"><%= flash[:notice] %></span>
+<% form_tag do %>
+<p>
+	<label for="nome">Nome:</label><br />
+	<%= text_field_tag :nome, params[:nome] %>
+	<script>
+		jQuery("#nome").focus();
+	</script>
+</p>
+<p>
+	<label for="senha">Senha</label><br />
+	<%= password_field_tag :senha, params[:senha] %>
+</p>
+<p>
+	<%= submit_tag 'Entrar' %>
+</p>
+<% end %>
+<!--
+<h2>A area administrativa esta temporariamente desativada</h2>
+<p>As operações serão retomadas ao normal no dia 18/01/2016 as 9h00.</p>
+-->

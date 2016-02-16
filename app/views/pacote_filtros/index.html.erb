@@ -1,0 +1,22 @@
+<h1>Listing pacote_filtros</h1>
+
+<table>
+  <tr>
+    <th>Nome</th>
+    <th>Url</th>
+  </tr>
+
+<% @pacote_filtros.each do |pacote_filtro| %>
+  <tr>
+    <td><%=h pacote_filtro.nome %></td>
+    <td><%=h pacote_filtro.url %></td>
+    <td><%= link_to 'Show', pacote_filtro %></td>
+    <td><%= link_to 'Edit', edit_pacote_filtro_path(pacote_filtro) %></td>
+    <td><%= link_to 'Destroy', pacote_filtro, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New pacote_filtro', new_pacote_filtro_path %>

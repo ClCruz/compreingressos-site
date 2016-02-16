@@ -1,0 +1,24 @@
+<h1>Listing textos</h1>
+
+<table>
+  <tr>
+    <th>Titulo</th>
+    <th>Subtitulo</th>
+    <th>Texto</th>
+  </tr>
+
+<% @textos.each do |texto| %>
+  <tr>
+    <td><%=h texto.titulo %></td>
+    <td><%=h texto.subtitulo %></td>
+    <td><%=h texto.texto %></td>
+    <td><%= link_to 'Show', texto %></td>
+    <td><%= link_to 'Edit', edit_texto_path(texto) %></td>
+    <td><%= link_to 'Destroy', texto, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New texto', new_texto_path %>

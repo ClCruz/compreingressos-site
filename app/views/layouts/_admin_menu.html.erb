@@ -1,0 +1,63 @@
+<% if Rails.env=="development" or session[:admin_id] %>
+	<div id="admin_menu">
+		<ul>
+      <!--
+      <li><%= link_to 'Homes', :controller => :homes %></li>
+      |
+      -->
+      <li><%= link_to 'Visores', :controller => :visores %></li>
+      |
+      <li><%= link_to 'Banners fixos', :controller => :banner_fixos %></li>
+      |
+      <li><%= link_to 'Home modulos', :controller => :home_modulos %></li>
+			|
+      <li><%= link_to 'Páginas especiais', :controller => :pagina_especiais %></li>
+      |
+      <li><%= link_to 'Filtros de páginas especiais', :controller => :pagina_especial_filtros %></li>
+      |
+      <li><%= link_to 'Espetáculos', :controller => :espetaculos, :action => :admin_index %></li>
+      |
+      <li><%= link_to 'Relatórios', :controller => :relatorios, :action => :index %></li>
+      <!--
+			|
+			<li><a href="/espetaculos/exportar.csv">Exportar espetáculos</a></li>
+			-->
+			|
+			<li><%= link_to 'Teatros', :controller => :teatros, :action => :admin_index %></li>
+			|
+			<li><%= link_to 'Cidades', :controller => :cidades %></li>
+			|
+			<li><%= link_to 'Gêneros', :controller => :generos %></li>
+      <!--
+      |
+      <li><%= link_to 'Outras Localidades', :controller => :outras_localidades %></li>
+      |
+      <li><%= link_to 'Vídeos', :controller => :videos %></li>
+      -->
+			
+			<br />
+
+      <li><%= link_to 'Classificações', :controller => :classificacaos %></li>
+      |
+			<li><%= link_to 'Home background', :controller => :home_background %></li>
+      |
+      <li><%= link_to 'Pacotes', :controller => :pagina_de_pacotes, :action => :admin_index %></li>
+      |
+      <li><%= link_to 'Serviços', :controller => :servicos %></li>
+			|
+			<li><%= link_to 'FAQs', :controller => :faqs %></li>
+			|
+			<li><%= link_to 'Especiais', :controller => :especiais %></li>
+			|
+			<li><%= link_to 'Pontos de Venda', :controller => :pontosdevenda %></li>
+			<!--
+			|
+			<li><%= link_to 'Eventos Realizados', :controller => :eventos_realizados, :action => :admin_index %></li>
+			-->
+			|
+			<li><%= link_to 'Admins', :controller => :admins, :action => :index %></li>
+			|
+			<li><%= link_to 'Logout', :controller => :admin, :action => :logout %></li>	
+		</ul>
+	</div>
+<% end %>

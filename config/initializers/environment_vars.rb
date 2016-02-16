@@ -1,0 +1,1 @@
+ENVIRONMENT_VARS = YAML.load_file("#{::Rails.root}/config/locales/environment_vars.yml")[::Rails.env]

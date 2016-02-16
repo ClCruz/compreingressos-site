@@ -1,0 +1,77 @@
+<style type="text/css">
+  #background_holder{
+    overflow:visible;
+  }
+  #background_holder div.centraliza div#espetaculos{
+    margin-bottom:40px;
+  }
+  #background_holder img.img_header_map{
+    display:block;
+  }
+  div.background_pagina{
+    background:<%= @pagina_de_pacotes.cor_de_fundo %> url('<%= @pagina_de_pacotes.imagem.url %>') top center no-repeat;
+  }
+  div.card{
+    overflow:visible;
+  }
+  p.pagina_especial_nome, p.pagina_especial_subtitulo{
+    color:<%= @pagina_de_pacotes.cor_do_header %>;
+    text-shadow: 3px 3px 3px #000;
+  }
+  #espetaculos{
+    width:914px;
+    margin:0 auto;
+  }
+  .container_theatromunicipal.right{
+    width:298px;
+  }
+  .container_theatromunicipal.left{
+    width:607px;
+    margin-right:9px;
+  }
+</style>
+<div class="background_pagina">
+    <div class="centraliza">
+      <map name="header_map">
+        <%= @pagina_de_pacotes.mapeamento_de_imagem %>
+      </map>
+      <img src="/images/header_map.png" usemap="#header_map" class="img_header_map" height="<%= @pagina_de_pacotes.altura_de_inicio_da_listagem %>" />
+      <% if !session[:desktop] or session[:desktop]==0 -%>
+        <script>
+          var divisorMd = 3.0;
+          var divisorParams = [["img.img_header_map","height"]];
+          mobileDivisor(divisorMd,divisorParams);
+          mobileMap(divisorMd);
+        </script>
+      <% end -%>
+    </div>
+  <div class="centraliza pacotes">
+    <div id="detalhes">
+      <p class="pagina_especial_nome"><%= nl2br @pagina_de_pacotes.nome %></p>
+      <p class="pagina_especial_subtitulo"><%= nl2br @pagina_de_pacotes.subtitulo %></p>
+      <p class="pagina_especial_subtitulo" style="font-size:20px;color#FFF;"><a href="http://theatromunicipal.org.br/2016/01/28/novas-series-de-assinaturas-na-sala-do-conservatorio-e-no-salao-nobre/" target="_blank" style="color:#FFF">saiba mais</a></p>
+    </div>
+    <h1 style="text-align: center; color: rgb(255, 255, 255); float: left; width: 100%; margin: 70px 0px 80px; font-size: 26px;">
+      Informamos que as vendas de assinaturas encerraram em 10/02.
+      <br>
+      Ingressos avulsos serão vendidos a partir do dia 16/02.
+      <br><br>
+      Theatro Municipal de São Paulo
+    </h1>
+    <!--
+    <div id="espetaculos">
+      <div class="container_theatromunicipal right">
+      <div><a href="/saladoconservatorio/assinaturas/serie-musica-de-camera-no-conservatorio"><img src="/images/sc-serie-musica-de-camera-no-conservatorio.jpg"></a></div>
+      </div>
+      <div class="container_theatromunicipal left">
+        <div style="float:left;margin:0 9px 0 0;"><a href="/saladoconservatorio/assinaturas/coral-paulistano-no-conservatorio"><img src="/images/sc-cp-no-conservatorio.jpg"></a></div>
+        <div style="float:left;margin:0 0 0 0;"><a href="/saladoconservatorio/assinaturas/coral-paulistano-no-salao-nobre-serie-oratorios"><img src="/images/sc-cp-no-salao-nobre-serie-oratorios.jpg"></a></div>
+        <div style="float:left;margin:9px 9px 0 0;"><a href="/saladoconservatorio/assinaturas/quarteto-serie-olimpiadas"><img src="/images/sc-quarteto-serie-olimpiadas.jpg"></a></div>
+        <div style="float:left;margin:9px 0 0 0;"><a href="/saladoconservatorio/assinaturas/quarteto-serie-convidados"><img src="/images/sc-quarteto-serie-convidados.jpg"></a></div>
+        <div style="float:left;margin:9px 9px 20px 0;"><a href="/saladoconservatorio/assinaturas/serie-contemporanea-no-conservatorio"><img src="/images/sc-serie-contemporanea-no-conservatorio.jpg"></a></div>
+        <div style="float:left;margin:9px 0 20px 0;"><a href="/saladoconservatorio/assinaturas/series-orquestra-experimental-e-a-musica-de-camara"><img src="/images/sc-serie-orquestra-experimental-no-conservatorio.jpg"></a></div>
+      </div>
+    </div>
+    -->
+  </div>
+</div>

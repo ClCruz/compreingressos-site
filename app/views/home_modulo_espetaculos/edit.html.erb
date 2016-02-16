@@ -1,0 +1,24 @@
+<h1>Editing home_modulo_espetaculo</h1>
+
+<% form_for(@home_modulo_espetaculo) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :home_modulo %><br />
+    <%= f.text_field :home_modulo %>
+  </p>
+  <p>
+    <%= f.label :espetaculo %><br />
+    <%= f.text_field :espetaculo %>
+  </p>
+  <p>
+    <%= f.label :ordem %><br />
+    <%= f.text_field :ordem %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @home_modulo_espetaculo %> |
+<%= link_to 'Back', home_modulo_espetaculos_path %>

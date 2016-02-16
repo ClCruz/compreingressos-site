@@ -1,0 +1,19 @@
+<% form_for(@er) do |f| %>
+  <%= f.error_messages %>
+  
+  <p>
+    <%= f.label :espetaculo_id %><br />
+	<%= f.select(:espetaculo_id, @espetaculos, :prompt => 'Selecione') %>
+  </p>
+  <p>
+    <%= f.label :temporada %><br />
+    <%= f.text_field :temporada, :style => "width:350px;"%>
+  </p>
+  <p>
+    <%= f.label :ordem %><br />
+    <%= f.text_field :ordem, :style => "width:70px;", :maxlength => "10" %>
+  </p>
+  <p>
+    <%= f.submit 'Salvar' %>
+  </p>
+<% end %>

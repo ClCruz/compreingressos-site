@@ -1,0 +1,218 @@
+<% if defined?(@tea.parallax) and @tea.parallax? %>
+<style type="text/css">
+  div#background_holder{
+    background-position:center 0px; 
+  }
+</style>
+<script type="text/javascript">
+/*$(document).ready(function(){
+  $(window).scroll(function(){
+    if ($(window).scrollTop() > 54){
+      var scroll = ($(window).scrollTop()*<%= @tea.parallax_valor %>)-54;
+      $('#background_holder').css("background-position", "center "+scroll+"px");
+    } else {
+      $('#background_holder').css("background-position", "center 0px");
+    }
+  });
+});*/
+</script>
+<% end %>
+<style type="text/css">
+  #background_holder{
+    <% if @tea.imagem_de_fundo? -%>
+      background-image:url('<%= @tea.imagem_de_fundo.url() %>') !important;
+      background-position:center top;
+      background-repeat:no-repeat !important;
+    <% end -%>
+    <% if !@tea.cor_de_fundo.blank? -%>
+      background-color:<%= @tea.cor_de_fundo %> !important;
+    <% end -%>
+  }
+  <% if @tea.imagem_de_fundo? -%>
+  #background_holder div.centraliza{
+    margin-top:<%= @tea.altura_de_inicio %>px;
+  }
+  @media only screen and (max-width:640px){
+    #teatro div.container_top div.left{
+      display:none;
+    }
+    #teatro div.container_top div.right{
+      width:100%;
+      text-shadow:1px 1px 2px #000;
+    }
+  }
+  <% end -%>
+  #teatro h1, #teatro div.container_top p.teatro_end, div.espetaculo_em_cartaz div.container_infos div.nome, div.espetaculo_em_cartaz div.container_infos div.data{
+    color:<%= @tea.cor_do_texto %>;
+  }
+  #teatro div.container{
+    border-color:<%= @tea.cor_da_borda_dos_boxes %>;
+    background-color:<%= @tea.cor_do_fundo_dos_boxes %>;
+  }
+  #teatro h2, #teatro div.container p{
+    color:<%= @tea.cor_do_texto_dos_boxes %>;
+  }
+</style>
+<% if @tea.imagem_de_fundo? -%>
+  <% if !session[:desktop] or session[:desktop]==0 -%>
+    <script>
+      var divisorMd = 4.0;
+      var divisorParams = [["#background_holder div.centraliza.teatro_pag","margin-top"]];
+      mobileDivisor(divisorMd,divisorParams);
+    </script>
+  <% end -%>
+<% else %>
+  <div class="googlemaps">
+    <iframe width="100%" height="200" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?f=q&source=s_q&hl=es&geocode=&q=<%=@tea.endereco%>, <%=@tea.bairro%> - <%=@tea.cidade.nome%> - <%=@tea.cidade.estado%>&ie=UTF8&z=15&t=m&iwloc=near&output=embed"></iframe><br />
+    <a class="ampliar" href="http://maps.google.com/maps?f=q&source=s_q&hl=es&geocode=&q=<%=@tea.endereco%>, <%=@tea.bairro%> - <%=@tea.cidade.nome%> - <%=@tea.cidade.estado%>&ie=UTF8&z=15&t=m&iwloc=near&output=embed" target="_blank">Exibir mapa ampliado</a>
+  </div>
+<% end -%>
+<div class="centraliza teatro_pag">
+  <div id="teatro">
+    <div class="container_top">
+      <div class="left">
+        <div class="cont_img">
+          <% if !@tea.imagem_de_fundo? -%>
+          <%= image_tag @tea.imagem.url(:big), :alt => @tea.nome, :title => @tea.nome %>
+          <% end -%>
+        </div>
+      </div>
+      <div class="right">
+        <div class="container_mini_topo">
+          <span class="icone imagens<%= @tea.teatro_imagens.size>0 ? '':' inativo'%>">Fotos</span>
+          <a href="http://<%=@tea.site%>" target="_blank"><span class="icone site<%= !@tea.site.blank? ? '':' inativo'%>">Site</span></a>
+          <span class="icone mapa_de_plateia<%= @tea.mapa_de_plateia? ? '':' inativo'%>">Mapa de platéia</span>
+          <span class="icone videos<%= @tea.videos.size>0 ? '':' inativo'%>">Vídeos</span>
+        </div>
+        <h1><%=@tea.nome%></h1>
+        <p class="teatro_end">
+          <%=@tea.endereco%><br />
+          <%=@tea.bairro%> - <%=@tea.cidade.nome%> - <%=@tea.cidade.estado%>
+        </p>
+      </div>
+      <div class="midias_sociais">
+        <div class="addthis_toolbox addthis_default_style">
+          <a class="addthis_button_facebook pequeno"></a>
+          <a class="addthis_button_twitter pequeno"></a>
+          <a class="addthis_button_email pequeno"></a>
+        </div>
+      </div>
+      <script type="text/javascript">var addthis_config = {ui_language:"pt"}</script>
+      <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=xa-4c8561805a96e24d"></script>
+    </div>
+    
+    <div class="container telefone">
+      <h2>Compre pelo telefone</h2>
+      <p><%=@tea.telefone%></p>
+    </div>
+    
+    <div class="container bilheteria">
+      <h2>Bilheteria</h2>
+      <p><%=@tea.bilheteria%></p>
+    </div>
+    
+    <div class="container lotacao">
+      <h2>Lotação</h2>
+      <p><%= nl2br @tea.lotacao.html_safe %></p>
+    </div>
+    
+    <div class="container_em_cartaz">
+      <h2>Espetáculos em cartaz</h2>
+    </div>
+    
+    <div id="overlay">
+      <div class="centraliza">
+        <div class="top">
+          <div class="fechar"></div>
+          <h1><%=@tea.nome%></h1>
+          <div class="cont_teatro">
+             <p class="teatro"><%=@tea.endereco%></p>
+            <p class="teatro_info"><%=@tea.bairro%> - <%= link_to @tea.cidade.nome, "/espetaculos?cidade=#{@tea.cidade.nome}&genero="%> - <%=@tea.cidade.estado%></p>
+          </div>
+        </div>
+        
+        <div class="container_mapa" style="height:420px">
+          <iframe width="960" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?f=q&source=s_q&hl=es&geocode=&q=<%=@tea.endereco%>, <%=@tea.bairro%> - <%=@tea.cidade.nome%> - <%=@tea.cidade.estado%>&ie=UTF8&z=15&t=m&iwloc=near&output=embed"></iframe><br />
+        </div>
+        
+        <div class="informacoes">
+          <% if @tea.mapa_de_plateia? -%>
+          <div class="container_overlay mapa_de_plateia">
+            <div class="icone mapa_de_plateia"></div>
+            <%= image_tag @tea.mapa_de_plateia.url() %>
+          </div>
+          <% end -%>
+          
+          <% if @tea.videos.size>0 %>
+            <div class="container_overlay videos">
+              <div class="icone video"></div>
+              <% for video in @tea.videos %>
+                <div class="container_iframe_video" style="width:960px;height:540px">
+                  <iframe id="video_player" width="960" height="540" src="//www.youtube-nocookie.com/embed/<%=video.youtube_id%>?rel=0&enablejsapi=1&version=3&playerapiid=ytplayer"  frameborder="0" allowfullscreen="true" allowscriptaccess="always"></iframe>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+          
+          <% if @tea.teatro_imagens.size>0 -%>
+          <div class="container_overlay imagens">
+            <div class="icone fotos"></div>
+            <% @tea.teatro_imagens.each do |i| -%>
+              <%= image_tag i.imagem.url(:big), :class => (cycle '',' right') %>
+            <% end -%>
+          </div>
+          <% end -%>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="espetaculo_em_cartaz">
+  <% @espetaculos_cartaz.each do |ec| -%>
+    <div class="container_imagem" style="background-image:url(<%= ec.img_principal.url %>);">
+      <a href="<%=url_for ec%>"></a>
+    </div>
+    <div class="container_infos">
+      <div class="centraliza">
+        <div class="nome">
+          <%= nl2br ec.nome %>
+        </div>
+        <div class="botao <%= (ec.cc_id.blank? or ec.proximo_horario.blank?) ? 'saiba_mais':'comprar'%>">
+          <a href="<%=url_for ec%>"></a>
+        </div>
+        <div class="data">
+          <% if ec.proximo_horario -%>
+            <p class="linha1">Próxima apresentação</p>
+            <p class="linha2"><%= ec.proximo_horario.data==Date.today ? 'Hoje' : l(ec.proximo_horario.data, :format => :weekday)%></p>
+            <p class="linha3"><%= l ec.proximo_horario.data, :format => :short %></p>
+          <% end -%>
+        </div>
+      </div>
+    </div>
+  <% end -%>
+  <!--
+  <% @espetaculos_cartaz.each do |ec| -%>
+    <div class="espetaculo espetaculo_grande_over" style="background-image:url(<%= ec.img_principal.url %>);">
+      <div class="over">
+        <span class="container_proxima_apresentacao">
+          <span class="proxima_apresentacao">
+            <% if ec.proximo_horario %>
+              <p class="linha1">Próxima apresentação</p>
+              <p class="linha2"><%= ec.proximo_horario.data==Date.today ? 'Hoje' : l(ec.proximo_horario.data, :format => :weekday)%></p>
+              <p class="linha3"><%= l ec.proximo_horario.data, :format => :short %></p>
+            <% end %>
+          </span>
+          <a href="<%=url_for ec%>" class="botao <%= ec.cc_id.blank? ? 'saiba_mais':'comprar'%>"></a>
+        </span>
+      </div>
+    </div>
+  <% end -%>
+  <script type="text/javascript">
+    /*$(function() {
+      $('.espetaculo_em_cartaz .espetaculo').each(function(){
+        $(this).hoverdir();
+      });
+    });*/
+  </script>
+  -->
+</div>

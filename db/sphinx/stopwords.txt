@@ -1,0 +1,41 @@
+
+ | A Portuguese stop word list. Comments begin with vertical bar. Each stop
+ | word is at the start of a line.
+
+
+ | The following is a ranked list (commonest to rarest) of stopwords
+ | deriving from a large sample of text.
+
+ | Extra words have been added at the end.
+
+de             |  of, from
+a              |  the; to, at; her
+o              |  the; him
+e              |  and
+do             |  de + o
+da             |  de + a
+em             |  in
+um             |  a
+os             |  the; them
+no             |  em + o
+se             |  himself etc
+na             |  em + a
+por            |  for
+as             |  the; them
+dos            |  de + os
+mas            |  but
+ao             |  a + o
+das            |  de + as
+à              |  a + a
+ou             |  or
+nos            |  em + os; us
+já             |  already, now
+ja
+eu             |  I
+só             |  only, just
+so
+nas            |  em + as
+me             |  me
+às             |  a + as
+as
+com

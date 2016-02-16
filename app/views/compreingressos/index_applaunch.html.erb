@@ -1,0 +1,204 @@
+<% cache("home") do -%>
+<style>
+div.background_personalizado {
+    background: url("/images/home_bg/bg_mobile_test.jpg") no-repeat scroll center top #540202 !important;
+}
+</style>
+<% if !session[:desktop] or session[:desktop]==0 -%>
+<script>
+  mobileRedirect();
+</script>
+<% end -%>
+<div id="home">
+  <div id="container_banners_fixos">
+    <div id="cont_alinha_banners_fixos">
+      <div id="alinha_banners_fixos">
+        <div id="banners_fixos">
+          <% @banner_fixos.each do |banner_fixo| %>
+            <div class="banner_fixo">
+              <% if banner_fixo.link.blank? %>
+                <%= image_tag(banner_fixo.imagem.url, :width => 160) %>
+              <% else %>
+                <%= link_to( image_tag(banner_fixo.imagem.url, :width => 170), banner_fixo.link, :target => (banner_fixo.blank==true ? '_blank':'_self')) %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="display">
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <%= render :partial => 'layouts/visor_destaque', :collection => @visores %>
+      </div>
+    </div>
+  <div class="pagination"></div>
+  </div>
+  <script type="text/javascript">
+    $(function(){
+      var swiperVisor = $('#display .swiper-container').swiper({
+        pagination:'.pagination',
+        mode:'horizontal',
+        speed:300,
+        autoplay:6000,
+        moveStartThreshold:50,
+        loop:true,
+        preventLinks:true,
+        paginationClickable:true
+      });
+    })
+  </script>
+  <div class="background_personalizado">
+    <div class="centraliza">
+      <div id="home_inferior">
+        <div class="modulo dois" id="app_launch" data-ss-colspan="2">
+          <div class="over" style="display:none;position: absolute;width: 219px;height: 388px;top: 196px;left: 74px;background:transparent url(../images/bg_espet_hover.png) 0 0 repeat;">
+            <a href="/app" class="botao saiba_mais" style="margin-top:168px;">Saiba mais sobre o APP</a>
+          </div>
+          <map name="header_map">
+            <area shape="rect" coords="60,30,310,100" href="/app" target="_blank" alt="Download on the App Store">
+            <area shape="rect" coords="87,678,193,708" href="https://itunes.apple.com/us/app/compreingressos/id980126862?ls=1&mt=8" target="_blank" alt="Download on the App Store">
+            <area shape="rect" coords="201,678,306,708" href="https://play.google.com/store/apps/details?id=br.com.compreingressos" target="_blank" alt="ANDROID APP ON Google play">
+          </map>
+          <img src="/images/header_map.png" usemap="#header_map" class="img_header_map" width="370" height="710">
+          <script type="text/javascript">
+            $(function(){
+              $("#app_launch").hover(
+                function(){
+                  $("#app_launch .over").fadeIn(200);
+                },
+                function(){
+                  $("#app_launch .over").fadeOut(100);
+                }
+              );
+            });
+          </script>
+        </div>
+
+        <% @home_modulos.each do |home_modulo| %>
+          <% if home_modulo.tipo==1 or home_modulo.tipo==2 %>
+            <div class="modulo<%= home_modulo.tipo==1 ? ' um':' dois' %>"<%= home_modulo.tipo==1 ? '':' data-ss-colspan="2"' %>>
+              <a name="modulo_<%= home_modulo.id %>"></a>
+              <h1><%=nl2br home_modulo.titulo %></h1>
+              <div class="espetaculos masonry js-masonry" data-masonry-options='{ "columnWidth":1 }'>
+                <% i = 1 %>
+                <% home_modulo.home_modulo_espetaculos.each do |me| %>
+                  <% if i <= home_modulo.exibir and me.espetaculo.ativo == true %>
+                    <div class="card">
+                      <a href="<%=url_for me.espetaculo%><%=!@completaurl.nil? ? '?'+@completaurl : ''%>">
+                        <%= image_tag me.espetaculo.img_miniatura.url(:miniatura), :height => me.espetaculo.img_miniatura_height %>
+                        <h3><%=me.espetaculo.nome%></h3>
+                        <% if !home_modulo.ocultar_teatro %>
+                          <p class="teatro"><%=me.espetaculo.teatro.nome%></p>
+                        <% end %>
+                        <% if !home_modulo.ocultar_cidade %>
+                          <p class="cidade"><%=me.espetaculo.cidade.nome%> - <%=me.espetaculo.cidade.estado%></p>
+                        <% end %>
+                        <% if !home_modulo.ocultar_genero %>
+                          <p class="genero"><%=me.espetaculo.genero.nome%></p>
+                        <% end %>
+                        <div class="over">
+                          <% if me.espetaculo.proximo_horario %>
+                            <p class="linha1">Próxima apresentação</p>
+                            <p class="linha2"><%= me.espetaculo.proximo_horario.data==Date.today ? 'Hoje' : l(me.espetaculo.proximo_horario.data, :format => :weekday) %></p>
+                            <p class="linha3"><%= l me.espetaculo.proximo_horario.data, :format => :short %></p>
+                            <a href="<%=url_for me.espetaculo%>" class="botao <%= me.espetaculo.cc_id.blank? ? 'saiba_mais':'comprar'%>"></a>
+                          <% else %>
+                            <a href="<%=url_for me.espetaculo%>" class="botao <%= (me.espetaculo.cc_id.blank? or me.espetaculo.proximo_horario.blank?) ? 'saiba_mais semdata':'comprar semdata'%>"></a>
+                          <% end %>
+                        </div>
+                      </a>
+                    </div>
+                    <% i = i+1 %>
+                  <% end %>
+                <% end %>
+              </div>
+              <div class="separador">...</div>
+            </div>
+          <% else %>
+            <div class="modulo<%= home_modulo.tipo==3 ? ' um':' dois banner_home' %>"<%= home_modulo.tipo==3 ? '':' data-ss-colspan="2"' %>">
+              <div class="container" style="height:<%= home_modulo.imagem_altura %>px;<%= home_modulo.topo ? 'margin-top:32px;position:relative;':'' %>">
+              <div class="card_banner">
+                <a href="<%=(home_modulo.blank==true ? 'http://':'')+home_modulo.link%>" target="<%=home_modulo.blank==true ? '_blank':'_self'%>">
+                  <%= image_tag home_modulo.imagem.url, :height => home_modulo.imagem_altura %>
+                </a>
+                <div class="over">
+                  <%=link_to '', home_modulo.link, :class => 'botao saiba_mais'%>
+                </div>
+              </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+$(document).ready(function($){
+  $container = $('#home_inferior');
+  $container.shapeshift({
+    enableDrag: false,
+    enableResize: false,
+    align: "left",
+    minColumns: 3,
+    gutterY: 20
+  });
+  setTimeout("$container.trigger('ss-rearrange')",1000);
+});
+</script>
+<script type="text/javascript">
+  $(function() {
+    // Over dos espetaculos
+    $('.espetaculos .card').each(function(){
+      $(this).hoverdir();
+    });
+    
+    // Over dos banners
+    $('.modulo .card_banner').hover(
+      function(){
+        $(this).children('div.over').fadeIn(200);
+      },
+      function(){
+        $(this).children('div.over').fadeOut(200);
+      }
+    );
+    
+    // Posiciona botao de saiba mais no meio do banner
+    $('.modulo .card_banner div.over a').each(function(){
+      var tover = $(this).parent().parent().height();
+      var marginsm = (tover-(104/2))/2;
+      $(this).css("margin",marginsm+"px 0px");
+    });
+  });
+</script>
+<% if Dir.glob("#{RAILS_ROOT}/public/images/home_bg/*").first -%>
+<style>
+  div.background_personalizado{
+    background:transparent url('/images/home_bg/bg<%= File.extname(Dir.glob("#{RAILS_ROOT}/public/images/home_bg/*").first) %>') center top no-repeat;
+    background-color:<%= HomeBackground.find(1).bgcolor %>;
+  }
+  div.modulo h1, div.modulo div.separador{
+    color:<%= HomeBackground.find(1).cor_de_texto%>;
+  }
+</style>
+<% elsif HomeBackground.find(1) %>
+<style>
+  div.background_personalizado{
+    background-color:<%= HomeBackground.find(1).bgcolor %>;
+  }
+  div.modulo h1, div.modulo div.separador{
+    color:<%= HomeBackground.find(1).cor_de_texto%>;
+  }
+</style>
+<% end -%>
+<%
+  @hb = HomeBackground.find(1)
+  if !@hb.esquerda_link.blank? or !@hb.direita_link.blank?
+%>
+  <script type='text/javascript'>
+    backgroundClick('<%=@hb.esquerda_link%>',<%=@hb.esquerda_blank%>,'<%=@hb.direita_link%>',<%=@hb.direita_blank%>);
+  </script>
+<% end -%>
+<% end -%>

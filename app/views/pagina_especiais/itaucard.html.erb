@@ -1,0 +1,583 @@
+<style type="text/css">
+  div.background_pagina{
+    background:<%= @pagina_especial.cor_de_fundo %> url('<%= @pagina_especial.imagem.url %>') top center no-repeat;
+  }
+  div#background_holder div#detalhes_busca{
+    background-color:<%= @pagina_especial.cor_de_fundo_do_box %> !important;
+  }
+  div.background_pagina div#detalhes_busca div.ordem, div.background_pagina div#detalhes_busca p, div.background_pagina div#detalhes_busca div.ordem a.ativo, #espetaculos h1{
+    color:<%= @pagina_especial.cor_do_texto_do_box %> !important;
+  }
+  div.background_pagina div#detalhes_busca div.ordem a{
+    color:<%= @pagina_especial.cor_do_link_do_box %>;
+  }
+  div.background_pagina div#detalhes_busca div.ordem a:hover{
+    background-color:<%= @pagina_especial.cor_do_link_do_box %>;
+    color:<%= @pagina_especial.cor_do_texto_do_box %>;
+  }
+  div.card{
+    border-color:<%= @pagina_especial.cor_da_borda_do_espetaculo %>;
+  }
+  #background_holder img.img_header_map{
+    display:block;
+    height:<%= @pagina_especial.altura_de_inicio_da_listagem %>px;
+  }
+  div.menu_busca.pag_especial{
+    background-color:<%= @pagina_especial.cor_de_fundo_do_box %>;
+    width:947px;
+    top:<%= @pagina_especial.altura_de_inicio_da_listagem+220 %>px;
+  }
+  div.menu_busca.pag_especial a{
+    color:<%= @pagina_especial.cor_do_link_do_box %>;
+  }
+  div.menu_busca.pag_especial a:hover{
+    color:<%= @pagina_especial.cor_do_texto_do_box %>;
+    background-color:<%= @pagina_especial.cor_do_link_do_box %>;
+  }
+  div.background_pagina div.menu_busca.pag_especial{
+    border:0;
+  }
+  div.background_pagina div.menu_busca a{
+    font-size:14px;
+    margin:0 5px 4px;
+  }
+  div#menu_topo div.container_mini_cabecalho.linha.fixed{
+    position:absolute !important;
+    border:0 !important;
+    top:56px !important;
+  }
+  div#menu_topo div.container_mini_cabecalho.linha.fixed.pag_especial{
+    top:231px !important;
+  }
+  .pag_especial_filtros div#busca div.container p{
+    color:<%= @pagina_especial.cor_do_link_do_box %> !important;
+  }
+  .pag_especial_filtros div#busca div.container p.help{
+    color:<%= @pagina_especial.cor_do_texto_do_box %> !important;
+  }
+  div.menu_busca .centraliza{
+    width:947px;
+  }
+  .pag_especial_filtros div#busca{
+    width:<%=@tt%>px;
+  }
+  .pag_especial_filtros div#busca div.container.buscar input {
+    width: <%=@tt==360 ? '301':'165'%>px;
+  }
+  #display{
+    height:368px;
+    border:0;
+  }
+  /* CONDITIONAL STYLES */
+<% if @pagina_especial.nome_tamanho_da_fonte? -%>
+  div.background_pagina div#detalhes_busca div.detalhes p.nome{
+    font-size:<%= @pagina_especial.nome_tamanho_da_fonte %>px;
+  }
+<% end -%>
+<% if @tt==360 -%>
+  .pag_especial_filtros div#busca div.container.buscar{
+    width:<%=@tt%>px;
+  }
+<% end -%>
+<% if @tt>0 -%>
+  div.background_pagina div#detalhes_busca div.detalhes{
+    height:80px;
+  }
+  div.background_pagina div#detalhes_busca div.detalhes p.nome{
+    margin-top:14px;
+  }
+<% end -%>
+<% if @pagina_especial.mapeamento_de_imagem.blank? and @pagina_especial.url != "theatromunicipaldesaopaulo" -%>
+  div#background_holder div#detalhes_busca{
+    margin-top:<%= @pagina_especial.altura_de_inicio_da_listagem %>px !important;
+  }
+<% end -%>
+
+
+  /* MOBILE STYLES */
+  @media only screen and (max-width:640px){
+    div.menu_busca .centraliza, div.menu_busca.pag_especial{
+      width:320px;
+    }
+    div#menu_topo div.container_mini_cabecalho.linha.fixed{
+      position:absolute !important;
+      border:0 !important;
+      top:0px !important;
+    }
+    div#menu_topo div.container_mini_cabecalho.linha.fixed.pag_especial{
+      top:0px !important;
+    }
+    div.background_pagina div#detalhes_busca div.detalhes{
+      height:56px;
+    }
+    .pag_especial_filtros{
+      width:100%;
+    }
+    .pag_especial_filtros div#busca{
+      width:100%;
+      margin-top:10px;
+    }
+    div#busca form{
+      display:block;
+    }
+    div.menu_busca.pag_especial .centraliza{
+      float:left;
+    }
+    div.menu_busca.pag_especial{
+      top:<%= @pagina_especial.altura_de_inicio_da_listagem_mobile+247 %>px !important;
+    }
+    .pag_especial_filtros div#busca div.container.buscar input{
+      width:252px;
+    }
+    .pag_especial_filtros div#busca div.container{
+      width:145px !important;
+      margin:0 5px;
+      text-align:center;
+    }
+    .pag_especial_filtros div#busca div.container.cidade p, .pag_especial_filtros div#busca div.container.genero p{
+      width:145px !important;
+    }
+    .pag_especial_filtros div#busca div.container.buscar{
+      margin-top:7px;
+      width:310px !important;
+      display:block;
+    }
+    #background_holder img.img_header_map{
+      display:block;
+      height:<%= @pagina_especial.altura_de_inicio_da_listagem_mobile %>px;
+    }
+    #background_holder #display, #background_holder #display #swiper-container, #background_holder #display div, #background_holder #display div a{
+      height:156px;
+      background-size: auto 156px;
+      background-position: 50% top;
+    }
+    
+    /* CONDITIONAL MOBILE STYLES */
+<% if @pagina_especial.mapeamento_de_imagem.blank? and @pagina_especial.url != "theatromunicipaldesaopaulo" and (!session[:desktop] or session[:desktop]==0) -%>
+    div#background_holder div#detalhes_busca{
+      margin-top:<%= @pagina_especial.altura_de_inicio_da_listagem_mobile %>px !important;
+    }
+<% end -%>
+<% if (@pagina_especial.filtro_cidade and !@pagina_especial.filtro_genero) or (!@pagina_especial.filtro_cidade and @pagina_especial.filtro_genero) -%>
+    .pag_especial_filtros div#busca div.container{
+      width:100px !important;
+      margin:0 10px 0 0;
+      text-align:center;
+    }
+    .pag_especial_filtros div#busca div.container.cidade p, .pag_especial_filtros div#busca div.container.genero p{
+      width:100px !important;
+    }
+    .pag_especial_filtros div#busca div.container.buscar{
+      margin:0;
+    }
+    div.menu_busca.pag_especial{
+      top:<%= @pagina_especial.altura_de_inicio_da_listagem_mobile+210 %>px !important;
+      /* PAGINA NORMAL MOBILE FILTROS OU FILTRO E BUSCA */
+    }
+    .pag_especial_filtros div#busca div.container.buscar{
+      width:200px !important;
+    }
+    .pag_especial_filtros div#busca div.container.buscar input{
+      width:142px;
+    }
+<% end -%>
+<% if !@pagina_especial.filtro_cidade and !@pagina_especial.filtro_genero and @pagina_especial.busca %>
+    .pag_especial_filtros div#busca div.container.buscar{
+      margin-top:0;
+    }
+<% end -%>
+  }
+
+
+  /* PAGINA ESPECIAL PRIVADA STYLES */
+<% if @pagina_especial.tipo==2 -%>
+  div#menu_topo div.bottom div.container_busca{
+    margin:0;
+    float:right;
+    width:<%=@tt%>px;
+  }
+  div#menu_topo{
+    height:70px;
+  }
+  div#menu_topo div.container_mini_cabecalho{
+    top:0;
+    background:<%=@pagina_especial.cor_do_header%>;
+  }
+  div#menu_topo div.container_mini_cabecalho.linha{
+    border-bottom-color:<%=@pagina_especial.cor_da_borda_do_header%>;
+  }
+  div#menu_topo a.logo{
+    width:100%;
+    height:60px;
+    margin:5px 0;
+    background-image:url(..<%= @pagina_especial.logo.url %>);
+    background-position:center;
+    background-size:auto 60px;
+  }
+  div.menu_busca.pag_especial{
+    top:<%= (@pagina_especial.altura_de_inicio_da_listagem)+163 %>px !important;
+    /* PAGINA PRIVADA NAO MOBILE */
+  }
+  @media only screen and (max-width:640px) {
+    div#menu_topo {
+      height: 50px !important;
+    }
+    div#menu_topo a.logo {
+      height: 40px;
+      background-size:auto 40px;
+    }
+<% if (@pagina_especial.filtro_cidade and !@pagina_especial.filtro_genero) or (!@pagina_especial.filtro_cidade and @pagina_especial.filtro_genero) -%>
+    div.menu_busca.pag_especial{
+      top:<%= @pagina_especial.altura_de_inicio_da_listagem_mobile+171 %>px !important;
+      /* PAGINA PRIVADA MOBILE FILTROS OU FILTRO E BUSCA */
+    }
+<% elsif @pagina_especial.filtro_cidade and @pagina_especial.filtro_genero and @pagina_especial.busca %>
+    div.menu_busca.pag_especial{
+      top:<%= @pagina_especial.altura_de_inicio_da_listagem_mobile+208 %>px !important;
+      /* PAGINA PRIVADA MOBILE FILTROS E BUSCA */
+    }
+<% end -%>
+  }
+<% end -%>
+</style>
+<% if @pagina_especial.url == 'itaucardshows' or @pagina_especial.url == 'itaucardteatro' %>
+<div id="display">
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <% if @pagina_especial.url == 'itaucardshows' %>
+        <div class="swiper-slide">
+          <div style="background-image:url('images/itaucard/s0.jpg');">
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div style="background-image:url('images/itaucard/s1.jpg');">
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div style="background-image:url('images/itaucard/s2.jpg');">
+            <a href="/espetaculos/3899-titas"></a>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div style="background-image:url('images/itaucard/s3.jpg');">
+			<a href="/espetaculos/5155-bobby-mcferrin-meets-brazil"></a>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div style="background-image:url('images/itaucard/s4.jpg');">
+			<a href="/espetaculos/4886-fafa-de-belem-on-the-rockn-roll"></a>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div style="background-image:url('images/itaucard/s5.jpg');">
+			<a href="/espetaculos/4991-gal-costa-estratosferica"></a>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div style="background-image:url('images/itaucard/s6.jpg');">
+			<a href="/espetaculos/5744-show-djavan"></a>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div style="background-image:url('images/itaucard/s7.jpg');">
+            <a href="/espetaculos/4870-paralamas-trio"></a>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div style="background-image:url('images/itaucard/s8.jpg');">
+            <a href="/espetaculos/5602-henrique-e-diego-os-tops-do-sertanejo"></a>
+          </div>
+        </div>
+      <% elsif @pagina_especial.url == 'itaucardteatro' %>
+        <div class="swiper-slide">
+          <div style="background-image:url('images/itaucard/t0.jpg');">
+            <a href="http://www.google.com"></a>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div style="background-image:url('images/itaucard/t1.jpg');">
+            <a href="/espetaculos/4043-intocaveis"></a>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div style="background-image:url('images/itaucard/t2.jpg');">
+            <a href="/espetaculos/2539-enfim-nos"></a>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div style="background-image:url('images/itaucard/t3.jpg');">
+            <a href="/espetaculos/5764-caravana-tonteria"></a>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<div class="pagination"></div>
+</div>
+<script type="text/javascript">
+  $(function(){
+    var swiperVisor = $('#display .swiper-container').swiper({
+      pagination:'.pagination',
+      mode:'horizontal',
+      speed:300,
+      autoplay:6000,
+      moveStartThreshold:50,
+      loop:true,
+      preventLinks:true,
+      paginationClickable:true
+    });
+  })
+</script>
+<script type="text/javascript">
+  function visorMobile(){
+    function mobile(){
+      if ($('div.swiper-wrapper').length > 0){    
+        if (window.innerWidth<=640 && mobileversion==1){
+          $('div.swiper-wrapper').children().each(function(){
+            /*if($(this).attr('class')=='swiper-slide'){
+              $(this).remove();
+            }*/
+            $(this).children().attr('style', $(this).children().attr('style').replace('.jpg','m.jpg'));
+          })
+        } else {
+          $('div.swiper-wrapper').children().each(function(){
+            $(this).children().attr('style', $(this).children().attr('style').replace('m.jpg','.jpg'));
+          })
+        }
+      }
+    }
+    
+    mobile();
+    $(window).resize(function(){
+      mobile();
+    });
+  }
+  visorMobile();
+</script>
+<% end %>
+<div class="background_pagina">
+<% if !@pagina_especial.mapeamento_de_imagem.blank? -%>
+  <div class="centraliza">
+    <map name="header_map">
+      <%= @pagina_especial.mapeamento_de_imagem %>
+    </map>
+    <img src="/images/header_map.png" usemap="#header_map" class="img_header_map" />
+  </div>
+<% if !session[:desktop] or session[:desktop]==0 -%>
+  <script>
+    var divisorMd = 3.0;
+    mobileMap(divisorMd);
+  </script>
+<% end -%>
+<% end -%>
+  <div class="centraliza">
+<% if @espetaculos.nil? -%>
+    <h1 class="espetaculos_vazio">Ainda não existe nenhum espetáculo vinculado a esta página.</h1>
+<% end -%>
+    <div id="detalhes_busca">
+      <div class="detalhes">
+        <p class="nome"><%= @pagina_especial.nome %></p>
+        <p class="total">
+          <%= pluralize (@m1.size+@m2.size+@m3.size+@m4.size), 'espetáculo encontrado', 'espetáculos encontrados'%>
+        </p>
+      </div>
+      <div class="ordem">
+<% if !params[:busca] -%>
+        organizado por
+        <a href="/<%= @pagina_especial.url %>?<%= "pecidade=#{@pecidade.nome}" if !@pecidade.blank? %><%= "&pegenero=#{@pegenero.nome}" if !@pegenero.blank? %><%= "&filtro=#{@pef.url}" if !params[:filtro].blank? %>&ordem=destaques"<%= "class='ativo'" if params[:ordem]=='destaques' or (params[:ordem].blank? and @pagina_especial.organizado_por==1) %>>destaques</a>
+        <a href="/<%= @pagina_especial.url %>?<%= "pecidade=#{@pecidade.nome}" if !@pecidade.blank? %><%= "&pegenero=#{@pegenero.nome}" if !@pegenero.blank? %><%= "&filtro=#{@pef.url}" if !params[:filtro].blank? %>&ordem=alfabetica"<%= "class='ativo'" if params[:ordem]=='alfabetica' or (params[:ordem].blank? and @pagina_especial.organizado_por==2) %>>alfabética</a>
+        <a href="/<%= @pagina_especial.url %>?<%= "pecidade=#{@pecidade.nome}" if !@pecidade.blank? %><%= "&pegenero=#{@pegenero.nome}" if !@pegenero.blank? %><%= "&filtro=#{@pef.url}" if !params[:filtro].blank? %>&ordem=data"<%= "class='ativo'" if params[:ordem]=='data' or (params[:ordem].blank? and @pagina_especial.organizado_por==3) %>>próximas apresentações</a>
+<% else -%>
+          <a href="/<%= @pagina_especial.url %>">ver todos os espetáculos</a>
+<% end -%>
+      </div>
+<% if @pagina_especial.filtro_cidade or @pagina_especial.filtro_genero or @pagina_especial.busca -%>
+      <div class="pag_especial_filtros">
+        <div id="busca">
+<% if @pagina_especial.filtro_cidade -%>
+          <div class="container pag_especial cidade">
+            <p>cidade</p>
+            <p class="help<%=@pecidade.blank? ? '':' ativo'%>"><%=@pecidade.blank? ? 'Escolha sua cidade':@pecidade.nome%></p>
+          </div>
+<% end -%>
+<% if @pagina_especial.filtro_genero -%>
+          <div class="container pag_especial genero">
+            <p>gênero</p>
+            <p class="help<%=@pegenero.blank? ? '':' ativo'%>"><%=@pegenero.blank? ? 'Escolha o gênero':@pegenero.nome%></p>
+          </div>
+<% end -%>
+<% if @pagina_especial.busca -%>
+          <form method="get" action="/<%= @pagina_especial.url %>">
+            <div class="container buscar">
+              <input type="text" value="espetáculo, diretor, teatro, elenco..." onblur="if(this.value=='') this.value='espetáculo, diretor, teatro, elenco...';" onfocus="if(this.value=='espetáculo, diretor, teatro, elenco...') this.value='';" name="busca">
+              <input type="submit" class="submit" value="buscar" />
+            </div>
+          </form>
+<% end -%>
+        </div>
+      </div>
+<% end -%>
+    </div>
+<%
+   cid = Cidade.find_by_sql(["SELECT count(t.id) AS total, c.id, c.nome FROM cidades AS c, teatros AS t, espetaculos AS e, espetaculos_pagina_especiais AS epe WHERE t.cidade_id = c.id AND e.teatro_id = t.id AND epe.espetaculo_id = e.id AND e.ativo = 1 AND epe.pagina_especial_id = ? GROUP BY t.cidade_id ORDER BY total DESC",@pagina_especial.id])
+   if @pecidade.blank? or params[:pecidade]=='Todas as cidades'
+     gen = Genero.find(:all,
+                       :select => "count(1) as total, generos.nome",
+                       :conditions => "espetaculos.ativo = true",
+                       :joins => ["INNER JOIN espetaculos ON espetaculos.genero_id = generos.id",
+                                  "INNER JOIN espetaculos_pagina_especiais ON espetaculos_pagina_especiais.espetaculo_id = espetaculos.id AND espetaculos_pagina_especiais.pagina_especial_id = #{@pagina_especial.id}",
+                                  @innerjoin],
+                       :group => 'generos.id',
+                       :order => 'total DESC')
+   else
+     gen = Genero.find(:all,
+                       :select => "count(1) as total, generos.nome",
+                       :conditions => ["espetaculos.ativo = 1 AND cidades.nome = ?",@pecidade.nome],
+                       :joins => ["INNER JOIN espetaculos ON espetaculos.genero_id = generos.id",
+                                  "INNER JOIN teatros ON espetaculos.teatro_id = teatros.id",
+                                  "INNER JOIN cidades ON cidades.id = teatros.cidade_id",
+                                  "INNER JOIN espetaculos_pagina_especiais ON espetaculos_pagina_especiais.espetaculo_id = espetaculos.id AND espetaculos_pagina_especiais.pagina_especial_id = #{@pagina_especial.id}",
+                                  @innerjoin],
+                       :group => 'generos.id',
+                       :order => 'total DESC')
+   end
+-%>
+    <div class="menu_busca pag_especial container cidade">
+      <div class="centraliza">
+        <a href="?pecidade=Todas as cidades"<%=" class='ativo'" if params[:pecidade]=='Todas as cidades'%>>Todas as cidades</a>
+<% for cidade in cid -%>
+          <a href="?pecidade=<%=cidade.nome%><%= "&filtro=#{@pef.url}" if !params[:filtro].blank? %><%= "&ordem=#{lparam(params[:ordem])}" if params[:ordem] %>" class="<%='ativo' if params[:pecidade]==cidade.nome%><%=' negrito' if cidade.total.to_i>=10%>"><%=cidade.nome%><!--<span>(<%=cidade.total%>)</span>--></a>
+<% end -%>
+      </div>
+    </div>
+    <div class="menu_busca pag_especial container genero">
+      <div class="centraliza">
+        <a href="?pecidade=<%= @pecidade.blank? ? 'Todas as cidades':@pecidade.nome %>&pegenero=Todos os gêneros"<%=" class='ativo'" if params[:pegenero]=='Todos os gêneros'%>>Todos os gêneros</a>
+<% for genero in gen -%>
+          <a href="?<%= "pecidade=#{@pecidade.nome}&" if !@pecidade.blank? %>pegenero=<%=genero.nome%><%= "&filtro=#{@pef.url}" if !params[:filtro].blank? %><%= "&ordem=#{lparam(params[:ordem])}" if params[:ordem] %>" class="<%='ativo' if params[:pegenero]==genero.nome%>"><%=genero.nome%><!--<span>(<%=genero.total%>)</span>--></a>
+<% end -%>
+      </div>
+    </div>
+    <div id="espetaculos">
+<% if @m1.size>0 -%>
+      <div class="separadopor mes1">
+        <h1><%= @m1.size>0 ? l(@m1.first.proximo_horario.data, :format => :mes):'' %></h1>
+        <div class="espetaculos">
+          <%= render :partial => 'layouts/card_com_auxiliar', :collection => @m1, :locals => {:auxiliar => @pagina_especial} -%>
+        </div>
+      </div>
+<% end -%>
+<% if @m2.size>0 -%>
+      <div class="separadopor mes2">
+        <h1><%= @m2.size>0 ? l(@m2.first.proximo_horario.data, :format => :mes):'' %></h1>
+        <div class="espetaculos">
+          <%= render :partial => 'layouts/card_com_auxiliar', :collection => @m2, :locals => {:auxiliar => @pagina_especial} -%>
+        </div>
+      </div>
+<% end -%>
+<% if @m3.size>0 -%>
+      <div class="separadopor mes3">
+        <h1><%= @m3.size>0 ? l(@m3.first.proximo_horario.data, :format => :mes):'' %></h1>
+        <div class="espetaculos">
+          <%= render :partial => 'layouts/card_com_auxiliar', :collection => @m3, :locals => {:auxiliar => @pagina_especial} -%>
+        </div>
+      </div>
+<% end -%>
+<% if @m4.size>0 -%>
+      <div class="separadopor mes3">
+        <h1>O que vem por aí...</h1>
+        <div class="espetaculos">
+          <%= render :partial => 'layouts/card_com_auxiliar', :collection => @m4, :locals => {:auxiliar => @pagina_especial} -%>
+        </div>
+      </div>
+<% end -%>
+  </div>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('.espetaculos').each(function(){
+        $(this).masonry({
+          columnWidth:0,
+          itemSelector:'.card'
+        });
+      });
+    });
+  </script>
+  <script type="text/javascript">
+    $(function() {
+      $('#espetaculos .card').each(function(){
+        $(this).hoverdir(/*{hoverDelay: 50}*/);
+      });
+    });
+  </script>
+  <script type="text/javascript">
+    var tt = <%= @pagina_especial.altura_de_inicio_da_listagem+220 %>
+    $('#guia_espetaculos .aba').on('click',function(){
+      if($(this).attr("class") == "aba fechado"){
+        $('.menu_busca.pag_especial.cidade, .menu_busca.pag_especial.genero').animate({
+          top:(tt+175)+"px"
+        },500);
+      }else{
+        $('.menu_busca.pag_especial.cidade, .menu_busca.pag_especial.genero').animate({
+          top:tt+"px"
+        },500);
+      }
+    });
+    /* MENU CIDADE */
+    if($(".container.pag_especial.cidade")){
+      $(".container.pag_especial.cidade").on('click',function(){
+        if($('.menu_busca.pag_especial.cidade').css('display')=='block'){
+          $('.menu_busca.pag_especial.cidade').slideUp();
+        } else {
+          function menuBuscaCidadePagEspecial(){
+            $('.menu_busca.pag_especial.cidade').slideDown();
+            $(".menu_busca.pag_especial.cidade").hover(
+                function(){
+                  $('.menu_busca.pag_especial.cidade').css('display', 'block');
+                },
+                function(){
+                  $('.menu_busca.pag_especial.cidade').slideUp(150);
+                }
+            );
+          }
+
+          if($('.menu_busca.pag_especial.genero').css('display')=='block'){
+            $('.menu_busca.pag_especial.genero').slideUp(150,function(){
+              menuBuscaCidadePagEspecial();
+            });
+          } else {
+            menuBuscaCidadePagEspecial();
+          }
+        }
+      });
+    }
+
+    /* MENU GENERO */
+    if($(".container.pag_especial.genero")){
+      $(".container.pag_especial.genero").on('click',function(){
+        if($('.menu_busca.pag_especial.genero').css('display')=='block'){
+          $('.menu_busca.pag_especial.genero').slideUp();
+        } else {
+          function menuBuscaGeneroPagEspecial(){
+            $('.menu_busca.pag_especial.genero').slideDown();
+            $(".menu_busca.pag_especial.genero").hover(
+                function(){
+                  $('.menu_busca.pag_especial.genero').css('display', 'block');
+                },
+                function(){
+                  $('.menu_busca.pag_especial.genero').slideUp(150);
+                }
+            );
+          }
+
+          if($('.menu_busca.pag_especial.cidade').css('display')=='block'){
+            $('.menu_busca.pag_especial.cidade').slideUp(150,function(){
+              menuBuscaGeneroPagEspecial();
+            });
+          } else {
+            menuBuscaGeneroPagEspecial();
+          }
+        }
+      });
+    }
+  </script>
+</div>

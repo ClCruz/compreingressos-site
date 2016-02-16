@@ -1,0 +1,301 @@
+<style type="text/css">
+  <% if @noheaderfooter %>
+  div#menu_topo div.bottom div.container_busca{
+    margin:0;
+    float:right;
+    <% if @tt -%>
+    width:<%=@tt%>px;
+    <% end -%>
+  }
+  div#menu_topo{
+    height:70px;
+  }
+  div#menu_topo div.container_mini_cabecalho{
+    top:0;
+    background:<%=@pagina_especial.cor_do_header%>;
+  }
+  div#menu_topo div.container_mini_cabecalho.linha{
+    border-bottom-color:<%=@pagina_especial.cor_da_borda_do_header%>;
+  }
+  div.menu_busca{
+    background:<%=@pagina_especial.cor_do_header%>;
+  }
+  div#busca div.container.buscar{
+    width:<%=@tt==598 ? '598px':'auto'%>;
+  }
+  div#busca div.container.buscar input{
+    width:<%=@tt==598 ? '515':'285'%>px;
+  }
+  div.menu_busca{
+    top:70px;
+  }
+  <% end %>
+</style>
+<% if pagina_selecionada?(@espetaculo, @espetaculo.pagina_especiais.find(:first, :conditions => {:id => 1})) %>
+  <% if !@pagina_especial or @pagina_especial.tipo!=2 %>
+  <div class="container_selo_itaucard">
+    <img src="/images/selo_itaucard.png" />
+  </div>
+  <% end %>
+<% end %>
+<div id="espetaculo">
+  <% if @espetaculo.img_principal? %>
+    <div id="display" style="background:#FFF url('<%= @espetaculo.img_principal.url %>') 50% 0 no-repeat;"></div>
+	<% end %>
+	<div class="centraliza">
+  	<div class="container_mini_topo">
+      <% if @pagina_especial %>
+        <span class="origem"><a href="/<%=@pagina_especial.url%>">Voltar para <%=@pagina_especial.nome%></a></span>
+      <% end %>
+      <% if @pacote %>
+        <span class="origem"><a href="/<%=@pacote.url%>/assinaturas">Voltar para <%=@pacote.nome%></a></span>
+      <% end %>
+      <% if @pagina_especial and @pagina_especial.tipo==2 %>
+        <span class="genero"><%= @espetaculo.genero.nome %></span>
+      <% else %>
+        <span class="genero"><%= link_to @espetaculo.genero.nome, "/espetaculos?cidade=&genero=#{@espetaculo.genero.nome}" %></span>
+  	  <% end %>
+  	  <span class="classificacao"><%=@espetaculo.classificacao.nome%></span>
+      <% if !@espetaculo.duracao.blank? %>
+      <span class="duracao"><%=@espetaculo.duracao%></span>
+      <% end %>
+      <span class="icone sinopse<%= !@espetaculo.sinopse.blank? ? '':' inativo'%>">Sinopse</span>
+      <span class="icone fotos<%= @espetaculo.galerias.size>0 ? '':' inativo'%>">Fotos</span>
+      <span class="icone videos<%= @espetaculo.videos.size>0 ? '':' inativo'%>">Vídeos</span>
+      <% if !@espetaculo.preco.blank? %>
+      <span class="preco"><%=@espetaculo.preco%></span>
+      <% end %>
+      <div class="icones_mobile">
+        <span class="icone sinopse<%= !@espetaculo.sinopse.blank? ? '':' inativo'%>">Sinopse</span>
+        <span class="icone fotos<%= @espetaculo.galerias.size>0 ? '':' inativo'%>">Fotos</span>
+        <span class="icone videos<%= @espetaculo.videos.size>0 ? '':' inativo'%>">Vídeos</span>
+      </div>
+  	</div>
+    <h1><%=nl2br @espetaculo.nome %></h1>
+    <div class="cont_teatro">
+      <% if @pagina_especial and @pagina_especial.tipo==2 %>
+        <p class="teatro"><%=nl2br @espetaculo.teatro.nome%></p>
+        <p class="teatro_info"><%=@espetaculo.teatro.bairro%> - <%=@espetaculo.teatro.cidade.nome%> - <%=@espetaculo.teatro.cidade.estado%></p>
+      <% else %>
+        <p class="teatro"><%=link_to nl2br(@espetaculo.teatro.nome), @espetaculo.teatro%></p>
+        <p class="teatro_info"><%=@espetaculo.teatro.bairro%> - <%=link_to @espetaculo.teatro.cidade.nome, "/espetaculos?cidade=#{@espetaculo.teatro.cidade.nome}&genero="%> - <%=@espetaculo.teatro.cidade.estado%></p>
+      <% end %>
+  	</div>
+  	
+    <div id="iframe">
+      <% if @pagina_especial and @pagina_especial.tipo_de_botao==2 %>
+        <% if !@pagina_especial.saiba_mais_aviso.blank? %>
+          <p class="saiba_mais_aviso"><%= @pagina_especial.saiba_mais_aviso %></p>
+        <% end %>
+      <% elsif @espetaculo.cc_id and (!@espetaculo.especificar_data_inicial_de_venda or (@espetaculo.especificar_data_inicial_de_venda and @espetaculo.data_inicial_de_venda<=DateTime.now.in_time_zone-2.hours)) %>
+        <% @espetaculo.horarios_disponiveis.each_with_index do |a,i| %>
+          <% if i<3 or @espetaculo.horarios_disponiveis.size==4 %>
+            <a href="<%= ENVIRONMENT_VARS['host_compra'] %>/comprar/etapa1.php?apresentacao=<%=a.id_apresentacao%>&eventoDS=<%=@espetaculo.nome.parameterize%>" class="botao data">
+              <span class="data">
+                <span class="numero"><%= l a.data, :format => :dia %></span>
+                <span class="mes"><%= l a.data, :format => :mes_curto %></span>
+              </span>
+              <span class="dia_hora"><%= l a.data, :format => :diahoraiframe %></span>
+              <span class="comprar">comprar</span>
+            </a>
+          <% end %>
+        <% end %>
+        <% if @espetaculo.horarios_disponiveis.size>=5 %>
+          <a href="#datas" class="botao todasdatas"></a>
+        <% end %>
+      <% elsif !@espetaculo.cc_id and @errocc %> 
+        <p class="saiba_mais_aviso"><%= @errocc %></p>
+      <% elsif @espetaculo.id == 4589 # CC ID do intensivamed 11383 %>
+        <% imed = Intensivamedcontador.find(1) %>
+        <% if imed.total <= 300 # total 369 %>
+          <!-- INICIO FORMULARIO BOTAO PAGSEGURO -->
+          <form action="https://pagseguro.uol.com.br/checkout/v2/payment.html" method="post">
+          <input type="hidden" name="code" value="D24E14330303D3D994C1BF98F2250FE1" />
+          <input type="image" src="https://p.simg.uol.com.br/out/pagseguro/i/botoes/pagamentos/209x48-comprar-assina.gif" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" style="border:0;"/>
+          </form>
+          <!-- FINAL FORMULARIO BOTAO PAGSEGURO -->
+        <% end %>
+      <% end %>
+    </div>
+  	
+  	<div class="detalhes_espetaculo">
+      <div class="container g">
+        <h2>Endereço</h2>
+        <p class="teatro">
+          <%=@espetaculo.teatro.endereco%><br />
+          <%=@espetaculo.teatro.bairro%> - <%=@espetaculo.teatro.cidade.nome%> - <%=@espetaculo.teatro.cidade.estado%>
+        </p>
+        <p class="googlemaps">
+          <a href="http://maps.google.com/maps?f=q&source=s_q&hl=es&geocode=&q=<%=@espetaculo.teatro.endereco%>, <%=@espetaculo.teatro.bairro%> - <%=@espetaculo.teatro.cidade.nome%> - <%=@espetaculo.teatro.cidade.estado%>&ie=UTF8&z=15&t=m&iwloc=near&output=embed" target="_blank">ver google maps</a>
+        </p>
+        <% if pagina_selecionada?(@espetaculo, @espetaculo.pagina_especiais.find_by_url('unibescultural')) %>
+            <p class="compre_fone">Informações pelo telefone</p>
+            <p class="compre_fone_num"><img src="/images/ico_telefone.png" />(11) 3065-4333</p>
+        <% else %>
+            <p class="compre_fone">Compre pelo telefone de segunda a domingo das 9h às 21h</p>
+            <% if @pagina_especial and @pagina_especial.url=='brasilprev' %>
+                <p class="compre_fone_num"><img src="/images/ico_telefone.png" />(11) 2626-5710</p>
+            <% else %>
+              <% if @espetaculo.teatro.cidade.estado.upcase=='RJ' and @espetaculo.id!=4970 %>
+                    <% if params[:origem] and params[:origem]=="itaucard" %>
+                        <p class="compre_fone_num"><img src="/images/ico_telefone.png" />(21) 3005-4104</p>
+                    <% else %>
+                        <p class="compre_fone_num"><img src="/images/ico_telefone.png" />(21) 3005-2701</p>
+                    <% end %>
+                <% else %>
+                    <p class="compre_fone_num"><img src="/images/ico_telefone.png" /><%=@espetaculo.teatro.telefone%></p>
+                <% end %>
+            <% end %>
+        <% end %>
+      </div>
+      
+      <div class="container g">
+        <h2>Temporada</h2>
+        <p class="temp_descricao"><%=@espetaculo.horario if !@espetaculo.horario.blank? %></p>
+        <p class="temp_data"><%=@temporada%></p>
+      </div>
+      
+      <% if !@espetaculo.preco.blank? -%>
+      <div class="container g">
+        <h2>Ingressos</h2>
+        <p><%=@espetaculo.preco%></p>
+      </div>
+      <% end -%>
+      
+      <% if pagina_selecionada?(@espetaculo, @espetaculo.pagina_especiais.find(:first, :conditions => {:id => 1})) -%>
+      <div class="container g">
+        <h2>Promoção Itaucard</h2>
+        <p class="desconto">50% de desconto para clientes Itaucard.<br /><br />Promoção pessoal e intransferível para o titular do cartão na compra de um ingresso inteiro. Válido somente para 1 apresentação do espetáculo, mediante pagamento com cartões participantes da promoção.</p>
+      </div>
+      <% end -%>
+      
+      <% if !@espetaculo.desconto.blank? -%>
+      <div class="container g">
+        <h2>Descontos</h2>
+        <p class="desconto"><%=nl2br @espetaculo.desconto%></p>
+      </div>
+      <% end -%>
+      
+      <% for entrada in @espetaculo.entradas -%>
+        <div class="container <%=entrada.pequeno ? 'p':'g'%>">
+          <h2><%=entrada.atributo%></h2>
+          <p><%=nl2br entrada.valor%></p>
+        </div>
+      <% end -%>
+      
+      <div id="overlay">
+        <div class="centraliza">
+          <div class="top">
+            <div class="fechar"></div>
+            <div class="container_mini_topo">
+              <span class="genero"><%= link_to @espetaculo.genero.nome, "/espetaculos?cidade=&genero=#{@espetaculo.genero.nome}" %></span>
+              <span class="classificacao"><%=@espetaculo.classificacao.nome%></span>
+              <% if !@espetaculo.duracao.blank? %>
+              <span class="duracao"><%=@espetaculo.duracao%></span>
+              <% end %>
+            </div>
+            <h1><%=@espetaculo.nome%></h1>
+            <div class="cont_teatro">
+              <p class="teatro"><%=nl2br @espetaculo.teatro.nome%></p>
+              <p class="teatro_info"><%=@espetaculo.teatro.bairro%> - <%= link_to @espetaculo.teatro.cidade.nome, "/espetaculos?cidade=#{@espetaculo.teatro.cidade.nome}&genero="%> - <%=@espetaculo.teatro.cidade.estado%></p>
+            </div>
+          </div>
+          
+          <div class="informacoes">
+            <% if @espetaculo.videos.size>0 %>
+              <div class="container_overlay videos">
+                <div class="icone video"></div>
+                <% for video in @espetaculo.videos %>
+                  <div class="container_iframe_video">
+                    <iframe id="video_player" width="820" height="461" src="//www.youtube-nocookie.com/embed/<%=video.youtube_id%>?rel=0&enablejsapi=1&version=3&playerapiid=ytplayer"  frameborder="0" allowfullscreen="true" allowscriptaccess="always"></iframe>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+      
+            <% if @espetaculo.galerias.size>0 %>
+              <div class="container_overlay fotos">
+                <div class="icone fotos"></div>
+                
+                <div class="slideshow-container">
+                  <div class="loading" class="loader"></div>
+                  <div class="slideshow" class="slideshow"></div>
+                </div>
+                <div class="thumbs_container">
+                  <ul class="thumbs noscript">
+                    <% for galeria in @espetaculo.galerias %>
+                      <li>
+                          <a class="thumb" href="<%= galeria.imagem.url(:big) %>" title="<%=galeria.respond_to?('title') ? galeria.title : ''%>">
+                              <img src="<%= galeria.imagem.url(:thumb) %>" alt="<%=galeria.respond_to?('title') ? galeria.title : ''%>" />
+                          </a>
+                      </li>
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
+            <% end %>
+            
+            <% if !@espetaculo.sinopse.blank? %>
+              <div class ="container_overlay sinopse">
+                <div class="icone sinopse"></div>
+                <p><%=nl2br @espetaculo.sinopse%></p>
+                <p class="sinopse_aviso">*Sinopse sob total responsabilidade da produção do evento.</p>
+              </div>
+            <% end %>
+          </div>
+          
+          <% if @espetaculo.cc_id %>
+            <div class="datas">
+              <% @espetaculo.horarios_disponiveis.each do |a| %>
+                <a href="<%= ENVIRONMENT_VARS['host_compra'] %>/comprar/etapa1.php?apresentacao=<%=a.id_apresentacao%>&eventoDS=<%=@espetaculo.nome.parameterize%>" class="botao data">
+                  <span class="data">
+                    <span class="numero"><%= l a.data, :format => :dia %></span>
+                    <span class="mes"><%= l a.data, :format => :mes_curto %></span>
+                  </span>
+                  <span class="dia_hora"><%= l a.data, :format => :diahoraiframe %></span>
+                  <span class="comprar">comprar</span>
+                </a>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  	
+  	
+    <% if !@pacote %>
+    <div class="espetaculos_recomendados">
+      <h2>Outros Espetáculos</h2>
+      <div class="espetaculos masonry js-masonry" data-masonry-options='{ "columnWidth":1 }'>
+        <% if @pagina_especial %>
+          <%= render :partial => 'layouts/card_com_auxiliar', :collection => @outros_espetaculos, :locals => {:auxiliar => @pagina_especial} %>
+        <% else %>
+          <%= render :partial => 'layouts/card_sem_auxiliar', :collection => @outros_espetaculos %>
+        <% end %>
+      </div>
+    </div>
+  	<script type="text/javascript">
+      $(function() {
+        $('.card').each(function(){
+          $(this).hoverdir();
+        });
+      });
+    </script>
+    <% end %>
+  	
+  	<% if !@noheaderfooter %>
+  	<div class="midias_sociais">
+  	  <div class="addthis_toolbox addthis_default_style">
+        <a class="addthis_button_facebook"></a>
+        <a class="addthis_button_twitter"></a>
+        <a class="addthis_button_email"></a>
+      </div>
+      <script type="text/javascript">var addthis_config = {ui_language:"pt"}</script>
+      <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=xa-4c8561805a96e24d"></script>
+  	</div>
+  	<script type="text/javascript">
+      midiasSociais(339);
+  	</script>
+  	<% end %>
+  </div>
+</div>

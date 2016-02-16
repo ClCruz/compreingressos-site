@@ -1,0 +1,50 @@
+<%= javascript_include_tag 'rails.js', 'jquery.ui.core.js', 'jquery.ui.widget.js', 'jquery.ui.mouse.js', 'jquery.ui.sortable.js' %>
+
+<% form_for(@home) do |f| %>
+  <%= f.error_messages %>
+
+	<p>
+		<%= f.label :cidade_id, "Cidade: "%><br />
+		<%= f.select :cidade_id, Cidade.all.collect {|c| [ c.nome, c.id ] } %><br />
+	</p>
+	
+	<p style="font-size:20px;color:#000">Espetáculos:</p>
+	<div id="espetaculos_home">
+		<% @home.espetaculos.each_with_index do |espetaculo, i| %>
+			<div class="espetaculo_home" id="espetaculo_home_<%= espetaculo.id %>">
+				<% espetaculos_options = '' %>
+				<% for esp in Espetaculo.find(:all, :include => :teatro, :conditions => {:ativo => true}, :order => :nome) %>
+					<% selected = espetaculo.id == esp.id ? " selected='selected'":'' %>
+					<% espetaculos_options += "<option value='#{esp.id}'#{selected}>#{esp.nome} (#{esp.teatro.nome})</option>" %>
+				<% end %>
+				<img src="/cache/<%= espetaculo.imagems[1].id %>_destaque.jpg">
+				<%= select_tag 'home[espetaculo_ids][]', espetaculos_options%><br />
+				<%= link_to_function "Remover este espetaculo", "jQuery(this).parent('.espetaculo_home').slideUp(500).remove();" %>
+			</div>
+		<% end %>
+	</div>
+	<p>
+		<%= add_espetaculo_home "Novo Espetáculo", 'home'%>
+	</p>
+  <p>
+    <%= f.submit 'Salvar' %>
+  </p>
+<% end %>
+<script>
+jQuery(document).ready(function($){
+  jQuery('#espetaculos_home').sortable({
+    items: '.espetaculo_home',
+    opacity: 0.6,
+    cursor: 'move',
+    axis: 'xy',
+    update: function(){
+      var order = $(this).sortable('serialize');
+      $.get('/homes/reorganiza/?home=<%= @home.id %>', order, function(response){
+        if(response!='true'){
+          alert('Ocorreu um erro ao atualizar a ordem, tente recarregar a página');
+        }
+      });
+    }
+  });
+});
+</script>

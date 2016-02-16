@@ -1,0 +1,149 @@
+<h1>COMPREINGRESSOS.COM</h1>
+<h2>Ocorrência número <%=@ocorrencia.id%></h2>
+
+<p>
+  <b>Atendente:</b><br />
+  <%=@ocorrencia.atendente.nome%>
+</p>
+
+<p>
+  <b>Ingressos adquiridos via:</b><br />
+  <%=@ocorrencia.adquiridos%>
+</p>
+
+<p>
+  <b>Data da compra:</b><br />
+  <%=@ocorrencia.data_compra%>
+</p>
+
+<p>
+  <b>Número do pedido:</b><br />
+  <%=@ocorrencia.numero_pedido%>
+</p>
+
+<p>
+  <b>Nome:</b><br />
+  <%=@ocorrencia.nome%>
+</p>
+
+<p>
+  <b>E-mail:</b><br />
+  <%=@ocorrencia.email%>
+</p>
+
+<p>
+  <b>Atração:</b><br />
+  <%=@ocorrencia.espetaculo.nome%>
+</p>
+
+<p>
+  <b>Data do ingresso:</b><br />
+  <%=@ocorrencia.data_ingressos%>
+</p>
+
+<p>
+  <b>Horário:</b><br />
+  <%=@ocorrencia.horario%>
+</p>
+
+<p>
+  <b>Lugares:</b><br />
+  <%=@ocorrencia.lugares%>
+</p>
+
+<p>
+  <b>Telefone de contato:</b><br />
+  <%=@ocorrencia.telefone%>
+</p>
+
+<p>
+  <b>Tipo da solicitação:</b><br />
+  <%=@ocorrencia.tipo_solicitacao%>
+</p>
+
+<% unless @ocorrencia.protocolo_cancelamento.blank? %>
+<p>
+  <b>Protocolo de cancelamento:</b><br />
+  <%=@ocorrencia.protocolo_cancelamento%>
+</p>
+<% end %>
+
+<% unless @ocorrencia.inteira.blank? %>
+<p>
+  <b>Entradas inteiras:</b><br />
+  <%=@ocorrencia.inteira%>
+</p>
+<% end %>
+
+<% unless @ocorrencia.meia.blank? %>
+<p>
+  <b>Meia-entradas:</b><br />
+  <%=@ocorrencia.meia%>
+</p>
+<% end %>
+
+<% unless @ocorrencia.outros.blank? %>
+<p>
+  <b>Outros ingressos:</b><br />
+  <%=@ocorrencia.outros%>
+</p>
+<% end %>
+
+<% unless @ocorrencia.obs.blank? %>
+<p>
+  <b>Observações:</b><br />
+  <%=@ocorrencia.obs%>
+</p>
+<% end %>
+
+<% unless @ocorrencia.nova_data.blank? %>
+<p>
+  <b>Nova data:</b><br />
+  <%=@ocorrencia.nova_data%>
+</p>
+<% end %>
+
+<% unless @ocorrencia.novo_horario.blank? %>
+<p>
+  <b>Novo horário:</b><br />
+  <%=@ocorrencia.novo_horario%>
+</p>
+<% end %>
+
+<% unless @ocorrencia.novo_lugar.blank? %>
+<p>
+  <b>Novo lugar:</b><br />
+  <%=@ocorrencia.novo_lugar%>
+</p>
+<% end %>
+
+<% unless @ocorrencia.valor_servico.blank? %>
+<p>
+  <b>Valor do serviço:</b><br />
+  <%=@ocorrencia.valor_servico%>
+</p>
+<% end %>
+
+<% unless @ocorrencia.valor_estorno.blank? %>
+<p>
+  <b>Valor do estorno:</b><br />
+  <%=@ocorrencia.valor_estorno%>
+</p>
+<% end %>
+
+<h3>Política de troca e cancelamento:</h3>
+<p>
+  <i>
+    <p>Devolução, Cancelamento e Extravio de Ingressos</p>
+
+<p>Nós não podemos proceder trocas ou devoluções de taxas de conveniência e entrega depois que a compra for efetuada. Neste sentido, quando o cliente concluir a operação de compra do ingresso, com ou sem impressão no local, é necessário que o mesmo seja mantido em local seguro, evitando rasuras ou quaisquer modificações que possam danificá-lo. Em caso de cancelamento do espetáculo a devolução do dinheiro deverá ser realizada somente mediante a entrega dos ingressos no teatro, ou de acordo com os procedimentos divulgados atravês da imprensa. A Compre Ingressos é uma agência de venda de ingressos. O espetáculo é de total responsabilidade da produção, bem como a devolução dos valores pagos na compra de ingressos.</p>
+
+<p>Não nos responsabilizamos por ingressos adquiridos fora dos nossos pontos oficiais de venda. Os ingressos adquiridos através dos canais de venda (Telefone, Internet e Pontos de Venda) estarão sujeitos ao acréscimo da taxa de conveniência por ingresso.</p>
+
+<p>ATENÇÃO!! Não haverá devolução das taxas de entrega e conveniência cobradas no caso do cancelamento da compra de ingressos.</p>
+
+<p>Na troca de ingressos para outras datas, somente ocorrerão caso os ingressos não tenham sido retirados ou recebidos.</p>
+
+<p>As ocorrências que envolvam troca ou devolução devem ser comunicadas é Central de Vendas ou através do site www.compreingressos.com com antecedência mínima de 4 (quatro) horas. Caso o ingresso já tenha sido retirado, não será possível efetuar qualquer tipo de ocorrência (troca/cancelamento).</p>
+  </i>
+</p>

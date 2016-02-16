@@ -1,0 +1,39 @@
+<% form_for(@visor, :html => {:multipart => true}) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :link %><br />
+    <%= f.text_field :link %>
+  </p>
+  <p>
+    <%= f.label :descricao %><br />
+    <%= f.text_field :descricao %>
+  </p>
+  <p>
+    <%= f.check_box :blank %><%= f.label :blank %>    
+  </p>
+  <p>
+    <%= f.label :imagem %><br />
+    <%= f.file_field :imagem %><br />
+    <span class="help_text">O tamanho deve ser exatamente 1920x310px, o conteúdo não deve ultrapassar 960px do centro da imagem</span>
+    <% if @visor.imagem? %>
+      <br /><%= image_tag @visor.imagem.url, :style => "max-height:181px; max-width:940px;" %>
+    <% end %>
+  </p>
+  <p>
+    <%= f.label :imagem_mobile %><br />
+    <%= f.file_field :imagem_mobile %><br />
+    <span class="help_text">O tamanho deve ser exatamente 1920x525px, o conteúdo não deve ultrapassar 1080px do centro da imagem com possibilidade de leitura em 570x156px</span>
+    <% if @visor.imagem_mobile? %>
+      <br /><%= image_tag @visor.imagem_mobile.url, :style => "max-height:156px; max-width:570px;" %>
+      <div style="border-right:1px solid red;border-left:1px solid red;width:321px;height:156px;position:absolute;margin:-172px 123px 0px;"></div>
+    <% end %>
+  </p>
+  <p>
+    <%= f.label :data_de_expiracao %><br />
+    <%= f.datetime_select(:data_de_expiracao, :order => [:day, :month, :year, :hour, :minute, :second], :include_seconds => true, :date_separator => '', :datetime_separator => ' às ', :time_separator => ':', :start_year => Date.current.year, :end_year => Date.current.year+2, :include_blank => false) %><br />
+  </p>
+  <p>
+    <%= f.submit 'Salvar' %>
+  </p>
+<% end %>

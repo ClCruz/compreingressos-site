@@ -1,0 +1,45 @@
+<div class="destaque_menor_v2">
+  <% if defined?(auxiliar) %>
+    <a href="<%=url_for destaque_menor_v2%>?origem=<%=auxiliar.url%>">
+  <% else %>
+    <a href="<%=url_for destaque_menor_v2%>">
+  <% end %>
+    <img src="<%= destaque_menor_v2.img_miniatura.url(:miniatura) %>" height="<%= destaque_menor_v2.img_miniatura_height %>">
+  </a>
+	<h3><%=destaque_menor_v2.nome%></h3>
+    <% if defined?(auxiliar) -%>
+  	  <% if !auxiliar.ocultar_teatro -%>
+        <p class="teatro"><%=destaque_menor_v2.teatro.nome%></p>
+      <% end -%>
+      <% if !auxiliar.ocultar_cidade -%>
+        <p class="cidade"><%=destaque_menor_v2.cidade.nome%> - <%=destaque_menor_v2.cidade.estado%></p>
+      <% end -%>
+      <% if !auxiliar.ocultar_genero -%>
+        <p class="genero"><%=destaque_menor_v2.genero.nome%></p>
+      <% end -%>
+    <% else -%>
+    	<p class="teatro"><%=destaque_menor_v2.teatro.nome%></p>
+    	<p class="cidade"><%=destaque_menor_v2.cidade.nome%> - <%=destaque_menor_v2.cidade.estado%></p>
+    	<p class="genero"><%=destaque_menor_v2.genero.nome%></p>
+  	<% end -%>
+	<div class="over">
+    <% if destaque_menor_v2.proximo_horario -%>
+      <% if defined?(auxiliar) %>
+        <% if auxiliar.url!='sala-do-conservatorio' -%>
+        <p class="linha1">Próxima apresentação</p>
+        <p class="linha2"><%= destaque_menor_v2.proximo_horario.data==Date.today ? 'Hoje':l(destaque_menor_v2.proximo_horario.data, :format => :weekday)%></p>
+        <p class="linha3"><%= l destaque_menor_v2.proximo_horario.data, :format => :short %></p>
+        <% end %>
+      <% else %>
+        <p class="linha1">Próxima apresentação</p>
+        <p class="linha2"><%= destaque_menor_v2.proximo_horario.data==Date.today ? 'Hoje':l(destaque_menor_v2.proximo_horario.data, :format => :weekday)%></p>
+        <p class="linha3"><%= l destaque_menor_v2.proximo_horario.data, :format => :short %></p>
+      <% end %>
+    <% end %>
+    <% if defined?(auxiliar) %>
+      <a href="<%=url_for destaque_menor_v2%><%= '?origem='+auxiliar.url %>" class="botao <%= (auxiliar.tipo_de_botao==2 or destaque_menor_v2.cc_id.blank? ? 'saiba_mais':'comprar'%>"></a>
+    <% else %>
+      <a href="<%=url_for destaque_menor_v2%>" class="botao <%= destaque_menor_v2.cc_id.blank? ? 'saiba_mais':'comprar'%>"></a>
+    <% end %>
+	</div>
+</div>

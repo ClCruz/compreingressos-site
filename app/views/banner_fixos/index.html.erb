@@ -1,0 +1,47 @@
+<h1>Banners fixos</h1>
+<div class="testa_banners_altura">
+  <div class="testa_banners_altura_limite">
+    <div id="banner_fixos">
+    <% @banner_fixos.each do |banner_fixo| %>
+      <div class="container_banner_fixo" id="banner_fixo_<%= banner_fixo.id %>">
+        <div class="banner_fixo">
+          <% if banner_fixo.link.blank? %>
+            <%= image_tag(banner_fixo.imagem.url, :width => 160) %>
+          <% else %>
+            <%= link_to( image_tag(banner_fixo.imagem.url, :width => 160), banner_fixo.link, :target => (banner_fixo.blank==true ? '_blank':'_self'), :title => banner_fixo.link) %>
+          <% end %>
+        </div>
+        <%= link_to 'Editar', edit_banner_fixo_path(banner_fixo) %> | <%= link_to 'Excluir', banner_fixo, :confirm => 'Are you sure?', :method => :delete %>
+      </div>
+    <% end %>
+    </div>
+  </div>
+</div>
+<br />
+<%= link_to 'Novo banner fixo', new_banner_fixo_path %>
+<br />
+<br />
+<br />
+<br />
+* AREA VERMELHA: representa o espaçamento de 10px superior e inferior.
+<br />
+<br />
+* AREA BRANCA: representa a altura da area na qual o conteúdo será exibido, 348px ao total.
+<script>
+jQuery(document).ready(function($){
+  jQuery('#banner_fixos').sortable({
+    items: '.container_banner_fixo',
+    opacity: 0.6,
+    cursor: 'move',
+    axis: 'y',
+    update: function(){
+      var order = $(this).sortable('serialize');
+      $.get('/banner_fixos/reorganiza/', order, function(response){
+        if(response!='true'){
+          alert('Ocorreu um erro ao atualizar a ordem, tente recarregar a página');
+        }
+      });
+    }
+  });
+});
+</script>

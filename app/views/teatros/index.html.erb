@@ -1,0 +1,78 @@
+<% cache("teatros#{params[:teatro_cidade].blank? ? '':'/'+params[:teatro_cidade].parameterize}#{(params[:ordem].blank? or params[:ordem]=='destaques') ? '':'/'+params[:ordem].parameterize}") do -%>
+<div class="centraliza">  
+  <div id="teatro">
+  	<h1 class='title_page'>Teatros e casas de show</h1>
+    <div class="ordem">
+      <% if !params[:busca] -%>
+        organizado por
+        <a href="/teatros?<%= "teatro_cidade=#{@cidade.nome}" if !@cidade.blank? %>"<%="class='ativo'" if params[:ordem].blank? %>>destaques</a>
+        <a href="/teatros?<%= "teatro_cidade=#{@cidade.nome}" if !@cidade.blank? %>&ordem=alfabetica"<%="class='ativo'" if !params[:ordem].blank? %>>alfabética</a>
+      <% end -%>
+    </div>
+  	<div class="menu_busca_teatro">
+      <a href="/teatros?<%= "&ordem=#{lparam(params[:ordem])}" if params[:ordem] %>"<%=" class='ativo'" if params[:teatro_cidade].blank?%>>Todos</a>
+      <% for cidade in @cid %>
+        <a href="/teatros?teatro_cidade=<%=cidade.nome%><%= "&ordem=#{lparam(params[:ordem])}" if params[:ordem] %>"<%=" class='ativo'" if params[:teatro_cidade]==cidade.nome%>><%=cidade.nome%> (<%=cidade.total%>)</a>
+      <% end %>
+    </div>
+      <% i=1 %>
+      <% for teatro in @tea %>
+        <% if i==1 -%>
+        <div class="linha">
+        <% end -%>
+        <div class="container_teatro<%= i==3 ? ' noborder':'' %>">
+          <%= link_to image_tag(teatro.imagem.url(:thumb), :alt => teatro.nome, :title => teatro.nome), teatro %>
+          <%= link_to teatro.nome, teatro, :class => 'teatro_nome' %>
+          <p class="teatro_end"><%=teatro.bairro%> - <%=teatro.cidade.nome%></p>
+          <div class="container_espetaculos">
+            <%
+              if teatro.ordenacao_dos_espetaculos==3
+                @espetaculos = teatro.espetaculos.find(:all,
+                                                            :conditions => ["espetaculos.ativo = 1 AND horarios.data >= ?", Date.today],
+                                                            :joins => ["INNER JOIN horarios ON horarios.espetaculo_id = espetaculos.id"],
+                                                            :group => :espetaculo_id,
+                                                            :order => 'horarios.data ASC, espetaculos.relevancia DESC, espetaculos.nome ASC',
+                                                            :limit => 4)
+              else
+                if teatro.ordenacao_dos_espetaculos==1
+                  order = "relevancia DESC"
+                elsif teatro.ordenacao_dos_espetaculos==2
+                  order = "nome ASC"
+                end
+                @espetaculos = teatro.espetaculos.find(:all, :conditions => {:ativo => true}, :order => order, :limit => 4)
+              end
+            %>
+            <% c=1 -%>
+            <% for espetaculo in @espetaculos -%>
+              <%
+              if c<=3
+                c+=1
+              -%>
+                <%= link_to espetaculo.nome, espetaculo, :class => (c>3 and @espetaculos.size>3) ? 'ultimo':'' %>
+              <% end -%>
+            <% end -%>
+            <% if @espetaculos.size > 3 -%>
+              <%= link_to "+#{@espetaculos.size-3}", teatro, :class => 'quantidade' %>
+            <% end -%>
+          </div>
+        </div>
+        <%
+        if i>=3
+          i=1
+        -%>
+        </div>
+        <%
+        else
+          i+=1
+          if teatro.id == @tea.last.id
+        -%>
+          </div>
+        <%
+          end
+        end
+        -%>
+      <% end %>
+  </div>
+</div>
+<script type="text/javascript" src="/javascripts/visor.js" language="JavaScript1.2"></script>
+<% end -%>

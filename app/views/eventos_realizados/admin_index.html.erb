@@ -1,0 +1,25 @@
+<div id="container_adm">
+	<p class="title_main">Eventos realizados<p>
+	<p><%= link_to 'Novo evento realizado', new_eventos_realizado_path %></p>
+	<table style="margin-top:20px;">
+	  <tr>
+	  	<th>Espetaculo</th>
+	  	<th>Temporada</th>
+	    <th>Ordem</th>
+	    <th></th>
+	    <th></th>
+	  </tr>
+	  <% if (@er.size > 0)%>
+		<% @er.each do |er| %>
+		  <tr>
+		  	<td><%=link_to er.espetaculo.nome, er.espetaculo, :target => "_blank"%></td>
+		  	<td><%=h er.temporada %></td>
+		    <td align="center"><%=h er.ordem %></td>
+		    <td><%= link_to image_tag('/admin/botao_editar.png', :alt => 'Editar', :title => 'Editar'), edit_eventos_realizado_path(er) %></td>
+		    <td><%= link_to image_tag('/admin/botao_excluir.png', :alt => 'Apagar', :title => 'Apagar'), er, :confirm => 'Deseja realmente excluir?', :method => :delete %></td>
+		  </tr>
+		<% end %>
+	  <% end %>
+	</table>
+	<p><%= link_to 'Novo evento realizado', new_eventos_realizado_path %></p>
+</div>

@@ -1,0 +1,326 @@
+<div id="container_adm">
+<%= javascript_include_tag :defaults %>
+
+<% form_for(@espetaculo, :html => {:multipart => true}) do |f| %>
+  <%= f.error_messages %>
+	<div class="campos">
+  		<div id="espetaculo_ativo">
+  		  <p style="font-weight:bold">Estados:</p>
+        <p>
+          <%= f.check_box :ativo %>
+          <%= f.label :ativo %>
+        </p>
+        <p>
+          <%= f.check_box :privado %>
+          <%= f.label :privado %>
+        </p>
+        <p>
+          <%= f.check_box :especial %>
+          <%= f.label :especial %>
+        </p>
+  		</div>
+  		<div id="patrocinador">
+        <p style="font-weight:bold">Páginas especiais (modo novo):</p>
+        <% @pagina_especiais = PaginaEspecial.find(:all, :order => :url) %>
+        <% if !@pagina_especiais.blank? %>
+          <% @pagina_especiais.each do |pagina_especial| %>
+            <p class="patrocinador">
+              <label>
+                <%= check_box_tag "espetaculo[pagina_especial_ids][]", pagina_especial.id, pagina_selecionada?(@espetaculo, pagina_especial) %>
+                /<%= pagina_especial.url %>
+              </label>
+            </p>
+          <% end %>
+        <% else %>
+          Não existem páginas especiais cadastradas
+        <% end %>
+      </div>
+  </div>
+  <div class="especial" style="display:<%= @espetaculo.especial ? 'block':'none' %>;">
+    <p>
+      <%= f.label :fundo %><br />
+      <%= f.file_field :fundo, :style => "width:400px;" %><br />
+      <span class="help_text">Tamanho máximo de 600kb</span><br />
+      <% if @espetaculo.fundo? %>
+        <%= image_tag @espetaculo.fundo.url, :style => "height:200px;" %><br />
+        <a href="/espetaculos/excluir_img/<%= @espetaculo.id %>/fundo">Excluir background</a>
+      <% end %>
+    </p>
+    <p>
+      <%= f.label :cor_dos_botoes %><br />
+      <%= f.select :cor_dos_botoes, Espetaculo::BOTOES %><br />
+    </p>
+    <p>
+      <%= f.label :cor_de_fundo %><br />
+      <%= f.text_field :cor_de_fundo %>
+    </p>
+    <p>
+      <%= f.label :altura_de_inicio, "Altura de inicio no computador" %><br />
+      <%= f.text_field :altura_de_inicio %>
+    </p>
+    <p>
+      <%= f.label :altura_de_inicio_mobile, "Altura de inicio no celular" %><br />
+      <%= f.text_field :altura_de_inicio_mobile %>
+    </p>
+    <p>
+      <%= f.label :cor_do_texto_do_cabecalho %><br />
+      <%= f.text_field :cor_do_texto_do_cabecalho %>
+    </p>
+    <p>
+      <%= f.label :cor_do_link_do_cabecalho %><br />
+      <%= f.text_field :cor_do_link_do_cabecalho %>
+    </p>
+    <p>
+      <%= f.label :cor_da_borda_das_imagens %><br />
+      <%= f.text_field :cor_da_borda_das_imagens %>
+    </p>
+    <p>
+      <%= f.label :cor_de_fundo_do_box %><br />
+      <%= f.text_field :cor_de_fundo_do_box %>
+    </p>
+    <p>
+      <%= f.label :cor_da_borda_do_box %><br />
+      <%= f.text_field :cor_da_borda_do_box %>
+    </p>
+    <p>
+      <%= f.label :cor_do_texto_do_box %><br />
+      <%= f.text_field :cor_do_texto_do_box %>
+    </p>
+    <p>
+      <%= f.label :cor_do_link_do_box %><br />
+      <%= f.text_field :cor_do_link_do_box %>
+    </p>
+  </div>
+  <script type="text/javascript">
+    jQuery("input[name='espetaculo[especial]']").on('change',function(){
+    if(jQuery("input[name='espetaculo[especial]']").is(':checked')){
+      if(jQuery('div.especial').css('display')=='none'){
+      jQuery('div.especial').slideDown();
+      }
+    }else{
+      if(jQuery('div.especial').css('display')=='block'){
+      jQuery('div.especial').slideUp();
+      }
+    };
+    });
+  </script>
+  
+  
+	<p>
+		<%= f.label :teatro_id, "Teatro: "%><br />
+		<%= f.select :teatro_id, Teatro.all(:order => 'nome').collect {|c| [ c.nome, c.id ] } %><br />
+	</p>
+	<p>
+		<%= f.label :nome %><br />
+		<%= f.text_area :nome, :rows => 3, :cols => 75 %>
+	</p>
+	<p>
+		<%= f.label :genero_id, "Gênero: "%><br />
+		<%= f.select :genero_id, Genero.all(:order => 'nome').collect {|c| [ c.nome, c.id ] } %><br />
+	</p>
+  <p>
+    <%= f.label :relevancia %><br />
+    <%= f.select :relevancia, Espetaculo::RELEVANCIAS %>
+  </p>
+	<p>
+  	<%= f.label :aba_inicial, "Aba inicial: "%><br />
+  	<%= f.select :aba_inicial, Espetaculo::ABAS %><br />
+  </p>
+  <p>
+  	<%= f.label :classificacao_id, "Classificação: "%><br />
+  	<%= f.select :classificacao_id, Classificacao.all(:order => 'nome').collect {|c| [ c.nome, c.id ] } %><br />
+  </p>
+  <p>
+  	<%= f.label :keywords, 'SEO keywords' %><br />
+  	<%= f.text_field :keywords, :size => 100 %>
+	</p>
+  <p>
+  	<%= f.label :description, 'SEO description' %><br />
+  	<%= f.text_field :description, :size => 100 %>
+	</p>
+	<p>
+		<%= f.label :sinopse %><br />
+		<%= f.text_area :sinopse, :cols => 100, :rows => 20, :class => 'mceEditor' %>
+	</p>
+  <p>
+    <%= f.label :desconto %><br />
+    <%= f.text_area :desconto, :cols => 70, :rows => 6 %>
+  </p>
+  <p>
+    <%= f.label :data_inicial %>*<br />
+    <%= f.date_select(:data_inicial, :order => [:day, :month, :year], :start_year => Time.now.year, :include_blank => true) %><br />
+  </p>
+	<p>
+  	<%= f.label :data_maxima %>*<br />
+  	<%= f.date_select(:data_maxima, :order => [:day, :month, :year], :start_year => Time.now.year, :include_blank => true) %><br />
+  	<span class="help_text">* Para única apresentação, insira a mesma data no 2 campos.</span>
+	</p>
+  <p>
+    <%= f.label :duracao %><br />
+    <%= f.text_field :duracao %>
+  </p>
+	<p>
+  	<%= f.label :horario %><br />
+  	<%= f.text_field :horario, :size => 100 %>
+	</p>
+	<p>
+  	<%= f.label :preco %><br />
+  	<%= f.text_field :preco, :size => 100 %>
+	</p>
+	<p>
+  	<%= f.label :site, "Site - (SEM http:// !!)" %><br />
+  	<%= f.text_field :site, :size => 100 %>
+	</p>
+	<p>
+	<%= f.label :cc_id, 'ID C&C' %><br />
+  	<%= f.text_field :cc_id, :size => 5 %>
+	</p>
+  <p>
+    <%= f.check_box :especificar_data_inicial_de_venda %>
+    <%= f.label :especificar_data_inicial_de_venda %>
+  </p>
+  <div class="data_inicial_venda" style="display:<%= @espetaculo.especificar_data_inicial_de_venda ? 'block':'none' %>;">
+    <p>
+      <%= f.label :data_inicial_de_venda %><br />
+      <%= f.datetime_select(:data_inicial_de_venda, :order => [:day, :month, :year, :hour, :minute], :include_seconds => false, :date_separator => '', :datetime_separator => ' às ', :time_separator => ':', :start_year => Date.current.year, :end_year => Date.current.year+2, :include_blank => false) %><br />
+      <span class="help_text">Horario de Brasília, acrescentar 1 hora caso esteja em horario de verão e o evento esteja sendo realizado no nordeste.</span>
+    </p>
+  </div>
+  <script type="text/javascript">
+    jQuery("input[name='espetaculo[especificar_data_inicial_de_venda]']").on('change',function(){
+    if(jQuery("input[name='espetaculo[especificar_data_inicial_de_venda]']").is(':checked')){
+      if(jQuery('div.data_inicial_venda').css('display')=='none'){
+      jQuery('div.data_inicial_venda').slideDown();
+      }
+    }else{
+      if(jQuery('div.data_inicial_venda').css('display')=='block'){
+      jQuery('div.data_inicial_venda').slideUp();
+      }
+    };
+    });
+  </script>
+	<hr color="#C7C7C7">	
+	
+	
+	<div class="campos" id="entradas">
+		<h2>Ficha Técnica:</h2>
+		<% f.fields_for :entradas do |entrada_form| %>
+		<div class="entrada">
+			<p>
+        <label><%= entrada_form.check_box :pequeno %> <%= entrada_form.label :pequeno, 'Pequeno'%></label><br />
+        <br />
+				<%= entrada_form.label :atributo, 'Atributo' %><br />
+				<%= entrada_form.text_field :atributo %><br />
+				<br />
+        <%= entrada_form.label :valor, 'Valor'%><br />
+        <%= entrada_form.text_area :valor, :cols => 40, :rows => 5, :class => 'mceEditor'%><br />
+        
+				<%= remove_link_unless_new_record(entrada_form) %>
+			</p>
+		</div>	
+		<% end %>
+	</div>
+		<p>
+			<%= add_entrada_link "Adicionar Entrada", f %>
+		</p>
+	<hr color="#C7C7C7">
+	
+	
+  <h2>Imagens:</h2>
+  <p>
+    <%= f.label :img_principal %><br />
+    <%= f.file_field :img_principal, :style => "width:400px;" %><br />
+    <span class="help_text">O tamanho deve ser exatamente 1920x200px com máximo de 300kb</span><br />
+    <% if @espetaculo.img_principal? %>
+      <%= image_tag @espetaculo.img_principal.url, :width => "500" %><br />
+      <a href="/espetaculos/excluir_img/<%= @espetaculo.id %>/img_principal">Excluir imagem pricipal</a>
+    <% end %>
+  </p>
+  <p>
+    <%= f.label :img_miniatura %><br />
+    <%= f.file_field :img_miniatura, :style => "width:400px;" %><br />
+    <!--<span class="help_text">O tamanho deve ser exatamente 160x90px ou 160x180px</span><br />-->
+    <span class="help_text">O tamanho deve ser exatamente 320x180px ou 320x360px ou no formato antigo, não mais recomendodado de 160x90px ou 160x180px</span><br />
+    <% if @espetaculo.img_miniatura? %>
+      <%= image_tag @espetaculo.img_miniatura.url(:miniatura), :width => "100" %><br />
+      <a href="/espetaculos/excluir_img/<%= @espetaculo.id %>/img_miniatura">Excluir imagem miniatura</a>
+    <% end %>
+  </p>
+  <hr color="#C7C7C7">
+    
+    
+  <div class="campos" id="imagems">
+    <h2>Galeria:</h2>
+    <% f.fields_for :galerias do |imagem_form| %>
+      <div class="galeria">
+        <p>            
+          <%= imagem_form.label 'Arquivo', 'Selecione o arquivo de imagem para substituir esta foto:' %><br />
+          <%= imagem_form.file_field :imagem %><br />
+          <span class="help_text">O tamanho deve ser exatamente 465x274px</span><br />
+          <% unless imagem_form.object.new_record? %>
+            <%= image_tag imagem_form.object.imagem.url(:thumb) %>
+          <% end %>
+        </p>
+        <p>
+          <%= imagem_form.text_field :legenda%><br />
+          <%= remove_link_unless_new_record(imagem_form) %>
+        </p>
+      </div>  
+      <hr width="600px" align="left"> 
+    <% end %>
+  </div>
+	<p>
+	  <%= add_imagem_link "Adicionar Imagem", f %>
+	</p>
+	<hr color="#C7C7C7">
+	
+	
+	<div id="videos">
+		<h2>Vídeos:</h2>
+		<% f.fields_for :videos do |video_form| %>
+		<div class="video">
+			<p>
+				<%= video_form.label :titulo, 'Título:' %><br />
+				<%= video_form.text_field :titulo %>
+			</p>
+			<p>
+			<%= video_form.label :legenda, 'Legenda'%><br />
+			<%= video_form.text_field :legenda%>
+			</p>
+			<p>
+			<%= video_form.label :youtube_id, 'YouTube ID:' %><br />
+			<%= video_form.text_field :youtube_id %><br />
+			<span class="help_text">Pegue apenas o ID do vídeo. (<i>Ex: http://www.youtube.com/watch?v=<b><u>CIXSwDLQgXc</u></b>&hd=1</i>)</span>
+			</p>
+			<%= remove_link_unless_new_record(video_form) %>
+		</div>
+		<hr width="600px" align="left">
+		<% end %>
+	</div>
+	<p>
+	  <%= add_video_link "Adicionar Vídeo", f %>
+	</p>
+  <hr color="#C7C7C7">
+
+
+  <div id="filtros">
+    <h2>Filtro de paginas especiais:</h2>
+    <% @pagina_especial_filtros = PaginaEspecialFiltro.find(:all, :order => :nome) %>
+    <% if !@pagina_especial_filtros.blank? %>
+      <% @pagina_especial_filtros.each do |pef| %>
+        <p class="patrocinador">
+          <label>
+            <%= check_box_tag "espetaculo[pagina_especial_filtro_ids][]", pef.id, filtro_selecionado?(@espetaculo, pef) %>
+            <%= pef.nome %>
+          </label>
+        </p>
+      <% end %>
+    <% else %>
+      Não existem filtros de páginas especiais cadastrados
+    <% end %>
+  </div>
+  <p>
+    <%= f.submit 'Salvar' %>&nbsp;&nbsp;&nbsp;&nbsp;
+  </p>
+<% end %>
+</div>

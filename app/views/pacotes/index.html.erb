@@ -1,0 +1,41 @@
+<div id="container_adm">
+  <p class="title_main">Pacotes</p>
+  <p><%= link_to 'Novo pacote', :action => :new, :id => params[:id] %></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody class="pacotes">
+      <% @pacotes.each do |pacote| %>
+        <tr id="pacote_<%= pacote.id %>" class="pacote move">
+          <td><%=h pacote.nome %></td>
+          <td class="buttom"><%= link_to image_tag('/admin/botao_editar.png', :alt => 'Editar', :title => 'Editar'), edit_pacote_path(pacote) %></td>
+          <td class="buttom"><%= link_to image_tag('/admin/botao_excluir.png', :alt => 'Apagar', :title => 'Apagar'), pacote, :confirm => 'Deseja realmente excluir?', :method => :delete %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <p><%= link_to 'Novo pacote', :action => :new, :id => params[:id] %></p>
+</div>
+<script>
+jQuery(document).ready(function($){
+  jQuery('.pacotes').sortable({
+    items: '.pacote',
+    opacity: 0.6,
+    cursor: 'move',
+    axis: 'y',
+    update: function(){
+      var order = $(this).sortable('serialize');
+      $.get('/pacotes/reorganiza?id=<%=params[:id]%>', order, function(response){
+        if(response!='true'){
+          alert('Ocorreu um erro ao atualizar a ordem, tente recarregar a página');
+        }
+      });
+    }
+  });
+});
+</script>

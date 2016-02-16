@@ -1,0 +1,79 @@
+<style type="text/css">
+  #background_holder{
+    overflow:visible;
+  }
+  #background_holder div.centraliza div#espetaculos{
+    margin-bottom:40px;
+  }
+  #background_holder img.img_header_map{
+    display:block;
+  }
+  div.background_pagina{
+    background:<%= @pagina_de_pacotes.cor_de_fundo %> url('<%= @pagina_de_pacotes.imagem.url %>') top center no-repeat;
+  }
+  div.card{
+    overflow:visible;
+  }
+  p.pagina_especial_nome, p.pagina_especial_subtitulo{
+    color:<%= @pagina_de_pacotes.cor_do_header %>;
+    text-shadow: 3px 3px 3px #000;
+  }
+</style>
+<div class="background_pagina">
+  <!-- MAPEAMENTO DE IMAGEM DESATIVA PARA O THEATRO MUNICIPAL DE SAO PAULO -->
+  <%
+  	if 1!=1 #@pagina_de_pacotes.url == 'theatromunicipaldesaopaulo' 
+  %>
+    <div class="centraliza theatro_video">
+      <iframe width="462" height="260" src="//www.youtube.com/embed/J9nJA0HjHdU" frameborder="0" style="margin:28px 249px 12px;" allowfullscreen></iframe>
+    </div>
+  <% elsif !@pagina_de_pacotes.mapeamento_de_imagem.blank? %>
+    <div class="centraliza">
+      <map name="header_map">
+        <%= @pagina_de_pacotes.mapeamento_de_imagem %>
+      </map>
+      <img src="/images/header_map.png" usemap="#header_map" class="img_header_map" height="<%= @pagina_de_pacotes.altura_de_inicio_da_listagem %>" />
+      <% if !session[:desktop] or session[:desktop]==0 -%>
+        <script>
+          var divisorMd = 3.0;
+          var divisorParams = [["img.img_header_map","height"]];
+          mobileDivisor(divisorMd,divisorParams);
+          mobileMap(divisorMd);
+        </script>
+      <% end -%>
+    </div>
+  <% end %>
+  <div class="centraliza pacotes">
+    <div id="detalhes" style="margin-top:<%= @pagina_de_pacotes.altura_de_inicio_da_listagem %>px !important">
+      <% if !session[:desktop] or session[:desktop]==0 -%>
+    	  <script>
+          var divisorMd = 3.0;
+          var divisorParams = [["#detalhes","margin-top"]];
+          mobileDivisor(divisorMd,divisorParams);
+          mobileMap(divisorMd);
+        </script>
+      <% end -%>
+	  <div class="assinatura_municipal download" style="width:100%;">
+        Caderno de Assinaturas<br />
+        <span>baixe em formato .pdf</span><br />
+        <a href="http://www.compreingressos.com/assinaturas-2016.pdf" target="_blank">caderno de assinaturas</a>
+      </div>
+    </div>
+    <div id="espetaculos">
+      <div class="container_theatromunicipal right">
+      	<p class="descricao">Novas assinaturas de<br /><span>21/01/2016 a 10/02/2016</span></p>
+		<!--
+      	<div><a href="https://compra.compreingressos.com/comprar/login.php?redirect=https%3A%2F%2Fcompra.compreingressos.com%3A443%2Fcomprar%2Fminha_conta.php"><img src="/images/pacotes_opera.jpg"></a></div>
+		-->
+		<div><a href="/theatromunicipaldesaopaulo/assinaturas/opera"><img src="/images/pacotes_opera.jpg"></a></div>
+      </div>
+      <div class="container_theatromunicipal left">
+      	<p class="descricao">Compra de novos pacotes de<br /><span>17/12/2015 a 10/02/2016</span></p>
+        <div style="float:left;margin:0 6px 0 0;"><a href="/theatromunicipaldesaopaulo/assinaturas/bale"><img src="/images/pacotes_bale.jpg"></a></div>
+        <div style="float:left;margin:0 0 0 0;"><a href="/theatromunicipaldesaopaulo/assinaturas/beethoven"><img src="/images/pacotes_beethoven.jpg"></a></div>
+        <div style="float:left;margin:6px 6px 20px 0;"><a href="/theatromunicipaldesaopaulo/assinaturas/combinadas"><img src="/images/pacotes_combinadas.jpg"></a></div>
+        <div style="float:left;margin:6px 0 20px 0;"><a href="/theatromunicipaldesaopaulo/assinaturas/concertos"><img src="/images/pacotes_concertos.jpg"></a></div>
+      </div>
+    </div>
+  </div>
+</div>

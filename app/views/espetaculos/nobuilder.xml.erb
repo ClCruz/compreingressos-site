@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Offers>
+  <% @espetaculos_home.each do |espetaculo| %>
+    <Offer>
+      <Id><%= espetaculo.id %></Id>
+      <Code><%= espetaculo.cc_id %></Code>
+      <Title><%= espetaculo.nome %></Title>
+      <Description><%= espetaculo.description %></Description>
+      <Sinopse><%= espetaculo.sinopse %></Sinopse>
+      <SiteDetailURL>http://www.compreingressos.com<%= espetaculo_path(espetaculo) %></SiteDetailURL>
+      <Images>
+        <Thumb>http://www.compreingressos.com/cache/<%= espetaculo.imagems[1].id %>.jpg</Thumb>
+        <HighLight>http://www.compreingressos.com/cache/<%= espetaculo.imagems[1].id %>.jpg</HighLight>
+      </Images>
+      <Category>
+        <Id><%= espetaculo.genero.id %></Id>
+        <Name><%= espetaculo.genero.nome %></Name>
+      </Category>
+      <Place>
+        <Id><%= espetaculo.teatro.id %></Id>
+        <Address><%= espetaculo.teatro.endereco %></Address>
+        <AddressDistrict><%= espetaculo.teatro.bairro %></AddressDistrict>
+        <AddressCityId><%= espetaculo.teatro.cidade.id %></AddressCityId>
+        <AddressCity><%= espetaculo.teatro.cidade.nome %></AddressCity>
+        <AddressState><%= espetaculo.teatro.cidade.estado %></AddressState>
+        <AddressPhone><%= espetaculo.teatro.telefone %></AddressPhone>
+        <GoogleMaps><%= espetaculo.teatro.maps %></GoogleMaps>
+      </Place>
+    </Offer>
+  <% end %>
+</Offers>

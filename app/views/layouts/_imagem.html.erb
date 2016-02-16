@@ -1,0 +1,15 @@
+<div class="galeria">
+  <% pf.fields_for :galerias, imagem, :child_index => 'index_to_replace' do |ef| %>
+    <p>            
+      <%= ef.label 'Arquivo', 'Selecione a imagem:' %><br />
+      <%= ef.file_field :imagem %><br />
+      <span class="help_text">O tamanho deve ser exatamente 465x274px</span>
+    </p>
+    <p>
+      <%= ef.label :legenda, 'Legenda' %><br />
+      <%= ef.text_field :legenda%><br />
+      <%= link_to_function "Remover esta imagem", "$(this).up('.galeria').remove()" %>
+    </p>
+  <% end %>
+  <hr width="600px" align="left"> 
+</div>

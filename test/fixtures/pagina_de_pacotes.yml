@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  nome: MyString
+  url: MyString
+  mapeamento_de_imagem: MyString
+  altura_de_inicio_da_listagem: 1
+
+two:
+  nome: MyString
+  url: MyString
+  mapeamento_de_imagem: MyString
+  altura_de_inicio_da_listagem: 1

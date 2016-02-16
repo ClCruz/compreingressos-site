@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  cidade: 
+  link: MyString
+  target: false
+  ordem: 1
+
+two:
+  cidade: 
+  link: MyString
+  target: false
+  ordem: 1

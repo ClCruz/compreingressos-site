@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  home_modulo: 
+  espetaculo: 
+  ordem: 1
+
+two:
+  home_modulo: 
+  espetaculo: 
+  ordem: 1

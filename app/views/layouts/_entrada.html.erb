@@ -1,0 +1,13 @@
+<div class="entrada">
+<% pf.fields_for :entradas, entrada, :child_index => 'index_to_replace' do |f| %>
+  <label><%= f.check_box :pequeno %><%= f.label :pequeno, 'Pequeno' %></label><br />
+  <br />
+	<%= f.label :atributo, 'Atributo' %><br />
+  <%= f.text_field :atributo %><br />
+  <br />
+  <%= f.label :valor, 'Valor' %><br />
+  <%= f.text_area :valor, :cols => 40, :rows => 5, :class=>'mceEditor', :id => 'entrada_index_to_replace' %><br />
+  
+  <%= link_to_function "Remover esta entrada", "$(this).up('.entrada').remove()" %>
+<% end %>
+</div>

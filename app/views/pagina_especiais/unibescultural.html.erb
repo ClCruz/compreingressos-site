@@ -1,0 +1,144 @@
+<style type="text/css">
+  <% if @pagina_especial.nome_tamanho_da_fonte? %>
+  div.background_pagina div#detalhes_busca div.detalhes p.nome{
+    font-size:<%= @pagina_especial.nome_tamanho_da_fonte %>px;
+  }
+  <% end %>
+  div.background_pagina{
+    background:<%= @pagina_especial.cor_de_fundo %> url('<%= @pagina_especial.imagem.url %>') top center no-repeat;
+  }
+  div#background_holder div#detalhes_busca{
+    background-color:<%= @pagina_especial.cor_de_fundo_do_box %> !important;
+  }
+  div.background_pagina div#detalhes_busca div.ordem, div.background_pagina div#detalhes_busca p, div.background_pagina div#detalhes_busca div.ordem a.ativo{
+    color:<%= @pagina_especial.cor_do_texto_do_box %> !important;
+  }
+  div.background_pagina div#detalhes_busca div.ordem a{
+    color:<%= @pagina_especial.cor_do_link_do_box %>;
+  }
+  div.background_pagina div#detalhes_busca div.ordem a:hover{
+    background-color:<%= @pagina_especial.cor_do_link_do_box %>;
+    color:<%= @pagina_especial.cor_do_texto_do_box %>;
+  }
+  div.card{
+    border-color:<%= @pagina_especial.cor_da_borda_do_espetaculo %>;
+  }
+  #background_holder img.img_header_map{
+    display:block;
+  }
+  <% if @pagina_especial.tipo==2 %>
+  div#menu_topo div.bottom div.container_busca{
+    margin:0;
+    float:right;
+    width:<%=@tt%>px;
+  }
+  div#menu_topo{
+    height:70px;
+  }
+  div#menu_topo div.container_mini_cabecalho{
+    top:0;
+    background:<%=@pagina_especial.cor_do_header%>;
+  }
+  div#menu_topo div.container_mini_cabecalho.linha{
+    border-bottom-color:<%=@pagina_especial.cor_da_borda_do_header%>;
+  }
+  div.menu_busca{
+    background:<%=@pagina_especial.cor_do_header%>;
+  }
+  div#busca div.container.buscar{
+    width:<%=@tt==598 ? '598px':'auto'%>;
+  }
+  div#busca div.container.buscar input{
+    width:<%=@tt==598 ? '515':'285'%>px;
+  }
+  div.menu_busca{
+    top:70px;
+  }
+  div#menu_topo a.logo{
+    background-image:url(..<%= @pagina_especial.logo.url %>);
+    background-size:auto 30px;
+  }
+  <% if !@pagina_especial.filtro_cidade and !@pagina_especial.filtro_genero %>
+    @media only screen and (max-width:640px){
+      div#menu_topo div.bottom div.container_busca{
+        display:none;
+      }
+      div#menu_topo div.container_mini_cabecalho.linha{
+        height:50px;
+      }
+      div#menu_topo{
+        height:50px !important;
+      }
+    }
+  <% end %>
+  <% end %>
+</style>
+<div class="background_pagina">
+  <div class="centraliza">
+    <div id="detalhes_busca" style="margin-top:<%= @pagina_especial.altura_de_inicio_da_listagem %>px !important">
+      <script>
+        var divisorMd = 3.0;
+        var divisorParams = [["div.background_pagina div#detalhes_busca","margin-top"]];
+        mobileDivisor(divisorMd,divisorParams);
+      </script>
+      <div class="detalhes">
+        <p class="nome"><%= @pagina_especial.nome %></p>
+        <p class="total">
+          <%= @espetaculos.size %>
+          <% if @espetaculos.size > 1 %>
+            espetáculos encontrados
+          <% else %>
+            espetáculo encontrado
+          <% end %>
+        </p>
+      </div>
+      <!--
+      <div class="ordem">
+        <% if !params[:busca] %>
+          organizado por
+          <a href="/<%= @pagina_especial.url %>?<%= "cidade=#{@cidade.nome}" if !@cidade.blank? %><%= "&genero=#{@genero.nome}" if !@genero.blank? %><%= "&filtro=#{@pef.url}" if !params[:filtro].blank? %>&ordem=destaques"<%= "class='ativo'" if params[:ordem]=='destaques' or (params[:ordem].blank? and @pagina_especial.organizado_por==1) %>>destaques</a>
+          <a href="/<%= @pagina_especial.url %>?<%= "cidade=#{@cidade.nome}" if !@cidade.blank? %><%= "&genero=#{@genero.nome}" if !@genero.blank? %><%= "&filtro=#{@pef.url}" if !params[:filtro].blank? %>&ordem=alfabetica"<%= "class='ativo'" if params[:ordem]=='alfabetica' or (params[:ordem].blank? and @pagina_especial.organizado_por==2) %>>alfabética</a>
+          <a href="/<%= @pagina_especial.url %>?<%= "cidade=#{@cidade.nome}" if !@cidade.blank? %><%= "&genero=#{@genero.nome}" if !@genero.blank? %><%= "&filtro=#{@pef.url}" if !params[:filtro].blank? %>&ordem=data"<%= "class='ativo'" if params[:ordem]=='data' or (params[:ordem].blank? and @pagina_especial.organizado_por==3) %>>próximas apresentações</a>
+        <% end %>
+      </div>
+      -->
+    </div>
+    <div id="espetaculos">
+      <a href="?filtro=para-todos" style="width:310px;height:315px;float:left;margin:0 9px 9px 0">
+        <img src="/images/unibescultural/uni1.jpg" />
+      </a>
+      <a href="?filtro=viva-a-cidade" style="width:310px;height:315px;float:left;margin:0 9px 9px 0">
+        <img src="/images/unibescultural/uni2.jpg" />
+      </a>
+      <a href="?filtro=de-bem-com-a-vida" style="width:310px;height:315px;float:left;margin:0 0 9px 0">
+        <img src="/images/unibescultural/uni3.jpg" />
+      </a>
+      <a href="?filtro=mentes-ativas" style="width:310px;height:315px;float:left;margin:0 9px 9px 0">
+        <img src="/images/unibescultural/uni4.jpg" />
+      </a>
+      <a href="?filtro=roda-roda-cultural" style="width:310px;height:315px;float:left;margin:0 9px 9px 0">
+        <img src="/images/unibescultural/uni5.jpg" />
+      </a>
+      <img src="/images/unibescultural/uni6.jpg" id="mapa_duplo_unibes" width="310" height="315" usemap="#mapa_duplo_unibes" />
+      <map name="mapa_duplo_unibes" id="mapa_duplo_unibes">
+        <area id="ID" alt="ALT" title="TITLE" href="?filtro=dialogo-no-escuro" shape="poly" coords="0,0,306,0,0,308" style="outline:none;" />
+        <area id="ID" alt="ALT" title="Title" href="?filtro=janela-para-o-conhecimento" shape="poly" coords="310,0,307,0,0,307,0,315,310,315" style="outline:none;" />
+      </map>
+    </div>
+  </div>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('#espetaculos').masonry({
+        columnWidth:0,
+        itemSelector:'.card'
+      });
+    });
+  </script>
+  <script type="text/javascript">
+    $(function() {
+      $('#espetaculos .card').each(function(){
+        $(this).hoverdir(/*{hoverDelay: 50}*/);
+      });
+    });
+  </script>
+</div>

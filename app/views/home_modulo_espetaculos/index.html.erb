@@ -1,0 +1,24 @@
+<h1>Listing home_modulo_espetaculos</h1>
+
+<table>
+  <tr>
+    <th>Home modulo</th>
+    <th>Espetaculo</th>
+    <th>Ordem</th>
+  </tr>
+
+<% @home_modulo_espetaculos.each do |home_modulo_espetaculo| %>
+  <tr>
+    <td><%=h home_modulo_espetaculo.home_modulo %></td>
+    <td><%=h home_modulo_espetaculo.espetaculo %></td>
+    <td><%=h home_modulo_espetaculo.ordem %></td>
+    <td><%= link_to 'Show', home_modulo_espetaculo %></td>
+    <td><%= link_to 'Edit', edit_home_modulo_espetaculo_path(home_modulo_espetaculo) %></td>
+    <td><%= link_to 'Destroy', home_modulo_espetaculo, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New home_modulo_espetaculo', new_home_modulo_espetaculo_path %>

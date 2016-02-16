@@ -1,0 +1,4 @@
+<p class="espetaculo">
+	<%= select_tag('home_modulo[home_modulo_espetaculos_attributes][][espetaculo_id]', espetaculos_options, :prompt => 'Selecione') %>
+	<%= link_to_function "Remover este espetaculo", "jQuery(this).parent('.espetaculo').slideUp(function(){jQuery(this).remove();});" %>
+</p>

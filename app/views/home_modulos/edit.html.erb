@@ -1,0 +1,131 @@
+<h1>Editar home módulo</h1>
+
+<% form_for(@home_modulo, :html => { :multipart => true }) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :tipo %><br />
+    <%= f.select :tipo, HomeModulo::TIPO, :selected => @home_modulo.tipo %>
+  </p>
+  <script type="text/javascript">
+    jQuery("select[name='home_modulo[tipo]']").on('change',function(){
+    if(jQuery(this).val()==1 || jQuery(this).val()==2){
+      if(jQuery('div.modulos').css('display')=='none'){
+        if(jQuery('div.banners').css('display')=='block'){
+          jQuery('div.banners').slideUp('fast',function(){
+            jQuery('div.modulos').slideDown('slow');
+          });
+        } else {
+          jQuery('div.modulos').slideDown('slow');
+        }
+      }
+    }else if(jQuery(this).val()==3 || jQuery(this).val()==4){
+      if(jQuery('div.banners').css('display')=='none'){
+        if(jQuery('div.modulos').css('display')=='block'){
+          jQuery('div.modulos').slideUp('fast',function(){
+            jQuery('div.banners').slideDown('slow');
+          });
+        } else {
+          jQuery('div.banners').slideDown('slow');
+        }
+      }
+      if(jQuery(this).val()==3){
+        jQuery('p.imagem span.help_text').html("A largura deve ser de 180px e a altura é livre");
+      } else if (jQuery(this).val()==4){
+        jQuery('p.imagem span.help_text').html("A largura deve ser de 370px e a altura é livre");
+      }
+    };
+    });
+  </script>
+  
+  <p>
+    <%= f.label :entrada %><br />
+    <%= f.datetime_select :entrada %>
+  </p>
+  <p>
+    <%= f.label :saida %><br />
+    <%= f.datetime_select :saida %>
+  </p>
+  <div class="modulos" style="width:100%;float:left;display:<%=(@home_modulo.tipo==1 or @home_modulo.tipo==2 or @home_modulo.tipo.blank?) ? 'block':'none'%>;">
+    <p>
+      <%= f.label :titulo %><br />
+      <%= f.text_area :titulo, :cols => 50, :rows => 2 %>
+    </p>
+    <p>
+      <%= f.label :exibir %><br />
+      <%= f.text_field :exibir, :size => 3 %>
+    </p>
+    <p>
+      <%= f.check_box :ocultar_cidade %>
+      <%= f.label :ocultar_cidade %>
+    </p>
+    <p>
+      <%= f.check_box :ocultar_teatro %>
+      <%= f.label :ocultar_teatro %>
+    </p>
+    <p>
+      <%= f.check_box :ocultar_genero %>
+      <%= f.label :ocultar_genero %>
+    </p>
+  </div>
+  <div class="banners" style="width:100%;float:left;display:<%=(@home_modulo.tipo==3 or @home_modulo.tipo==4) ? 'block':'none'%>;">
+    <p>
+      <%= f.label :link %><br />
+      <%= f.text_field :link %>
+    </p>
+    <p>
+      <%= f.check_box :blank %><%= f.label :blank %>
+    </p>
+    <p class="imagem">
+      <%= f.label :imagem, 'Selecione a imagem:' %><br />
+      <%= f.file_field :imagem %><br />
+      <span class="help_text">A largura deve ser de 370px e a altura é livre</span>
+      <% if defined?(@home_modulo.imagem) %>
+        <br /><%= image_tag @home_modulo.imagem.url %>
+      <% end %>
+    </p>
+    <p>
+      <%= f.check_box :topo %><%= f.label :topo %><br />
+      <span class="help_text">Alinha o banner aos cards quando estiver na primeira fileira</span>
+    </p>
+  </div>
+  
+  <% if @home_modulo.tipo==1 or @home_modulo.tipo==2 %>
+  <div id='espetaculos'>
+    <h2>Espetaculos</h2>
+    <% f.fields_for :home_modulo_espetaculos, f.object.home_modulo_espetaculos.all(:order => :ordem) do |e| %>
+        <p class="home_modulo_espetaculo" id="home_modulo_espetaculo_<%= e.object.id %>">
+          <%= e.select(:espetaculo_id, @espetaculos, :selected => e.object.espetaculo_id, :prompt => 'Selecione') %>
+          <%= remove_link_unless_new_record(e) %>
+        </p>
+    <% end %>
+  </div>
+  <%= link_to 'Adicionar espetaculo', new_home_modulo_espetaculo_path+'?home_modulo='+@home_modulo.id.to_s %>
+  <% end %>
+  
+  
+  <%= f.hidden_field :ordem %>
+  <p>
+    <%= f.submit 'Salvar' %>
+  </p>
+<% end %>
+<script>
+jQuery(document).ready(function($){
+  jQuery('#espetaculos').sortable({
+    items: 'p.home_modulo_espetaculo',
+    opacity: 0.6,
+    cursor: 'move',
+    axis: 'y',
+    update: function(){
+      var order = $(this).sortable('serialize');
+      $.get('/home_modulo_espetaculos/reorganiza/', order, function(response){
+        if(response!='true'){
+          alert('Ocorreu um erro ao atualizar a ordem, tente recarregar a página');
+        }
+      });
+    }
+  });
+});
+</script>
+<%= link_to 'Show', @home_modulo %> |
+<%= link_to 'Back', home_modulos_path %>

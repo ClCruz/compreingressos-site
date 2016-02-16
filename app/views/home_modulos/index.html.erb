@@ -1,0 +1,66 @@
+<div id="container_adm" style="margin-left:-10px;">
+  <p class="title_main">Home módulos</p>
+  <%= link_to 'Novo home módulo', new_home_modulo_path %>
+  
+  <div id="home_inferior">
+    <% @home_modulos.each do |home_modulo| %>
+      <% if home_modulo.tipo==1 or home_modulo.tipo==2 %>
+        <div id="modulo_<%= home_modulo.id %>" class="modulo<%= home_modulo.tipo==1 ? ' um':' dois' %>"<%= home_modulo.tipo==1 ? ' ':' data-ss-colspan="2"' %>>
+          <a name="modulo_<%= home_modulo.id %>"></a>
+          <h1>
+            <%=nl2br home_modulo.titulo %><br />
+            <span>(<%=h home_modulo.entrada.strftime("%d/%m/%y %H:%M") %> à <%=h home_modulo.saida.strftime("%d/%m/%y %H:%M") %>)</span>
+          </h1>
+          <p class="edit"><%= link_to 'Editar', edit_home_modulo_path(home_modulo) %> | <%= link_to 'Excluir', home_modulo, :confirm => 'Are you sure?', :method => :delete %></p>
+          
+          <div class="espetaculos masonry js-masonry" data-masonry-options='{ "columnWidth":1 }'>
+            <% home_modulo.home_modulo_espetaculos.all(:limit => home_modulo.exibir).each do |me| %>
+              <div class="card">
+                <a href="<%=url_for me.espetaculo%><%=!@completaurl.nil? ? '?'+@completaurl : ''%>"><%= image_tag me.espetaculo.img_miniatura.url(:miniatura), :height => (me.espetaculo.img_miniatura_height.blank? ? '180':me.espetaculo.img_miniatura_height) %></a>
+                <h3><a href="<%=url_for me.espetaculo%><%=!@completaurl.nil? ? '?'+@completaurl : ''%>" target="_parent"><%=me.espetaculo.nome%></a></h3>
+                <% if !home_modulo.ocultar_teatro %>
+                  <p class="teatro"><%=me.espetaculo.teatro.nome%></p>
+                <% end %>
+                <% if !home_modulo.ocultar_cidade %>
+                  <p class="cidade"><%=me.espetaculo.cidade.nome%> - <%=me.espetaculo.cidade.estado%></p>
+                <% end %>
+                <% if !home_modulo.ocultar_genero %>
+                  <p class="genero"><%=me.espetaculo.genero.nome%></p>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% else %>
+        <div id="modulo_<%= home_modulo.id %>" class="modulo<%= home_modulo.tipo==3 ? ' um':' dois' %>"<%= home_modulo.tipo==3 ? ' ':' data-ss-colspan="2"' %>>
+          <h1>
+            <span>(<%=h home_modulo.entrada.strftime("%d/%m/%y %H:%M") %> à <%=h home_modulo.saida.strftime("%d/%m/%y %H:%M") %>)</span>
+          </h1>
+          <p class="edit"><%= link_to 'Editar', edit_home_modulo_path(home_modulo) %> | <%= link_to 'Excluir', home_modulo, :confirm => 'Are you sure?', :method => :delete %></p>
+          <a href="<%=(home_modulo.blank==true ? 'http://':'')+home_modulo.link%>" target="<%=home_modulo.blank==true ? '_blank':'_self'%>">
+            <%= image_tag home_modulo.imagem.url, :style => (home_modulo.topo ? 'margin-top:22px':''), :height => home_modulo.imagem_altura %>
+          </a>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <%= link_to 'Novo home módulo', new_home_modulo_path %>
+</div>
+<script>
+jQuery(document).ready(function($){
+  $container = $('#home_inferior');
+  $container.shapeshift();
+  $container.on("ss-drop-complete",function(){
+    var order = Array();
+    $('#home_inferior .modulo').each(function(){
+       order.push($(this).attr('id').replace('modulo_', ''));
+    });
+    $.get('/home_modulos/reorganiza/', {modulo:order}, function(response){
+      if(response!='true'){
+        alert('Ocorreu um erro ao atualizar a ordem, tente recarregar a página');
+      }
+    });
+  });
+  setTimeout("$container.trigger('ss-rearrange')",500);
+});
+</script>

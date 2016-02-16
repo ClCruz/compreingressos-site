@@ -1,0 +1,5 @@
+"<%= l DateTime.now %>"
+"Estado", "Cidade", "Teatro", "Espetáculo", "Gênero", "Inicio", "Término", "Sinopse"
+<% @espetaculos.each do |e| -%>
+"<%= e.estado.gsub('"','“') %>","<%= e.cidaden.gsub('"','“') %>","<%= e.teatron.gsub('"','“') %>","<%= e.espetaculo.gsub('"','“') %>","<%= e.generon.gsub('"','“') %>","<%= e.tinicio.split("-").reverse.join("/") %>","<%= e.ttermino.split("-").reverse.join("/") %>","<%= e.sinopse %>"
+<% end -%>

@@ -1,0 +1,88 @@
+<div id="container_adm">
+<%= javascript_include_tag :defaults %>
+
+<% form_for(@pacote, :html => { :multipart => true }) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :nome %><br />
+    <%= f.text_field :nome %>
+  </p>
+  <p>
+    <%= f.label :cc_id, "C&C id" %><br />
+    <%= f.text_field :cc_id %>
+  </p>
+  <p>
+    <%= f.label :cc_evento_id, "C&C Evento id" %><br />
+    <%= f.text_field :cc_evento_id %>
+  </p>
+  <p>
+    <%= f.label :setores %><br />
+    <%= f.text_area :setores, :rows => 10, :cols => 30 %>
+  </p>
+  <p>
+    <%= f.label :imagem %><br />
+    <%= f.file_field :imagem %><br />
+    <span class="help_text">O tamanho deve ser exatamente 160x90px ou 160x180px</span>
+    <% if @pacote.imagem? %>
+      <br /><%= image_tag @pacote.imagem.url %>
+    <% end %>
+  </p>
+  <p>
+    <%= f.label :descricao %><br />
+    <%= f.text_area :descricao, :cols => 100, :rows => 20, :class => 'mceEditor' %>
+  </p>
+  <%= f.hidden_field :pagina_de_pacote_id %>
+  
+  <div id="filtros">
+    <h2>Filtro de pacotes:</h2>
+    <% @pacote_filtros = PacoteFiltro.find(:all, :order => :nome) %>
+    <% if !@pacote_filtros.blank? %>
+      <% @pacote_filtros.each do |pf| %>
+        <p class="patrocinador">
+          <label>
+            <%= check_box_tag "pacote[pacote_filtro_ids][]", pf.id, filtro_pacote_selecionado?(@pacote, pf) %>
+            <%= pf.nome %>
+          </label>
+        </p>
+      <% end %>
+    <% else %>
+      Não existem filtros de pacotes cadastrados
+    <% end %>
+  </div>
+
+  <div class="campos" id="pacotes_espetaculos">
+    <h2>Espetáculos:</h2>
+    <% f.fields_for :pacotes_espetaculos do |pe| %>
+      <div class="pacotes_espetaculo" id="pacotes_espetaculo_<%=pe.object.id%>">
+        <p class="espetaculo">
+          <%= pe.label :espetaculo_id %><br />
+          <%= pe.select(:espetaculo_id, @espetaculos, :prompt => 'Selecione') %>
+        </p>
+        <p>
+          <%= pe.label :nome_do_espetaculo %><br />
+          <%= pe.text_field :nome_do_espetaculo %><br />
+          <span class="help_text">Digite o nome caso o espetaculo desejado ainda não tenha sido cadastrado</span>
+        </p>
+        <p>
+          <%= pe.label :data %><br />
+          <%= pe.datetime_select(:data, :order => [:day, :month, :year, :hour, :minute], :include_seconds => true, :date_separator => '', :datetime_separator => ' às ', :time_separator => ':', :start_year => Date.current.year, :end_year => Date.current.year+2, :include_blank => false) %><br />
+        </p>
+        
+          <%= remove_link_unless_new_record(pe) %>
+        </p>
+        <hr width="600px" align="left">
+      </div>  
+    <% end %>
+  </div>
+  <p>
+    <%= add_pacote_espetaculo_link "Adicionar espetáculo", f, @espetaculos %>
+  </p>
+  <hr color="#C7C7C7">
+
+
+  <p>
+    <%= f.submit 'Salvar' %>
+  </p>
+<% end %>
+</div>

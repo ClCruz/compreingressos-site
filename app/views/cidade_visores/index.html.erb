@@ -1,0 +1,26 @@
+<h1>Listing cidade_visores</h1>
+
+<table>
+  <tr>
+    <th>Cidade</th>
+    <th>Link</th>
+    <th>Target</th>
+    <th>Ordem</th>
+  </tr>
+
+<% @cidade_visores.each do |cidade_visor| %>
+  <tr>
+    <td><%=h cidade_visor.cidade %></td>
+    <td><%=h cidade_visor.link %></td>
+    <td><%=h cidade_visor.target %></td>
+    <td><%=h cidade_visor.ordem %></td>
+    <td><%= link_to 'Show', cidade_visor %></td>
+    <td><%= link_to 'Edit', edit_cidade_visor_path(cidade_visor) %></td>
+    <td><%= link_to 'Destroy', cidade_visor, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New cidade_visor', new_cidade_visor_path %>

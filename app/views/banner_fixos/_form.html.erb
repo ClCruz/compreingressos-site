@@ -1,0 +1,20 @@
+<% form_for(@banner_fixo, :html => {:multipart => true}) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :link %><br />
+    <%= f.text_field :link %>
+  </p>
+  <p>
+    <%= f.label :blank %><br />
+    <%= f.check_box :blank %>
+  </p>
+  <p>
+    <%= f.label :imagem %><br />
+    <%= f.file_field :imagem %><br />
+    <span class="help_text">A largura deve ser de 160px com sombra nas laterais de 5px totalizando 170px e a altura é livre</span>
+  </p>
+  <p>
+    <%= f.submit 'Salvar' %>
+  </p>
+<% end %>

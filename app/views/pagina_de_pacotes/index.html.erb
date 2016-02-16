@@ -1,0 +1,101 @@
+<style type="text/css">
+  #background_holder{
+    overflow:visible;
+  }
+  #background_holder div.centraliza div#espetaculos{
+    margin-bottom:40px;
+  }
+  #background_holder img.img_header_map{
+    display:block;
+  }
+  div.background_pagina{
+    background:<%= @pagina_de_pacotes.cor_de_fundo %> url('<%= @pagina_de_pacotes.imagem.url %>') top center no-repeat;
+  }
+  div.card{
+    overflow:visible;
+  }
+  p.pagina_especial_nome, p.pagina_especial_subtitulo{
+    color:<%= @pagina_de_pacotes.cor_do_header %>;
+    text-shadow: 3px 3px 3px #000;
+  }
+</style>
+<div class="background_pagina">
+  <!-- MAPEAMENTO DE IMAGEM DESATIVA PARA O THEATRO MUNICIPAL DE SAO PAULO -->
+  <%
+    if 1!=1 #@pagina_de_pacotes.url == 'theatromunicipaldesaopaulo'
+  %>
+    <div class="centraliza theatro_video">
+      <iframe width="462" height="260" src="//www.youtube.com/embed/J9nJA0HjHdU" frameborder="0" style="margin:28px 249px 12px;" allowfullscreen></iframe>
+    </div>
+  <% elsif !@pagina_de_pacotes.mapeamento_de_imagem.blank? %>
+    <div class="centraliza">
+      <map name="header_map">
+        <%= @pagina_de_pacotes.mapeamento_de_imagem %>
+      </map>
+      <img src="/images/header_map.png" usemap="#header_map" class="img_header_map" height="<%= @pagina_de_pacotes.altura_de_inicio_da_listagem %>" />
+      <% if !session[:desktop] or session[:desktop]==0 -%>
+        <script>
+          var divisorMd = 3.0;
+          var divisorParams = [["img.img_header_map","height"]];
+          mobileDivisor(divisorMd,divisorParams);
+          mobileMap(divisorMd);
+        </script>
+      <% end -%>
+    </div>
+  <% end %>
+  <div class="centraliza pacotes">
+    <% if @pagina_de_pacotes.pacotes.nil? %>
+      <h1 class="espetaculos_vazio">Ainda não existe nenhum pacote vinculado a esta página.</h1>
+    <% end %>
+    <% if !@pagina_de_pacotes.mapeamento_de_imagem.blank? and @pagina_de_pacotes.url != 'theatromunicipaldesaopaulo' %>
+      <div id="detalhes" style="height:110px;margin-top:<%= @pagina_de_pacotes.altura_de_inicio_da_listagem %>px !important">
+      <% if !session[:desktop] or session[:desktop]==0 -%>
+        <script>
+          var divisorMd = 3.0;
+          var divisorParams = [["div.background_pagina div#detalhes","margin-top"]];
+          mobileDivisor(divisorMd,divisorParams);
+        </script>
+      <% end -%>
+    <% else %>
+      <div id="detalhes" style="margin-top:<%= @pagina_de_pacotes.altura_de_inicio_da_listagem %>px !important">
+      <% if !session[:desktop] or session[:desktop]==0 -%>
+        <script>
+          var divisorMd = 3.0;
+          var divisorParams = [["div.background_pagina div#detalhes","margin-top"]];
+          mobileDivisor(divisorMd,divisorParams);
+        </script>
+      <% end -%>
+    <% end %>
+    <% if @pagina_de_pacotes.url != 'theatromunicipaldesaopaulo' %>
+      <p class="pagina_especial_nome"><%= nl2br @pagina_de_pacotes.nome %></p>
+      <p class="pagina_especial_subtitulo"><%= nl2br @pagina_de_pacotes.subtitulo %></p>
+    <% end %>
+    </div>
+    <div id="espetaculos">
+      <%= render :partial => 'layouts/card_pacotes', :collection => @pacotes %>
+    </div>
+  </div>
+</div>
+<div id="espetaculo">
+  <div id="overlay">
+    <div class="centraliza">
+      <div class="top">
+        <div class="fechar"></div>
+        <div class="container_mini_topo">
+        </div>
+        <h1><%=nl2br @pagina_de_pacotes.nome%></h1>
+        <div class="cont_teatro">
+          <p class="teatro"><%=nl2br @pagina_de_pacotes.subtitulo %></p>
+          <p class="teatro nome_pacote"></p>
+        </div>
+      </div>
+      
+      <div class="informacoes">      
+        <div class ="container_overlay detalhes">
+          <div class="icone detalhes"></div>
+          <div class="conteudo"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

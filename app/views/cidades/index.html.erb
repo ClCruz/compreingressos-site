@@ -1,0 +1,21 @@
+<div id="container_adm">
+	<p class="title_main">Cidades</p>
+	<p><%= link_to 'Nova cidade', new_cidade_path %></p>
+	<table cellpadding="0" cellspacing="0">
+	  <tr height="42px">
+	  	<th>Nome</th>
+	    <th>Estado</th>
+	    <th></th>
+	    <th></th>
+	  </tr>	
+	<% @cidades.each do |cidade| %>
+	  <tr height="42px">
+	  	<td><%=h cidade.nome %></td>
+	    <td><%=h cidade.estado %></td>
+	    <td class="buttom"><%= link_to image_tag('/admin/botao_editar.png', :alt => 'Editar', :title => 'Editar'), edit_cidade_path(cidade) %></td>
+	    <td class="buttom"><%= link_to image_tag('/admin/botao_excluir.png', :alt => 'Apagar', :title => 'Apagar'), cidade, :confirm => 'Deseja realmente excluir?', :method => :delete %></td>
+	  </tr>
+	<% end %>
+	</table>
+	<p><%= link_to 'Nova cidade', new_cidade_path %></p>
+</div>

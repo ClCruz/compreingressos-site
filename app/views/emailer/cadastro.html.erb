@@ -1,0 +1,52 @@
+<h1>Tipo de atração:</h1>
+<p><%=@params[:tipo]%></p>
+<h1>Dados da Empresa / Agência</h1>
+<p>Nome: <%=@params[:nome]%></p>
+<p>Contato*: <%=@params[:contato]%></p>
+<p>CNPJ / CPF*: <%=@params[:cnpj]%></p>
+<p>Telefone*: <%=@params[:telefone]%></p>
+<p>E-mail*: <%=@params[:email]%></p>
+<p>Site: <%=@params[:site]%></p>
+<h1>Dados da Atração</h1>
+<p>Nome do espetáculo/show/evento*: <%=@params[:nome_atracao]%></p>
+<p>Autor: <%=@params[:autor]%></p>
+<p>Direção: <%=@params[:direcao]%></p>
+<p>Elenco: <%=@params[:elenco]%></p>
+<p>Gênero*: <%=@params[:genero]%></p>
+<p>Duração*: <%=@params[:duracao]%></p>
+<p>Classificação*: <%=@params[:classificacao]%></p>
+<p>Temporada*: <%=@params[:start_temporada_dia]%>/<%=@params[:start_temporada_mes]%>/<%=@params[:start_temporada_ano]%>
+&nbsp;a&nbsp;<%=@params[:fim_temporada_dia]%>/<%=@params[:fim_temporada_mes]%>/<%=@params[:fim_temporada_ano]%>
+</p>
+<p>Horários (dia/hora)*: <%=@params[:horarios]%></p>
+<p>Site: <%=@params[:site_atracao]%></p>
+<p>Sinopse*:</p>
+<p><%=@params[:sinopse].gsub("\n","<br>")%></p>
+<p>Observações:</p>
+<p><%=@params[:obs].gsub("\n","<br>")%></p>
+<h1>Setores:</h1>
+<% if @params[:setor] %>
+<% i = 0 %>
+<%while setor = @params[:setor][i]%>
+<p>Setor: <%=setor%> - Valor: <%=@params[:valor_setor][i]%></p>
+<%i+=1%>
+<%end%>
+<%end%>
+
+<p>Formas de pagamento*:</p>
+<%if @params[:forma_pagamento]%>
+<%i = 0%>
+<%while pag = @params[:forma_pagamento][i]%>
+<%=pag%><br />
+<%i+=1%>
+<%end%>
+<%end%>
+<p>Local*: <%=@params[:local]%></p>
+<p>Endereço Completo: <%=@params[:endereco]%></p>
+<p>Lotação: <%=@params[:lotacao]%></p>
+<p>Horário de funcionamento da bilheteria: <%=@params[:horario_bilheteria]%></p>
+<p>Quantidade de operadores na bilheteria: <%=@params[:qtde_bilheteria]%></p>
+<p>Telefone: <%=@params[:telefone_local]%></p>
+<p>Estacionamento: <%=@params[:estacionamento]%></p>
+<p>Valor do estacionamento: <%=@params[:valor_estacionamento]%></p>
+<p>Site: <%=@params[:site_local]%></p>

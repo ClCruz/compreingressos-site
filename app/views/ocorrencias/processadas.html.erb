@@ -1,0 +1,30 @@
+<div id="ocorrencias">
+  <h1>Ocorrências Processadas</h1>
+  
+  <p style="color:red;"><%=flash[:notice]%></p>
+  <%= link_to 'Nova ocorrência', new_ocorrencia_path %>
+  
+  <table>
+    <tr>
+      <th>Data criação</th>
+      <th>Atendente</th>
+      <th>Canal</th>
+      <th>Solicitação</th>
+      <th>Status</th>
+    </tr>
+  
+  <% @ocorrencias.each do |ocorrencia| %>
+    <tr>
+      <td><%=h data_br(ocorrencia.created_at)%></td>
+      <td><%=h ocorrencia.atendente.nome %></td>
+      <td><%=h ocorrencia.adquiridos %></td>
+      <td><%=h ocorrencia.tipo_solicitacao %></td>
+      <td><%=h ocorrencia.status %></td>
+      <td><%= link_to 'Editar', edit_ocorrencia_path(ocorrencia) %></td>
+    </tr>
+  <% end %>
+  </table>
+  
+  <br />
+  <%= link_to 'Nova ocorrência', new_ocorrencia_path %>
+</div>

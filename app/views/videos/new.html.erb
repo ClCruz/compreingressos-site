@@ -1,0 +1,24 @@
+<div id="container_adm">
+	<p class="title_main">Novo vídeo</p>
+	<% form_for(@video) do |f| %>
+	<%= f.error_messages %>
+	
+	<p>
+		<%= f.label :titulo %><br />
+	    <%= f.text_field :titulo %>
+	</p>
+	<p>
+	    <%= f.label :legenda %><br />
+	    <%= f.text_field :legenda %>
+	</p>
+	<p>
+	    <%= f.label :youtube_id %><br />
+	    <%= f.text_field :youtube_id %>
+	</p>
+	<p>
+	    <%= f.submit 'Salvar' %>
+	</p>
+	<% end %>
+	
+	<%= link_to 'Voltar', videos_path %>
+</div>

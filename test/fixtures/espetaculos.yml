@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  nome: MyString
+  sinopse: MyText
+  temporada: MyString
+  horario: MyString
+  preco: MyString
+  site: MyString
+  ativo: false
+  ticket_net_id: 1
+
+two:
+  nome: MyString
+  sinopse: MyText
+  temporada: MyString
+  horario: MyString
+  preco: MyString
+  site: MyString
+  ativo: false
+  ticket_net_id: 1

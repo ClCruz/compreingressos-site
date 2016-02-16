@@ -1,0 +1,31 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  hello: "Hello world"
+
+  activerecord:
+    errors:
+      template:
+        header:
+          one: "Não foi possível gravar %{model}: 1 erro"
+          other: "Não foi possível gravar %{model}: %{count} erros."
+        body: "Por favor, verifique o(s) seguinte(s) campo(s):"
+
+      messages:
+        taken: "já está em uso"
+        record_invalid: "A validação falhou: %{errors}"
+        <<: *errors_messages
+
+      full_messages:
+        format: "%{attribute} %{message}"
+        
+    attributes:
+      espetaculo:
+        data_inicial: "Data de início da temporada"
+        data_maxima: "Data de término da temporada"
+        img_principal: "Imagem principal"
+        img_miniatura: "Imagem miniatura"
+
+      home_modulo:
+        exibir: "Máximo de espetaculos a exibir"

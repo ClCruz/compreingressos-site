@@ -1,0 +1,28 @@
+<h1>Editing cidade_visor</h1>
+
+<% form_for(@cidade_visor) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :cidade %><br />
+    <%= f.text_field :cidade %>
+  </p>
+  <p>
+    <%= f.label :link %><br />
+    <%= f.text_field :link %>
+  </p>
+  <p>
+    <%= f.label :target %><br />
+    <%= f.check_box :target %>
+  </p>
+  <p>
+    <%= f.label :ordem %><br />
+    <%= f.text_field :ordem %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @cidade_visor %> |
+<%= link_to 'Back', cidade_visores_path %>

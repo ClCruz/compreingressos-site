@@ -1,0 +1,10 @@
+<div class="espetaculo_home">
+	<% espetaculos_options = "" %>
+	<% for espetaculo in Espetaculo.find(:all, :include => :teatro, :conditions => {:ativo => true}, :order => :nome) %>
+		<% espetaculos_options += "<option value='#{espetaculo.id}'>#{espetaculo.nome} (#{espetaculo.teatro.nome})</option>" %>
+	<% end %>
+	<p>Espetáculo <br />
+	<%= select_tag "#{pf}[espetaculo_ids][]", espetaculos_options%><br />
+	</p>
+	<%= link_to_function "Remover este espetaculo", "jQuery(this).parent('.espetaculo_home').slideUp(function(){jQuery(this).remove();});" %>
+</div>

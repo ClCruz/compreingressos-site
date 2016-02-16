@@ -1,0 +1,164 @@
+<% form_for(@pagina_especial, :html => { :multipart => true }) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :tipo %><br />
+    <%= f.select :tipo, PaginaEspecial::TIPOS %>
+  </p>
+  
+  <div class="especial" style="display:<%= @pagina_especial.tipo==2 ? 'block':'none' %>;float:left;width:100%;">
+    <p style="margin-top:0;">
+      <%= f.label :logo %><br />
+      <%= f.file_field :logo %><br />
+      <span class="help_text">O tamanho máximo é de 300x60px, a largura pode ser menor e ele irá se adptar.</span>
+      <% if @pagina_especial.logo? %>
+      <br /><%= image_tag @pagina_especial.logo.url, :style => "max-height:40px;" %>
+    <% end %>
+    </p>
+    <p>
+      <%= f.label :cor_do_header %><br />
+      <%= f.text_field :cor_do_header %>
+    </p>
+    <p>
+      <%= f.label :cor_da_borda_do_header %><br />
+      <%= f.text_field :cor_da_borda_do_header %>
+    </p>
+  </div>
+  <script type="text/javascript">
+    jQuery("select[name='pagina_especial[tipo]']").on('change',function(){
+    if(jQuery(this).val() == 2){
+      if(jQuery('div.especial').css('display')=='none'){
+        jQuery('div.especial').slideDown();
+      }
+    }else{
+      if(jQuery('div.especial').css('display')=='block'){
+        jQuery('div.especial').slideUp();
+      }
+    };
+    });
+  </script>
+
+  <p>
+    <%= f.check_box :filtro_cidade %>
+    <%= f.label :filtro_cidade %>
+  </p>
+
+  <p>
+    <%= f.check_box :filtro_genero %>
+    <%= f.label :filtro_genero %>
+  </p>
+
+  <p>
+    <%= f.check_box :busca %>
+    <%= f.label :busca %>
+  </p>
+  
+  <p>
+    <%= f.label :organizado_por %><br />
+    <%= f.select :organizado_por, PaginaEspecial::ORGANIZADOPOR %>
+  </p>
+  
+  <p>
+    <%= f.label :tipo_de_botao %><br />
+    <%= f.select :tipo_de_botao, PaginaEspecial::TIPOBOTAO %>
+  </p>
+  
+  <div class="saiba_mais_aviso" style="display:<%= @pagina_especial.tipo_de_botao==2 ? 'block':'none' %>;float:left;width:100%;">
+    <p style="margin-top:0;">
+      <%= f.label :saiba_mais_aviso %><br />
+      <%= f.text_field :saiba_mais_aviso %>
+    </p>
+  </div>
+  <script type="text/javascript">
+    jQuery("select[name='pagina_especial[tipo_de_botao]']").on('change',function(){
+    if(jQuery(this).val() == 2){
+      if(jQuery('div.saiba_mais_aviso').css('display')=='none'){
+        jQuery('div.saiba_mais_aviso').slideDown();
+      }
+    }else{
+      if(jQuery('div.saiba_mais_aviso').css('display')=='block'){
+        jQuery('div.saiba_mais_aviso').slideUp();
+      }
+    };
+    });
+  </script>
+  
+  <p>
+    <%= f.label :nome %><br />
+    <%= f.text_field :nome %>
+  </p>
+  <p>
+    <%= f.label :nome_tamanho_da_fonte %><br />
+    <%= f.text_field :nome_tamanho_da_fonte %><br />
+    <span class="help_text">Tamanho em pixels para versão browser desktop. Caso em branco o valor padrão de 32 será aplicado.</span>
+  </p>
+  <p>
+    <%= f.label :url %><br />
+    <%= f.text_field :url %>
+  </p>
+  <p>
+    <%= f.check_box :ocultar_cidade %>
+    <%= f.label :ocultar_cidade %>
+  </p>
+  <p>
+    <%= f.check_box :ocultar_teatro %>
+    <%= f.label :ocultar_teatro %>
+  </p>
+  <p>
+    <%= f.check_box :ocultar_genero %>
+    <%= f.label :ocultar_genero %>
+  </p>
+  <p>
+    <%= f.label :altura_de_inicio_da_listagem, "Altura de inicio no computador" %><br />
+    <%= f.text_field :altura_de_inicio_da_listagem %>
+  </p>
+  <p>
+    <%= f.label :altura_de_inicio_da_listagem_mobile, "Altura de inicio no celular" %><br />
+    <%= f.text_field :altura_de_inicio_da_listagem_mobile %>
+  </p>
+  <p>
+    <%= f.label :imagem %><br />
+    <%= f.file_field :imagem %><br />
+    <span class="help_text">Tamanho livre, recomenda-se supervisão de um web designer</span>
+    <% if @pagina_especial.imagem? %>
+      <br /><%= image_tag @pagina_especial.imagem.url, :style => "max-height:200px; max-width:700px" %><!--<br />
+      <a href="/pagina_especiais/excluir_img/<%= @pagina_especial.id %>/imagem">Excluir imagem</a>-->
+    <% end %>
+  </p>
+  <p>
+    <%= f.label :mapeamento_de_imagem %><br />
+    <%= f.text_field :mapeamento_de_imagem %><br />
+    <span class="help_text">Área mapeavel: 948xAltura de inicio da listagem</span>
+  </p>
+  <p>
+    <%= f.label :cor_de_fundo %><br />
+    <%= f.text_field :cor_de_fundo %>
+  </p>
+  <p>
+    <%= f.label :cor_de_fundo_do_box %><br />
+    <%= f.text_field :cor_de_fundo_do_box %>
+  </p>
+  <p>
+    <%= f.label :cor_do_texto_do_box %><br />
+    <%= f.text_field :cor_do_texto_do_box %>
+  </p>
+  <p>
+    <%= f.label :cor_do_link_do_box %><br />
+    <%= f.text_field :cor_do_link_do_box %>
+  </p>
+  <p>
+    <%= f.label :cor_da_borda_do_espetaculo %><br />
+    <%= f.text_field :cor_da_borda_do_espetaculo %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </p>
+  <p>
+    <%= f.label :keywords %><br />
+    <%= f.text_field :keywords %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>

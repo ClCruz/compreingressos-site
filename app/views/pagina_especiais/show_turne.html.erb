@@ -1,0 +1,43 @@
+<div class="background_pagina <%= PaginaEspecial::ESTILOS[@pagina_especial.estilo-1][0].downcase %>" style="background:<%= @pagina_especial.cor_de_fundo %> url('<%= @pagina_especial.imagem.url %>') top center no-repeat;">
+  <div class="centraliza">
+    <% if @espetaculos.nil?%>
+      <h1 class="espetaculos_vazio">Ainda não existe nenhum espetáculo vinculado a esta página.</h1>
+    <% end %>
+    <div id="detalhes_busca" style="margin-top:<%= @pagina_especial.altura_de_inicio_da_listagem %>px">
+      <div class="detalhes">
+        <p class="nome"><%= @pagina_especial.nome %></p>
+        <p class="total">
+          <%= @espetaculos.size %>
+          <% if @espetaculos.size > 1 %>
+            espetáculos encontrados
+          <% else %>
+            espetáculo encontrado
+          <% end %>
+        </p>
+      </div>
+      <div class="ordem">
+        organizado por
+        <a href="/<%= @pagina_especial.url %>"<%="class='ativo'" if params[:ordem].blank? %>>destaques</a>
+        <a href="/<%= @pagina_especial.url %>?ordem=alfabetica"<%="class='ativo'" if !params[:ordem].blank? %>>alfabética</a>
+      </div>
+    </div>
+    <div id="espetaculos">
+      <%= render :partial => 'layouts/card_sem_auxiliar', :collection => @espetaculos %>
+    </div>
+  </div>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('#espetaculos').masonry({
+        columnWidth:0,
+        itemSelector:'.card'
+      });
+    });
+  </script>
+  <script type="text/javascript">
+    $(function() {
+      $('#espetaculos .card').each(function(){
+        $(this).hoverdir(/*{hoverDelay: 50}*/);
+      });
+    });
+  </script>
+</div>

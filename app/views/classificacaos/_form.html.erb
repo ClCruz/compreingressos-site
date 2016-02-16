@@ -1,0 +1,19 @@
+<% form_for(@classificacao) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :nome %><br />
+    <%= f.text_field :nome %>
+  </p>
+  <p>
+    <%= f.label :texto %><br />
+    <%= f.text_field :texto %>
+  </p>
+  <p>
+    <%= f.label :icone %><br />
+    <%= f.text_field :icone %>
+  </p>
+  <p>
+    <%= f.submit 'Salvar' %>
+  </p>
+<% end %>

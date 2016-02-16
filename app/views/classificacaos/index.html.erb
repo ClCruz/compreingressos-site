@@ -1,0 +1,23 @@
+<div id="container_adm">
+	<p class="title_main">Classificações</p>
+	<p><%= link_to 'Nova classificação', new_classificacao_path %></p>
+	<table>
+		<tr>
+    		<th>Nome</th>
+    		<th>Texto</th>
+    		<th>Icone</th>
+    		<th></th>
+    		<th></th>
+  		</tr>
+		<% @classificacaos.each do |classificacao| %>
+  		<tr>
+    		<td><%=h classificacao.nome %></td>
+    		<td><%=h classificacao.texto %></td>
+    		<td><%= image_tag '/images/'+classificacao.icone %></td>
+   			<td class="buttom"><%= link_to image_tag('/admin/botao_editar.png', :alt => 'Editar', :title => 'Editar'), edit_classificacao_path(classificacao) %></td>
+    		<td class="buttom"><%= link_to image_tag('/admin/botao_excluir.png', :alt => 'Apagar', :title => 'Apagar'), classificacao, :confirm => 'Deseja realmente excluir?', :method => :delete %></td>
+  		</tr>
+		<% end %>
+	</table>
+	<p><%= link_to 'Nova classificação', new_classificacao_path %></p>
+</div>

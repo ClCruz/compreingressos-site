@@ -1,0 +1,131 @@
+<script type="text/javascript">
+  window.onload = changeSolicitacao;
+</script>
+<div id="ocorrencia_form">
+  <% form_for(@ocorrencia) do |f| %>
+    <%= f.error_messages %>
+    <p class="help_text">* - Campos obrigatórios</p>
+    <p>
+      <%= f.label :atendente_id %><br />
+      <% if @ocorrencia.new_record? %>
+      <%= f.hidden_field :atendente_id, :value => @logged_atendente.id %>
+      <b><%=@logged_atendente.nome%></b>
+      <% else %>
+      <b><%=@ocorrencia.atendente.nome%></b>
+      <% end %>
+    </p>
+    <p>
+      <% if @ocorrencia.new_record? %>
+      <%= f.hidden_field :status, :value => 'Nova'%>
+      <% else %>
+      <%= f.label :status, 'Status? *' %><br />
+      <%= f.select :status, Ocorrencia::STATUS %>
+      <% end %>
+    </p>
+    <p>
+      <%= f.label :adquiridos, 'Onde foram adquiridos os ingressos? *' %><br />
+      <%= f.select :adquiridos, Ocorrencia::ADQUIRIDOS, :prompt => 'Selecione um local de compra' %>
+    </p>
+    <p>
+      <%= f.label :data_compra, 'Data da compra *' %><br />
+      <%= f.date_select :data_compra, :order => [:day,:month,:year],:use_month_numbers => :true %>
+    </p>
+    <p>
+      <%= f.label :numero_pedido, 'Número do Pedido (Numérico) *' %><br />
+      <%= f.text_field :numero_pedido %>
+    </p>
+    <p>
+      <%= f.label :nome, 'Nome (como no cartão de crédito) *' %><br />
+      <%= f.text_field :nome %>
+    </p>
+    <p>
+      <%= f.label :email, 'E-mail *' %><br />
+      <%= f.text_field :email %>
+    </p>
+    <p>
+      <%= f.label :espetaculo_id, 'Atração *' %><br />
+      <%= f.select :espetaculo_id, Espetaculo.find(:all,:order => 'nome', :conditions => {:ativo => true}).collect {|c| [ c.nome, c.id ] } %>
+    </p>
+    <p>
+      <%= f.label :data_ingressos, 'Data do ingresso *' %><br />
+      <%= f.date_select :data_ingressos, :order => [:day,:month,:year],:use_month_numbers => :true %>
+    </p>
+    <p>
+      <%= f.label :horario, 'Horário *' %><br />
+      <%= f.text_field :horario %>
+    </p>
+    <p>
+      <%= f.label :lugares, 'Lugar(es) (Fileiras / Poltronas) *' %><br />
+      <%= f.text_area :lugares, :rows => 3 %>
+    </p>
+    <p>
+      <%= f.label :telefone, 'Telefone ou celular *' %><br />
+      <%= f.text_field :telefone %>
+    </p>
+    <p>
+      <%= f.label :tipo_solicitacao, 'Tipo de solicitação *' %><br />
+      <%= f.select :tipo_solicitacao, Ocorrencia::SOLICITACAO, {:prompt => 'Selecione um tipo de solicitação'}, {:onchange => 'changeSolicitacao()'} %>
+    </p>
+    <div id="troca" class="ocorrencia_solicitacao">
+      <p><b>Preencha os dados abaixo para troca:</b></p>
+      <p>
+        <%= f.label :nova_data, 'Nova Data:' %><br />
+        <%= f.date_select :nova_data, :order => [:day,:month,:year],:use_month_numbers => :true %>
+      </p>
+      <p>
+        <%= f.label :novo_horario, 'Novo Horário:' %><br />
+        <%= f.text_field :novo_horario %>
+      </p>
+      <p>
+        <%= f.label :novo_lugar, 'Novo(s) Lugar(es):' %><br />
+        <%= f.text_area :novo_lugar, :rows => 3 %>
+      </p>
+      <p>
+        <%= f.label :valor_servico, 'Valor do serviço:' %><br />
+        <%= f.text_field :valor_servico %>
+      </p>
+    </div>
+    <div id="cancelamento" class="ocorrencia_solicitacao">
+      <p><b>Preencha os dados abaixo para cancelamento:</b></p>
+      <p>
+        <%= f.label :valor_estorno, 'Valor do estorno:' %><br />
+        <%= f.text_field :valor_estorno %>
+      </p>
+    </div>
+    <p>
+      <%= f.label :protocolo_cancelamento, 'Protocolo de cancelamento na operadora (Númerico)' %><br />
+      <%= f.text_field :protocolo_cancelamento %>
+    </p>
+    <p><b>Quantidade de ingressos:</b></p>
+    <p>
+      <%= f.label :inteira %><br />
+      <%= f.text_field :inteira %>
+    </p>
+    <p>
+      <%= f.label :meia %><br />
+      <%= f.text_field :meia %>
+    </p>
+    <p>
+      <%= f.label :outros %><br />
+      <%= f.text_field :outros %>
+    </p>
+    <p>
+      <%= f.label :obs, 'Observações' %><br />
+      <%= f.text_area :obs %>
+    </p>
+    <p>
+      <%= f.label :concordancia, 'Política de Troca e Cancelamento:' %><br />
+      <%= f.check_box :concordancia %> Li e concordo com a política de troca e cancelamento
+    </p>
+    <% if @logged_atendente.nivel > 1 %>
+    <p>
+      <%= f.label :processada, 'Ocorrência processada?'%><br />
+      <%= f.check_box :processada %> 
+    </p>
+    <% end %>
+    <p class="help_text">* - Campos obrigatórios</p>
+    <p>
+      <%= f.submit 'Salvar' %>
+    </p>
+  <% end %>
+</div>

@@ -1,0 +1,39 @@
+<style type="text/css">
+  div.background_pagina{
+    background:<%= @pagina_especial.cor_de_fundo %> url('<%= @pagina_especial.imagem.url %>') top center no-repeat;
+  }
+  
+  div.cliqueteatro{
+    float:left;
+    width:480px;
+    height:450px;
+    text-align:center;
+    opacity:0.5;
+  }
+  div.cliqueshow{
+    float:right;
+    width:480px;
+    height:450px;
+    text-align:center;
+    opacity:0.5;
+  }
+
+  /* MOBILE STYLES */
+  @media only screen and (max-width:640px){
+    div.cliqueteatro, div.cliqueshow{
+      width:160px;
+      height:250px;
+    }
+  }
+
+</style>
+<div class="background_pagina">
+  <div class="centraliza">
+    <a href="/itaucardshows">
+      <div class="cliqueteatro"></div>
+    </a>
+    <a href="/itaucardteatro">
+      <div class="cliqueshow"></div>
+    </a>
+  </div>
+</div>

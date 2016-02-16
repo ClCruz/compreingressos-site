@@ -1,0 +1,30 @@
+<h1>Visores</h1>
+<div id="visores">
+<% @visores.each do |visor| %>
+  <div class="visor" id="visor_<%= visor.id %>">
+    <%= link_to( image_tag(visor.imagem.url, :width => 960), visor.link, :target => (visor.blank==true ? '_blank':'_self') ) %>
+    <%= link_to 'Editar', edit_visor_path(visor) %> | <%= link_to 'Excluir', visor, :confirm => 'Are you sure?', :method => :delete %>
+    Expiração: <%= l visor.data_de_expiracao, :format => :datahora %>
+  </div>
+<% end %>
+</div>
+<br />
+<%= link_to 'Novo visor', new_visor_path %>
+<script>
+jQuery(document).ready(function($){
+  jQuery('#visores').sortable({
+    items: '.visor',
+    opacity: 0.6,
+    cursor: 'move',
+    axis: 'y',
+    update: function(){
+      var order = $(this).sortable('serialize');
+      $.get('/visores/reorganiza/', order, function(response){
+        if(response!='true'){
+          alert('Ocorreu um erro ao atualizar a ordem, tente recarregar a página');
+        }
+      });
+    }
+  });
+});
+</script>

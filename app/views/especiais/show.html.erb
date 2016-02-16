@@ -1,0 +1,35 @@
+<div class="centraliza">
+  <div id="espetaculo">
+    <div id="center_left">
+      <!--
+      <h1><%=@especial.titulo_left%></h1>
+      <p class="help_text"><%=nl2br @especial.subtitulo_left%></p>
+      -->
+      <% if session[:admin_id] %>
+        <%= link_to 'Nova especial', new_especial_path %>
+      <% end %>
+      
+      <div id="servicos_left">
+      </div>          
+    </div>
+    <div id="center_right">
+      <div id="contato">
+        <h1><%=@especial.titulo%></h1>
+        <p class="help_text"><%=@especial.subtitulo%></p>
+      </div>
+      <div id="servicos">
+        <p><%=nl2br @especial.texto%></p>
+      </div>
+      <div id="fotos">
+        <% for foto in @especial.imagems %>
+        <div class="foto">
+          <a href="<%=url_for(:controller => :imagems, :action => :show, :id => foto)+".jpg"%>" class="top_up" toptions="group = especial <%=@especial.id%>, title= <%=@especial.titulo%> - <%=foto.legenda%>, overlayClose = 1, shaded = 1">
+            <img src="<%=url_for(:controller => :imagems, :action => :destaque , :id => foto)%>" alt="<%=foto.legenda%>" title="<%=foto.legenda%>">
+          </a>
+          <p><%=foto.legenda%></p>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

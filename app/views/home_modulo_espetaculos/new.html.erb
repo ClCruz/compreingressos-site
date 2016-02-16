@@ -1,0 +1,16 @@
+<h1>Adicionar espetaculo</h1>
+
+<% form_for(@home_modulo_espetaculo) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :espetaculo %><br />
+    <%= f.select(:espetaculo_id, @espetaculos = Espetaculo.find(:all, :conditions => { :ativo => true }, :order => 'nome').map{|e| ["#{e.nome.gsub('"',"'")} (#{e.teatro.nome})",e.id]}, :prompt => 'Selecione') %>
+  </p>
+  <%= f.hidden_field :home_modulo_id, :value => params[:home_modulo] %>
+  <%= f.hidden_field :ordem %>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+<%= link_to 'Back', home_modulo_espetaculos_path %>

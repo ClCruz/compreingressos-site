@@ -1,0 +1,21 @@
+<div id="container_adm">
+  <p class="title_main">Filtros de páginas especiais</p>
+  <%= link_to 'Novo filtro', new_pagina_especial_filtro_path %>
+  <table>
+    <tr>
+      <th>Nome</th>
+      <th>Url</th>
+      <th></th>
+      <th></th>
+    </tr>
+    <% @pagina_especial_filtros.each do |pagina_especial_filtro| %>
+      <tr>
+        <td><%=h pagina_especial_filtro.nome %></td>
+        <td><%=h pagina_especial_filtro.url %></td>
+        <td class="buttom"><%= link_to image_tag('/admin/botao_editar.png', :alt => 'Editar', :title => 'Editar'), edit_pagina_especial_filtro_path(pagina_especial_filtro) %></td>
+        <td class="buttom"><%= link_to image_tag('/admin/botao_excluir.png', :alt => 'Apagar', :title => 'Apagar'), pagina_especial_filtro, :confirm => 'Deseja realmente excluir?', :method => :delete %></td>
+      </tr>
+    <% end %>
+  </table>
+  <%= link_to 'Novo filtro', new_pagina_especial_filtro_path %>
+</div>

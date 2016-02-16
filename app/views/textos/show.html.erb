@@ -1,0 +1,23 @@
+<div class="centraliza">
+  <div id="espetaculo">
+  	<div id="center_left">
+  		<p class="titulo"><%=@texto.titulo%></p>
+	    <p class="help_titulo"><%=@texto.subtitulo%></p>
+  		<% if session[:admin_id] %>
+  		<%= link_to 'Editar', edit_texto_path(@texto) %>
+  		<% end %>
+  	</div>
+  	<div id="center_right">
+  		<div id="servicos" class="noborder">
+  			<p><%=nl2br @texto.texto%></p>
+  			<% if @texto.id == 4 %>
+  			<div id="suporte_script_div">
+  				<script language="JavaScript" src="http://na.ntrsupport.com/inquiero/web/an/ann4.asp?login=I23EEF508C6B51A9E700A43&lang=pr&button=suporte"></script>
+  				<a href="http://na.ntrsupport.com"><img src="http://na.ntrsupport.com/inquiero/images/monitor.gif" border="0"></a>
+  			</div>
+  			<% end %>
+  		</div>
+  	</div>
+  </div>
+</div>
+<script type="text/javascript" src="/javascripts/visor.js" language="JavaScript1.2"></script>

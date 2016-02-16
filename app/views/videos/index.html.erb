@@ -1,0 +1,23 @@
+<div id="container_adm">
+	<p class="title_main">Vídeos</p>
+	<p><%= link_to 'Novo vídeo', new_video_path %></p>
+	<table>
+	  <tr>
+	    <th>Titulo</th>
+	    <th>Legenda</th>
+	    <th>Youtube</th>
+	    <th></th>
+	    <th></th>
+	  </tr>
+	<% @videos.each do |video| %>
+	  <tr height="42px">
+	    <td><%=h video.titulo %></td>
+	    <td style="padding-top:5px;padding-bottom:5px;"><%=h video.legenda %></td>
+	    <td ><%=h video.youtube_id %></td>
+	    <td class="bottom"><%= link_to image_tag('/admin/botao_editar.png', :alt => 'Editar', :title => 'Editar'), edit_video_path(video) %></td>
+	    <td class="bottom"><%= link_to image_tag('/admin/botao_excluir.png', :alt => 'Apagar', :title => 'Apagar'), video, :confirm => 'Deseja realmente excluir?', :method => :delete %></td>
+	  </tr>
+	<% end %>
+	</table>
+	<p><%= link_to 'Novo vídeo', new_video_path %></p>
+</div>

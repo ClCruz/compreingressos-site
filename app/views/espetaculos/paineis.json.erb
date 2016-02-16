@@ -1,0 +1,19 @@
+[
+<% @espetaculos.each_with_index do |e,ei| -%>
+{
+  "espetaculo_id":<%= e.id %>,
+  "titulo":<%= e.nome.to_json.gsub('\r','').gsub('\n',' ') %>,
+  "teatro_id":<%= e.teatro.id %>,
+  "teatro":<%= e.teatro.nome.to_json.gsub('\r','').gsub('\n',' ') %>,
+  "imagem_principal":<%= FileTest.exists?("#{RAILS_ROOT}/public/images/espetaculos/#{e.id}/princial.jpg") ? "\"/images/espetaculos/#{e.id}/princial.jpg\"":"null" %>,
+  "imagem_miniatura":<%= FileTest.exists?("#{RAILS_ROOT}/public/images/espetaculos/#{e.id}/miniatura2x.jpg") ? "\"/images/espetaculos/#{e.id}/miniatura2x.jpg\"":"" %>,
+  "imagem_fundo":<%= FileTest.exists?("#{RAILS_ROOT}/public#{e.fundo.url}") ? "\"#{e.fundo.url}\"":"null" %>,
+  "background_color":<%= e.cor_de_fundo.blank? ? "null":"\"#{e.cor_de_fundo}\"" %>,
+  "url":"<%= url_for e %>",
+  "data":[
+         <% e.horarios.each_with_index do |h,hi| -%>
+            "<%= l h.data, :format => :webservice %>"<%= (e.horarios.size-1) <= hi ? '':',' %>
+         <% end -%>]
+}<%= (@espetaculos.size-1) <= ei ? '':',' %>
+<% end -%>
+]

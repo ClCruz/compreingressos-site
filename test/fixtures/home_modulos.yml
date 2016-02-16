@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  titulo: MyString
+  entrada: 2013-07-24 00:08:10
+  saida: 2013-07-24 00:08:10
+  orderm: 1
+
+two:
+  titulo: MyString
+  entrada: 2013-07-24 00:08:10
+  saida: 2013-07-24 00:08:10
+  orderm: 1

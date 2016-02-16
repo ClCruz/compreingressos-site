@@ -1,0 +1,21 @@
+<div class="pacotes_espetaculo">
+<% pf.fields_for :pacotes_espetaculos, pacotes_espetaculo, :child_index => 'index_to_replace' do |f| %>
+  <p>
+    <%= f.label :espetaculo_id %><br />
+    <%= f.select(:espetaculo_id, espetaculos, :prompt => 'Selecione') %>
+  </p>
+  <p>
+    <%= f.label :nome_do_espetaculo %><br />
+    <%= f.text_field :nome_do_espetaculo %><br />
+    <span class="help_text">Digite o nome caso o espetaculo desejado ainda não tenha sido cadastrado</span>
+  </p>
+  <p>
+    <%= f.label :data %><br />
+    <%= f.datetime_select(:data, :order => [:day, :month, :year, :hour, :minute, :second], :include_seconds => true, :date_separator => '', :datetime_separator => ' às ', :time_separator => ':', :start_year => Date.current.year, :end_year => Date.current.year+2, :include_blank => false) %>
+  </p>
+  <p>
+    <%= link_to_function "Remover este espetaculo", "$(this).up('.pacotes_espetaculo').remove()" %>
+  </p>
+<% end %>
+<hr width="600px" align="left"> 
+</div>

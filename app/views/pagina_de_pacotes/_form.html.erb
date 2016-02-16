@@ -1,0 +1,43 @@
+<% form_for(@pagina_de_pacote, :html => { :multipart => true }) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :nome %><br />
+    <%= f.text_area :nome, :rows => 3, :cols => 75 %>
+  </p>
+  <p>
+    <%= f.label :subtitulo %><br />
+    <%= f.text_field :subtitulo %>
+  </p>
+  <p>
+    <%= f.label :url %><br />
+    <%= f.text_field :url %>
+  </p>
+  <p>
+    <%= f.label :cor_do_header %><br />
+    <%= f.text_field :cor_do_header %>
+  </p>
+  <p>
+    <%= f.label :cor_de_fundo %><br />
+    <%= f.text_field :cor_de_fundo %>
+  </p>
+  <p>
+    <%= f.label :imagem %><br />
+    <%= f.file_field :imagem %><br />
+    <span class="help_text">Tamanho livre, recomenda-se supervisão de um web designer</span>
+    <% if @pagina_de_pacote.imagem? %>
+      <br /><%= image_tag @pagina_de_pacote.imagem.url, :style => "height:200px;" %>
+    <% end %>
+  </p>
+  <p>
+    <%= f.label :mapeamento_de_imagem %><br />
+    <%= f.text_field :mapeamento_de_imagem %>
+  </p>
+  <p>
+    <%= f.label :altura_de_inicio_da_listagem %><br />
+    <%= f.text_field :altura_de_inicio_da_listagem %>
+  </p>
+  <p>
+    <%= f.submit 'Salvar' %>
+  </p>
+<% end %>

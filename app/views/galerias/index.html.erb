@@ -1,0 +1,22 @@
+<h1>Listing galerias</h1>
+
+<table>
+  <tr>
+    <th>Legenda</th>
+    <th>Espetaculo</th>
+  </tr>
+
+<% @galerias.each do |galeria| %>
+  <tr>
+    <td><%=h galeria.legenda %></td>
+    <td><%=h galeria.espetaculo %></td>
+    <td><%= link_to 'Show', galeria %></td>
+    <td><%= link_to 'Edit', edit_galeria_path(galeria) %></td>
+    <td><%= link_to 'Destroy', galeria, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New galeria', new_galeria_path %>

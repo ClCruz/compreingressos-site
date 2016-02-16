@@ -1,0 +1,28 @@
+<div id="container_adm">
+  <p class="title_main">Vinculando espetáculos a página especial</p>
+  <% form_for(@pagina_especial, :html => { :multipart => true }) do |f| %>
+    <%= f.error_messages %>
+    
+    <% if !@espetaculos.blank? -%>
+      <% @espetaculos.each do |espetaculo| -%>
+        <p>
+          <label>
+            <%= check_box_tag "pagina_especial[espetaculo_ids][]", espetaculo.id, espetaculo_selecionado?(@pagina_especial, espetaculo) %>
+            <%= espetaculo.nome %> <span style="font-size:11px;font-style:italic;">(<%= espetaculo.teatro.nome %>)</span>
+          </label>
+        </p>
+      <% end -%>
+    <% else -%>
+      <% if @pagina_especial.tipo == 2 -%>
+        Não existem espetáculos privados
+      <% else -%>
+        Não existem espetáculos ativos
+      <% end -%>
+    <% end -%>
+    
+    <p>
+      <%= f.submit 'Salvar' %>
+    </p>
+  <% end %>
+  <%= link_to 'Voltar', pagina_especiais_path %>
+</div>

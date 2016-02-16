@@ -1,0 +1,19 @@
+<div id="container_adm">
+	<p class="title_main">Homes</p>
+	<p><%= link_to 'Nova home', new_home_path %></p>
+	<table>
+		<tr>
+  			<th>Cidade</th>
+  			<th></th>
+  			<th></th>
+  		</tr>
+		<% @homes.each do |home| %>
+  		<tr>
+  			<td><%= h home.cidade.nome %></td>
+    		<td class="buttom"><%= link_to image_tag('/admin/botao_editar.png', :alt => 'Editar', :title => 'Editar'), edit_home_path(home) %></td>
+    		<td class="buttom"><%= link_to image_tag('/admin/botao_excluir.png', :alt => 'Apagar', :title => 'Apagar'), home, :confirm => 'Deseja realmente excluir?', :method => :delete %></td>
+  		</tr>
+		<% end %>
+	</table>
+	<p><%= link_to 'Nova home', new_home_path %></p>
+</div>

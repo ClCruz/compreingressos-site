@@ -1,0 +1,32 @@
+<div id="crumbs">
+	<a href="/">home</a> / <span>eventos realizados</span>
+</div>
+<%= render :partial => 'layouts/busca' %>
+<div id="espetaculo">
+	<div id="display" style="height:180px;margin: 0 0 10px;">
+		<img src="/images/eventosrealizados.jpg" alt="Eventos realizados - compreingressos.com" title="Eventos realizados - compreingressos.com" usemap="#imagemlinks" />
+	</div>
+	<div id="lista_espetaculos">
+		<div id="espetaculos">
+			<% if !@er %>
+				<p>Não existem atrações cadastradas ainda.</p>
+			<% else %>
+				<% for er in @er%>
+					<div class="destaque_home">
+						<a href="/cache/<%=er.espetaculo.imagems[1].id.to_s%>.jpg" class="top_up" toptions="title= <%=er.espetaculo.teatro.nome%> - <%=er.espetaculo.nome%>, overlayClose = 1, shaded = 1">
+							<img src="/cache/<%=er.espetaculo.imagems[1].id%>_produto.jpg" alt="<%=er.espetaculo.nome%>" title="<%=er.espetaculo.nome%>">
+						</a>
+						<h3><a href="/cache/<%=er.espetaculo.imagems[1].id.to_s%>.jpg"  class="top_up" toptions="title= <%=er.espetaculo.teatro.nome%> - <%=er.espetaculo.nome%>, overlayClose = 1, shaded = 1"><%=er.espetaculo.nome%></a></h3>
+						<div class="er">
+							<p><%=er.espetaculo.cidade.nome%> / <%=er.espetaculo.cidade.estado%></p>
+							<p class="teatro"><%=er.espetaculo.teatro.nome%></p>
+							<p class="genero"><%=er.espetaculo.genero.nome%></p>	
+							<p class="temporada"><%=er.temporada%></p>
+						</div>
+					</div>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="/javascripts/visor.js" language="JavaScript1.2"></script>

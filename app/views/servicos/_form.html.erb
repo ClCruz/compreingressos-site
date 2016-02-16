@@ -1,0 +1,42 @@
+<%= javascript_include_tag :defaults %>
+
+<% form_for(@servico, :html => {:multipart => true}) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :titulo %><br />
+    <%= f.text_field :titulo %>
+  </p>
+  <p>
+    <%= f.label :subtitulo %><br />
+    <%= f.text_field :subtitulo %>
+  </p>
+  <p>
+    <%= f.label :texto %><br />
+    <%= f.text_area :texto, :class => 'mceEditor' %>
+  </p>
+  <div id="imagems">
+      <h2>Imagens:</h2>
+      <% f.fields_for :imagems do |imagem_form| %>
+        <div class="imagem">
+          <p>
+            <% unless imagem_form.object.new_record? %>
+            <img src="<%=url_for(:controller=>:imagems, :action => :thumb, :id => imagem_form.object.id)%>" alt="<%=imagem_form.object.legenda%>" /><br />
+            <% end %>
+            <p class="help_text"> (Primeira imagem 940x180, Segunda imagem: 660x420)</p>
+            <%= imagem_form.label 'Arquivo', 'Selecione o arquivo de imagem para substituir esta foto:' %><br />
+            <%= imagem_form.file_field 'uploaded_picture' %><br />
+            <%= imagem_form.label 'Legenda'%>
+            <%= imagem_form.text_field :legenda%><br />
+            <%= remove_link_unless_new_record(imagem_form) %>
+          </p>
+        </div>  
+      <% end %>
+  </div>
+  <p>
+    <%= add_imagem_link "Adicionar Imagem", f %>
+  </p>
+  <p>
+    <%= f.submit 'Salvar' %>
+  </p>
+<% end %>

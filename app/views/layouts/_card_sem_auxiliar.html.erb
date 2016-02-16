@@ -1,0 +1,33 @@
+<div class="card">
+  <a href="<%=url_for card_sem_auxiliar%>">
+    <img src="<%= card_sem_auxiliar.img_miniatura.url(:miniatura) %>" height="<%= card_sem_auxiliar.img_miniatura_height %>">
+    <h3><%=card_sem_auxiliar.nome%></h3>
+  </a>
+  	<p class="teatro"><%=card_sem_auxiliar.teatro.nome%></p>
+  	<p class="cidade"><%=card_sem_auxiliar.cidade.nome%> - <%=card_sem_auxiliar.cidade.estado%></p>
+  	<p class="genero"><%=card_sem_auxiliar.genero.nome%></p>
+	<div class="over">
+    <% if card_sem_auxiliar.proximo_horario -%>
+      <p class="linha1">Próxima apresentação</p>
+      <p class="linha2"><%= card_sem_auxiliar.proximo_horario.data==Date.today ? 'Hoje':l(card_sem_auxiliar.proximo_horario.data, :format => :weekday)%></p>
+      <p class="linha3"><%= l card_sem_auxiliar.proximo_horario.data, :format => :short %></p>
+      
+      <% if !card_sem_auxiliar.especificar_data_inicial_de_venda -%>
+        <% if card_sem_auxiliar.cc_id -%>
+          <a href="<%=url_for card_sem_auxiliar%>" class="botao comprar"></a>
+        <% else -%>
+          <a href="<%=url_for card_sem_auxiliar%>" class="botao saiba_mais"></a>
+        <% end -%>
+      <% else -%>
+        <% if card_sem_auxiliar.cc_id and card_sem_auxiliar.data_inicial_de_venda<=DateTime.now -%>
+          <a href="<%=url_for card_sem_auxiliar%>" class="botao comprar"></a>
+        <% else -%>
+          <a href="<%=url_for card_sem_auxiliar%>" class="botao saiba_mais"></a>
+        <% end -%>
+      <% end -%>
+      
+    <% else -%>
+      <a href="<%=url_for card_sem_auxiliar%>" class="botao saiba_mais semdata"></a>
+    <% end -%>
+	</div>
+</div>

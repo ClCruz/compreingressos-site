@@ -1,0 +1,191 @@
+<div id="container_adm">
+<%= javascript_include_tag :defaults %>
+
+<% form_for(@teatro,:html => {:multipart => true}) do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :imagem %><br />
+    <%= f.file_field :imagem %><br />
+    <span class="help_text">O tamanho deve ser exatamente 160x160px</span><br />
+    <% if @teatro.imagem? %>
+      <%= image_tag @teatro.imagem.url(:big), :width => "160" %>
+    <% end %>
+  </p>
+	<p>
+		<%= f.label :cidade_id, "Cidade: "%><br />
+		<%= f.select :cidade_id, Cidade.all(:order => 'nome').collect {|c| [ c.nome, c.id ] } %><br />
+	</p>
+  <p>
+    <%= f.label :nome %><br />
+    <%= f.text_area :nome, :rows => 3, :cols => 75 %>
+  </p>
+  <p>
+    <%= f.label :relevancia %><br />
+    <%= f.select :relevancia, Teatro::RELEVANCIAS %>
+  </p>
+	<p>
+    <%= f.label :aba_inicial, "Aba inicial: "%><br />
+    <%= f.select :aba_inicial, Teatro::ABAS %><br />
+  </p>
+	<p>
+    	<%= f.label :keywords, 'SEO keywords' %><br />
+    	<%= f.text_field :keywords, :size => 100 %>
+  </p>
+	<p>
+    	<%= f.label :description, 'SEO description' %><br />
+    	<%= f.text_field :description, :size => 100 %>
+  </p>
+	<p>
+		<%= f.label :endereco, 'Endereço - (SEM Cidade!)' %><br />
+		<%= f.text_field :endereco %>
+	</p>
+	<p>
+		<%= f.label :bairro, 'Bairro - (SEM Cidade!)' %><br />
+		<%= f.text_field :bairro %>
+	</p>
+	<p>
+		<%= f.label :lotacao, 'Lotação' %><br />
+		<%= f.text_area :lotacao, :cols => 40, :rows => 5 %><br />
+    <span class="help_text">Use &lt;i&gt;(indique o número aqui dentro)&lt;/i&gt; para aumentar a fonte dos números</span>
+	</p>
+	<p>
+		<%= f.label :telefone %><br />
+		<%= f.text_field :telefone %>
+	</p>
+	<p>
+		<%= f.label :bilheteria %><br />
+		<%= f.text_field :bilheteria %>
+	</p>
+	<p>
+		<%= f.label :site, 'Site - (SEM http://)'%><br />
+		<%= f.text_field :site %>
+	</p>
+  <p>
+    <%= f.label :cor_de_fundo %><br />
+    <%= f.text_field :cor_de_fundo %>
+  </p>
+  <p>
+    <%= f.label :imagem_de_fundo %><br />
+    <%= f.file_field :imagem_de_fundo %><br />
+    <span class="help_text">Tamanho livre</span><br />
+    <% if @teatro.imagem_de_fundo? %>
+      <%= image_tag @teatro.imagem_de_fundo.url(), :width => "200" %>
+    <% end %>
+  </p>
+  <p>
+    <%= f.check_box :parallax %>
+    <%= f.label :parallax %><br />
+    <span class="help_text">Liga efeito parallax no background</span>
+  </p>
+  <p>
+    <%= f.label :parallax_valor %><br />
+    <%= f.text_field :parallax_valor, :size => "3" %><br />
+    <span class="help_text">Valor negativo background sobe e valor positivo background desce</span>
+  </p>
+  <p>
+    <%= f.label :mapa_de_plateia %><br />
+    <%= f.file_field :mapa_de_plateia %><br />
+    <span class="help_text">A largura deve ser de 960px e a altura é livre</span><br />
+    <% if @teatro.mapa_de_plateia? %>
+      <%= image_tag @teatro.mapa_de_plateia.url(), :width => "200" %>
+    <% end %>
+  </p>
+  
+  <p>
+    <%= f.label :altura_de_inicio %><br />
+    <%= f.text_field :altura_de_inicio %>
+  </p>
+  
+  <p>
+    <%= f.label :cor_do_texto %><br />
+    <%= f.text_field :cor_do_texto %>
+  </p>
+  
+  <p>
+    <%= f.label :cor_da_borda_dos_boxes %><br />
+    <%= f.text_field :cor_da_borda_dos_boxes %>
+  </p>
+  
+  <p>
+    <%= f.label :cor_do_fundo_dos_boxes %><br />
+    <%= f.text_field :cor_do_fundo_dos_boxes %>
+  </p>
+  
+  <p>
+    <%= f.label :cor_do_texto_dos_boxes %><br />
+    <%= f.text_field :cor_do_texto_dos_boxes %>
+  </p>
+  
+  <p>
+    <%= f.label :ordenacao_dos_espetaculos %><br />
+    <%= f.select :ordenacao_dos_espetaculos, Teatro::ORGANIZADOPOR %><br />
+    <span class="help_text">Próximas apresentações só exibem os espetaculos que tem datas de apresentações definidas, caso <br />o espetáculo esteja ativo mas ainda não tenha data cadastrada de apresentação ele não será listado</span>
+  </p>
+	
+	<div id="entradas">
+		<h2>Rider Técnico:</h2>
+		<% f.fields_for :entradas do |entrada_form| %>
+		<div class="entrada">
+			<p>
+				<%= entrada_form.label :atributo, 'Atributo' %><br />
+				<%= entrada_form.text_field :atributo %><br />
+				<%= entrada_form.label :valor, 'Valor'%><br />
+				<%= entrada_form.text_area :valor, :cols => 40, :rows => 5, :class=>'mceEditor'%><br />
+				<%= remove_link_unless_new_record(entrada_form) %>
+			</p>
+		</div>	
+		<% end %>
+	</div>
+	<p>
+	  <%= add_entrada_link "Adicionar Entrada", f %>
+	</p>
+	
+	<div class="campos" id="imagems">
+    <h2>Galeria:</h2>
+    <% f.fields_for :teatro_imagens do |imagem_form| %>
+      <div class="teatro_imagen">
+        <p>            
+          <%= imagem_form.label 'Arquivo', 'Selecione o arquivo de imagem para substituir esta foto:' %><br />
+          <%= imagem_form.file_field :imagem %><br />
+          <span class="help_text">O tamanho deve ser exatamente 465x274px</span><br />
+          <% unless imagem_form.object.new_record? %>
+            <%= image_tag imagem_form.object.imagem.url(:thumb) %>
+          <% end %>
+          <br />
+          <%= remove_link_unless_new_record(imagem_form) %>
+        </p>
+      </div>  
+      <hr width="600px" align="left"> 
+    <% end %>
+  </div>
+  <p>
+    <%= add_teatro_imagem_link "Adicionar Imagem", f %>
+  </p>
+  
+  <hr color="#C7C7C7">
+	
+	<div id="videos">
+		<h2>Vídeos:</h2>
+		<% f.fields_for :videos do |video_form| %>
+		<div class="video">
+			<p>
+				<p class="help_text"> (Para o YouTube ID pegue apenas o ID do vídeo no YouTube!)</p>
+				<%= video_form.label :titulo, 'Título:' %><br />
+				<%= video_form.text_field :titulo %><br />
+				<%= video_form.label :legenda, 'Legenda'%><br />
+				<%= video_form.text_field :legenda%><br />
+				<%= video_form.label :youtube_id, 'YouTube ID:' %><br />
+				<%= video_form.text_field :youtube_id %><br />
+				<%= remove_link_unless_new_record(video_form) %>
+			</p>
+		</div>	
+		<% end %>
+	</div>
+	<p>
+	  <%= add_video_link "Adicionar Vídeo", f %>
+	</p>
+	<p>
+		<%= f.submit 'Salvar' %>
+	</p>
+<% end %>
+</div>

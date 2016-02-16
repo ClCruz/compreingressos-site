@@ -1,0 +1,27 @@
+<div id="container_adm">
+  <p class="title_main">Páginas especiais</p>
+  <p><%= link_to 'Nova página especial', new_pagina_especial_path %></p>
+  <table>
+    <tr>
+      <th>Tipo</th>
+      <th>Nome</th>
+      <th>Link</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  <% @pagina_especiais.each do |pagina_especial| %>
+    <tr>
+      <td>
+        <%= PaginaEspecial::TIPOS[pagina_especial.tipo-1][0] %>
+      </td>
+      <td><%=h pagina_especial.nome %></td>
+      <td><a href="/<%=h pagina_especial.url %>">compreingressos.com/<%=h pagina_especial.url %></a></td>
+      <td class="buttom"><%= link_to image_tag('/admin/botao_avalidar.png', :alt => 'Vincular espetáculos', :title => 'Vincular espetáculos'), "/pagina_especiais/selecionar/#{pagina_especial.id}" %></td>
+      <td class="buttom"><%= link_to image_tag('/admin/botao_editar.png', :alt => 'Editar', :title => 'Editar'), edit_pagina_especial_path(pagina_especial) %></td>
+      <td class="buttom"><%= link_to image_tag('/admin/botao_excluir.png', :alt => 'Apagar', :title => 'Apagar'), pagina_especial, :confirm => 'Deseja realmente excluir?', :method => :delete %></td>
+    </tr>
+  <% end %>
+  </table>
+  <p><%= link_to 'Nova página especial', new_pagina_especial_path %></p>
+</div>

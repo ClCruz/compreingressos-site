@@ -1,0 +1,24 @@
+<div id="container_adm">
+	<p class="title_main">Home background</p>
+	<%= form_tag({:action => 'gravar'}, :multipart => true) %>
+	<label>Imagem</label><br />
+  <%= file_field("form","imagem") %><br />
+  <% if Dir.glob("#{RAILS_ROOT}/public/images/home_bg/*").first %>
+  <img src="/images/home_bg/bg<%= File.extname(Dir.glob("#{RAILS_ROOT}/public/images/home_bg/*").first) %>" width="500"><br />
+  <a href="/home_background/excluir">Excluir background</a><br />
+  <% end %>
+  <br />
+  <label>Cor de texto</label><br />
+  <%= text_field_tag 'cor_de_texto', @hb.cor_de_texto %><br />
+  <br />
+  <label>BG Color</label><br />
+  <%= text_field_tag 'bgcolor', @hb.bgcolor %><br />
+  <br />
+  <label>Link esquerda</label><br />
+  <%= text_field_tag 'esquerda_link', @hb.esquerda_link %> <%= check_box_tag 'esquerda_blank', 1, @hb.esquerda_blank %><label>Blank</label>
+  <br /><br />
+  <label>Link direita</label><br />
+  <%= text_field_tag 'direita_link', @hb.direita_link %> <%= check_box_tag 'direita_blank', 1, @hb.direita_blank %><label>Blank</label>
+  <br />
+  <%= submit_tag( "Enviar" ) %>
+</div>

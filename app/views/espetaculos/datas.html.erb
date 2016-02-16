@@ -1,0 +1,114 @@
+<div id="container_adm">
+	<p class="title_main">Datas do Espetáculo</p>
+	
+    <div id="container_adm">
+    <%= javascript_include_tag :defaults %>
+    
+    <% form_tag "/espetaculos/datas_gravar?id=#{params[:id]}" do -%>
+      <div class="container_meses">
+        <%
+          date = Date.today
+          
+          actualmonth = date-1.month
+          totalmonths = 1
+          linemonths = 1  
+          
+          while(totalmonths <= 12)
+            if(linemonths > 3)
+        %>
+              </div><div class="container_meses">
+        <%
+              linemonths = 1
+            end
+            
+            day = actualmonth.day
+            month = actualmonth.month
+            year = actualmonth.year
+            
+            firstday = actualmonth.beginning_of_month
+            
+            title = firstday.strftime("%B")
+            
+            dayofweek = firstday.wday
+            
+            daysinmonth = Time.days_in_month(month,year)
+        %>
+            <table class="mes">
+              <thead>
+                <tr>
+                  <td colspan="7">
+                    <%=actualmonth.strftime("%B")%>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Dom</td>
+                  <td>Seg</td>
+                  <td>Ter</td>
+                  <td>Qua</td>
+                  <td>Qui</td>
+                  <td>Sex</td>
+                  <td>Sab</td>
+                </tr>
+              </thead>
+              <tbody>
+                <%
+                  daycount = 1
+                  while (dayofweek > 0)
+                %>
+                      <td></td>
+                <%
+                    dayofweek -= 1
+                    daycount += 1
+                  end
+                  
+                  daynum = 1
+                  while (daynum <= daysinmonth)
+                    fdate = "#{year}-#{month}-#{daynum}%".to_date
+                %>
+                    
+                    <td>
+                      <label>
+                        <%= daynum %><br />
+                        <% cd = @espetaculo.horarios.find(:first, :select => :data, :conditions => ["data BETWEEN '#{fdate} 00:00:00' AND '#{fdate} 23:59:59'"]) %>
+                        <input type="checkbox" name="data[]"<%= cd ? " value=\"#{cd.data}\" checked=\"checked\"":" value=\"#{fdate} 12:00:00\"" %>>
+                      </label>
+                    </td>
+                <%
+                    daynum += 1
+                    daycount +=1
+                    
+                    if (daycount > 7)
+                %>
+                      </tr><tr>
+                <%
+                      daycount = 1
+                    end
+                  end
+                  
+                  while (daycount > 1 and daycount <= 7)
+                %>
+                    <td></td>
+                <%
+                    daycount += 1
+                  end 
+                %>
+                </tr>
+              </tbody>
+            </table>
+      <%
+          actualmonth = actualmonth+1.month
+          linemonths += 1
+          totalmonths += 1
+        end
+      %>
+      </div>
+      
+      <p>
+        <input type="submit" value="Salvar"></button>
+      </p>
+    <% end %>
+    </div>
+
+	
+	<%= link_to 'Voltar', espetaculos_path %>
+</div>

@@ -1,0 +1,23 @@
+<p>
+  <b>Nome:</b>
+  <%=h @pagina_de_pacote.nome %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%=h @pagina_de_pacote.url %>
+</p>
+
+<p>
+  <b>Mapeamento de imagem:</b>
+  <%=h @pagina_de_pacote.mapeamento_de_imagem %>
+</p>
+
+<p>
+  <b>Altura de inicio da listagem:</b>
+  <%=h @pagina_de_pacote.altura_de_inicio_da_listagem %>
+</p>
+
+
+<%= link_to 'Edit', edit_pagina_de_pacote_path(@pagina_de_pacote) %> |
+<%= link_to 'Back', pagina_de_pacotes_path %>

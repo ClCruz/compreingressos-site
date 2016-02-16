@@ -1,0 +1,23 @@
+<div id="container_adm">
+  <p class="title_main">Páginas de pacotes</p>
+  <p><%= link_to 'Nova página de pacote', new_pagina_de_pacote_path %></p>
+  <table>
+    <tr>
+      <th>Nome</th>
+      <th>Url</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    <% @pagina_de_pacotes.each do |pagina_de_pacote| %>
+      <tr>
+        <td><%=h pagina_de_pacote.nome %></td>
+        <td><a href="/<%=h pagina_de_pacote.url %>/assinaturas">compreingressos.com/<%=h pagina_de_pacote.url %>/assinaturas</a></td>
+        <td class="buttom"><%= link_to image_tag('/admin/botao_avalidar.png', :alt => 'Editar pacotes', :title => 'Editar pacotes'), "/pacotes?id=#{pagina_de_pacote.id}" %></td>
+        <td class="buttom"><%= link_to image_tag('/admin/botao_editar.png', :alt => 'Editar', :title => 'Editar'), edit_pagina_de_pacote_path(pagina_de_pacote) %></td>
+        <td class="buttom"><%= link_to image_tag('/admin/botao_excluir.png', :alt => 'Apagar', :title => 'Apagar'), pagina_de_pacote, :confirm => 'Deseja realmente excluir?', :method => :delete %></td>
+      </tr>
+    <% end %>
+  </table>
+  <p><%= link_to 'Nova página de pacote', new_pagina_de_pacote_path %></p>
+</div>

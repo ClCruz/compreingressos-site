@@ -1,0 +1,19 @@
+[
+<% @espetaculos.each_with_index do |e,ie| -%>
+{
+  "titulo":<%= e.nome.gsub('\r','').gsub('\n',' ').gsub('"','“').to_json %>,
+  "genero":<%= e.genero.nome.gsub('\r','').gsub('\n',' ').gsub('"','“').to_json %>,
+  "teatro":<%= e.teatro.nome.gsub('\r','').gsub('\n',' ').gsub('"','“').to_json %>,
+  "cidade":<%= e.cidade.nome.gsub('\r','').gsub('\n',' ').gsub('"','“').to_json %>,
+  "estado":<%= e.cidade.estado.gsub('\r','').gsub('\n',' ').gsub('"','“').to_json %>,
+  "miniatura":"http://www.compreingressos.com/images/espetaculos/<%= e.id %>/miniatura.jpg",
+  "url":"http://www.compreingressos.com<%= url_for e %>",
+  "data":"<%= (e.proximo_horario.respond_to? :data) ? "#{e.proximo_horario.data}":"" %>",
+  "relevancia":<%= e.relevancia %>,
+  "codigo_cc":<%= e.cc_id.blank? ? 0:e.cc_id %>,
+  "endereco":<%= e.teatro.endereco.to_json %>,
+  "keywords":<%= e.keywords.gsub('\r','').gsub('\n',' ').gsub('"','“').to_json %>,
+  "description":<%= e.description.gsub('\r','').gsub('\n',' ').gsub('"','“').to_json %>
+}<%= (@espetaculos.size-1) <= ie ? '':',' %>
+<% end -%>
+]

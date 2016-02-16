@@ -1,0 +1,27 @@
+<div class="centraliza">
+  <div id="espetaculo">
+  	<div id="center_left">
+  		<p style="font-size:22px;color:#000;margin-top:10px">Serviços</p>
+  		<p class="help_text">Para ficar sabendo mais sobre os serviços oferecidos pela compreingressos.com, clique nos links abaixo.</p>
+  		
+  		<% if session[:admin_id] %>
+  			<%= link_to 'Novo serviço', new_servico_path %>
+  		<% end %>
+  		
+  		<div id="servicos_left">
+  			<% for servico in @servicos %>
+  			<h2><a href="<%=url_for servico%>"><%=servico.titulo%></a></h2>
+  			<p class="help_text italico"><%=servico.subtitulo%></p>
+  			
+  			<% if session[:admin_id] %>
+  			<p><%= link_to image_tag('/admin/botao_editar.png', :alt => 'Editar', :title => 'Editar'), edit_servico_path(servico) %>&nbsp;
+      		<%= link_to image_tag('/admin/botao_excluir.png', :alt => 'Apagar', :title => 'Apagar'), servico, :confirm => 'Deseja realmente excluir?', :method => :delete %></p>
+  			<% end %>
+  			
+  			<% end %>
+  		</div>					
+  	</div>
+  	<div id="center_right">
+  	</div>
+  </div>
+</div>

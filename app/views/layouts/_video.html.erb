@@ -1,0 +1,18 @@
+<div class="video">
+	<% pf.fields_for :videos, video, :child_index => 'index_to_replace' do |video_form| %>
+  	<p>
+      <%= video_form.label :titulo, 'Título:' %><br />
+      <%= video_form.text_field :titulo %>
+    </p>
+    <p>
+    <%= video_form.label :legenda, 'Legenda'%><br />
+    <%= video_form.text_field :legenda%>
+    </p>
+    <p>
+    <%= video_form.label :youtube_id, 'YouTube ID:' %><br />
+    <%= video_form.text_field :youtube_id %><br />
+    <span class="help_text">Pegue apenas o ID do vídeo. (<i>Ex: http://www.youtube.com/watch?v=<b><u>CIXSwDLQgXc</u></b>&hd=1</i>)</span>
+    </p>
+  	<%= link_to_function "Remover este vídeo", "$(this).up('.video').remove()" %>
+	<% end %>
+</div>

@@ -1,0 +1,43 @@
+<div class="card assinatura">
+	<h3 class="pacote_nome"><%= card_pacotes.nome %></h3>
+	<% if card_pacotes.descricao.blank? %>
+  <p class="pacote_total_espetaculos"><%= pluralize(card_pacotes.pacotes_espetaculos.size,'evento') %></p>
+	<% end %>
+	<p class="pacote_setores"><%= nl2br card_pacotes.setores %></p>
+	<% if card_pacotes.descricao.blank? %>
+  <p class="pacote_detalhes">ver detalhes da série</p>
+	<% else %>
+  <p class="pacote_detalhes2" title="<%= card_pacotes.nome %>">ver detalhes</p>
+	<% end %>
+	<% if DateTime.now.in_time_zone >= '2015-12-17 12:00:00'.to_time.in_time_zone%>
+  	<% if params[:filtro]=='opera' and card_pacotes.cc_id.blank? and card_pacotes.cc_evento_id.blank? %>
+        <a href="https://compra.compreingressos.com/comprar/etapa1.php?apresentacao=<%= card_pacotes.cc_evento_id %>&eventoDS=<%= card_pacotes.nome %>" class="botao assinar">Assinar</a>
+  	<% elsif card_pacotes.cc_id.blank? or card_pacotes.cc_evento_id.blank? %>
+  	  <a href="" class="botao aguarde" style="cursor:default">Aguarde</a>
+  	<% elsif !card_pacotes.cc_id.blank? and !card_pacotes.cc_evento_id.blank? %>
+  	  <a href="https://compra.compreingressos.com/comprar/etapa1.php?apresentacao=<%= card_pacotes.cc_evento_id %>&eventoDS=<%= card_pacotes.nome %>" class="botao comprar_pacote">Comprar</a>
+  	<% end %>
+	<% else %>
+	  <a href="" class="botao aguarde" style="cursor:default">Aguarde</a>
+	<% end %>
+
+	<div class="pac_topup">
+  	<% if card_pacotes.descricao.blank? %>
+  	  <p class="pacote_nome"><%= card_pacotes.nome %></p>
+  	  <p class="pacote_setores"><%= card_pacotes.setores.gsub("\n"," | ") %></p>
+  	  <p class="pacote_titulo_composicao">Composição da série</p>
+  	  <p class="pacote_composicao">
+  	    <% card_pacotes.pacotes_espetaculos.each do |pe| %>
+          <% if pe.espetaculo_id.blank? -%>
+            <b><%= pe.nome_do_espetaculo %></b>
+          <% else -%>
+            <b><%= link_to pe.espetaculo.nome, url_for(pe.espetaculo)+"?pacote=true&origem=#{params[:url]}" %></b>
+          <% end -%>
+            | <%= pe.data.strftime('%M')!=0 ? "#{l pe.data, :format => :pacotecomposicao}":"#{l pe.data, :format => :pacotecomposicao2}" %><br />
+  	    <% end %>
+  	  </p>
+    <% else %>
+      <p><%= card_pacotes.descricao %></p>
+    <% end %>
+  </div>
+</div>

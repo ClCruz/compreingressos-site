@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  link: MyString
+  blank: false
+  ordem: 1
+
+two:
+  link: MyString
+  blank: false
+  ordem: 1

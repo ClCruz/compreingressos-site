@@ -1,0 +1,5 @@
+<div class="swiper-slide<%= " mobile_image" if defined?(visor_destaque.imagem_mobile) and visor_destaque.imagem_mobile? %>">
+  <div style="background-image:url('<%=visor_destaque.imagem.url%>');">
+    <a href="<%=(visor_destaque.blank==true ? 'http://':'')+visor_destaque.link%>" target="<%=visor_destaque.blank==true ? '_blank':'_self'%>"></a>
+  </div>
+</div>

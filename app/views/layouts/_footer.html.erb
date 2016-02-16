@@ -1,0 +1,66 @@
+<% if !session[:app] %>
+<% if !@noheaderfooter %>
+  <div id="footer">
+    <div class="centraliza">
+      <ul>
+        <li class="title">Serviços</li>
+        <li><a href="/servicos/6-Captacao_de_Patrocinio">Captação de patrocínio</a></li>
+        <li><a href="/servicos/3-Catracas_Offline_e_Online">Catracas online e offline</a></li>
+        <li><a href="/servicos/2-Central_de_Vendas">Central de vendas</a></li>
+        <li><a href="/servicos/7-Credenciamento">Credenciamento</a></li>
+        <li><a href="/servicos/8-Gestao_de_Bilheteria">Gestão de bilheteria</a></li>
+        <li><a href="/servicos/4-Ingressos">Ingressos</a></li>
+        <li><a href="/grupos">Vendas para grupos</a></li>
+        <li><a href="/servicos/1-Vendas_pela_Internet">Vendas pela internet</a></li>
+        <li><a href="/servicos/5-Vantagens_do_Sistema">Vantagens do sistema</a></li>
+      </ul>
+      <ul>
+        <li class="title">Ajuda</li>
+        <li><a href="http://suporte.compreingressos.com/" target="_blank">Sac & Suporte</a></li>
+        <li><a href="https://compra.compreingressos.com/comprar/loginBordero.php?redirect=..%2Fadmin%2F%3Fp%3DrelatorioBordero">Borderô web</a></li>
+        <li><a href="/institucional">Institucional</a></li>
+        <li><a href="/especiais/3-Lei_6103-11">Lei 6103/11</a></li>
+        <li><a href="/faqs">Perguntas frequentes</a></li>
+        <li><a href="/politica">Política de venda</a></li>
+        <li><a href="/privacidade">Privacidade</a></li>
+        <li><a href="https://plus.google.com/107039038797259256027" rel="publisher" target="_blank">Google+</a></li>
+        <li><a class="minha_conta_mobile" href="<%=ENVIRONMENT_VARS['host_compra']%>/comprar/minha_conta.php">Minha conta</a></a>
+      </ul>
+      <ul class="midias_sociais">
+        <li class="title">Mídias Sociais</li>
+        <li class="midia"><a href="http://www.facebook.com/compreingressos" target="_blank" class="facebook">Seja nosso fã<br /> no facebook</a></li>
+        <li class="midia"><a href="http://twitter.com/compreingressos" target="_blank" class="twitter">Siga-nos<br /> no twitter</a></li>
+      </ul>
+    </div>
+  </div>
+<% end %>
+<% end %>
+<div id="selos">
+  <% if Rails.env == "production" -%>
+  <div class="centraliza">
+      <script language='javascript'>function vopenw(){tbar='location=no,status=yes,resizable=yes,scrollbars=yes,width=560,height=535';sw=window.open('https://www.certisign.com.br/seal/splashcerti.htm','CRSN_Splash',tbar);sw.focus();}</script>
+      <table width='135' border='0' cellpadding='2' cellspacing='0' align='center' style="float:left;margin:17px 0 0 164px">
+        <tr>
+          <td width='135' align='center' valign='middle'>
+            <a href='javascript:vopenw()'>
+              <img src='/images/100x46_fundo_branco.gif' style='margin-right:30px;' border=0 align=center alt='Certisign'>
+            </a>
+          </td>
+          <td width=135 align=center valign=center>
+            <script src=https://seal.verisign.com/getseal?host_name=www.compreingressos.com&size=S&use_flash=NO&use_transparent=getsealjs_b.js&lang=pt></script>
+          </td>
+        </tr>
+      </table>
+      <div id="armored_website" style="float:left;width:115px;height:32px;margin:40px 34px 0px;">
+        <param id="aw_preload" value="true" />
+      </div>
+      <script type="text/javascript" src="//selo.siteblindado.com/aw.js"></script>
+      <div id="aw_malware" style="float:left;margin:36px 0 0;">
+      <param id="aw_malware_preload" value="true" />
+      </div>
+      <script type="text/javascript" src="//selo.siteblindado.com/aw_malware.js"></script>
+  </div>
+  <% end -%>
+  <p class="creditos">COMPREINGRESSOS.COM 2010 © Todos os direitos reservados.</p>
+  <a href="" class="link_adptativo">visualizar na versao desktop</a>
+</div>

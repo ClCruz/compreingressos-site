@@ -1,0 +1,37 @@
+<div class="centraliza">
+  <div id="espetaculo">
+  	<div id="center_left">
+  		<p class="titulo">Pontos de Venda</p>
+  		<p class="help_titulo">Selecione a cidade abaixo para listar seus pontos de venda:</p>
+  		
+  		<% if session[:admin_id] %>
+  			<%= link_to 'Novo Ponto de Venda', new_pontodevenda_path %>
+  		<% end %>
+  		
+  		<div id="servicos_left">
+  			<% for cidade in @cidades %>
+  			<h2><a href="?cidade=<%=cidade.nome%>"><%=cidade.nome%></a></h2>
+  			<% end %>
+  		</div>					
+  	</div>
+  	<div id="center_right">
+  		<% if @cid %>
+  			<div id="contato">
+  				<h1>Pontos de venda em <%=@cid.nome%></h1>
+  				<p class="help_text">Veja abaixo aonde comprar seus ingressos fisicamente:</p>
+  			</div>
+  			
+  			<div id="ficha_tecnica">
+  				<% for pdv in @pontosdevenda %>
+  				<h2><%=pdv.titulo%></h2>
+  				<%=nl2br pdv.texto%>
+  				<% if session[:admin_id] %>
+  				<p><%= link_to image_tag('/admin/botao_editar.png', :alt => 'Editar', :title => 'Editar'), edit_pontodevenda_path(pdv) %>&nbsp;
+  	    		<%= link_to image_tag('/admin/botao_excluir.png', :alt => 'Apagar', :title => 'Apagar'), pdv, :confirm => 'Deseja realmente excluir?', :method => :delete %></p>
+  				<% end %>
+  				<% end %>
+  			</div>
+  		<% end %>
+  	</div>
+  </div>
+</div>

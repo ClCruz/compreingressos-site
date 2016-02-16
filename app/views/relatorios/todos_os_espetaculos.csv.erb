@@ -1,0 +1,7 @@
+<% require 'iconv' -%>
+"<%= Iconv.conv("WINDOWS-1252//IGNORE", "UTF-8", l(DateTime.now)) %>"
+"";"";"";"";"";"";"";"";"";"";"Paginas especiais";
+"ID";"UF";"Cidade";"Espetaculo";"Teatro";"Genero";"Inicio";"Termino";"Sinopse";"Ativo"<%= @pagina_especiais.map {|pe| ";\"#{Iconv.conv("WINDOWS-1252//IGNORE", "UTF-8",pe.nome)}\""} %>
+<% @espetaculos.each do |e| -%>
+"<%= e.id %>";"<%= Iconv.conv("WINDOWS-1252//IGNORE", "UTF-8", e.cidade.estado) %>";"<%= Iconv.conv("WINDOWS-1252//IGNORE", "UTF-8", e.cidade.nome) %>";"<%= e.teatron %>";"<%= e.espetaculo %>";"<%= e.generon %>";"<%= e.tinicio %>";"<%= e.ttermino %>";"<%= e.sinopse %>";"<%= e.ativo ? '1':'0' %>"<%= @pagina_especiais.map {|pe| e.pagina_especiais.include?(pe) ? ';"1"':';"0"'} %>
+<% end -%>

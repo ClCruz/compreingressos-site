@@ -1,0 +1,83 @@
+development:
+  host: 'http://staging.compreingressos.com'
+  host_compra: 'http://186.237.201.132:81/compreingressos2'
+  host_json: 'http://186.237.201.153'
+#  host_json: 'https://192.168.13.2' IP interno C&C server  
+#  ftp_compra_host: '192.168.13.2' IP interno C&C server
+  ftp_compra_host1: '186.237.201.153'
+  ftp_compra_port1: '2111'
+  ftp_compra_username1: 'ftpupld'
+  ftp_compra_password1: 'Ftp@upload*'
+  ftp_compra_images_dir1: 'evento'
+  
+  ftp_compra_host2: '186.237.201.153'
+  ftp_compra_port2: '2122'
+  ftp_compra_username2: 'ftpupld'
+  ftp_compra_password2: 'Ftp@upload*'
+  ftp_compra_images_dir2: 'evento'
+  
+  ftp_compra_host3: '186.237.201.153'
+  ftp_compra_port3: '2133'
+  ftp_compra_username3: 'ftpupld'
+  ftp_compra_password3: 'Ftp@upload*'
+  ftp_compra_images_dir3: 'evento'
+
+test:
+  host: 'http://staging.compreingressos.com'
+  host_compra: 'http://186.237.201.132:81/compreingressos2'
+  host_json: 'https://186.237.201.132:81/compreingressos2'
+  ftp_compra_host: '186.237.201.132'
+  ftp_compra_port: '8044'
+  ftp_compra_username: 'ftpupld'
+  ftp_compra_password: 'Ftp@upload*'
+  ftp_compra_images_dir: 'compreingressos2_images_evento'
+
+production:
+  host: 'http://www.compreingressos.com'
+  host_compra: 'https://compra.compreingressos.com'
+  host_json: 'https://186.237.201.153'
+#  host_json: 'https://192.168.13.2' IP interno C&C server
+#  ftp_compra_host1: '192.168.13.2' IP interno C&C server
+#  ftp_compra_port1: '221'
+  ftp_compra_host1: '186.237.201.153'
+  ftp_compra_port1: '211'
+  ftp_compra_username1: 'ftpupld'
+  ftp_compra_password1: 'Ftp@upload*'
+  ftp_compra_images_dir1: 'evento'
+  
+  ftp_compra_host2: '186.237.201.153'
+  ftp_compra_port2: '212'
+  ftp_compra_username2: 'ftpupld'
+  ftp_compra_password2: 'Ftp@upload*'
+  ftp_compra_images_dir2: 'evento'
+  
+  ftp_compra_host3: '186.237.201.153'
+  ftp_compra_port3: '213'
+  ftp_compra_username3: 'ftpupld'
+  ftp_compra_password3: 'Ftp@upload*'
+  ftp_compra_images_dir3: 'evento'
+
+staging:
+  host: 'http://www.compreingressos.com'
+  host_compra: 'https://compra.compreingressos.com'
+  host_json: 'https://186.237.201.153'
+#  host_json: 'https://192.168.13.2' IP interno C&C server
+#  ftp_compra_host1: '192.168.13.2' IP interno C&C server
+#  ftp_compra_port1: '221'
+  ftp_compra_host1: '186.237.201.153'
+  ftp_compra_port1: '211'
+  ftp_compra_username1: 'ftpupld'
+  ftp_compra_password1: 'Ftp@upload*'
+  ftp_compra_images_dir1: 'evento'
+  
+  ftp_compra_host2: '186.237.201.153'
+  ftp_compra_port2: '212'
+  ftp_compra_username2: 'ftpupld'
+  ftp_compra_password2: 'Ftp@upload*'
+  ftp_compra_images_dir2: 'evento'
+  
+  ftp_compra_host3: '186.237.201.153'
+  ftp_compra_port3: '213'
+  ftp_compra_username3: 'ftpupld'
+  ftp_compra_password3: 'Ftp@upload*'
+  ftp_compra_images_dir3: 'evento'
