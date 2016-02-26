@@ -1,5 +1,5 @@
 <div class="card">
-  <a href="<%= (card_com_auxiliar.id==3903 or card_com_auxiliar.id==3593) ? "/comunicado-theatro-municipal-de-sao-paulo-2015-09-28.pdf":"#{url_for card_com_auxiliar}" %>?origem=<%=auxiliar.url%>">
+  <a href="<%= (card_com_auxiliar.id==4936) ? "https://www.ingressorapido.com.br/compras/?id=46901#!/":"#{url_for card_com_auxiliar}" %>?origem=<%=auxiliar.url%>"<%= (card_com_auxiliar.id==4936) ? " target='_blank'":"" %>>
     <img src="<%= card_com_auxiliar.img_miniatura.url(:miniatura) %>" height="<%= card_com_auxiliar.img_miniatura_height %>">
     <h3><%=card_com_auxiliar.nome%></h3>
   </a>
@@ -22,20 +22,20 @@
       
       <% if !card_com_auxiliar.especificar_data_inicial_de_venda -%>
         <% if card_com_auxiliar.cc_id and auxiliar.tipo_de_botao==1 -%>
-          <a href="<%= (card_com_auxiliar.id==3903 or card_com_auxiliar.id==3593) ? "/comunicado-theatro-municipal-de-sao-paulo-2015-09-28.pdf":"#{url_for card_com_auxiliar}" %><%= '?origem='+auxiliar.url %>" class="botao comprar"></a>
+          <a href="<%= (card_com_auxiliar.id==4936) ? "https://www.ingressorapido.com.br/compras/?id=46901#!/":"#{url_for card_com_auxiliar}" %><%= '?origem='+auxiliar.url %>" class="botao comprar"<%= (card_com_auxiliar.id==4936) ? " target='_blank'":"" %>></a>
         <% else -%>
-          <a href="<%= (card_com_auxiliar.id==3903 or card_com_auxiliar.id==3593) ? "/comunicado-theatro-municipal-de-sao-paulo-2015-09-28.pdf":"#{url_for card_com_auxiliar}" %><%= '?origem='+auxiliar.url %>" class="botao saiba_mais"></a>
+          <a href="<%= (card_com_auxiliar.id==4936) ? "https://www.ingressorapido.com.br/compras/?id=46901#!/":"#{url_for card_com_auxiliar}" %><%= '?origem='+auxiliar.url %>" class="botao saiba_mais"<%= (card_com_auxiliar.id==4936) ? " target='_blank'":"" %>></a>
         <% end -%>
       <% else -%>
         <% if card_com_auxiliar.cc_id and card_com_auxiliar.data_inicial_de_venda<=DateTime.now and auxiliar.tipo_de_botao==1 -%>
-          <a href="<%= (card_com_auxiliar.id==3903 or card_com_auxiliar.id==3593) ? "/comunicado-theatro-municipal-de-sao-paulo-2015-09-28.pdf":"#{url_for card_com_auxiliar}" %><%= '?origem='+auxiliar.url %>" class="botao comprar"></a>
+          <a href="<%= (card_com_auxiliar.id==4936) ? "https://www.ingressorapido.com.br/compras/?id=46901#!/":"#{url_for card_com_auxiliar}" %><%= '?origem='+auxiliar.url %>" class="botao comprar"<%= (card_com_auxiliar.id==4936) ? " target='_blank'":"" %>></a>
         <% else -%>
-          <a href="<%= (card_com_auxiliar.id==3903 or card_com_auxiliar.id==3593) ? "/comunicado-theatro-municipal-de-sao-paulo-2015-09-28.pdf":"#{url_for card_com_auxiliar}" %><%= '?origem='+auxiliar.url %>" class="botao saiba_mais"></a>
+          <a href="<%= (card_com_auxiliar.id==4936) ? "https://www.ingressorapido.com.br/compras/?id=46901#!/":"#{url_for card_com_auxiliar}" %><%= '?origem='+auxiliar.url %>" class="botao saiba_mais"<%= (card_com_auxiliar.id==4936) ? " target='_blank'":"" %>></a>
         <% end -%>
       <% end -%>      
       
     <% else -%>
-      <a href="<%= (card_com_auxiliar.id==3903 or card_com_auxiliar.id==3593) ? "/comunicado-theatro-municipal-de-sao-paulo-2015-09-28.pdf":"#{url_for card_com_auxiliar}" %><%= '?origem='+auxiliar.url %>" class="botao saiba_mais semdata"></a>
+      <a href="<%= (card_com_auxiliar.id==4936) ? "https://www.ingressorapido.com.br/compras/?id=46901#!/":"#{url_for card_com_auxiliar}" %><%= '?origem='+auxiliar.url %>" class="botao saiba_mais semdata"<%= (card_com_auxiliar.id==4936) ? " target='_blank'":"" %>></a>
     <% end -%>
 	</div>
 </div>
