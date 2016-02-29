@@ -147,25 +147,25 @@ class Espetaculo < ActiveRecord::Base
         ftp2.chdir(ENVIRONMENT_VARS['ftp_compra_images_dir2'])
         
         # FTP 3
-        ftp3 = Net::FTP.new
-        ftp3.connect(ENVIRONMENT_VARS['ftp_compra_host3'],ENVIRONMENT_VARS['ftp_compra_port3'])
-        ftp3.passive = true
-        ftp3.login(ENVIRONMENT_VARS['ftp_compra_username3'],ENVIRONMENT_VARS['ftp_compra_password3'])
-        ftp3.chdir(ENVIRONMENT_VARS['ftp_compra_images_dir3'])
+        #ftp3 = Net::FTP.new
+        #ftp3.connect(ENVIRONMENT_VARS['ftp_compra_host3'],ENVIRONMENT_VARS['ftp_compra_port3'])
+        #ftp3.passive = true
+        #ftp3.login(ENVIRONMENT_VARS['ftp_compra_username3'],ENVIRONMENT_VARS['ftp_compra_password3'])
+        #ftp3.chdir(ENVIRONMENT_VARS['ftp_compra_images_dir3'])
         
         arquivo = "#{RAILS_ROOT}/public/images/espetaculos/#{self.id}/miniatura.jpg"
         if File.exist?(arquivo)
           #logger.info "\n\n\n###\nUPLOADING"
           ftp1.putbinaryfile(arquivo, "#{self.cc_id}.jpg", Net::FTP::DEFAULT_BLOCKSIZE)
           ftp2.putbinaryfile(arquivo, "#{self.cc_id}.jpg", Net::FTP::DEFAULT_BLOCKSIZE)
-          ftp3.putbinaryfile(arquivo, "#{self.cc_id}.jpg", Net::FTP::DEFAULT_BLOCKSIZE)
+          #ftp3.putbinaryfile(arquivo, "#{self.cc_id}.jpg", Net::FTP::DEFAULT_BLOCKSIZE)
           #logger.info "Images uploaded\n###\n\n\n"
         else
           #logger.info "\n\n\n###\nIMAGE DOESNT EXIST\n###\n\n\n"
         end
         ftp1.close
         ftp2.close
-        ftp3.close
+        #ftp3.close
       rescue Exception => e
         errors.add(:img_miniatura, "Erro ao enviar imagem para o servidor da C&C. Mensagem: #{e.message}")
         return false # Sem o return o rails ignora o erro adicionado
