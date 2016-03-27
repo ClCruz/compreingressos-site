@@ -1,0 +1,18 @@
+<div class="conjunto_cidade_visor">
+<% pf.fields_for :conjunto_cidade_visores, conjunto_cidade_visores, :child_index => 'index_to_replace' do |f| %>
+  <p>
+    <%= f.label :link %><br />
+    <%= f.text_field :link %>
+  </p>
+  <p>
+    <%= f.check_box :blank %><%= f.label :blank %>
+  </p>
+  <p>
+    <%= f.label :imagem, 'Selecione a imagem:' %><br />
+    <%= f.file_field :imagem %><br />
+    <span class="help_text">O tamanho deve ser exatamente 1920x369px</span>
+  </p>
+  <%= link_to_function "Remover este visor", "$(this).up('.conjunto_cidade_visor').remove()" %>
+<% end %>
+<hr width="600px" align="left">
+</div>

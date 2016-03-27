@@ -1,0 +1,27 @@
+<h1>New conjunto_cidade_visor</h1>
+
+<% form_for(@conjunto_cidade_visor) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :conjunto_cidade %><br />
+    <%= f.text_field :conjunto_cidade %>
+  </p>
+  <p>
+    <%= f.label :link %><br />
+    <%= f.text_field :link %>
+  </p>
+  <p>
+    <%= f.label :blank %><br />
+    <%= f.check_box :blank %>
+  </p>
+  <p>
+    <%= f.label :ordem %><br />
+    <%= f.text_field :ordem %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', conjunto_cidade_visores_path %>

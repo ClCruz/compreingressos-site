@@ -215,7 +215,11 @@
                     <div class="container geral cidade">
                       <div class="icone"></div>
                       <p>cidade</p>
+                      <% if @conjuntocidade %>
+                        <p class="help<%=@conjuntocidade.blank? ? '':' ativo'%>"><%=@conjuntocidade.blank? ? 'Escolha sua cidade':@conjuntocidade.nome%></p>
+                      <% else %>
                       <p class="help<%=@cidade.blank? ? '':' ativo'%>"><%=@cidade.blank? ? 'Escolha sua cidade':@cidade.nome%></p>
+                      <% end %>
                     </div>
                     <div class="container geral genero">
                       <div class="icone"></div>
@@ -240,19 +244,39 @@
   if @cidade.blank? or params[:cidade]=='Todas as cidades'
     gen = Genero.find(:all,
                           :select => "count(1) as total, generos.nome",
-                          :conditions => "espetaculos.ativo = true",
+                          :conditions => "espetaculos.ativo = 1",
                           :joins => "INNER JOIN espetaculos ON espetaculos.genero_id = generos.id",
                           :group => 'generos.id',
                           :order => 'total DESC')
   else
-    gen = Genero.find(:all,
-                          :select => "count(1) as total, generos.nome",
-                          :conditions => ["espetaculos.ativo = 1 AND cidades.nome = ?",@cidade.nome],
-                          :joins => ["INNER JOIN espetaculos ON espetaculos.genero_id = generos.id",
-                                     "INNER JOIN teatros ON espetaculos.teatro_id = teatros.id",
-                                     "INNER JOIN cidades ON cidades.id = teatros.cidade_id"],
-                          :group => 'generos.id',
-                          :order => 'total DESC')
+    if @conjuntocidade 
+      ccid = ConjuntoCidade.find(:all, :include => :cidades, :order => :nome)
+      ccid.each_with_index do |cc, i|
+        cids = cc.cidades.map{|c| "#{c.id},"}.to_s+"0"
+        ccid[i].total = Espetaculo.find(:first,
+                                        :select => "count(espetaculos.id) as total",
+                                        :joins => ["INNER JOIN teatros ON espetaculos.teatro_id = teatros.id",
+                                                   "INNER JOIN cidades ON cidades.id = teatros.cidade_id"],
+                                        :conditions => "espetaculos.ativo = 1 AND cidades.id IN (#{cids})").total.to_i
+      end
+      gen = Genero.find(:all,
+                        :select => "count(1) as total, generos.nome",
+                        :conditions => ["espetaculos.ativo = 1"],
+                        :joins => ["INNER JOIN espetaculos ON espetaculos.genero_id = generos.id",
+                                   "INNER JOIN teatros ON espetaculos.teatro_id = teatros.id",
+                                   "INNER JOIN cidades ON cidades.id = teatros.cidade_id AND cidades.id in (#{@cids})"],
+                        :group => 'generos.id',
+                        :order => 'total DESC')
+    else
+      gen = Genero.find(:all,
+                        :select => "count(1) as total, generos.nome",
+                        :conditions => ["espetaculos.ativo = 1 AND cidades.nome = ?",@cidade.nome],
+                        :joins => ["INNER JOIN espetaculos ON espetaculos.genero_id = generos.id",
+                                   "INNER JOIN teatros ON espetaculos.teatro_id = teatros.id",
+                                   "INNER JOIN cidades ON cidades.id = teatros.cidade_id"],
+                        :group => 'generos.id',
+                        :order => 'total DESC')
+    end
   end
 -%>
     	  <div class="menu_busca geral container cidade">

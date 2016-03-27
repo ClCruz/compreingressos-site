@@ -1,0 +1,209 @@
+<% cache("espetaculos#{params[:cidade].blank? ? '':'/'+params[:cidade].parameterize}#{params[:genero].blank? ? '':'/'+params[:genero].parameterize}#{(params[:ordem].blank? or params[:ordem]=='destaques') ? '':'/'+params[:ordem].parameterize}") do -%>
+<% if defined?(@conjuntocidade.imagem_de_fundo) and @conjuntocidade.imagem_de_fundo? -%>
+<style type="text/css">
+  div#background_holder{
+    background-image:url('<%= @conjuntocidade.imagem_de_fundo.url %>');
+    background-color:<%= @conjuntocidade.cor_de_fundo %>;
+    background-position:center <%= defined?(@conjuntocidade.conjunto_cidade_visores) and @conjuntocidade.conjunto_cidade_visores.size>0 ? '368px':'-54px' %>;
+    background-repeat:no-repeat;
+  }
+  div#background_holder div#detalhes_busca{
+    background-color:<%= @conjuntocidade.cor_de_fundo_do_box %>;
+    color:#FFF;
+  }
+  div#detalhes_busca div.max_resultados{
+    width:420px;
+  }
+  div.ordem{
+    margin-top:-20px;
+  }
+  div#background_holder div#detalhes_busca div.ordem, div#background_holder div#detalhes_busca p, div#background_holder div#detalhes_busca div.ordem a.ativo{
+    color:<%= @conjuntocidade.cor_de_texto_do_box %>;
+  }
+  div#background_holder div#detalhes_busca div.ordem a{
+    color:<%= @conjuntocidade.cor_de_link_do_box %>;
+  }
+  div#background_holder div#detalhes_busca div.ordem a:hover{
+    background-color:<%= @conjuntocidade.cor_de_link_do_box %>;
+    color:<%= @conjuntocidade.cor_de_texto_do_box %>;
+  }
+  div.card{
+    border-color:<%= @conjuntocidade.cor_da_borda_do_espetaculo %>;
+  }
+<% if (defined?(@conjuntocidade.conjunto_cidade_visores) and @conjuntocidade.conjunto_cidade_visores.size>0) -%>
+  #home #display, #display.cidades{
+    margin-bottom:10px !important;
+  }
+  @media only screen and (max-width:640px){
+    #display.cidades{
+      margin-bottom:5px !important;
+    }
+  }
+<% end -%>
+</style>
+<% if @conjuntocidade.conjunto_cidade_visores.size<=0 -%>
+<div class="centraliza">
+  <map name="header_map">
+    <%= @conjuntocidade.mapeamento_de_imagem %>
+  </map>
+  <img src="/images/header_map.png" usemap="#header_map" class="img_header_map" width="960" height="<%= @conjuntocidade.altura_de_inicio %>" />
+</div>
+<% end -%>
+<% end -%>
+<% if defined?(@conjuntocidade.parallax) and @conjuntocidade.parallax? -%>
+<!--
+<style type="text/css">
+  div#background_holder{
+    background-position:center -54px;
+  }
+</style>
+<script type="text/javascript">
+/*if (navigator.userAgent.indexOf('MSIE') != -1 || navigator.appVersion.indexOf('Trident/') > 0 || navigator.userAgent.indexOf('Safari') != -1){
+} else {
+  $(document).ready(function(){
+    $(window).scroll(function(){
+      /*if ($(window).scrollTop() > 54){*/
+        var scroll = ($(window).scrollTop()*<%= @conjuntocidade.parallax_valor %>)-54;
+        $('#background_holder').css("background-position", "center "+scroll+"px");
+      /*} else {
+        $('#background_holder').css("background-position", "center 0px");
+      }*/
+    /*});
+  });
+}*/
+</script>
+-->
+<% end -%>
+<% if defined?(@conjuntocidade.cidade_visores) and @conjuntocidade.cidade_visores.size>0 -%>
+<!--
+<div id="display" class="cidades">
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <%= render :partial => 'layouts/visor_destaque', :collection => @conjuntocidade.cidade_visores %>
+    </div>
+  </div>
+  <div class="pagination"></div>
+</div>
+<script type="text/javascript">
+  /*$(function(){
+    var swiperVisor = $('#display .swiper-container').swiper({
+      pagination:'.pagination',
+      mode:'horizontal',
+      speed:300,
+      autoplay:6000,
+      moveStartThreshold:50,
+      loop:true,
+      preventLinks:true,
+      paginationClickable:true
+    });
+  });*/
+</script>
+-->
+<% end -%>
+
+  <div id="home" class="visor_home_mobile" style="display:<%= (defined?(@conjuntocidade.conjunto_cidade_visores) and @conjuntocidade.conjunto_cidade_visores.size>0) ? 'block':'none' %>">
+    <div id="display">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+<% if @conjuntocidade.blank? -%>
+          <%= render :partial => 'layouts/visor_destaque', :collection => @visores %>
+<% else -%>
+          <%= render :partial => 'layouts/visor_destaque', :collection => @conjuntocidade.conjunto_cidade_visores %>
+<% end -%>
+        </div>
+      </div>
+    <div class="pagination"></div>
+    </div>
+    <div id="container_banners_fixos" style="display:<%= (defined?(@conjuntocidade.conjunto_cidade_visores) and @conjuntocidade.conjunto_cidade_visores.size>0) ? 'none':'block' %>">
+      <div id="cont_alinha_banners_fixos">
+        <div id="alinha_banners_fixos">
+          <div id="banners_fixos">
+            <% @banner_fixos.each do |banner_fixo| %>
+              <div class="banner_fixo">
+                <% if banner_fixo.link.blank? %>
+                  <%= image_tag(banner_fixo.imagem.url, :width => 160) %>
+                <% else %>
+                  <%= link_to( image_tag(banner_fixo.imagem.url, :width => 170), banner_fixo.link, :target => (banner_fixo.blank==true ? '_blank':'_self')) %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      $(function(){
+        var swiperVisor = $('#display .swiper-container').swiper({
+          pagination:'.pagination',
+          mode:'horizontal',
+          speed:300,
+          autoplay:6000,
+          moveStartThreshold:50,
+          loop:true,
+          preventLinks:true,
+          paginationClickable:true
+        });
+        visorMobile();
+      })
+    </script>
+  </div>
+
+<div class="centraliza">
+  <% if @espetaculos_vazio == 1 and params[:auto].blank? %>
+  	<h1 class="espetaculos_vazio">Não foi possível encontrar nenhuma atração com o termo pesquisado.</h1>
+  	<p class="espetaculos_vazio">Confira abaixo todas as atrações.</p>
+  <% elsif @espetaculos_vazio == 1 and !params[:auto].blank? %>
+    <h1 class="espetaculos_vazio">Não foi possível encontrar nenhuma atração na sua cidade.</h1>
+    <p class="espetaculos_vazio">Altere sua cidade acima ou confira todas as atrações abaixo.</p>
+  <% end %>
+  <% if defined?(@conjuntocidade.imagem_de_fundo) and @conjuntocidade.imagem_de_fundo? %>
+  <div class="cidade_especial">
+  <% end %>
+    
+    <div id="detalhes_busca">
+      <div class="cid_gen">
+        <% if params[:busca] && @espetaculos_vazio.blank? %>
+          Buscar por: <%=lparam(params[:busca])%>
+        <% elsif @espetaculos_vazio.blank? && (!params[:cidade].blank? or !params[:genero].blank?) %>
+          <%= @conjuntocidade.blank? ? 'Todas as cidades':@conjuntocidade.nome %><span><%=", #{@genero.nome}" if @genero %></span>
+        <% elsif !params[:latitude].blank? %>
+          Perto de min
+        <% else %>
+          Todos os espetáculos
+        <% end %>
+      </div>
+      <div class="max_resultados">
+        <%= pluralize @espetaculos.size,'resultado'%> <%= "encontrado".pluralize if @espetaculos.size > 1%><%= "encontrado" if @espetaculos.size <= 1%>
+      </div>
+      <div class="ordem">
+        <% if !params[:busca] or !@espetaculos_vazio.blank? %>
+          organizado por
+          <a href="/espetaculos?<%= "cidade=#{@cidade.nome}" if !@cidade.blank? %><%= "&genero=#{@genero.nome}" if !@genero.blank? %>&ordem=destaques"<%="class='ativo'" if params[:ordem]=='destaques' or params[:ordem].blank? %>>destaques</a>
+          <a href="/espetaculos?<%= "cidade=#{@cidade.nome}" if !@conjuntocidade.blank? %><%= "&genero=#{@genero.nome}" if !@genero.blank? %>&ordem=alfabetica"<%="class='ativo'" if params[:ordem]=='alfabetica' %>>alfabética</a>
+          <a href="/espetaculos?<%= "cidade=#{@cidade.nome}" if !@conjuntocidade.blank? %><%= "&genero=#{@genero.nome}" if !@genero.blank? %>&ordem=data"<%="class='ativo'" if params[:ordem]=='data' %>>próximas apresentações</a>
+        <% end %>
+      </div>
+    </div>
+    <div id="espetaculos">
+    	<%= render :partial => 'layouts/card_sem_auxiliar', :collection => @espetaculos %>
+    </div>
+  <% if defined?(@conjuntocidade.imagem_de_fundo) and @conjuntocidade.imagem_de_fundo? %>
+  </div>
+  <% end %>
+</div>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#espetaculos').masonry({
+      columnWidth:0,
+      itemSelector:'.card'
+    });
+  });
+</script>
+<script type="text/javascript">
+  $(function() {
+    $('#espetaculos .card').each(function(){
+      $(this).hoverdir(/*{hoverDelay: 50}*/);
+    });
+  });
+</script>
+<% end -%>

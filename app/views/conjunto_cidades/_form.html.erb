@@ -1,0 +1,144 @@
+<div id="container_adm">
+<%= javascript_include_tag :defaults %>
+
+<% form_for(@conjunto_cidade, :html => {:multipart => true}) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :nome %><br />
+    <%= f.text_field :nome %>
+  </p>
+  <p>
+    <%= f.label :url %><br />
+    <%= f.text_field :url %>
+  </p>
+  <p>
+    <%= f.label :altura_de_inicio %><br />
+    <%= f.text_field :altura_de_inicio %>
+  </p>
+  <p>
+    <%= f.label :imagem_de_fundo %><br />
+    <%= f.file_field :imagem_de_fundo %><br />
+    <span class="help_text">Tamanho livre, recomenda-se supervisão de um web designer</span>
+    <% if @conjunto_cidade.imagem_de_fundo? %>
+      <br /><%= image_tag @conjunto_cidade.imagem_de_fundo.url, :style => "height:200px;" %><br />
+        <a href="/conjunto_cidades/excluir_img/<%= @conjunto_cidade.id %>/fundo">Excluir background</a>
+    <% end %>
+  </p>
+  <p>
+    <%= f.label :mapeamento_de_imagem %><br />
+    <%= f.text_field :mapeamento_de_imagem %><br />
+    <span class="help_text">Área mapeavel: 948xAltura de inicio</span>
+  </p>
+  <p>
+    <%= f.check_box :parallax %>
+    <%= f.label :parallax %><br />
+    <span class="help_text">Liga efeito parallax ao background</span>
+  </p>
+  <p>
+    <%= f.label :parallax_valor %><br />
+    <%= f.text_field :parallax_valor, :size => "3" %><br />
+    <span class="help_text">Valor negativo background sobe e valor positivo background desce</span>
+  </p>
+  <p>
+    <%= f.label :cor_de_fundo %><br />
+    <%= f.text_field :cor_de_fundo %>
+  </p>
+  <p>
+    <%= f.label :cor_de_fundo_do_box %><br />
+    <%= f.text_field :cor_de_fundo_do_box %>
+  </p>
+  <p>
+    <%= f.label :cor_de_texto_do_box %><br />
+    <%= f.text_field :cor_de_texto_do_box %>
+  </p>
+  <p>
+    <%= f.label :cor_de_link_do_box %><br />
+    <%= f.text_field :cor_de_link_do_box %>
+  </p>
+  <p>
+    <%= f.label :cor_da_borda_do_espetaculo %><br />
+    <%= f.text_field :cor_da_borda_do_espetaculo %>
+  </p>
+  <p>
+    <%= f.label :cor_do_header %><br />
+    <%= f.text_field :cor_do_header %>
+  </p>
+  <p>
+    <%= f.label :cor_da_borda_do_header %><br />
+    <%= f.text_field :cor_da_borda_do_header %>
+  </p>
+  <hr color="#C7C7C7">
+
+  <div class="campos" id="conjunto_cidade_visores">
+    <h2 style="margin-bottom:0;">Visores:</h2>
+    <span class="help_text">Ao adicionar 1 visor a "Altura de inicio" é desconsiderada e o box vem logo abaixo dos visores</span>
+    <% f.fields_for :conjunto_cidade_visores do |cv| %>
+    <div class="conjunto_cidade_visor" id="conjunto_cidade_visor_<%=cv.object.id%>">
+      <div>
+        <p>
+          <%= cv.label :link %><br />
+          <%= cv.text_field :link %>
+        </p>
+        <p>
+          <%= cv.check_box :blank %><%= cv.label :blank %>
+        </p>
+        <p>
+          <%= cv.label :imagem, 'Selecione a imagem:' %><br />
+          <%= cv.file_field :imagem %><br />
+          <span class="help_text">O tamanho deve ser exatamente 1920x369px</span>
+          <% unless cv.object.new_record? %>
+            <br /><%= image_tag cv.object.imagem.url, :width => '100%' %>
+          <% end %>
+        </p>
+        <%= remove_link_unless_new_record(cv) %>
+      </div>
+      <hr width="600px" align="left">
+    </div>  
+    <% end %>
+  </div>
+  <p>
+    <%= add_conjunto_cidade_visores "Adicionar Visor", f %>
+  </p>
+  <hr color="#C7C7C7">
+  <script>
+    jQuery('#conjunto_cidade_visores').sortable({
+      items: '.conjunto_cidade_visor',
+      opacity: 0.6,
+      cursor: 'move',
+      axis: 'y',
+      update: function(){
+        var order = jQuery(this).sortable('serialize');
+        jQuery.get('/conjunto_cidade_visores/reorganiza/?conjunto_cidade_id=<%=@conjunto_cidade.id%>', order, function(response){
+          if(response!='true'){
+            alert('Ocorreu um erro ao atualizar a ordem, tente recarregar a página');
+          }
+        });
+      }
+    });
+  </script>
+
+  <hr color="#C7C7C7">
+  <div class="conjunto_cidades campos">
+    <h2>Cidades:</h2>
+    <% cidades = Cidade.find(:all, :order => :nome) %>
+    <% if cidades.size > 0 %>
+      <% cidades.each do |c| %>
+        <p class="patrocinador">
+          <label>
+            <%= check_box_tag "conjunto_cidade[cidade_ids][]", c.id, cidade_selecionada?(@conjunto_cidade, c) %>
+            <%= c.nome %>
+          </label>
+        </p>
+      <% end %>
+    <% else %>
+      Não existem cidades cadastradas
+    <% end %>
+  </div>
+
+
+  <p>
+    <%= f.submit 'Salvar' %>
+  </p>
+<% end %>
+</div>

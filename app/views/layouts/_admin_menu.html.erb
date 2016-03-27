@@ -25,9 +25,10 @@
 			|
 			<li><%= link_to 'Teatros', :controller => :teatros, :action => :admin_index %></li>
 			|
-			<li><%= link_to 'Cidades', :controller => :cidades %></li>
-			|
 			<li><%= link_to 'Gêneros', :controller => :generos %></li>
+      		|
+			<li><%= link_to 'Home background', :controller => :home_background %></li>
+			|
       <!--
       |
       <li><%= link_to 'Outras Localidades', :controller => :outras_localidades %></li>
@@ -37,9 +38,12 @@
 			
 			<br />
 
+	
+	<li><%= link_to 'Cidades', :controller => :cidades %></li>
+	|
+	<li><%= link_to 'Conjunto de cidades', :controller => :conjunto_cidades %></li>
+	|
       <li><%= link_to 'Classificações', :controller => :classificacaos %></li>
-      |
-			<li><%= link_to 'Home background', :controller => :home_background %></li>
       |
       <li><%= link_to 'Pacotes', :controller => :pagina_de_pacotes, :action => :admin_index %></li>
       |
