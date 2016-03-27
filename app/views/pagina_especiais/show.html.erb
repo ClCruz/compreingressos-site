@@ -269,12 +269,8 @@
       </div>
       -->
       <div class="assinatura_municipal left" style="width:490px;margin:130px 0 0 86px;">
-        <p class="titulo">Assinaturas do Conservatório 2016</p>
-        <p>
-          As novas assinaturas começaram a ser vendidas a partir do dia<br />
-           28/01/2016, garanta já a sua para a temporada 2016.
-        </p>
-        <a href="/saladoconservatorio/assinaturas" class="botao ver_pacotes"></a>
+        <p class="titulo">Veja Também a nossa Programação na<br/> Sala do Conservatório</p>        
+        <a href="/sala-do-conservatorio" class="botao ver_pacotes"></a>
       </div>
       <!--
       <div class="assinatura_municipal right">
@@ -321,6 +317,14 @@
         <a href="/sala-do-conservatorio" class="botao ver_pacotes"></a>
       </div>
       -->
+    </div>
+<% end -%>
+<% if @pagina_especial.url == "sala-do-conservatorio" -%>
+    <div>
+      <div class="assinatura_municipal left" style="width:490px;margin:130px 0 0 86px;">
+        <p class="titulo"><b>Veja Também a nossa Programação no Theatro Municipal de São Paulo</b></p>        
+        <a href="/theatromunicipaldesaopaulo" class="botao ver_pacotes"></a>
+      </div>
     </div>
 <% end -%>
 <% if @espetaculos.nil? -%>
