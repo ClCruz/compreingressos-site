@@ -55,6 +55,16 @@ module ApplicationHelper
       }
     end
   end
+
+  def add_conjunto_cidade_visores(name,form)
+    link_to_function name do |page|
+      cv = render(:partial => 'layouts/conjunto_cidade_visores', :locals => { :pf => form, :conjunto_cidade_visores => ConjuntoCidadeVisor.new })
+      page << %{
+        var new_entrada_id = new Date().getTime();
+        $('conjunto_cidade_visores').insert({ bottom: "#{ escape_javascript cv }".replace(/index_to_replace/g, new_entrada_id) });
+      }
+    end
+  end
   
   def add_pacote_espetaculo_link(name,form,espetaculos)
     link_to_function name do |page|
@@ -198,6 +208,14 @@ module ApplicationHelper
   def filtro_pacote_selecionado?(obj, pacote)
     if obj
       obj.pacote_filtros.include?(pacote)
+    else
+      false
+    end
+  end
+  
+  def cidade_selecionada?(obj, pagina)
+    if obj
+       obj.cidades.include?(pagina)
     else
       false
     end
