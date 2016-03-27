@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151229230343) do
+ActiveRecord::Schema.define(:version => 20160308164526) do
 
   create_table "admins", :force => true do |t|
     t.string   "nome"
@@ -74,12 +74,52 @@ ActiveRecord::Schema.define(:version => 20151229230343) do
   add_index "cidades", ["estado"], :name => "index_cidades_on_estado"
   add_index "cidades", ["nome"], :name => "index_cidades_on_nome"
 
+  create_table "cidades_conjunto_cidades", :id => false, :force => true do |t|
+    t.integer "conjunto_cidade_id"
+    t.integer "cidade_id"
+  end
+
   create_table "classificacaos", :force => true do |t|
     t.string   "nome"
     t.string   "texto"
     t.string   "icone"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "conjunto_cidade_visores", :force => true do |t|
+    t.integer  "conjunto_cidade_id"
+    t.string   "link"
+    t.boolean  "blank"
+    t.integer  "ordem"
+    t.string   "imagem_file_name"
+    t.string   "imagem_content_type"
+    t.integer  "imagem_file_size"
+    t.datetime "imagem_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "conjunto_cidades", :force => true do |t|
+    t.string   "nome"
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "cor_de_fundo"
+    t.string   "imagem_de_fundo_file_name"
+    t.string   "imagem_de_fundo_content_type"
+    t.string   "cor_de_fundo_do_box"
+    t.string   "cor_de_texto_do_box"
+    t.string   "cor_de_link_do_box"
+    t.string   "cor_da_borda_do_espetaculo"
+    t.string   "cor_do_header"
+    t.string   "cor_da_borda_do_header"
+    t.string   "parallax_valor"
+    t.integer  "imagem_de_fundo_file_size"
+    t.integer  "altura_de_inicio"
+    t.boolean  "parallax"
+    t.text     "mapeamento_de_imagem"
+    t.datetime "imagem_de_fundo_updated_at"
   end
 
   create_table "entradas", :force => true do |t|
@@ -322,15 +362,6 @@ ActiveRecord::Schema.define(:version => 20151229230343) do
 
   create_table "intensivamedcontadors", :force => true do |t|
     t.integer "total"
-  end
-
-  create_table "macacos", :force => true do |t|
-    t.string   "nome"
-    t.float    "comprimento_rabo"
-    t.integer  "idade"
-    t.boolean  "ativo"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "ocorrencias", :force => true do |t|
