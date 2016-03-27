@@ -23,7 +23,7 @@ class AdminController < ApplicationController
   def index
     # Delete old sessions
     sql = "DELETE FROM sessions WHERE updated_at < '#{DateTime.now-48.hours}';"
-    ActiveRecord::Base.connection.execute(sql)
+    ActiveRecord::Base.connection.execute(sql) if Rails.env=="production"
   end
 
   def logout
