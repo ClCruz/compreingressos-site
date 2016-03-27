@@ -1,4 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :conjunto_cidade_visores
+
+  map.resources :conjunto_cidades
+
   map.resources :macacos
 
   map.resources :pacote_filtros
