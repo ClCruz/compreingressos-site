@@ -8,6 +8,7 @@ class Cidade < ActiveRecord::Base
   has_one :outras_localidade, :through => :home
   has_many :pontosdevenda, :order => :titulo
   has_many :cidade_visores, :order => 'ordem', :dependent => :destroy
+  has_and_belongs_to_many :conjunto_cidades
   
   accepts_nested_attributes_for :cidade_visores, :allow_destroy => true
   
