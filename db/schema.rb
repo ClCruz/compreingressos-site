@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160308164526) do
+ActiveRecord::Schema.define(:version => 20160329232552) do
 
   create_table "admins", :force => true do |t|
     t.string   "nome"
@@ -502,9 +502,26 @@ ActiveRecord::Schema.define(:version => 20160308164526) do
     t.string   "cor_da_borda_do_header"
     t.integer  "nome_tamanho_da_fonte"
     t.integer  "altura_de_inicio_da_listagem_mobile", :default => 0
+    t.string   "texto_de_link_do_regulamento"
+    t.string   "link_do_regulamento"
+    t.string   "cor_de_link_do_regulamento"
+    t.boolean  "blank_de_link_do_regulamento"
   end
 
   add_index "pagina_especiais", ["url"], :name => "index_pagina_especiais_on_url"
+
+  create_table "pagina_especial_banners", :force => true do |t|
+    t.integer  "pagina_especial_id"
+    t.string   "link"
+    t.boolean  "blank"
+    t.integer  "ordem"
+    t.string   "imagem_file_name"
+    t.string   "imagem_content_type"
+    t.integer  "imagem_file_size"
+    t.datetime "imagem_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "pagina_especial_filtros", :force => true do |t|
     t.string   "nome"
@@ -515,6 +532,19 @@ ActiveRecord::Schema.define(:version => 20160308164526) do
 
   add_index "pagina_especial_filtros", ["nome"], :name => "index_pagina_especial_filtros_on_nome", :unique => true
   add_index "pagina_especial_filtros", ["url"], :name => "index_pagina_especial_filtros_on_url", :unique => true
+
+  create_table "pagina_especial_visores", :force => true do |t|
+    t.integer  "pagina_especial_id"
+    t.string   "link"
+    t.boolean  "blank"
+    t.integer  "ordem"
+    t.string   "imagem_file_name"
+    t.string   "imagem_content_type"
+    t.integer  "imagem_file_size"
+    t.datetime "imagem_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "pontosdevenda", :force => true do |t|
     t.string   "titulo"

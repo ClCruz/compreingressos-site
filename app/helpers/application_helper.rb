@@ -65,6 +65,26 @@ module ApplicationHelper
       }
     end
   end
+
+  def add_pagina_especial_visores(name,form)
+    link_to_function name do |page|
+      cv = render(:partial => 'layouts/pagina_especial_visores', :locals => { :pf => form, :pagina_especial_visores => PaginaEspecialVisor.new })
+      page << %{
+        var new_entrada_id = new Date().getTime();
+        $('pagina_especial_visores').insert({ bottom: "#{ escape_javascript cv }".replace(/index_to_replace/g, new_entrada_id) });        
+      }
+    end
+  end
+
+  def add_pagina_especial_banners(name,form)
+    link_to_function name do |page|
+      cv = render(:partial => 'layouts/pagina_especial_banners', :locals => { :pf => form, :pagina_especial_banners => PaginaEspecialBanner.new })
+      page << %{
+        var new_entrada_id = new Date().getTime();
+        $('pagina_especial_banners').insert({ bottom: "#{ escape_javascript cv }".replace(/index_to_replace/g, new_entrada_id) }); 
+      }
+    end
+  end
   
   def add_pacote_espetaculo_link(name,form,espetaculos)
     link_to_function name do |page|

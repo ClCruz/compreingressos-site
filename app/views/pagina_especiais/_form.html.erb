@@ -1,3 +1,5 @@
+<div id="container_adm">
+<%= javascript_include_tag :defaults %>
 <% form_for(@pagina_especial, :html => { :multipart => true }) do |f| %>
   <%= f.error_messages %>
 
@@ -158,7 +160,125 @@
     <%= f.label :keywords %><br />
     <%= f.text_field :keywords %>
   </p>
+  <hr color="#C7C7C7">
+
+  <div class="campos" id="pagina_especial_visores">
+    <h2 style="margin-bottom:0;">Visores:</h2>
+    <span class="help_text">Ao adicionar 1 visor a "Altura de inicio" é desconsiderada e o box vem logo abaixo dos visores</span>
+    <% f.fields_for :pagina_especial_visores do |cv| %>
+    <div class="pagina_especial_visor" id="pagina_especial_visor_<%=cv.object.id%>">
+      <div>
+        <p>
+          <%= cv.label :link %><br />
+          <%= cv.text_field :link %>
+        </p>
+        <p>
+          <%= cv.check_box :blank %><%= cv.label :blank %>
+        </p>
+        <p>
+          <%= cv.label :imagem, 'Selecione a imagem:' %><br />
+          <%= cv.file_field :imagem %><br />
+          <span class="help_text">O tamanho deve ser exatamente 1920x369px</span>
+          <% unless cv.object.new_record? %>
+            <br /><%= image_tag cv.object.imagem.url, :width => '100%' %>
+          <% end %>
+        </p>
+        <%= remove_link_unless_new_record(cv) %>
+      </div>
+      <hr width="600px" align="left">
+    </div>  
+    <% end %>
+  </div>
+  <p>
+    <%= add_pagina_especial_visores "Adicionar Visor", f %>
+  </p>
+  <hr color="#C7C7C7">
+  <script>
+    jQuery('#pagina_especial_visores').sortable({
+      items: '.pagina_especial_visor',
+      opacity: 0.6,
+      cursor: 'move',
+      axis: 'y',
+      update: function(){
+        var order = jQuery(this).sortable('serialize');
+        jQuery.get('/pagina_especial_visores/reorganiza/?pagina_especial_id=<%=@pagina_especial.id%>', order, function(response){
+          if(response!='true'){
+            alert('Ocorreu um erro ao atualizar a ordem, tente recarregar a página');
+          }
+        });
+      }
+    });
+  </script>
+
+  <hr color="#C7C7C7">
+
+  <div class="campos" id="pagina_especial_banners">
+    <h2 style="margin-bottom:0;">Banners:</h2>
+    <span class="help_text">Ao adicionar 1 visor a "Altura de inicio" é desconsiderada e o box vem logo abaixo dos visores</span>
+    <% f.fields_for :pagina_especial_banners do |cv| %>
+    <div class="pagina_especial_banner" id="pagina_especial_banner_<%=cv.object.id%>">
+      <div>
+        <p>
+          <%= cv.label :link %><br />
+          <%= cv.text_field :link %>
+        </p>
+        <p>
+          <%= cv.check_box :blank %><%= cv.label :blank %>
+        </p>
+        <p>
+          <%= cv.label :imagem, 'Selecione a imagem:' %><br />
+          <%= cv.file_field :imagem %><br />
+          <span class="help_text">O tamanho deve ser exatamente 180x130px</span>
+          <% unless cv.object.new_record? %>
+            <br /><%= image_tag cv.object.imagem.url %>
+          <% end %>
+        </p>
+        <%= remove_link_unless_new_record(cv) %>
+      </div>
+      <hr width="600px" align="left">
+    </div>  
+    <% end %>
+  </div>
+  <p>
+    <%= add_pagina_especial_banners "Adicionar Banner", f %>
+  </p>
+  <hr color="#C7C7C7">
+  <script>
+    jQuery('#pagina_especial_banners').sortable({
+      items: '.pagina_especial_banner',
+      opacity: 0.6,
+      cursor: 'move',
+      axis: 'y',
+      update: function(){
+        var order = jQuery(this).sortable('serialize');
+        jQuery.get('/pagina_especial_banners/reorganiza/?pagina_especial_id=<%=@pagina_especial.id%>', order, function(response){
+          if(response!='true'){
+            alert('Ocorreu um erro ao atualizar a ordem, tente recarregar a página');
+          }
+        });
+      }
+    });
+  </script>
+
+  <p>
+    <%= f.label :texto_de_link_do_regulamento %><br />
+    <%= f.text_field :texto_de_link_do_regulamento %>
+  </p>
+  <p>
+    <%= f.label :link_do_regulamento %><br />
+    <%= f.text_field :link_do_regulamento %>
+  </p>
+  <p>
+    <%= f.label :cor_de_link_do_regulamento %><br />
+    <%= f.text_field :cor_de_link_do_regulamento %>
+  </p>
+  <p>
+    <%= f.label :blank_de_link_do_regulamento %><br />
+    <%= f.check_box :blank_de_link_do_regulamento %>
+  </p>
+
   <p>
     <%= f.submit 'Update' %>
   </p>
 <% end %>
+</div>

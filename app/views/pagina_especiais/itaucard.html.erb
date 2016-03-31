@@ -1,4 +1,7 @@
 <style type="text/css">
+  div.separadopor_menor{
+    width: 780px !important;
+  }
   div.background_pagina{
     background:<%= @pagina_especial.cor_de_fundo %> url('<%= @pagina_especial.imagem.url %>') top center no-repeat;
   }
@@ -92,6 +95,13 @@
     margin-top:<%= @pagina_especial.altura_de_inicio_da_listagem %>px !important;
   }
 <% end -%>
+<% if @pagina_especial.link_do_regulamento? -%>
+  .link_do_regulamento {
+    margin: 10px 0;
+    display: block;
+    color: <%=@pagina_especial.cor_de_link_do_regulamento -%>
+  }
+<% end -%>
 
 
   /* MOBILE STYLES */
@@ -150,6 +160,12 @@
       height:156px;
       background-size: auto 156px;
       background-position: 50% top;
+    }
+    div.separadopor_menor{
+      width: 100% !important;
+    }
+    div.home_module{
+      display: none;
     }
     
     /* CONDITIONAL MOBILE STYLES */
@@ -245,70 +261,17 @@
   <div class="swiper-container">
     <div class="swiper-wrapper">
       <% if @pagina_especial.url == 'itaucardshows' %>
-        <div class="swiper-slide">
-          <div style="background-image:url('images/itaucard/s0.jpg');">
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div style="background-image:url('images/itaucard/s1.jpg');">
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div style="background-image:url('images/itaucard/s2.jpg');">
-            <a href="/espetaculos/3899-titas"></a>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div style="background-image:url('images/itaucard/s3.jpg');">
-			<a href="/espetaculos/5155-bobby-mcferrin-meets-brazil"></a>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div style="background-image:url('images/itaucard/s4.jpg');">
-			<a href="/espetaculos/4886-fafa-de-belem-on-the-rockn-roll"></a>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div style="background-image:url('images/itaucard/s5.jpg');">
-			<a href="/espetaculos/4991-gal-costa-estratosferica"></a>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div style="background-image:url('images/itaucard/s6.jpg');">
-			<a href="/espetaculos/5744-show-djavan"></a>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div style="background-image:url('images/itaucard/s7.jpg');">
-            <a href="/espetaculos/4870-paralamas-trio"></a>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div style="background-image:url('images/itaucard/s8.jpg');">
-            <a href="/espetaculos/5602-henrique-e-diego-os-tops-do-sertanejo"></a>
-          </div>
-        </div>
+        <% if @pagina_especial.blank? -%>
+          <%= render :partial => 'layouts/visor_destaque', :collection => @visores %>
+        <% else -%>
+          <%= render :partial => 'layouts/visor_destaque', :collection => @pagina_especial.pagina_especial_visores %>
+        <% end -%>
       <% elsif @pagina_especial.url == 'itaucardteatro' %>
-        <div class="swiper-slide">
-          <div style="background-image:url('images/itaucard/t0.jpg');">
-            <a href="http://www.google.com"></a>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div style="background-image:url('images/itaucard/t1.jpg');">
-            <a href="/espetaculos/4043-intocaveis"></a>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div style="background-image:url('images/itaucard/t2.jpg');">
-            <a href="/espetaculos/2539-enfim-nos"></a>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div style="background-image:url('images/itaucard/t3.jpg');">
-            <a href="/espetaculos/5764-caravana-tonteria"></a>
-          </div>
-        </div>
+        <% if @pagina_especial.blank? -%>
+          <%= render :partial => 'layouts/visor_destaque', :collection => @visores %>
+        <% else -%>
+          <%= render :partial => 'layouts/visor_destaque', :collection => @pagina_especial.pagina_especial_visores %>
+        <% end -%>
       <% end %>
     </div>
   </div>
@@ -460,13 +423,36 @@
     </div>
     <div id="espetaculos">
 <% if @m1.size>0 -%>
-      <div class="separadopor mes1">
+        <div class="separadopor mes1 <%=(@pagina_especial.pagina_especial_banners.length > 0) ? ' separadopor_menor' : '' -%>">
         <h1><%= @m1.size>0 ? l(@m1.first.proximo_horario.data, :format => :mes):'' %></h1>
         <div class="espetaculos">
-          <%= render :partial => 'layouts/card_com_auxiliar', :collection => @m1, :locals => {:auxiliar => @pagina_especial} -%>
+          <%= render :partial => 'layouts/card_com_auxiliar', :collection => @m1, :locals => {:auxiliar => @pagina_especial} -%>         
         </div>
       </div>
 <% end -%>
+
+<% if @pagina_especial.pagina_especial_banners.length > 0 -%>
+  <div class="home_module" style="width: 180px;float:right;">
+    <div class="container" style="margin-top:32px;position:relative;text-align: center;">
+      <% link_exibe = true -%>
+      <% for @banner in @pagina_especial.pagina_especial_banners -%>
+        <div class="card_banner">
+          <a href="<%=(@banner.blank==true ? 'http://':'')+@banner.link%>" target="<%=@banner.blank==true ? '_blank':'_self'%>">
+            <%= image_tag @banner.imagem.url %>
+          </a>
+          <div class="over">
+            <%=link_to '', @banner.link, :class => 'botao saiba_mais'%>
+          </div>
+        </div>
+        <% if link_exibe -%>
+          <%=link_to @pagina_especial.texto_de_link_do_regulamento, @pagina_especial.link_do_regulamento, :class => 'link_do_regulamento', :target => (@pagina_especial.blank_de_link_do_regulamento==true ? '_blank':'_self') %>
+          <% link_exibe = false -%>
+        <% end -%>      
+      <% end -%>    
+    </div>
+  </div>
+<% end -%>
+
 <% if @m2.size>0 -%>
       <div class="separadopor mes2">
         <h1><%= @m2.size>0 ? l(@m2.first.proximo_horario.data, :format => :mes):'' %></h1>

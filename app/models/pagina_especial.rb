@@ -16,7 +16,11 @@ class PaginaEspecial < ActiveRecord::Base
   
   
   has_and_belongs_to_many :espetaculos
-  
+  has_many :pagina_especial_visores, :order => 'ordem', :dependent => :destroy
+  has_many :pagina_especial_banners, :order => 'ordem', :dependent => :destroy
+
+  accepts_nested_attributes_for :pagina_especial_visores, :allow_destroy => true
+  accepts_nested_attributes_for :pagina_especial_banners, :allow_destroy => true
   
   validates_presence_of :tipo, :nome, :url, :cor_de_fundo, :altura_de_inicio_da_listagem, :cor_de_fundo_do_box, :cor_do_texto_do_box, :cor_do_link_do_box, :cor_da_borda_do_espetaculo
   validates_uniqueness_of :url

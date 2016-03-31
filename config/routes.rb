@@ -1,4 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :pagina_especial_banners
+
+  map.resources :pagina_especial_visores
+
   map.resources :conjunto_cidade_visores
 
   map.resources :conjunto_cidades

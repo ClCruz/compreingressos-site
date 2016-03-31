@@ -1,39 +1,74 @@
 <style type="text/css">
+  html{
+    overflow-x: hidden !important;
+  }
+  body{
+    overflow-x: hidden !important;
+  }
   div.background_pagina{
-    background:<%= @pagina_especial.cor_de_fundo %> url('<%= @pagina_especial.imagem.url %>') top center no-repeat;
+    background-color:<%= @pagina_especial.cor_de_fundo %>;
+    /*url('<%= @pagina_especial.imagem.url %>') top center no-repeat;*/
+    height: 2430px;
+    overflow-x: hidden !important;
+    position: absolute;
+    margin-left: -960px;
+    left: 50%;
+    width: 1920px;
+  }
+  div.background_pagina img{
+    
+    overflow-x: hidden;
   }
   
   div.cliqueteatro{
     float:left;
     width:480px;
-    height:450px;
+    height:700px;
     text-align:center;
     opacity:0.5;
   }
   div.cliqueshow{
     float:right;
     width:480px;
-    height:450px;
+    height:700px;
     text-align:center;
     opacity:0.5;
+  }
+  div.centraliza_img{
+    display: none;
   }
 
   /* MOBILE STYLES */
   @media only screen and (max-width:640px){
     div.cliqueteatro, div.cliqueshow{
       width:160px;
-      height:250px;
+      height:500px;
+    }
+    div.centraliza_img{
+      display: block;      
+    }
+    div.background_pagina{
+      background:<%= @pagina_especial.cor_de_fundo %> url('<%= @pagina_especial.imagem.url %>') top center no-repeat;
+    }
+    div.background_pagina img{
+      display: none;
     }
   }
 
 </style>
-<div class="background_pagina">
-  <div class="centraliza">
-    <a href="/itaucardshows">
-      <div class="cliqueteatro"></div>
-    </a>
-    <a href="/itaucardteatro">
-      <div class="cliqueshow"></div>
-    </a>
-  </div>
+<div class="background_pagina">  
+    <img src="<%= @pagina_especial.imagem.url %>" usemap="#header_map" />
+    <map name="header_map">
+      <%= @pagina_especial.mapeamento_de_imagem %>
+    </map>
+    <div class="centraliza">
+      <div class="centraliza_img">
+        <a href="/itaucardshows">
+          <div class="cliqueteatro"></div>
+        </a>
+        <a href="/itaucardteatro">
+          <div class="cliqueshow"></div>
+        </a>
+      </div>
+    </div>
 </div>
