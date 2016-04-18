@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160329232552) do
+ActiveRecord::Schema.define(:version => 20160331185613) do
 
   create_table "admins", :force => true do |t|
     t.string   "nome"
@@ -198,6 +198,9 @@ ActiveRecord::Schema.define(:version => 20160329232552) do
     t.datetime "horario_cache"
     t.boolean  "especificar_data_inicial_de_venda"
     t.datetime "data_inicial_de_venda"
+    t.string   "texto_de_link_do_redirecionamento"
+    t.string   "link_do_redirecionamento"
+    t.boolean  "blank_de_link_do_redirecionamento"
   end
 
   add_index "espetaculos", ["ativo"], :name => "index_espetaculos_on_ativo"
