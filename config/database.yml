@@ -3,7 +3,7 @@ development:
   encoding: utf8
   database: compreingressos_development
   username: root
-  password: 
+  password: 123
   pool: 20
   timeout: 50000
   host: cpnglcsql1001
