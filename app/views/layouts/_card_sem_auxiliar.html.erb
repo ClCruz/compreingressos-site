@@ -1,5 +1,7 @@
+<% link = (card_sem_auxiliar.link_do_redirecionamento.nil? or card_sem_auxiliar.link_do_redirecionamento.empty?) ? "#{url_for card_sem_auxiliar}" : "#{card_sem_auxiliar.link_do_redirecionamento}" -%>
+<% blank = card_sem_auxiliar.blank_de_link_do_redirecionamento ? " target='_blank'" : "" -%>
 <div class="card">
-  <a href="<%= (card_sem_auxiliar.id==4936) ? "https://www.ingressorapido.com.br/compras/?id=46901#!/":"#{url_for card_sem_auxiliar}" %>"<%= (card_sem_auxiliar.id==4936) ? " target='_blank'":"" %>>
+  <a href="<%=link %>"<%= blank %>>
     <img src="<%= card_sem_auxiliar.img_miniatura.url(:miniatura) %>" height="<%= card_sem_auxiliar.img_miniatura_height %>">
     <h3><%=card_sem_auxiliar.nome%></h3>
   </a>
@@ -14,20 +16,20 @@
       
       <% if !card_sem_auxiliar.especificar_data_inicial_de_venda -%>
         <% if card_sem_auxiliar.cc_id -%>
-          <a href="<%= (card_sem_auxiliar.id==4936) ? "https://www.ingressorapido.com.br/compras/?id=46901#!/":"#{url_for card_sem_auxiliar}" %>"<%= (card_sem_auxiliar.id==4936) ? " target='_blank'":"" %> class="botao comprar"<%= (card_sem_auxiliar.id==4936) ? " target='_blank'":"" %>></a>
+          <a href="<%=link %>"<%= blank %> class="botao comprar"></a>
         <% else -%>
-          <a href="<%= (card_sem_auxiliar.id==4936) ? "https://www.ingressorapido.com.br/compras/?id=46901#!/":"#{url_for card_sem_auxiliar}" %>"<%= (card_sem_auxiliar.id==4936) ? " target='_blank'":"" %> class="botao saiba_mais"<%= (card_sem_auxiliar.id==4936) ? " target='_blank'":"" %>></a>
+          <a href="<%=link %>"<%= blank %> class="botao saiba_mais"></a>
         <% end -%>
       <% else -%>
         <% if card_sem_auxiliar.cc_id and card_sem_auxiliar.data_inicial_de_venda<=DateTime.now -%>
-          <a href="<%= (card_sem_auxiliar.id==4936) ? "https://www.ingressorapido.com.br/compras/?id=46901#!/":"#{url_for card_sem_auxiliar}" %>"<%= (card_sem_auxiliar.id==4936) ? " target='_blank'":"" %> class="botao comprar"<%= (card_sem_auxiliar.id==4936) ? " target='_blank'":"" %>></a>
+          <a href="<%=link %>"<%= blank %> class="botao comprar"></a>
         <% else -%>
-          <a href="<%= (card_sem_auxiliar.id==4936) ? "https://www.ingressorapido.com.br/compras/?id=46901#!/":"#{url_for card_sem_auxiliar}" %>"<%= (card_sem_auxiliar.id==4936) ? " target='_blank'":"" %> class="botao saiba_mais"<%= (card_sem_auxiliar.id==4936) ? " target='_blank'":"" %>></a>
+          <a href="<%=link %>"<%= blank %> class="botao saiba_mais"></a>
         <% end -%>
       <% end -%>
       
     <% else -%>
-      <a href="<%= (card_sem_auxiliar.id==4936) ? "https://www.ingressorapido.com.br/compras/?id=46901#!/":"#{url_for card_sem_auxiliar}" %>"<%= (card_sem_auxiliar.id==4936) ? " target='_blank'":"" %> class="botao saiba_mais semdata"<%= (card_sem_auxiliar.id==4936) ? " target='_blank'":"" %>></a>
+      <a href="<%=link %>"<%= blank %> class="botao saiba_mais semdata"></a>
     <% end -%>
 	</div>
 </div>

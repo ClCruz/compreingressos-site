@@ -179,6 +179,14 @@
     <%= f.check_box :especificar_data_inicial_de_venda %>
     <%= f.label :especificar_data_inicial_de_venda %>
   </p>
+  <p>
+    <%= f.label :link_do_redirecionamento %><br />
+    <%= f.text_field :link_do_redirecionamento %>
+  </p>
+  <p>
+    <%= f.check_box :blank_de_link_do_redirecionamento %><br />
+    <%= f.label :blank_de_link_do_redirecionamento %>
+  </p>
   <div class="data_inicial_venda" style="display:<%= @espetaculo.especificar_data_inicial_de_venda ? 'block':'none' %>;">
     <p>
       <%= f.label :data_inicial_de_venda %><br />
