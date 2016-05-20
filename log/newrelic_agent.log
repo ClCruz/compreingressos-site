@@ -1,0 +1,19 @@
+# Logfile created on Fri May 20 12:15:26 -0300 2016 by logger.rb/1.2.6
+[05/20/16 12:15:26 -0300 edicarlos-vm (2542)] INFO : Starting the New Relic agent in "development" environment.
+[05/20/16 12:15:26 -0300 edicarlos-vm (2542)] INFO : To prevent agent startup add a NEWRELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[05/20/16 12:15:26 -0300 edicarlos-vm (2542)] INFO : Reading configuration from config/newrelic.yml (/mnt/hgfs/Compre)
+[05/20/16 12:15:26 -0300 edicarlos-vm (2542)] INFO : New Relic Agent Developer Mode enabled.
+[05/20/16 12:15:26 -0300 edicarlos-vm (2542)] INFO : Environment: development
+[05/20/16 12:15:26 -0300 edicarlos-vm (2542)] INFO : Dispatcher: webrick
+[05/20/16 12:15:26 -0300 edicarlos-vm (2542)] INFO : Application: Compreingressos (Development)
+[05/20/16 12:15:26 -0300 edicarlos-vm (2542)] WARN : Agent configured not to send data in this environment.
+[05/20/16 12:15:26 -0300 edicarlos-vm (2542)] WARN : Refusing to re-register DependencyDetection block with name 'sinatra'
+[05/20/16 12:15:26 -0300 edicarlos-vm (2542)] INFO : Installing ActiveRecord instrumentation
+[05/20/16 12:15:26 -0300 edicarlos-vm (2542)] INFO : Installing Net instrumentation
+[05/20/16 12:15:26 -0300 edicarlos-vm (2542)] INFO : Installing deferred Rack instrumentation
+[05/20/16 12:15:26 -0300 edicarlos-vm (2542)] INFO : Installing Rack::Builder middleware instrumentation
+[05/20/16 12:15:26 -0300 edicarlos-vm (2542)] INFO : Installing Rails 2.2 - 2.3 View instrumentation
+[05/20/16 12:15:26 -0300 edicarlos-vm (2542)] INFO : Installing Rails 2 Controller instrumentation
+[05/20/16 12:15:26 -0300 edicarlos-vm (2542)] INFO : Installing Rails 2 Error instrumentation
+[05/20/16 12:15:26 -0300 edicarlos-vm (2542)] INFO : Finished instrumentation
+[05/20/16 12:15:29 -0300 edicarlos-vm (2542)] INFO : Doing deferred dependency-detection before Rack startup
