@@ -1,0 +1,28 @@
+<p>
+  <b>Id:</b>
+  <%=h @estado.id %>
+</p>
+
+<p>
+  <b>Nome:</b>
+  <%=h @estado.nome %>
+</p>
+
+<p>
+  <b>Sigla:</b>
+  <%=h @estado.sigla %>
+</p>
+
+<p>
+  <b>Regiao geografica:</b>
+  <%=h @estado.regiao_geografica_id %>
+</p>
+
+<p>
+  <b>Pais:</b>
+  <%=h @estado.pais_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_estado_path(@estado) %> |
+<%= link_to 'Back', estados_path %>

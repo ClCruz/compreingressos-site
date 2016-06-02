@@ -1,0 +1,32 @@
+<div id="container_adm">
+<%= javascript_include_tag :defaults %>
+
+<% form_for(@espetaculo_ausente, :html => {:multipart => true}) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.label :artista %><br />
+    <%= f.text_field :artista %>
+  </p>
+  <p>
+    <%= f.label :estilo %><br />
+    <%= f.text_field :estilo %>
+  </p>
+  <p>
+    <%= f.label :municipio_id %><br />
+    <%= f.select :municipio_id, Municipio.find(:all).collect{|m| [m.nome,m.id]} %>
+  </p>
+  <p>
+    <%= f.label :aceita_noticia %><br />
+    <%= f.check_box :aceita_noticia %>
+  </p>
+  
+  <p>
+    <%= f.submit 'Salvar' %>
+  </p>
+<% end %>
+</div>

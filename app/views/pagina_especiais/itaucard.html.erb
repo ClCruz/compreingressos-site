@@ -1,4 +1,103 @@
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 <style type="text/css">
+  #espetaculos-ausentes{
+    width: 100%;
+    float: left;
+  }     
+  .foto_itau{     
+    width: 100%;
+    height: 220px;
+    position: relative;
+    padding: 100px 0px;
+  }
+  .foto_itau .box_texto {
+    width: 300px;
+    float: right;
+    text-align: center;    
+  }
+  .foto_itau .form-espetaculos-ausentes {
+    width: 100%;
+  }
+  .foto_itau .fonte_laranja_branca {
+    float: left;
+    margin-left: 10px;
+  }
+  .foto_itau .conteudo {
+    position: absolute;
+    width: 960px;
+    left: 50%;
+    margin-left: -480px;
+    float: left;
+  }
+  .foto_itau .fonte_laranja{
+    color: #f47920;
+    font-weight: bold;
+    font-size: 50px;
+    font-family: Arial;
+  }
+  .foto_itau .fonte_branca{
+    color: #ffffff;
+    font-size: 25px;
+    margin-top: 37px;
+  }
+  .foto_itau .foto{
+    width: 100%;
+    height: 100%;
+    background-image: url('images/background_eventos_ausentes.jpg');
+    background-repeat: no-repeat;
+    background-size: 120%;
+    background-position: 50% 0%;
+    position: absolute;
+    top: 8px;
+    opacity: 0.8;
+    margin: 0px;
+    float: none;
+  }
+  .foto_itau input {
+    width: 100%;
+    height: 38px;
+    padding-left: 24px;
+    margin-bottom: 9px;
+    border-radius: 4px;
+    border: 1px solid #001e59;
+    color: #001e59;
+    font-weight: bold;
+    font-size: 16px;
+    font-style: normal;
+    box-sizing: border-box;
+  }
+  .error{
+    border:2px solid red !important;
+  }
+  .foto_itau input[type=submit]{
+    background-color: #001e59;
+    color:#ffffff;
+    text-transform: uppercase;
+    width: 140px;
+    margin-right: 75px;
+    text-align: center;
+    padding-left: 0;
+    margin: 0 auto;
+    display: block;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .foto_itau label.privacidade span {
+    font-size: 14px;
+    color: #ffffff;
+    text-shadow: 1px 1px #000000;
+  }
+  .foto_itau label.resultado span {
+    font-size: 14px;
+    color: #ffffff;
+    text-shadow: 1px 1px #000000;
+    margin-bottom: 1em;
+    display: block;
+  }
+  .foto_itau input[name="btn-enviar"]:hover { transition: all 0.3s; background-color: #00AAC0; }
+
+  input[name="espetaculo_ausente[aceita_noticia]"] { height: auto !important; transition: height 0.3s; width: 14px; }
+  
   div.separadopor_menor{
     width: 780px !important;
   }
@@ -105,7 +204,61 @@
 
 
   /* MOBILE STYLES */
+
+  @media only screen and (min-width:641px) and (max-width:959px){
+  .foto_itau .foto {
+    background-size: 170%;
+    }
+  .foto_itau .conteudo {
+    width: 650px;
+    margin-left: -325px;
+    }
+  .foto_itau .fonte_laranja {
+    font-size: 35px;
+    }
+  .foto_itau .box_texto {
+    width: 230px;
+    text-align: center;
+    margin-right: 10px;
+    }
+  }
+
   @media only screen and (max-width:640px){
+    .foto_itau {
+      margin: 0 auto;
+      padding: 0px !important;
+      height: 430px;
+    }
+    .foto_itau .foto {
+      margin: 0px;
+      float: none;
+    }
+    .foto_itau .conteudo {
+      margin: 0 auto;
+      float: none;
+      left: 0px;
+      width: 100%;
+    }
+    .foto_itau .box_texto {
+      padding: 6px;
+      float: none;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .foto_itau .fonte_laranja_branca {
+      margin: 0px;
+      float:none;
+    }
+    .foto_itau .fonte_branca {
+      font-size: 20px;
+      text-align: center;
+      margin-top: 10px;
+    }
+    .foto_itau .fonte_laranja {
+      font-size: 35px;
+      text-align: center;
+      padding-top: 2px;
+    }
     div.menu_busca .centraliza, div.menu_busca.pag_especial{
       width:320px;
     }
@@ -202,6 +355,12 @@
       margin-top:0;
     }
 <% end -%>
+  div#menu_topo {
+      height: 50px !important;
+    }
+    div#menu_topo a.logo {
+      height: 40px;
+      background-size:auto 40px;
   }
 
 
@@ -234,14 +393,6 @@
     top:<%= (@pagina_especial.altura_de_inicio_da_listagem)+163 %>px !important;
     /* PAGINA PRIVADA NAO MOBILE */
   }
-  @media only screen and (max-width:640px) {
-    div#menu_topo {
-      height: 50px !important;
-    }
-    div#menu_topo a.logo {
-      height: 40px;
-      background-size:auto 40px;
-    }
 <% if (@pagina_especial.filtro_cidade and !@pagina_especial.filtro_genero) or (!@pagina_especial.filtro_cidade and @pagina_especial.filtro_genero) -%>
     div.menu_busca.pag_especial{
       top:<%= @pagina_especial.altura_de_inicio_da_listagem_mobile+171 %>px !important;
@@ -255,6 +406,21 @@
 <% end -%>
   }
 <% end -%>
+
+  @media only screen and (max-width:1279px){
+   .foto_itau .foto {
+    background-image: url('images/background_eventos_ausentes_320px.png');
+    background-position: 50% 35%; 
+  }
+  }
+  @media only screen and (max-width:320px){
+  .foto_itau {
+    height: 480px;  
+  }
+  .foto_itau .foto{
+    background-image: url('images/background_eventos_ausentes_320px.png');
+  }
+}
 </style>
 <% if @pagina_especial.url == 'itaucardshows' or @pagina_especial.url == 'itaucardteatro' %>
 <div id="display">
@@ -486,7 +652,89 @@
           itemSelector:'.card'
         });
       });
+      $( "#cidade" ).autocomplete({
+        // source: "municipios.json",
+        source: function (request, response) {
+                  $.getJSON("municipios.json?term=" + request.term, function (data) {
+                      response($.map(data, function (value, key) {
+                        return {
+                          label: value.municipio.label + ' - ' + value.municipio.sigla,
+                          value: value.municipio.value
+                        };
+                      }));
+                  });
+                },
+        minLength: 3,
+        select: function( event, ui ) {    
+          event.preventDefault();
+          $("#cidade_id").val(ui.item.value);
+          $("#cidade").val(ui.item.label);
+        },
+        focus: function( event, ui) {
+          event.preventDefault();
+          $("#cidade_id").val(ui.item.value);
+          $("#cidade").val(ui.item.label);
+        }
+      });
+      $('form[name="form-espetaculos-ausentes"]').on('submit',function(e){
+        e.preventDefault();
+        $('form[name="form-espetaculos-ausentes"] :input').each(function(){
+          $(this).removeClass("error");
+        });
+        if (validaEspetaculosAusentes()){
+          $.ajax({
+            method: "POST",
+            url: "/espetaculo_ausentes/save",
+            data: $('form[name="form-espetaculos-ausentes"]').serialize()
+          }).done(function( msg ) {
+            $(".resultado span").text("Dados enviados com sucesso!");
+          }).fail(function() {
+            $(".resultado span").text("Houve um erro ao enviar os dados.");
+          });
+
+          // $.get('http://www.faroestudio.com.br/MailChimp.php', {nome: email, email: email, uf: estado});
+        }
+      });      
     });
+    function validaEspetaculosAusentes(){
+      var email=$("#espetaculo_ausente_email");
+      var artista=$("#espetaculo_ausente_artista");
+      var estilo=$("#espetaculo_ausente_estilo");
+      var cidade=$("#cidade_id");
+      if(email.val()==""){
+        $(".resultado span").text("E-mail inválido" + email.val());
+        email.addClass("error");
+        email.focus();
+        return false;
+      }
+      if(artista.val()==""){
+        $(".resultado span").text("Artista inválido");
+        artista.addClass("error");
+        artista.focus();
+        return false;
+      }
+      if(estilo.val()==""){
+        $(".resultado span").text("Estilo inválido");
+        estilo.addClass("error");
+        estilo.focus();
+        return false;
+      }
+      if(cidade.val()==""){
+        $(".resultado span").text("Digite a Cidade e escolha uma opção.");
+        cidade.addClass("error");
+        cidade.focus();
+        return false;
+      }
+      return true;
+    }
+    function validaEmail(email){
+      var filtro = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+      if(filtro.test(email)){
+        return true;
+      } else {
+        return false;
+      }
+    }
   </script>
   <script type="text/javascript">
     $(function() {
@@ -566,4 +814,39 @@
       });
     }
   </script>
+  
 </div>
+<div class="cleaner"></div>
+<div class="foto_itau">
+    <div class="foto"></div>
+  <div class="conteudo">
+    <div class="fonte_laranja_branca">
+    <div class="fonte_laranja">
+      <span>Não achou o artista<br> que você gosta? </span>
+    </div>
+      <div class="fonte_branca">
+      <span>Fala para a gente qual é. Assim que<br> ele estiver por aqui, nós te avisamos :)</span>
+      </div>
+    </div>
+    <div class="box_texto">
+    <label class="resultado"><span><span/></label>
+      <% @espetaculo_ausente = EspetaculoAusente.new %>
+      <% form_for(@espetaculo_ausente, :html => {:name => "form-espetaculos-ausentes"}) do |f| %>
+        <%= f.error_messages %>  
+        <%= f.text_field :email, :placeholder =>"Seu e-mail" %>
+        <%= f.text_field :artista, :placeholder =>"Nome do Artista ou Banda" %>
+        <%= f.text_field :estilo, :placeholder =>"Seu estilo favorito" %>
+        <input type="text" id="cidade" placeholder = "Digite sua cidade" >
+        <%= f.text_field :municipio_id, :id =>"cidade_id", :hidden => true %>
+        <label class="privacidade">
+          <%= f.check_box :aceita_noticia, :checked => true %>
+          <span>Aceito receber notícias da compreingressos.</span>
+        </label>
+        <%= f.submit "Enviar",:name =>'btn-enviar',:id =>"btn-enviar" %>
+      <% end %>
+      
+    </div>
+  </div>
+</div>
+ 
+

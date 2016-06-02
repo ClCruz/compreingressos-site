@@ -1,4 +1,13 @@
 ActionController::Routing::Routes.draw do |map|
+  
+  map.connect 'espetaculo_ausentes/save', :controller => :espetaculo_ausentes, :action => :save
+
+  map.resources :espetaculo_ausentes
+
+  map.resources :estados
+
+  map.resources :municipios
+
   map.resources :pagina_especial_banners
 
   map.resources :pagina_especial_visores
@@ -12,6 +21,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :pacote_filtros
 
   map.connect 'relatorios/todos_os_espetaculos.:format', :controller => :relatorios, :action => :todos_os_espetaculos
+
+  map.connect 'espetaculo_ausentes/exportar.csv', :controller => :espetaculo_ausentes, :action => :exportar
 
   map.connect 'relatorios/index', :controller => :relatorios, :action => :index
 

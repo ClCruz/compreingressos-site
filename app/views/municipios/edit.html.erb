@@ -1,0 +1,32 @@
+<h1>Editing municipio</h1>
+
+<% form_for(@municipio) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :id %><br />
+    <%= f.text_field :id %>
+  </p>
+  <p>
+    <%= f.label :nome %><br />
+    <%= f.text_field :nome %>
+  </p>
+  <p>
+    <%= f.label :estado_id %><br />
+    <%= f.text_field :estado_id %>
+  </p>
+  <p>
+    <%= f.label :pais_id %><br />
+    <%= f.text_field :pais_id %>
+  </p>
+  <p>
+    <%= f.label :nr_habitantes %><br />
+    <%= f.text_field :nr_habitantes %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @municipio %> |
+<%= link_to 'Back', municipios_path %>

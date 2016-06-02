@@ -1,0 +1,6 @@
+<% require 'iconv' -%>
+"<%= Iconv.conv("WINDOWS-1252//IGNORE", "UTF-8", l(DateTime.now)) %>"
+"ID";"Email";"Artista";"Estilo";"<%= Iconv.conv("WINDOWS-1252//IGNORE", "UTF-8","Município") %>";"<%= Iconv.conv("WINDOWS-1252//IGNORE", "UTF-8","Aceita Notícia") %>";"Data de Cadastro"
+<% @espetaculo_ausentes.each do |e| -%>
+"<%= e.id %>";"<%= e.email %>";"<%= Iconv.conv("WINDOWS-1252//IGNORE", "UTF-8", e.artista) %>";"<%= Iconv.conv("WINDOWS-1252//IGNORE", "UTF-8", e.estilo) %>";"<%= Iconv.conv("WINDOWS-1252//IGNORE", "UTF-8", Municipio.find(e.municipio_id).nome) %>";"<%= e.aceita_noticia ? 'sim' : Iconv.conv("WINDOWS-1252//IGNORE", "UTF-8", 'não') %>";"<%= e.created_at %>"
+<% end -%>

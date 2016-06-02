@@ -1,0 +1,28 @@
+<p>
+  <b>Id:</b>
+  <%=h @municipio.id %>
+</p>
+
+<p>
+  <b>Nome:</b>
+  <%=h @municipio.nome %>
+</p>
+
+<p>
+  <b>Estado:</b>
+  <%=h @municipio.estado_id %>
+</p>
+
+<p>
+  <b>Pais:</b>
+  <%=h @municipio.pais_id %>
+</p>
+
+<p>
+  <b>Nr habitantes:</b>
+  <%=h @municipio.nr_habitantes %>
+</p>
+
+
+<%= link_to 'Edit', edit_municipio_path(@municipio) %> |
+<%= link_to 'Back', municipios_path %>

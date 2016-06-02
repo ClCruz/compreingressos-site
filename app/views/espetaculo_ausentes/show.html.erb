@@ -1,0 +1,33 @@
+<p>
+  <b>Id:</b>
+  <%=h @espetaculo_ausente.id %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%=h @espetaculo_ausente.email %>
+</p>
+
+<p>
+  <b>Artista:</b>
+  <%=h @espetaculo_ausente.artista %>
+</p>
+
+<p>
+  <b>Estilo:</b>
+  <%=h @espetaculo_ausente.estilo %>
+</p>
+
+<p>
+  <b>Municipio:</b>
+  <%=h @espetaculo_ausente.municipio_id %>
+</p>
+
+<p>
+  <b>Aceita noticia:</b>
+  <%=h @espetaculo_ausente.aceita_noticia %>
+</p>
+
+
+<%= link_to 'Edit', edit_espetaculo_ausente_path(@espetaculo_ausente) %> |
+<%= link_to 'Back', espetaculo_ausentes_path %>

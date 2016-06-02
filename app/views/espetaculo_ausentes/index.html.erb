@@ -1,0 +1,34 @@
+<div id="container_adm">
+  <p class="title_main">Pedidos de Shows</p>
+  <!-- <p>= link_to Novo Espetáculo Ausente, new_espetaculo_ausente_path </p> -->
+
+  <table>
+    <tr>
+      <th>Email</th>
+      <th>Artista</th>
+      <th>Estilo</th>
+      <th>Municipio</th>
+      <th>Estado</th>
+      <th>Aceita noticia</th>
+      <th>Opções</th>
+    </tr>
+
+  <% @espetaculo_ausentes.each do |espetaculo_ausente| %>
+    <tr>
+      <td><%=h espetaculo_ausente.email %></td>
+      <td><%=h espetaculo_ausente.artista %></td>
+      <td><%=h espetaculo_ausente.estilo %></td>
+      <% @municipio = Municipio.find(espetaculo_ausente.municipio_id) %>
+      <td><%=h @municipio.nome %></td>
+      <td><%=h Estado.find(@municipio.estado_id).sigla %></td>
+      <td><%=h espetaculo_ausente.aceita_noticia ? "Sim" : "Não" %></td>
+      <td class="buttom"><%= link_to image_tag('/admin/botao_editar.png', :alt => 'Editar', :title => 'Editar'), edit_espetaculo_ausente_path(espetaculo_ausente) %></td>
+      <td class="buttom"><%= link_to image_tag('/admin/botao_excluir.png', :alt => 'Apagar', :title => 'Apagar'), espetaculo_ausente, :confirm => 'Deseja realmente excluir?', :method => :delete %></td>
+    </tr>
+  <% end %>
+  </table>
+
+  <br />
+
+  <a href="espetaculo_ausentes/exportar/0">Baixar arquivo csv</a>
+</div>

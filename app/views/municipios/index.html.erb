@@ -1,0 +1,28 @@
+<h1>Listing municipios</h1>
+
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Nome</th>
+    <th>Estado</th>
+    <th>Pais</th>
+    <th>Nr habitantes</th>
+  </tr>
+
+<% @municipios.each do |municipio| %>
+  <tr>
+    <td><%=h municipio.id %></td>
+    <td><%=h municipio.nome %></td>
+    <td><%=h municipio.estado_id %></td>
+    <td><%=h municipio.pais_id %></td>
+    <td><%=h municipio.nr_habitantes %></td>
+    <td><%= link_to 'Show', municipio %></td>
+    <td><%= link_to 'Edit', edit_municipio_path(municipio) %></td>
+    <td><%= link_to 'Destroy', municipio, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New municipio', new_municipio_path %>
