@@ -1,5 +1,5 @@
 class MunicipiosController < ApplicationController
-  before_filter :authorize
+  before_filter :authorize, :except => [:index]
   # GET /municipios
   # GET /municipios.xml
   def index
