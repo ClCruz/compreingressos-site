@@ -1,0 +1,44 @@
+body { margin: 0; font-family: 'Arial'; }
+
+/*DEFAULT*/
+a{ color: #fff; text-decoration: none }
+a:visited{ color: inherit; text-decoration: none; }
+.center { text-align: center }
+.strong { font-weight: bold; }
+.upper { text-transform: uppercase; }
+.txt {  color: #fff;  text-align: justify;  font-size: 16px;  line-height: 29px; font-family: 'Arial';  }
+.txt.black { color: #989898; }
+h1 {  color: #C80F2B !important;  font-weight: bold !important;  text-transform: uppercase !important;  font-family: 'Arial black' !important;  font-size: 44px !important;  margin: 0px;  padding: 30px 0px;  }
+.white { color: #fff !important; }
+div.container { width: 100%; }
+div.content { width: 640px; margin: 0 auto; }
+.clearfix { float: none !important; clear: both !important; }
+/*DEFAULT*/
+
+/*topo*/
+div#topo {  background-image: url(../images/meia_entrada/topo_bg.jpg);  padding-top: 40px;  padding-bottom: 105px; }
+div#topo .logo {  text-align: center;  }
+div#topo .titulo {  text-align: center;  margin-bottom: 20px;  }
+div#topo .titulo img {  width: 100%;  }
+div#topo .txt {  width: 80%;  margin: 0 auto;  }
+
+
+/*estudantes*/
+.box.txtL {  position: relative;  }
+.box.txtL img {  position: absolute;  width: 60%;  bottom: -20px;  right: -20px;  }
+.box.txtL .txt { width: 50%; }
+
+div#estud {  background-image: url(../images/meia_entrada/estud_bg.png);  padding-bottom: 80px;  background-position-y: 75%;  }
+
+/*idosos*/
+#idosos {     position: relative;  background-image: url(../images/meia_entrada/idoso_bg.png);  background-repeat: no-repeat;  background-size: 100%;  background-position: 50%; }
+#idosos .sombra {  background-image: url(../images/meia_entrada/idoso_sombra.png);  width: 100%;  height: 40px;  background-position-y: 100%;  position: absolute;  bottom: 0px;  }
+#idosos .foto img {  width: 100%;  margin-bottom: -4px;  }
+#idosos h1.white {  font-size: 42px !important;  }
+
+/*Footer*/
+div#footer {  background-image: url(../images/meia_entrada/footer_bg.jpg); padding-top: 50px; padding-bottom: 10px; }
+div#footer .titulo img:nth-child(2) {  margin-top: -40px;  }
+div#footer .titulo img {  width: 110%;  margin-left: -35px;  }
+#footer .logo {  text-align: center;  margin: 30px 0px;  }
+#footer .decreto { margin: 40px 0px; }

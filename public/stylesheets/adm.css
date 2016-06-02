@@ -1,0 +1,292 @@
+.title_main{
+	font-size:22px;
+	margin-top:-2px;
+	color:#000;
+}
+.buttom{
+	width:35px;
+}
+.buttom a img{
+	margin:0 10px;
+}
+div#menu_topo div.bottom{
+  margin-top:12px;
+  float:left;
+}
+div#menu_topo{
+  height:72px;
+}
+#container_adm{
+	margin-top:20px;
+	width:915px;
+	text-shadow: 0 1px 0 #fff;
+	margin-bottom:20px;	
+}
+#container_adm a:hover{
+	text-decoration:underline;	
+}
+#container_adm h1{
+	font-size:16px;
+}
+#container_adm tr:hover{
+	background:#F0EFE6;
+}
+#container_adm tr.move{
+  cursor:move;
+}
+#container_adm td:hover{
+	background:#F7F6ED;
+	
+}
+#container_adm table{
+	width:100%;
+	border-collapse:collapse;
+}
+#container_adm .campos{
+	overflow: auto;
+	width:100%;
+}
+#container_adm .campos .entrada{
+	float:left;
+	margin-right:45px;
+}
+#container_adm input{
+	height:18px;
+}
+
+#container_adm table, #container_adm table tr, #container_adm table td, #container_adm table th{
+	border-bottom:1px solid #E0E0E0;
+	padding-right:10px;
+	padding-left:10px;
+	font-weight: normal;
+	font-size:14px;
+	color:#3D3D3D;
+	height:42px;
+}
+#container_adm label{
+	font-size:14px;
+	
+}
+#container_adm th{
+	font-size:16px !important;
+	font-weight:bold !important;
+	text-align: left;
+}
+/* Espetaculo */
+.mceMenu, .mceColorSplitMenu table{
+	background:#EFEFEF;
+	border:1px #CCC solid;
+	margin-top:3px;
+}
+
+.mceListBoxMenu a{
+	font-size:1.2em;
+	line-height:1.8em;
+	margin:2px 6px;
+}
+
+.mceColorSplitMenu table td a{
+	width:10px;
+	height:10px;
+	display:block;
+}
+
+.mceColorSplitMenu table td.mceMoreColors a{
+	width:100px;
+}
+#container_adm .mceLayout tr, #container_adm .mceLayout td, #container_adm .mceLayout th{
+	border:0;
+	padding:0;
+	margin:0;
+	
+}
+#container_adm .help_text{
+	margin-bottom:10px;
+}
+.help_text{
+  line-height:14px;
+}
+#container_adm #filtrar{
+	width:100%;
+	margin-bottom:15px;
+}
+#container_adm #filtrar label{
+	float:left;
+	font-size:13px;
+	margin-right:10px;
+	margin-top:4px;
+}
+#container_adm #filtrar input{
+	font-size:14px;
+	font-style: normal;
+}
+#container_adm #filtrar select{
+	font-style: normal;
+}
+#container_adm #lista_espetaculo{
+	width:100%;
+}
+#container_adm .filtrar_espetaculo{
+	float:left;
+}
+#container_adm div#espetaculo_ativo{
+  float: left;
+  font-size: 14px;
+  width: 90px;
+}
+#container_adm div#espetaculo_ativo p, #container_adm #patrocinador p{
+  margin:0 0 10px 0;
+}
+#container_adm #patrocinador{
+  float:left;
+  font-size:14px;
+  width:560px;
+  margin-left:40px;
+}
+#container_adm #patrocinador p.patrocinador{
+  float:left;
+  width:270px;
+  margin:0 10px 10px 0;
+  overflow:hidden;
+  -ms-word-break:break-all;
+  word-break:break-all;
+  word-break:break-word;
+  -webkit-hyphens:auto;
+  -moz-hyphens:auto;
+  hyphens:auto;
+  word-wrap:break-word;
+}
+#container_adm #espetaculo_ativo input{
+	margin-top:1px;
+}
+
+#container_adm div.modulo h1{
+  width:100%;
+  color:#999;
+  margin:0;
+  padding:0;
+  font-size:20px;
+  font-weight:300;
+  font-family:'Source Sans Pro', Arial, Helvetica, sans-serif;
+}
+
+div#espetaculos{
+  width:100%;
+  overflow:hidden;
+}
+
+div#espetaculos p.home_modulo_espetaculo{
+  float:left;
+  padding:5px 5px 5px 20px;
+  margin:0 0 10px;
+  border:1px #CCC solid;
+  cursor:pointer;
+  width:700px;
+}
+
+div#espetaculos p.home_modulo_espetaculo select{
+  width:100%;
+}
+
+div.testa_banners_altura{
+  float:right;
+  width:220px;
+  height:368px;
+  padding:10px 10px;
+  border:1px solid #CCC;
+  overflow:visible;
+  margin:0 276px 300px 100px;
+  background:#C00;
+}
+
+div.testa_banners_altura_limite{
+  background:#FFF;
+  width:170px;
+  padding:0 25px;
+  height:368px;
+}
+
+div.testa_banners_altura_limite #banner_fixos{
+  display:table-cell;
+  vertical-align:bottom;
+  height:363px;
+}
+
+div.banner_fixo{
+  float:left;
+  margin:0 -100px 0 0;
+}
+
+div.container_banner_fixo{
+  float:left;
+  margin-top:5px;
+  width:170px;
+  text-shadow:1px 1px 2px #FFF;
+}
+
+#content_container{
+  overflow:hidden;
+}
+
+#container_adm table.mes{
+  float:left;
+  width:266px;
+  text-align:center;
+  margin-right:38px;
+  border:1px solid #E0E0E0;
+}
+
+#container_adm table.mes thead td{
+  font-weight:bold;
+  width:38px;
+}
+
+#container_adm table.mes td, #container_adm table.mes tr{
+  padding:0;
+  margin:0;
+  vertical-align:middle;
+  height:auto;
+}
+
+ #container_adm table.mes tr:hover{
+  background-color:#FFF;
+}
+
+#container_adm table.mes td label{
+  width:100%;
+  display:block;
+  cursor:pointer;
+  font-size:12px;
+  line-height:1em;
+  padding:4px 0;
+}
+
+#container_adm table.mes input{
+  margin:0;
+}
+
+div.container_meses{
+  width:100%;
+  float:left;
+  overflow:hidden;
+  margin-bottom:38px;
+}
+
+#cidade_visores div.cidade_visor img{
+  cursor:move;
+}
+
+.fieldWithErrors input, .fieldWithErrors select {
+    border-color: red;
+}
+#container_adm .mceLayout td, #container_adm .mceLayout th, #container_adm .mceLayout td:hover, #container_adm .mceLayout th:hover{
+  background-color:#f0f0ee;
+}
+.pacotes_espetaculo .espetaculo select{
+	width:600px;
+}
+.conjunto_cidades label{
+  width:228px;
+  float:left;
+  margin-bottom:10px;
+}

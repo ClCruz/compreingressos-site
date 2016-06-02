@@ -1,0 +1,1044 @@
+@media only screen and (max-width:640px){
+  body, html{
+    -webkit-text-size-adjust:none;
+  }
+  div#guia_espetaculos, div#menu_topo div.topo div.facebook{
+    display:none;
+  }
+  div.centraliza{
+    width:320px;
+  }
+  div#menu_topo{
+    height:90px !important;
+  }
+  div#menu_topo div.topo{
+    display:none;
+  }
+  div#menu_topo div.container_mini_cabecalho{
+    top:0 !important;
+    position:fixed;
+    z-index:50;
+    height:90px;
+  }
+  div#menu_topo div.bottom{
+    width:310px;
+    margin:10px auto;
+  }
+  div#menu_topo a.logo{
+    margin:0;
+    width:120px;
+    height:30px;
+    background:transparent url('../images/menu_logo.png') 0 0 no-repeat;
+    background-size:40%;
+  }
+  div#menu_topo div.busca_mobile{
+    float:right;
+    width:184px;
+    display:block;
+  }
+  div#menu_topo div.container.buscar input{
+    float:left;
+    margin:0;
+    width:150px;
+    font-size:11px;
+    line-height:15px;
+    height:15px;
+    padding:7px 25px 6px 7px;
+    -moz-border-radius:0;
+    -webkit-border-radius:0;
+    border-radius:0;
+  }
+  div#menu_topo div.container.buscar input.submit{
+    float:left;
+    font-size:12px;
+    height:28px;
+    line-height:28px;
+    padding:0;
+    outline:0;
+    border:0;
+    width:24px;
+    margin:1px 0 1px -25px;
+    -moz-border-radius:0px;
+    -webkit-border-radius:0px;
+    border-radius:0px;
+    text-indent:-20000px;
+    background:transparent url('../images/ico_busca_mobile.png') 50% 50% no-repeat;
+    background-size:14px auto;
+  }
+  div#menu_topo div.container.buscar input.submit:hover{
+    background-position:50% 50%;
+  }
+  div#menu_topo div#busca div.container:hover div.icone{
+    background-position:0 -30px;
+  }
+  div#busca div.container.cidade, div#busca div.container.genero{
+    width:150px;
+    height:30px;
+    margin:0 10px 0 0;
+  }
+  div.pag_especial_priv div#busca div.container p{
+    margin-left:20px;
+  }
+  div#busca{
+    height:30px;
+    margin:10px 0;
+  }
+  div#busca div.container.genero{
+    margin-right:0;
+  }
+  div#busca div.container div.icone{
+    width:30px;
+    height:30px;
+    margin:0 5px 0 0;
+    background-size:30px auto !important;
+  }
+  div#busca div.container.cidade div.icone{
+    background-image:url('../images/ico_cidade_2x.png');
+  }
+  div#busca div.container.genero div.icone{
+    background-image:url('../images/ico_genero_2x.png');
+  }
+  div#busca div.container.cidade, div#busca div.container.genero{
+  }
+  div#busca div.container.cidade p, div#busca div.container.genero p{
+    width:115px;
+    height:auto;
+    font-size:16px;
+    line-height:18px;
+  }
+  div#busca div.container p.help{
+    font-size:12px;
+    line-height:12px;
+  }
+  div#busca div.container.buscar, div#busca form{
+    display:none;
+  }
+  
+  div#menu_topo div.bottom div.container_busca{
+    float:left !important;
+    width:310px !important;
+  }
+  div.menu_busca{
+    top:90px !important;
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=95)";
+    filter:alpha(opacity=95);
+    -moz-opacity:0.95;
+    -khtml-opacity:0.95;
+    opacity:0.95;
+  }
+  div.menu_busca a{
+    padding:0;
+    font-size:15px;
+    margin:3px 8px;
+  }
+  div.menu_busca .centraliza{
+    margin:0 auto;
+  }
+  #footer div.centraliza{
+    width:300px;
+  }
+  #footer ul{
+    width:150px;
+    margin:10px 0;
+  }
+  #footer ul li{
+    margin:0;
+    height:20px;
+  }
+  #footer ul li.title{
+    font-weight:400;
+    font-size:20px;
+    margin:0;
+    height:28px;
+  }
+  #footer ul li a{
+    font-size:12px;
+    line-height:20px;
+    padding:0;
+  }
+  #footer ul li a.minha_conta_mobile{
+    display:block;
+  }
+  #footer ul.midias_sociais{
+    float:left;
+    width:350px;
+    margin-top:0;
+  }
+  #footer ul li a.facebook, #footer ul li a.twitter {
+    font-size:12px;
+    background-size:50px 100px;
+    padding: 18px 0 2px 55px;
+    height:30px;
+    margin:6px 0 0;
+  }
+  #footer ul li a.facebook:hover, #footer ul li a.twitter:hover{
+    background-position:0 -50px;
+  }
+  #footer ul li.midia{
+    width:150px;
+    float:left;
+    height:auto;
+  }
+  #selos div.centraliza{
+    width:300px;
+    margin:0 10px;
+    display:none;
+  }
+  #selos #certsign{
+    width:70px !important;
+    float:left !important;
+    margin:17px 0 6px !important;
+  }
+  #selos #certsign tr td, #selos #certsign tr td a{
+    padding:0;
+    width:70px !important;
+  }
+  #selos div#armored_website{
+    float:left;
+    width:80px !important;
+    margin:7px 0 0 0 !important;
+  }
+  #selos div#armored_website a{
+    width:80px !important;
+  }
+  #selos div#aw_malware, #selos div#aw_malware img{
+    width:80px !important;
+  }
+  #selos p.creditos{
+    margin:5px 0;
+    font-size:11px;
+  }
+  a.link_adptativo{
+    font-size:11px;
+    margin-bottom:5px;
+  }
+  #background_holder{
+    background-color:#D9D9D9 !important;
+    background-image:url("../images/bg.jpg") !important;
+    background-repeat:repeat-y !important;
+    background-position:center top !important;
+  }
+  #background_holder img.img_header_map{
+    display:none;
+  }
+  div#background_holder div#detalhes_busca{
+    margin:0 0 5px !important;
+    background:none !important;
+    color:#4d4d4d !important;
+    width:310px;
+    padding:5px;
+  }
+  #home.visor_home_mobile #display{
+    margin-bottom:0px;
+  }
+  #background_holder div.centraliza div.cidade_especial div.cid_gen, #background_holder div.centraliza div.cidade_especial h1.title_page{
+    font-size:24px;
+  }
+  div#detalhes_busca div.max_resultados{
+    font-size:12px;
+    width:100% !important;
+  }
+  #pai div#background_holder div#detalhes_busca div.ordem{
+    margin:0;
+    color:#4D4D4D;
+    float:left;
+    width:100%;
+    font-size:11px;
+    text-align:left;
+    font-weight:normal;
+  }
+  div.ordem a{
+    font-size:11px;
+    margin:0;
+    padding:0 3px;
+  }
+  #pai div#background_holder div#detalhes_busca div.ordem a.ativo{
+    color:#000;
+    font-weight:bold;
+  }
+  #espetaculos{
+    width:315px;
+    margin:0 0 0 5px;
+  }
+  div.card{
+    width:150px;
+    border-color:#CCC !important;
+  }
+  div.card img{
+    width:132px;
+  }
+  div.card h3, div.card h3 a, div.card p{
+    width:130px;
+  }
+  div.card div.over p{
+    width:100%;
+  }
+  div.card h3, div.card h3 a{
+    font-size:13px;
+    margin-bottom:4px;
+  }
+  div.card p.teatro{
+    margin-bottom:2px;
+  }
+  div.card p.cidade, div.card p.genero{
+    font-size:10px;
+    line-height:12px;
+    margin-bottom:2px;
+  }
+  #espetaculos div.card{
+    margin:0 5px 5px 0;
+  }
+  a.botao{
+    margin:0 4px;
+  }
+  a.botao, div.over a.botao.comprar, div.over a.botao.saiba_mais{
+    width:122px;
+    height:42px;
+    background-size:122px 84px;
+  }
+  a.botao:hover, div.over a.botao.comprar:hover, div.over a.botao.saiba_mais:hover{
+    background-position:0 -42px;
+  }
+  div.over p.linha1{
+    font-size:12px;
+    margin-bottom:0;
+  }
+  div.over p.linha3{
+    font-size:14px;
+  }
+  #display{
+    height:67px;
+    background-size:auto 67px !important;
+    background-position:47% 0 !important;
+  }
+  div.container_mini_topo{
+    margin:10px 0 8px;
+  }
+  div.container_mini_topo div.icones_mobile{
+    display:block;
+  }
+  div.container_mini_topo div.icones_mobile .icone{
+    display:inline-block;
+    margin-top:8px;
+  }
+  div.container_mini_topo .icone, div.container_mini_topo div.icones_mobile .icone.inativo{
+    display:none;
+  }
+  div.container_mini_topo span.icone{
+    background-size:26px auto;
+  }
+  div.container_mini_topo span.sinopse{
+    background-image:url('../images/ico_sinopse_2x.png');
+  }
+  div.container_mini_topo span.fotos{
+    background-image:url('../images/ico_fotos_2x.png');
+  }
+  div.container_mini_topo span.videos{
+    background-image:url('../images/ico_videos_2x.png');
+  }
+  #espetaculo h1, #teatro #overlay h1{
+    width:100%;
+    margin:0;
+  }
+  #espetaculo h1, #teatro #overlay h1{
+    font-size:25px;
+  }
+  #espetaculo div.cont_teatro, #teatro #overlay div.cont_teatro{
+    margin-top:4px;
+  }
+  #espetaculo div.cont_teatro p.teatro, #espetaculo div.cont_teatro p.teatro a{
+    font-size:15px;
+  }
+  #espetaculo div.cont_teatro p.teatro_info{
+    font-size:12px;
+  }
+  div#espetaculo div#iframe{
+    margin:10px 5px;
+    width:100%;
+  }
+  #espetaculo div.detalhes_espetaculo{
+    width:310px;
+    margin:0 5px;
+  }
+  #espetaculo div.detalhes_espetaculo div.container.g, #espetaculo div.detalhes_espetaculo div.container.p{
+    margin-right:0;
+    width:276px;
+    padding:14px 16px 5px;
+  }
+  #espetaculo div.detalhes_espetaculo div.container h2{
+    font-size:23px;
+    margin-bottom:3px;
+  }
+  #espetaculo div.detalhes_espetaculo div.container p, #espetaculo div.detalhes_espetaculo div.container p.teatro, #espetaculo div.detalhes_espetaculo div.container p.compre_fone{
+    font-size:12px;
+    margin-bottom:6px;
+  }
+  #espetaculo div.detalhes_espetaculo div.container p.compre_fone{
+    margin:0;
+  }
+  #espetaculo div.detalhes_espetaculo div.container p.compre_fone_num{
+    font-size:20px;
+  }
+  #espetaculo div.detalhes_espetaculo div.container p.desconto{
+    font-size:11px;
+  }
+  #espetaculo div.espetaculos_recomendados{
+    float:left;
+    width:310px;
+    margin:0 5px;
+  }
+  #espetaculo div.espetaculos_recomendados h2{
+    font-size:21px;
+    height:23px;
+    margin:5px 0 4px;
+  }
+  div.midias_sociais{
+    margin:0;
+    display:none !important;
+  }
+  #overlay div.centraliza, #pai div#background_holder #overlay div.centraliza{
+    width:310px;
+	margin-top:51px
+  }
+  #pai #overlay div.centraliza div.fechar{
+	background-image:url('../images/bot_fechar_2x.png');
+    background-size:112px auto !important;
+    margin:0 99px 5px;
+	position:fixed;
+	top:0;
+  }
+  #overlay div.container_mini_topo{
+    margin:4px 0;
+  }
+  #overlay div.icone{
+    height:28px;
+  }
+  #overlay div.icone.fotos{
+    height:30px;
+    background-size:96px auto;
+    margin-bottom:7px;
+  }
+  #overlay div.icone.sinopse{
+    background-size:113px auto;
+  }
+  #overlay div.icone.video{
+    background-size:94px auto;
+    height:34px;
+  }
+  #overlay div.container_iframe_video{
+    width:310px;
+    height:181px;
+    margin-top:6px;
+  }
+  #overlay iframe#video_player{
+    margin:0;
+    padding:0;
+    width:310px;
+    height:181px;
+  }
+  #overlay div.slideshow-container{
+    float:left;
+    width:310px;
+    height:180px;
+  }
+  #overlay div.slideshow-container img, #overlay div.slideshow-container a{
+    max-width:310px;
+    max-height:180px;
+  }
+  #overlay div.thumbs_container{
+    float:left;
+    margin:7px 0 0 1px;
+    height:auto;
+  }
+  #overlay div.thumbs_container ul{
+    height:auto;
+  }
+  #overlay div.thumbs_container li{
+    margin:0 8px 8px 0;
+  }
+  #espetaculo #overlay div.container_overlay, #teatro #overlay div.container_overlay{
+    margin-top:20px;
+  }
+  #overlay div.informacoes{
+    margin-top:-14px;
+  }
+  #overlay div.icone.detalhes{
+    background-size:177px auto;
+  }
+  #espetaculo #overlay div.container_overlay p, #teatro #overlay div.container_overlay p{
+    font-size:12px;
+  }
+  #espetaculo #overlay div.container_overlay p.sinopse_aviso, #teatro #overlay div.container_overlay p.sinopse_aviso{
+    font-size:10px;
+  }
+  #pai div#background_holder{
+    background-size:640px auto !important;
+  }
+  #pai #espetaculo.especial_mobile h1, #pai #espetaculo.especial_mobile div.cont_teatro p.teatro_info, #pai #espetaculo.especial_mobile div.cont_teatro p.teatro, #pai #espetaculo.especial_mobile div.container_mini_topo span, #pai div#espetaculo.especial_mobile div#iframe p.saiba_mais_aviso, #pai div#espetaculo.especial_mobile #div.container_mini_topo{
+    text-shadow:1px 1px 2px #000;
+  }
+  div.botoes_sessoes{
+    width:310px;
+    height:50px;
+    margin:0 5px 10px;
+  }
+  div.botoes_sessoes a.botao{
+    width:50px;
+    height:50px;
+    margin:0 10px;
+    background-size:50px auto;
+  }
+  div.botoes_sessoes a.botao:hover{
+    background-position:0 -50px;
+  }
+  div.botoes_sessoes a.botao.ativo{
+    background-position:0 -101px;
+  }
+  #espetaculo #ancora_cabecalho{
+    margin-bottom:84px;
+  }
+  #espetaculo div.detalhes_espetaculo.especial{
+    width:310px;
+    margin:0 5px 5px;
+  }
+  #espetaculo div.detalhes_espetaculo.especial div#informacoes, #espetaculo div.detalhes_espetaculo.especial div#fotos{
+    margin:0;
+    width:310px;
+  }
+  #espetaculo div.detalhes_espetaculo.especial div#sinopse{
+    margin:0;
+    width:276px;
+    margin-bottom:5px;
+    padding:14px 16px 5px;
+  }
+  #espetaculo div.detalhes_espetaculo.especial div#sinopse p{
+    font-size:12px;
+  }
+  #espetaculo div.detalhes_espetaculo.especial div#sinopse p.sinopse_aviso{
+    font-size:10px;
+  }
+  #espetaculo div.detalhes_espetaculo.especial div#fotos .container_foto, #espetaculo div.detalhes_espetaculo.especial div#fotos .container_foto img{
+    width:308px;
+    height:181px;
+    margin:0 0 5px;
+  }
+  #espetaculo div.detalhes_espetaculo.especial div#videos, #espetaculo div.detalhes_espetaculo.especial div#videos iframe{
+    margin:0;
+    padding:0;
+    width:310px;
+    height:181px;
+  }
+  #teatro{
+    margin:0 5px;
+  }
+  #background_holder div.centraliza h1.title_page{
+    width:310px;
+  }
+  #teatro div.ordem{
+    float:left;
+    margin:0;
+    text-align:left;
+  }
+  div.menu_busca_teatro{
+    margin:10px 0;
+  }
+  div.menu_busca_teatro a{
+    font-size:12px;
+    margin:3px 8px 3px 0
+  }
+  #teatro div.container_teatro{
+    width:284px;
+    margin-right:12px;
+    min-height:100px;
+  }
+  #teatro div.container_teatro a.teatro_nome{
+    width:209px;
+  }
+  #teatro div.container_teatro p.teatro_end{
+    width:212px;
+  }
+  #teatro div.container_teatro div.container_espetaculos{
+    margin:12px 14px 7px;
+    width:256px;
+  }
+  #teatro div.container_teatro div.container_espetaculos a{
+    width:252px;
+    font-size:12px;
+    margin-bottom:5px;
+    line-height:1.2em;
+  }
+  #teatro div.container_teatro div.container_espetaculos a.ultimo{
+    width:206px;
+  }
+  #teatro div.container_teatro div.container_espetaculos a.quantidade{
+    font-size:16px;
+    margin-bottom:3px;
+    text-align:right;
+  }
+  div.googlemaps a.ampliar{
+    display:none;
+  }
+  #teatro div.container_top{
+    width:100%;
+  }
+  #teatro div.container_top div.left{
+    margin:5px 5px 0 0;
+  }
+  #teatro div.container_top div.left, #teatro div.container_top div.left div.cont_img, #teatro div.container_top div.left div.cont_img img{
+    width:100px;
+    height:100px;
+  }
+  #teatro div.container_top div.right{
+    width:205px;
+  }
+  #teatro div.container_mini_topo{
+    display:none;
+  }
+  #teatro div.container_mini_topo span.icone{
+    display:inline-block;
+  }
+  div.container_mini_topo span.origem{
+    width:100%;
+    margin-bottom:4px;
+  }
+  #teatro div.container_mini_topo span.icone.inativo{
+    display:none;
+  }
+  #teatro h1{
+    font-size:25px;
+  }
+  #teatro div.container_top p.teatro_end{
+    font-size:12px;
+    line-height:1.3em;
+  }
+  #teatro div.container{
+    width:280px !important;
+    margin-right:0 !important;
+    padding:10px 14px !important;
+    height:auto !important;
+  }
+  #teatro h2{
+    margin-bottom:2px;
+  }
+  #teatro h2, #teatro div.container.telefone p, #teatro div.container_em_cartaz h2{
+    font-size:20px;
+    line-height:1.2em;
+  }
+  #teatro div.container.lotacao p{
+    margin-top:0;
+  }
+  #teatro div.container_em_cartaz{
+    width:310px;
+    margin-top:15px;
+  }
+  div.espetaculo_em_cartaz div.container_imagem{
+    margin-top:10px;
+    height:67px;
+    background-size:auto 67px;
+    background-position:50% 0;
+  }
+  div.espetaculo_em_cartaz div.container_imagem a{
+    height:67px;
+  }
+  div.espetaculo_em_cartaz div.container_infos div.nome{
+    width:115px;
+    font-size:13px;
+    line-height:16px;
+    margin:4px 5px 0 0;
+  }
+  div.espetaculo_em_cartaz div.container_infos div.botao{
+    width:100px;
+    height:38px;
+  }
+  div.espetaculo_em_cartaz div.container_infos div.botao.comprar a, div.espetaculo_em_cartaz div.container_infos div.botao.saiba_mais a{
+    width:100px;
+    height:38px;
+    background-size:100px auto;
+  }
+  div.espetaculo_em_cartaz div.container_infos div.data{
+    margin-left:5px;
+    width:95px;
+  }
+  div.espetaculo_em_cartaz div.container_infos p.linha1{
+    font-size:10px;
+    line-height:10px;
+    margin-top:1px;
+  }
+  div.espetaculo_em_cartaz div.container_infos p.linha2{
+    font-size:12px;
+    line-height:16px;
+  }
+  div.espetaculo_em_cartaz div.container_infos p.linha3{
+    font-size:10px;
+    line-height:10px;
+  }
+  #background_holder div.espetaculo_em_cartaz div.centraliza{
+    margin:0 auto !important;
+  }
+  #center_left{
+    display:none;
+  }
+  #center_right{
+    padding:0;
+    width:100%;
+    margin-top:5px;
+    min-height:0;
+  }
+  #servicos{
+    width:100%;
+  }
+  #contato h1, #center_left p.titulo{
+    margin:0;
+  }
+  #center_right .help_text{
+    font-size:12px;
+    margin-bottom:10px;
+  }
+  #servicos p, #servicos{
+    font-size:12px;
+    line-height:15px;
+  }
+  div.background_pagina{
+    background-size:640px auto !important;
+  }
+  div#background_holder div.background_pagina div#detalhes_busca{
+    padding-top:0;
+  }
+  div.background_pagina div#detalhes_busca div.detalhes{
+    width:310px;
+    height:auto;
+  }
+  div.background_pagina div#detalhes_busca div.detalhes p{
+    /*text-shadow:1px 1px 2px #000;*/
+  }
+  div.background_pagina div#detalhes_busca div.detalhes p.nome{
+    font-size:22px;
+    margin-top:4px;
+    line-height:1.1em;
+  }
+  p.pagina_especial_nome{
+    font-size:24px;
+    line-height:25px;
+  }
+  p.pagina_especial_subtitulo{
+    font-size:18px;
+    line-height:19px;
+  }
+  div.centraliza.pacotes div#detalhes{
+    margin-bottom:10px;
+  }
+  div.centraliza.theatro_video{
+    text-align:center;
+  }
+  div.centraliza.theatro_video iframe{
+    width:300px !important;
+    height:169px !important;
+    margin:10px auto 0 !important;
+  }
+  div.card h3.pacote_nome{
+    font-size:18px;
+  }
+  div#espetaculos p.pacote_total_espetaculos, div#espetaculos p.pacote_setores{
+    font-size:12px;
+    margin-top:4px;
+  }
+  div#espetaculos p.pacote_detalhes, div#espetaculos p.pacote_detalhes2{
+    font-size:11px;
+    margin:8px 0;
+  }
+  a.botao.assinar, a.botao.aguarde, a.botao.comprar_pacote{
+    margin:0 24px 10px;
+  }
+  a.botao.assinar:hover, a.botao.aguarde:hover, a.botao.comprar_pacote:hover{
+    background-position:0 0;
+  }
+  div.card div.pac_topup{
+    width:220px;
+  }
+  div.pac_topup p.pacote_nome{
+    font-size:18px;
+  }
+  div#espetaculos div.pac_topup p.pacote_nome{
+    font-size:18px;
+  }
+  div#espetaculos div.pac_topup p.pacote_setores{
+    font-size:12px;
+  }
+  div#espetaculos div.pac_topup p.pacote_titulo_composicao{
+    font-size:14px;
+    margin:6px 0 0;
+  }
+  div#espetaculos div.pac_topup p.pacote_composicao{
+    font-size:12px;
+  }
+  div.assinatura_municipal p.titulo{
+    font-size:18px;
+    margin:0;
+    display:block;
+  }
+  div.assinatura_municipal.download{
+    font-size:14px;
+    margin-top:0px;
+  }
+  div.assinatura_municipal.download span{
+    font-size:12px;
+  }
+  div.assinatura_municipal, div.assinatura_municipal.download.mobile{
+    display:block;
+    margin:0 0 10px 0;
+    width:100%;
+  }
+  div.assinatura_municipal p{
+    font-size:13px;
+    margin-bottom:4px;
+    text-shadow:1px 1px 2px #000;
+    display:none;
+  }
+  div.assinatura_municipal a.botao{
+    margin-bottom:0;
+  }
+  div.assinatura_municipal.right{
+    margin-top:75px;
+  }
+  div.assinatura_municipal.download span{
+    margin:0;
+  }
+  a.botao span.data{
+    width:38px;
+    font-size:17px;
+    line-height:17px;
+    margin:6px 5px 0 2px;
+  }
+  a.botao span.numero, a.botao span.mes{
+    width:38px;
+  }
+  a.botao span.dia_hora{
+    margin-top:9px;
+    font-size:10px;
+    font-weight:400;
+  }
+  a.botao span.comprar{
+    font-size:12px;
+  }
+  #overlay div.datas{
+    width:363px;
+    margin:20px 22px 0;
+  }
+  div.container_selo_itaucard{
+    width:100%;
+  }
+  div.container_selo_itaucard img{
+    width:100px;
+    margin-right:5px;
+  }
+  #home.visor_home_mobile{
+    display:block !important;
+  }
+  #home.visor_home_mobile #display{
+    width:100%;
+    height:156px;
+  }
+  #home.visor_home_mobile .pagination{
+    display:none;
+  }
+  #home.visor_home_mobile #display .swiper-container, #home.visor_home_mobile #display .swiper-slide, #home.visor_home_mobile #display .swiper-slide div, #home.visor_home_mobile #display .swiper-slide div a{
+    height:156px;
+  }
+  #home.visor_home_mobile #display .swiper-slide div{
+    background-size:auto 156px;
+    background-position:50% top;
+  }
+  div#container_banners_fixos{
+    height:auto;
+    width:100%;
+    overflow:hidden;
+  }
+  div#cont_alinha_banners_fixos{
+    position:relative;
+  }
+  div#alinha_banners_fixos{
+    float:none;
+    width:320px;
+    margin:0 auto;
+  }
+  div#banners_fixos{
+    width:319px;
+    padding-left:1px;
+    height:auto;
+  }
+  div#banners_fixos div.banner_fixo{
+    float:left;
+    clear:none;
+  }
+  div#banners_fixos div.banner_fixo img{
+    width:106px;
+  }
+  div.menu_busca.pag_especial{
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+    filter:alpha(opacity=90);
+    -moz-opacity:0.9;
+    -khtml-opacity:0.9;
+    opacity:0.90;
+  }
+  div.background_pagina div#detalhes_busca div.detalhes p.nome{
+    margin-top:9px !important;
+  }
+  .separadopor, .mes1, .mes2, .mes3, .mes4{
+    width:315px;
+  }
+  .separadopor h1{
+    margin-right:5px;
+  }
+  div.assinatura_municipal.download{
+    margin:0 0 10px !important;
+  }
+  .container_theatromunicipal.right, .container_theatromunicipal.left{
+    float:left;
+    width:310px;
+    margin:0 0 20px;
+  }
+  .container_theatromunicipal .descricao{
+    margin:0;
+    color:#FFF;
+    font-size:20px;
+    background:#008395;
+    padding:4px; 
+  }
+  .container_theatromunicipal.right .descricao, .container_theatromunicipal.left .descricao{
+    width:302px;
+  }
+  .container_theatromunicipal.left img{
+    width:310px;
+  }
+  .container_theatromunicipal.left div{
+    margin:0 0 10px !important;
+  }
+}
+
+
+@media only screen and (min-width:480px) and (max-width:640px){
+  div.centraliza{
+    width:480px;
+  }
+  div#menu_topo div.bottom{
+    width:470px;
+  }
+  div#menu_topo div.busca_mobile{
+    float:left;
+    width:344px;
+    margin-left:5px;
+  }
+  div#menu_topo div.container.buscar input{
+    width:310px;
+  }
+  div#menu_topo div.bottom div.container_busca{
+    width:470px !important;
+  }
+  #footer div.centraliza{
+    width:450px;
+  }
+  #footer ul.midias_sociais{
+    width:150px;
+    margin-top:10px;
+  }
+  div#background_holder div#detalhes_busca{
+    width:470px;
+  }
+  #espetaculos{
+    width:475px;
+  }
+  #espetaculo div.detalhes_espetaculo{
+    width:470px;
+  }
+  #espetaculo div.detalhes_espetaculo div.container.g, #espetaculo div.detalhes_espetaculo div.container.p{
+    float:none;
+    width:350px;
+    margin:0 auto 6px;
+  }
+  #espetaculo div.espetaculos_recomendados{
+    width:475px;
+    margin-right:0;
+  }
+  #espetaculo div.espetaculos_recomendados div.espetaculos{
+    width:475px;
+  }
+  #espetaculo div.espetaculos_recomendados h2{
+    margin-left:-5px;
+  }
+  div.botoes_sessoes{
+    width:470px;
+  }
+  #espetaculo div.detalhes_espetaculo.especial{
+    width:470px;
+  }
+  #espetaculo div.detalhes_espetaculo.especial div#informacoes, #espetaculo div.detalhes_espetaculo.especial div#fotos{
+    width:470px;
+  }
+  #espetaculo div.detalhes_espetaculo.especial div#sinopse{
+    float:none;
+    width:350px;
+    margin:0 auto 6px;
+    position:relative;
+  }
+  #espetaculo div.detalhes_espetaculo.especial div#videos, #espetaculo div.detalhes_espetaculo.especial div#videos iframe{
+    width:470px;
+    height:259px;
+  }
+  #espetaculo div.detalhes_espetaculo.especial div#fotos .container_foto, #espetaculo div.detalhes_espetaculo.especial div#fotos .container_foto img{
+    width:230px;
+    height:135px;
+  }
+  #espetaculo div.detalhes_espetaculo.especial div#fotos .container_foto{
+    margin-right:5px;
+  }
+  #teatro div.container_teatro{
+    margin:12px 92px 20px;
+  }
+  #teatro div.container_top div.left{
+    margin:-52px 5px 0 0;
+  }
+  #teatro div.container_top div.left, #teatro div.container_top div.left div.cont_img, #teatro div.container_top div.left div.cont_img img{
+    width:130px;
+    height:130px;
+  }
+  #teatro div.container_top div.right{
+    width:335px;
+  }
+  #teatro div.container_mini_topo{
+    display:block;
+  }
+  #teatro div.container, #teatro div.container.lotacao{
+    width:350px !important;
+    margin:0 45px 6px;
+  }
+  #teatro div.container_em_cartaz{
+    width:470px;
+  }
+  div.espetaculo_em_cartaz div.container_infos div.nome{
+    width:250px;
+  }
+  #overlay div.centraliza,#pai div#background_holder #overlay div.centraliza{
+    width:470px;
+  }
+  #pai #overlay div.centraliza div.fechar{
+    margin:0 179px 5px;
+  }
+  #overlay div.datas{
+    width:398px;
+    margin:20px 34px 0;
+  }
+  #home.visor_home_mobile #display, #home.visor_home_mobile #display .swiper-container, #home.visor_home_mobile #display .swiper-slide, #home.visor_home_mobile #display .swiper-slide div, #home.visor_home_mobile #display .swiper-slide div a{
+    height:190px;
+  }
+  #home.visor_home_mobile #display .swiper-slide div{
+    background-size:auto 190px;
+  }
+  div#alinha_banners_fixos, div#banners_fixos{
+    width:480px;
+    padding:0;
+  }
+  div#banners_fixos div.banner_fixo img{
+    width:140px;
+    margin:0 10px;
+  }
+}
