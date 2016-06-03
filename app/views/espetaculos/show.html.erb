@@ -90,7 +90,7 @@
       <% elsif @espetaculo.cc_id and (!@espetaculo.especificar_data_inicial_de_venda or (@espetaculo.especificar_data_inicial_de_venda and @espetaculo.data_inicial_de_venda<=DateTime.now.in_time_zone-2.hours)) %>
         <% @espetaculo.horarios_disponiveis.each_with_index do |a,i| %>
           <% if i<3 or @espetaculo.horarios_disponiveis.size==4 %>
-            <a href="<%= ENVIRONMENT_VARS['host_compra'] %>/comprar/etapa1.php?apresentacao=<%=a.id_apresentacao%>&eventoDS=<%=@espetaculo.nome.parameterize%>" class="botao data">
+            <a href="<%= ENVIRONMENT_VARS['host_compra'] %>/comprar/etapa1.php?apresentacao=<%=a.id_apresentacao%>&eventoDS=<%=@espetaculo.nome.parameterize%><%=preserv_params %>" class="botao data">
               <span class="data">
                 <span class="numero"><%= l a.data, :format => :dia %></span>
                 <span class="mes"><%= l a.data, :format => :mes_curto %></span>
@@ -247,7 +247,7 @@
           <% if @espetaculo.cc_id %>
             <div class="datas">
               <% @espetaculo.horarios_disponiveis.each do |a| %>
-                <a href="<%= ENVIRONMENT_VARS['host_compra'] %>/comprar/etapa1.php?apresentacao=<%=a.id_apresentacao%>&eventoDS=<%=@espetaculo.nome.parameterize%>" class="botao data">
+                <a href="<%= ENVIRONMENT_VARS['host_compra'] %>/comprar/etapa1.php?apresentacao=<%=a.id_apresentacao%>&eventoDS=<%=@espetaculo.nome.parameterize%><%=preserv_params %>" class="botao data">
                   <span class="data">
                     <span class="numero"><%= l a.data, :format => :dia %></span>
                     <span class="mes"><%= l a.data, :format => :mes_curto %></span>
