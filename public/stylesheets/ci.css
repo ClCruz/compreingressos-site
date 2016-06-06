@@ -1026,7 +1026,7 @@ div#guia_espetaculos div.right div.container.status label input{
 div#menu_topo{
   float:left;
   width:100%;
-  height:122px;
+  height:132px;
   overflow:hidden;
   margin:0 auto;
   background:#FFF;
@@ -2670,6 +2670,7 @@ div.midias_sociais{
   position:absolute;
   margin-left:900px;
   display:none;
+  margin-top: 10px;
 }
 
 div.midias_sociais.fixed{
