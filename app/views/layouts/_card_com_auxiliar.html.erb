@@ -16,7 +16,7 @@
     <% end -%>
   <div class="over">
     <% if card_com_auxiliar.proximo_horario -%>
-      <% if auxiliar.url!='sala-do-conservatorio' -%>
+      <% if auxiliar.url!='pracadasartes' -%>
         <p class="linha1">Próxima apresentação</p>
         <p class="linha2"><%= card_com_auxiliar.proximo_horario.data==Date.today ? 'Hoje':l(card_com_auxiliar.proximo_horario.data, :format => :weekday)%></p>
         <p class="linha3"><%= l card_com_auxiliar.proximo_horario.data, :format => :short %></p>

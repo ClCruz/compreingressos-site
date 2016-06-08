@@ -25,7 +25,7 @@
 	<div class="over">
     <% if destaque_menor_v2.proximo_horario -%>
       <% if defined?(auxiliar) %>
-        <% if auxiliar.url!='sala-do-conservatorio' -%>
+        <% if auxiliar.url!='pracadasartes' -%>
         <p class="linha1">Próxima apresentação</p>
         <p class="linha2"><%= destaque_menor_v2.proximo_horario.data==Date.today ? 'Hoje':l(destaque_menor_v2.proximo_horario.data, :format => :weekday)%></p>
         <p class="linha3"><%= l destaque_menor_v2.proximo_horario.data, :format => :short %></p>
