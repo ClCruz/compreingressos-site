@@ -54,6 +54,8 @@
   	<link href="/favicon.ico" rel="shortcut icon"/>
   	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,200italic,300,600,200' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/stylesheets/ci.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/icons/socicon/styles.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/icons/flaticon1/flaticon.css">
     <% if (!session[:desktop] or session[:desktop]==0) and @paginaapp.blank? -%>
       <link rel="stylesheet" href="/stylesheets/cimobile.min.css"/>
       <script type="text/javascript">
@@ -108,7 +110,73 @@
       <!-- End Facebook Pixel Code -->
     <% end %>
   </head>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/nova_home.css">
   <body>
+  <div id="novo_menu">
+      <div class="centraliza">
+        <div class="banner_1">banner 1</div>  
+        <div class="itens">
+            <div class="primeira">
+              <div class="logo">
+                <img src="../images/menu_logo.png">
+              </div>
+            </div>
+            <div class="meio">
+              <div class="div_header">
+                <ul class="opcoes">
+                  <li><a href="#">Minha Conta</a></li>
+                  <li><a href="#">Todos os Espetáculos</a></li>
+                  <li><a href="#">Teatros e Casas de Show</a></li>
+                </ul>
+              </div>
+              <div class="clearfix"></div>
+              <div class="bottom">
+                <div class="local">
+                  <div class="icone flaticon-placeholder-for-map"></div>
+                  <div class="txt container geral cidade">
+                    <span>Cidade</span>
+                    <span>Escolha sua cidade</span>
+                  </div>
+                </div>
+                <div class="container geral genero">
+                  <div class="icone flaticon-office-list"></div>
+                  <div class="txt">
+                    <span>Genero</span>
+                    <span>genero preferido</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <span class="clearfix"></span>
+
+            <div class="fim">
+              <div class="div_header">
+                <span class="flaticon-star"></span>
+                <span class="btn">área exclusiva ASSINANTE A</span>
+              </div>
+
+              <div class="bottom">
+                  <div class="search">
+                      <span class="flaticon-magnifier"></span>
+                      <span><input type="text" placeholder="Espetáculo, diretor, teatro, elenco"></input></span>
+                  </div>
+                  <div class="icones">
+                      <div class="icone_social">
+                          <a href="#"></a>
+                        <span class="socicon-facebook"></span>
+                      </div>
+                      <div class="icone_social">
+                          <a href="#"></a>
+                        <span class="socicon-instagram"></span>
+                      </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+      </div>
+  </div> <!-- ... -->
+  <div style="clear: both;"></div>
 <% if session[:app].blank? -%>
     <div class="baixe_app">
       <div class="baixe_app_close">X</div>
@@ -116,145 +184,8 @@
     </div>
 <% end -%>
     <div id="pai">
-<% if !@noheaderfooter -%>
-        <div id="guia_espetaculos">
-          <div class="centraliza">
-            <div class="container">
-              <div class="left">
-                <img src="/images/ico_guiaespetaculos.png" />
-                <p class="frase1">Assine e ganhe</p>
-                <p class="frase2">faça parte do nosso grupo<br>de assinantes, concorra<br>a ingressos, receba<br>descontos e promoções<br>exclusivas</p>
-              </div>
-              <div class="right">
-                <form id="newsletter">
-                  <div class="container">
-                    <div class="numero um">
-                      <div class="check"></div>
-                    </div>
-                    <input type="text" value="insira seu nome" name="nome" />
-                  </div>
-                  <div class="container">
-                    <div class="numero dois">
-                      <div class="check"></div>
-                    </div>
-                    <input type="text" value="insira seu e-mail" name="email" />
-                  </div>
-                  <div class="container tres">
-                    <div class="numero tres">
-                      <div class="check"></div>
-                    </div>
-                    <div class="container_estado">
-                      <p class="estadoselecionado">seu estado <span></span></p>
-                    </div>
-                    <ul class="containerestados">
-                      <li rel="Acre">AC</li>
-                      <li rel="Alagoas">AL</li>
-                      <li rel="Amapá">AP</li>
-                      <li rel="Amazonas">AM</li>
-                      <li rel="Bahia">BA</li>
-                      <li rel="Ceará">CE</li>
-                      <li rel="Distrito Federal">DF</li>
-                      <li rel="Espírito Santo">ES</li>
-                      <li rel="Goiás">GO</li>
-                      <li rel="Maranhão">MA</li>
-                      <li rel="Mato Grosso">MT</li>
-                      <li rel="Mato Grosso do Sul">MS</li>
-                      <li rel="Minas Gerais">MG</li>
-                      <li rel="Pará">PR</li>
-                      <li rel="Paraíba">PB</li>
-                      <li rel="Paraná">PR</li>
-                      <li rel="Pernambuco">PE</li>
-                      <li rel="Piauí">PI</li>
-                      <li rel="Rio de Janeiro">RJ</li>
-                      <li rel="Rio Grande do Norte">RN</li>
-                      <li rel="Rio Grande do Sul">RS</li>
-                      <li rel="Rondônia">RO</li>
-                      <li rel="Roraima">RR</li>
-                      <li rel="Santa Catarina">SC</li>
-                      <li rel="São Paulo">SP</li>
-                      <li rel="Sergipe">SE</li>
-                      <li rel="Tocantins">TO</li>
-                    </ul>
-                    <input type="hidden" name="estado" value="0"/>
-                  </div>
-                  <div class="container status">
-                    <div class="segura">
-                      <div class="status" onclick="$('#newsletter').submit();"></div>
-                      <div class="loading"></div>
-                    </div>
-                    <input type="checkbox" id="check_acordo" checked="checked" class="checkbox" />
-                    <label class="label" for="check_acordo">
-                      Li e concordo com a<br />
-                      <a href="/privacidade" target="_blank">política de privacidade.</a>
-                    </label>
-                  </div>
-                </form>
-              </div>
-            </div>
-            <div class="aba fechado">
-              Assine o guia de espetáculos <span></span>
-            </div>        
-          </div>
-        </div>
-    	  <div id="menu_topo">
-          <div class="centraliza">
-            <div class="topo">
-              <div class="links">
-                <div class="facebook">
-                  <div id="fb-root"></div>
-                  <script>(function(d, s, id) {
-                    var js, fjs = d.getElementsByTagName(s)[0];
-                    if (d.getElementById(id)) return;
-                    js = d.createElement(s); js.id = id;
-                    js.src = "//connect.facebook.net/pt_BR/all.js#xfbml=1";
-                    fjs.parentNode.insertBefore(js, fjs);
-                  }(document, 'script', 'facebook-jssdk'));</script>
-                  <fb:like href="https://www.facebook.com/compreingressos" send="false" layout="button_count" width="160" show_faces="true" font="verdana"></fb:like>
-                </div>
-                <a href="<%=ENVIRONMENT_VARS['host_compra']%>/comprar/minha_conta.php">Minha conta</a>
-                <a href="/espetaculos"<%=" class='ativo'" if controller.controller_name=='espetaculos' and controller.action_name=='index' and params[:cidade].blank? and params[:genero].blank? and params[:busca].blank?%>>Todos os espetáculos</a>
-                <a href="/teatros"<%=" class='ativo'" if controller.controller_name=='teatros' and controller.action_name=='index'%>>Teatros e casas de show</a>
-              </div>
-            </div>
-            <div class="container_mini_cabecalho linha">
-              <div class="bottom">
-                <a href="/" class="logo"></a>
-                <div class="busca_mobile">
-                  <form method="get" action="/espetaculos/busca">
-                    <div class="container buscar">
-                      <input type="text" value="espetáculo, diretor, teatro..." onblur="if(this.value=='') this.value='espetáculo, diretor, teatro...';" onfocus="if(this.value=='espetáculo, diretor, teatro...') this.value='';" name="busca">
-                      <input type="submit" class="submit" value="buscar" />
-                    </div>
-                  </form>
-                </div>
-                <div class="container_busca">
-                  <div id="busca">
-                    <div class="container geral cidade">
-                      <div class="icone"></div>
-                      <p>cidade</p>
-                      <% if @conjuntocidade %>
-                        <p class="help<%=@conjuntocidade.blank? ? '':' ativo'%>"><%=@conjuntocidade.blank? ? 'Escolha sua cidade':@conjuntocidade.nome%></p>
-                      <% else %>
-                      <p class="help<%=@cidade.blank? ? '':' ativo'%>"><%=@cidade.blank? ? 'Escolha sua cidade':@cidade.nome%></p>
-                      <% end %>
-                    </div>
-                    <div class="container geral genero">
-                      <div class="icone"></div>
-                      <p>gênero</p>
-                      <p class="help<%=@genero.blank? ? '':' ativo'%>"><%=@genero.blank? ? 'Escolha o gênero':@genero.nome%></p>
-                    </div>
-                    <form method="get" action="/espetaculos/busca">
-                      <div class="container buscar">
-                        <input type="text" value="espetáculo, diretor, teatro, elenco..." onblur="if(this.value=='') this.value='espetáculo, diretor, teatro, elenco...';" onfocus="if(this.value=='espetáculo, diretor, teatro, elenco...') this.value='';" name="busca">
-                        <input type="submit" class="submit" value="buscar" />
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-    	  </div>
+    <% if !@noheaderfooter -%>
+    <!-- item2 removed -->
 <% cache("menu") do %>
 <%
   cid = Cidade.find_by_sql('SELECT count(t.id) as total, c.id, c.nome FROM cidades as c, teatros as t, espetaculos as e WHERE t.cidade_id = c.id AND e.teatro_id = t.id AND e.ativo = 1 GROUP BY t.cidade_id ORDER BY total DESC')
