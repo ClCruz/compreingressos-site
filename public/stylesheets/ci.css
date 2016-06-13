@@ -2184,7 +2184,7 @@ div.container_selo_itaucard{
 #footer{
   float:left;
   width:100%;
-  background-color:#000;
+  background-color:#cd1331;
 }
 
 #footer div.centraliza{
@@ -2201,19 +2201,12 @@ div.container_selo_itaucard{
 #footer ul li{
   list-style:none;
   margin:0 0 4px;
-  height:23px;
 }
 
-#footer ul li a{
-  font-size:18px;
-  text-transform:lowercase;
-  padding:0 4px;
-  line-height:23px;
-  float:left;
-}
+
 
 #footer ul li a:hover{
-  color:#FFF;
+  color:#000;
 }
 
 #footer ul li a.minha_conta_mobile{
@@ -2222,43 +2215,69 @@ div.container_selo_itaucard{
 
 #footer ul li.title{
   color:#FFF;
-  font-size:31px;
-  font-weight:300;
+  font-size:23px;
+  font-weight:bold;
   margin-bottom:10px;
   text-transform:none;
   font-variant:small-caps;
   height:38px;
 }
-
-#footer ul li a.facebook{
+#footer ul.midias_sociais li.title{
+  width:100%;
   display:block;
-  padding:30px 0 15px 95px;
-  text-transform:none;
-  background-image:url('../images/ico_facebook.png');
-  background-position:0 0;
-  background-repeat:no-repeat;
-  line-height:1.2em;
-  height:42px;
 }
 
-#footer ul li a.facebook:hover{
-  background-position:0 -92px;
+#footer ul.midias_sociais li{
+  float: left;
+  position: relative;
 }
 
-#footer ul li a.twitter{
-  display:block;
-  margin-top:30px;
-  text-transform:none;
-  padding:30px 0 15px 95px;
-  background-image:url('../images/ico_twitter.png');
-  background-position:0 0;
-  background-repeat:no-repeat;
-  line-height:1.2em;
-  height:42px;
+#footer li.midia .icone {
+  background-color: #fff;
+  width: 37px;
+  height: 37px;
+  margin: 5px;
+  border-radius: 30px;
+  transition:background-color 0.4s;
+  -webkit-transition:background-color 0.4s
 }
 
-#footer ul li a.twitter:hover{
-  background-position:0 -92px;
+#footer ul li a{
+  color: #fff;
+}
+
+#footer ul.midias_sociais li a{
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+
+#footer li.midia:hover .icone{
+  background-color: #6d000d;
+}
+
+#footer li.midia:hover .icone span.icon{
+  color:#fff;
+  }
+
+#footer li.midia span {
+  font-size: 20px;
+  text-align: center;
+  display: block;
+  height: 37px;
+  line-height: 37px;
+  color: #cf102d;
+}
+#footer li.midia span:before {
+  line-height: 37px;
+}
+
+@media only screen and (max-width: 979px) and (min-width: 768px) {
+  #footer ul.midias_sociais {
+    width: 195px;
+  }
+
 }
 
 #selos{

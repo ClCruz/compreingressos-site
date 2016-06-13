@@ -53,9 +53,13 @@
   	<meta name="keywords" content="<%=@keywords%>"/>
   	<link href="/favicon.ico" rel="shortcut icon"/>
   	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,200italic,300,600,200' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="/stylesheets/ci.min.css"/>
+
+    <!-- <link rel="stylesheet" href="/stylesheets/ci.min.css"/> -->
     <link rel="stylesheet" type="text/css" href="/stylesheets/icons/socicon/styles.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/icons/flaticon1/flaticon.css">
+
+    <link rel="stylesheet" href="/stylesheets/ci.css"/>
+
     <% if (!session[:desktop] or session[:desktop]==0) and @paginaapp.blank? -%>
       <link rel="stylesheet" href="/stylesheets/cimobile.min.css"/>
       <script type="text/javascript">
@@ -124,16 +128,16 @@
             <div class="meio">
               <div class="div_header">
                 <ul class="opcoes">
-                  <li><a href="#">Minha Conta</a></li>
-                  <li><a href="#">Todos os Espetáculos</a></li>
-                  <li><a href="#">Teatros e Casas de Show</a></li>
+                  <li><a href="https://compra.compreingressos.com/comprar/minha_conta.php">Minha Conta</a></li>
+                  <li><a href="/espetaculos">Todos os Espetáculos</a></li>
+                  <li><a href="/teatros">Teatros e Casas de Show</a></li>
                 </ul>
               </div>
               <div class="clearfix"></div>
               <div class="bottom">
-                <div class="local">
+                <div class="local container geral cidade">
                   <div class="icone flaticon-placeholder-for-map"></div>
-                  <div class="txt container geral cidade">
+                  <div class="txt">
                     <span>Cidade</span>
                     <span>Escolha sua cidade</span>
                   </div>
@@ -163,11 +167,11 @@
                   </div>
                   <div class="icones">
                       <div class="icone_social">
-                          <a href="#"></a>
+                          <a href="http://www.facebook.com/compreingressos" target="_blank"></a>
                         <span class="socicon-facebook"></span>
                       </div>
                       <div class="icone_social">
-                          <a href="#"></a>
+                          <a href="https://www.instagram.com/compreingressos" target="_blank"></a>
                         <span class="socicon-instagram"></span>
                       </div>
                   </div>
