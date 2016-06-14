@@ -1,0 +1,134 @@
+/**/
+div.menu_busca { top: 230px !important; }
+
+div#novo_menu{height: 200px;background: #CF0C2B;padding: 15px 0px;}
+
+div#novo_menu .banner_1{width: 100%;height: 75px;background: rgba(255, 255, 255, 0.2);margin-bottom: 15px;}
+
+div#novo_menu .itens{display: table;}
+div#novo_menu .itens > div{display: table-cell;vertical-align: middle;border-right: 1px solid #000;padding-right: 25px;}
+div#novo_menu .itens > div:last-child{border: none; padding-right: 0px !important; }
+
+div#novo_menu .logo{background: #fff;padding: 25px 5px;border-radius: 30px;float: left;}
+div#novo_menu .logo a.logo {display: block;float: left;width: 158px;height: 60px;background: transparent url(../images/menu_logo.png) 0 0 no-repeat;}
+
+div#novo_menu .meio{padding-left: 25px;}
+div#novo_menu .meio ul.opcoes {margin: 0px;padding: 0px;list-style: none;}
+div#novo_menu .meio ul.opcoes li{color: #fff;font-size: 0.8em;float: left; padding: 0px 15px;border-right: 1px solid #000;}
+div#novo_menu .meio ul.opcoes li:first-child{padding-left: 0px;}
+div#novo_menu .meio ul.opcoes li:last-child{border-right: none;}
+div#novo_menu .meio ul.opcoes li a{transition: all 0.3s;color: inherit;font-size: inherit;}
+div#novo_menu .meio ul.opcoes li a:hover{transition: all 0.3s;color: #930606;}
+
+div#novo_menu .meio .bottom > div {width: 50%;float: left;margin-top: 25px; cursor: pointer; }
+
+div#novo_menu .meio .bottom > div *:before{ transition: color 0.4s;  }
+div#novo_menu .meio .bottom > div:hover *:before { color: #930606; !important; }
+
+div#novo_menu .meio .bottom > div .icone {    margin-right: 10px;    line-height: 40px;    color: #fff;}
+
+div#novo_menu .meio .bottom > div .icone:before { font-size: 30px !important;  }
+
+div#novo_menu .meio .bottom > div .icone, div#novo_menu .meio .bottom > div .txt{float: left;font-size: 0.9em;}
+div#novo_menu .meio .bottom > div .txt span{display: block;color: #fff;}
+div#novo_menu .meio .bottom > div .txt span:first-child{font-weight: bold;}
+
+div#novo_menu .fim { height: 110px; padding-left: 15px; }
+div#novo_menu .fim .bottom { margin-top: 10px;  }
+
+div#novo_menu .bottom input {padding: 10px 20px;box-sizing: border-box;width: 220px; }
+
+.icone_social {padding: 7px;background: #fff;display: inline-block;border-radius: 15px;margin-right: 10px;color: #cf0c2b;transition: background-color 0.4s;position: relative; }
+.icone_social a{position: absolute;width: 100%;height: 100%;z-index: 1;top: 0px; }
+.icone_social:hover {background-color: #980a0a;color: #fff; }
+
+#novo_menu .fim .search {float: left; }
+#novo_menu .fim .icones {float: right;margin-left: 15px;margin-top: 10px; }
+
+span.flaticon-magnifier:before {color: #fff;font-size: 35px;position: relative;top: 9px;margin-right: 15px; }
+
+.fim .btn:hover {background-color: #980a0a;color: #fff; cursor: pointer; }
+.fim .btn {background: #fff;padding: 1px 5px;font-size: 12px;position: relative;top: -2px;color: #990b0a;font-weight: bold;transition: background-color 0.3s; }
+.fim span.flaticon-star {color: #fff; }
+
+@media screen and (max-width: 640px){
+	div#novo_menu .itens > div{ border: none;  }
+	div#novo_menu .banner_1,  
+	div#novo_menu .meio .div_header,
+	div#menu_topo
+	{ display: none !important;  }
+
+	.fim .div_header, .fim .bottom .icones, .fim .bottom [class*="flaticon"] { display: none; }
+
+	.primeira {
+	    padding: 0px !important;
+	    vertical-align: top !important;
+	}
+
+	#novo_menu .fim .search{
+		float: none;
+	}
+
+	div#novo_menu .bottom input{
+		width: 100%;
+	}
+
+	.fim {
+	    display: block !important;
+	    margin-left: 10px;
+	    width: 350px;
+	}
+
+	div#novo_menu .meio .bottom > div{
+		margin-top: 10px;
+	}
+
+	.meio {
+	    padding: 0px;
+	    float: none;
+	    display: block !important;
+	    width: 350px;
+	    height: 10px;
+	}
+
+	div#novo_menu { height: 115px;  }
+}
+
+@media screen and (max-width: 479px){
+	div#novo_menu .itens{
+		display: block;
+	}
+
+	.primeira {
+	    display: block !important;
+	    width: 100%;
+	}
+
+	div#novo_menu {
+    	height: 250px;
+	}
+
+	div#novo_menu .logo {
+	    margin: 0 auto !important;
+	    float: none !important;
+	    width: 95px;
+	}
+	div#novo_menu .itens > div {
+	    width: 100%;
+	    margin: 0px;
+	    padding: 5px;
+	}
+
+	div#novo_menu .meio .bottom > div .icone, div#novo_menu .meio .bottom > div .txt {
+	    margin: 0 auto;
+	}
+	
+	div#novo_menu .meio .bottom > div .icone, div#novo_menu .meio .bottom > div .txt {
+	    float: none;
+	    text-align: center;
+	}
+
+	div#novo_menu .bottom input {
+	    width: 97%;
+	}
+}
