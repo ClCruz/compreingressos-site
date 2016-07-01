@@ -1,6 +1,5 @@
 <% if !session[:app] %>
 <% if !@noheaderfooter %>
-<Link href = "/stylesheets/icons.css" rel = "stylesheet">
   <div id="footer">
     <div class="centraliza">
       <ul>
@@ -25,7 +24,7 @@
         <li><a href="/politica">Política de venda</a></li>
         <li><a href="/privacidade">Privacidade</a></li>
         <li><a href="/meia_entrada.html" rel="publisher" target="_blank">Política de Meia Entrada</a></li>
-        <li><a class="minha_conta_mobile" href="<%=ENVIRONMENT_VARS['host_compra']%>/comprar/minha_conta.php">Minha conta</a></a>
+        <li><a class="minha_conta_mobile" href="<%=ENVIRONMENT_VARS['host_compra']%>/comprar/minha_conta.php">Minha conta</a>
       </ul>
       <ul class="midias_sociais">
         <li class="title">Mídias Sociais</li>

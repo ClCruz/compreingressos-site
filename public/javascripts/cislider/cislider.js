@@ -291,14 +291,6 @@ function CISliderMain(elementStrID, newOpts)
         var time = E.lis[E.getRealPos()].getAttribute('data-showtime');
         if ( !time ) { time = parseInt(E.options.defaultTime); }
 
-        var rand = Math.floor((Math.random() * 1000) + 1);
-        //console.log('Rand:'+rand);
-
-        E.randTO = rand;
-
-        //eval('to_'+rand+' = setTimeout( function(){ E.fn() }, 3000 );');
-
-
         E.autoTime = setTimeout( function () {
             
             E.move();
