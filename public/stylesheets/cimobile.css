@@ -118,14 +118,6 @@
     float:left !important;
     width:310px !important;
   }
-  div.menu_busca{
-    top:90px !important;
-    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=95)";
-    filter:alpha(opacity=95);
-    -moz-opacity:0.95;
-    -khtml-opacity:0.95;
-    opacity:0.95;
-  }
   div.menu_busca a{
     padding:0;
     font-size:15px;
