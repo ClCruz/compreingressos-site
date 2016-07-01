@@ -1,10 +1,7 @@
 development:
-  host: 'http://www.compreingressos.com'
-  #host_compra: 'http://186.237.201.132:81/compreingressos2'
-  host_compra: 'https://compra.compreingressos.com'
-  #host_json: 'http://192.168.13.2' IP interno C&C server
+  host: 'http://development.compreingressos.com:3000'
+  host_compra: 'http://www.ci.dev'
   host_json: 'http://179.124.45.101'
-  #ftp_compra_host1: '192.168.13.2' IP interno C&C server porta 211 tambem
   ftp_compra_host1: '179.124.45.101'
   ftp_compra_port1: '211'
   ftp_compra_username1: 'ftpupld'
