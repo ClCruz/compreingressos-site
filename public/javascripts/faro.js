@@ -1,3 +1,15 @@
+function buscaEspetaculos(id){
+  $busca = $('input[name="busca"]');
+  $btn = $('#busca-espetaculos');
+
+  if ($busca.val() == '' || $busca.val().length < 4) 
+  {
+    return false;
+  }else{
+      $btn.click();
+  }
+}
+
 function midiasSociais(maximo){
   $('.midias_sociais').css('display','block');
   $('.midias_sociais').css('top',(maximo+10).toString()+'px');
@@ -537,132 +549,162 @@ $(document).ready(function(){
   desktopVersion();
   
   /* SCROLLA O CABECALHO/MENU SUPERIOR */
-  $(window).scroll(function(){
-    if (window.innerWidth<=640 && mobileversion==1){
-      var mbmaximo = 0;
-      var mbtop = 90;
-      var mbfixtop = 90;
-      var mbfixtopguia = 303;
-    } else {
-      var mbmaximo = 56;
-      var mbtop = 127;
-      var mbfixtop = 71;
-      var mbfixtopguia = 303;
-    }
+  // $(window).scroll(function(){
+  //   if (window.innerWidth<=640 && mobileversion==1){
+  //     var mbmaximo = 0;
+  //     var mbtop = 90;
+  //     var mbfixtop = 90;
+  //     var mbfixtopguia = 303;
+  //   } else {
+  //     var mbmaximo = 56;
+  //     var mbtop = 127;
+  //     var mbfixtop = 71;
+  //     var mbfixtopguia = 303;
+  //   }
     
-    // Precisa levar em consideração a altura extra se o guia de espetaculos esta aberto ou não para fixar no topo
-    // Guia de espetaculos fechado 
-    if($('#guia_espetaculos .aba').attr('class')=="aba fechado"){
-      if($(window).scrollTop() > mbmaximo){
-        $('.container_mini_cabecalho').addClass('fixed');
-        $('.container_mini_cabecalho').css('top','0px');
-        $('.menu_busca.geral').addClass('fixed');
-        $('.menu_busca.geral').css('top',mbfixtop+'px');
-      } else if($(window).scrollTop() <= mbmaximo){
-        $('.container_mini_cabecalho').removeClass('fixed');
-        $('.container_mini_cabecalho').css('top','56px');
-        $('.menu_busca.geral').removeClass('fixed');
-        $('.menu_busca.geral').css('top',mbtop+'px');
-      }
-    // Guia de espetaculos aberto
-    } else if($('#guia_espetaculos .aba').attr('class')=="aba aberto"){
-      var mbmaximo = mbmaximo+parseInt($('#guia_espetaculos').height());
-      if($(window).scrollTop() > mbmaximo){
-        $('.container_mini_cabecalho').addClass('fixed');
-        $('.container_mini_cabecalho').addClass('pag_especial');
-        $('.container_mini_cabecalho').css('top','0px');
-        $('.menu_busca.geral').addClass('fixed');
-        $('.menu_busca.geral').css('top',mbfixtop+'px');
-      } else if($(window).scrollTop() <= mbmaximo){
-        $('.container_mini_cabecalho').removeClass('fixed');
-        $('.container_mini_cabecalho').removeClass('pag_especial');
-        $('.container_mini_cabecalho').css('top','231px');
-        $('.menu_busca.geral').removeClass('fixed');
-        $('.menu_busca.geral').css('top',mbfixtopguia+'px');
-      }
-    // Caso não exista guia de espetaculos (html removido)
-    } else if($('#guia_espetaculos .aba').length == 0){
-      if($(window).scrollTop() > 0){
-        $('.container_mini_cabecalho').addClass('fixed');
-        $('.container_mini_cabecalho').css('top','0px');
-        $('.menu_busca.geral').addClass('fixed');
-        $('.menu_busca.geral').css('top','70px');
-      } else if($(window).scrollTop() <= 0){
-        $('.container_mini_cabecalho').removeClass('fixed');
-        $('.container_mini_cabecalho').css('top','0px');
-        $('.menu_busca.geral').removeClass('fixed');
-        $('.menu_busca.geral').css('top','70px');
-      }
-    }
-  });
+  //   // Precisa levar em consideração a altura extra se o guia de espetaculos esta aberto ou não para fixar no topo
+  //   // Guia de espetaculos fechado 
+  //   if($('#guia_espetaculos .aba').attr('class')=="aba fechado"){
+  //     if($(window).scrollTop() > mbmaximo){
+  //       $('.container_mini_cabecalho').addClass('fixed');
+  //       $('.container_mini_cabecalho').css('top','0px');
+  //       $('.menu_busca.geral').addClass('fixed');
+  //       $('.menu_busca.geral').css('top',mbfixtop+'px');
+  //     } else if($(window).scrollTop() <= mbmaximo){
+  //       $('.container_mini_cabecalho').removeClass('fixed');
+  //       $('.container_mini_cabecalho').css('top','56px');
+  //       $('.menu_busca.geral').removeClass('fixed');
+  //       $('.menu_busca.geral').css('top',mbtop+'px');
+  //     }
+  //   // Guia de espetaculos aberto
+  //   } else if($('#guia_espetaculos .aba').attr('class')=="aba aberto"){
+  //     var mbmaximo = mbmaximo+parseInt($('#guia_espetaculos').height());
+  //     if($(window).scrollTop() > mbmaximo){
+  //       $('.container_mini_cabecalho').addClass('fixed');
+  //       $('.container_mini_cabecalho').addClass('pag_especial');
+  //       $('.container_mini_cabecalho').css('top','0px');
+  //       $('.menu_busca.geral').addClass('fixed');
+  //       $('.menu_busca.geral').css('top',mbfixtop+'px');
+  //     } else if($(window).scrollTop() <= mbmaximo){
+  //       $('.container_mini_cabecalho').removeClass('fixed');
+  //       $('.container_mini_cabecalho').removeClass('pag_especial');
+  //       $('.container_mini_cabecalho').css('top','231px');
+  //       $('.menu_busca.geral').removeClass('fixed');
+  //       $('.menu_busca.geral').css('top',mbfixtopguia+'px');
+  //     }
+  //   // Caso não exista guia de espetaculos (html removido)
+  //   } else if($('#guia_espetaculos .aba').length == 0){
+  //     if($(window).scrollTop() > 0){
+  //       $('.container_mini_cabecalho').addClass('fixed');
+  //       $('.container_mini_cabecalho').css('top','0px');
+  //       $('.menu_busca.geral').addClass('fixed');
+  //       $('.menu_busca.geral').css('top','0px');
+  //     } else if($(window).scrollTop() <= 0){
+  //       $('.container_mini_cabecalho').removeClass('fixed');
+  //       $('.container_mini_cabecalho').css('top','0px');
+  //       $('.menu_busca.geral').removeClass('fixed');
+  //       $('.menu_busca.geral').css('top','70px');
+  //     }
+  //   }
+  // });
   
+var topCidade = $("#buscaCidade");
+var btnCidade = $("#btnbuscaCidade");
+
+var topGenero = $("#buscaGenero");
+var btnGenero = $("#btnbuscaGenero");
+
+cfgShow(btnCidade, topCidade);
+cfgShow(btnGenero, topGenero);
+
+function cfgShow(btn, div)
+{
+    $(btn).click(function(){
+      var outro = $('[data-topstatus="show"]');
+      $(outro).slideUp();
+
+      $div = $(div);
+      var status = $div.css('display');
+
+      if (status == 'none') 
+      {
+        var h = $div.outerHeight();
+        $div.css('bottom', (h * -1) );
+        $div.slideDown();
+        $div.attr('data-topstatus','show');
+      }
+  })
+}
+
+
+
   /* MENU CIDADE */
-  if($(".container.geral.cidade")){
-  $(".container.geral.cidade").on('click',function(){
-    if($('.menu_busca.geral.cidade').css('display')=='block'){
-      $('.menu_busca.geral.cidade').slideUp(function(){
-        $('.container_mini_cabecalho').addClass('linha');
-      });
-    } else {
-      function menuBuscaCidade(){
-        $('.container_mini_cabecalho').removeClass('linha');
-        $('.menu_busca.geral.cidade').slideDown();
-        $(".menu_busca.geral.cidade").hover(
-          function(){
-            $('.menu_busca.geral.cidade').css('display', 'block');
-          }, 
-          function(){
-            $('.menu_busca.geral.cidade').slideUp(150,function(){
-              $('.container_mini_cabecalho').addClass('linha');
-            });
-          }
-        );
-      }
+  // if($(".container.geral.cidade")){
+  // $(".container.geral.cidade").on('click',function(){
+  //   if($('.menu_busca.geral.cidade').css('display')=='block'){
+  //     $('.menu_busca.geral.cidade').slideUp(function(){
+  //       $('.container_mini_cabecalho').addClass('linha');
+  //     });
+  //   } else {
+  //     function menuBuscaCidade(){
+  //       $('.container_mini_cabecalho').removeClass('linha');
+  //       $('.menu_busca.geral.cidade').slideDown();
+  //       $(".menu_busca.geral.cidade").hover(
+  //         function(){
+  //           $('.menu_busca.geral.cidade').css('display', 'block');
+  //         }, 
+  //         function(){
+  //           $('.menu_busca.geral.cidade').slideUp(150,function(){
+  //             $('.container_mini_cabecalho').addClass('linha');
+  //           });
+  //         }
+  //       );
+  //     }
       
-      if($('.menu_busca.geral.genero').css('display')=='block'){
-        $('.menu_busca.geral.genero').slideUp(150,function(){
-          menuBuscaCidade();
-        });
-      } else {
-        menuBuscaCidade();
-      }
-    }
-  });
-  }
+  //     if($('.menu_busca.geral.genero').css('display')=='block'){
+  //       $('.menu_busca.geral.genero').slideUp(150,function(){
+  //         menuBuscaCidade();
+  //       });
+  //     } else {
+  //       menuBuscaCidade();
+  //     }
+  //   }
+  // });
+  // }
   
   /* MENU GENERO */
-  if($(".container.geral.genero")){
-  $(".container.geral.genero").on('click',function(){
-    if($('.menu_busca.geral.genero').css('display')=='block'){
-      $('.menu_busca.geral.genero').slideUp(function(){
-        $('.container_mini_cabecalho').addClass('linha');
-      });
-    } else {
-      function menuBuscaGenero(){
-        $('.container_mini_cabecalho').removeClass('linha');
-        $('.menu_busca.geral.genero').slideDown();
-        $(".menu_busca.geral.genero").hover(
-          function(){
-            $('.menu_busca.geral.genero').css('display', 'block');
-          }, 
-          function(){
-            $('.menu_busca.geral.genero').slideUp(150,function(){
-              $('.container_mini_cabecalho').addClass('linha');
-            });
-          }
-        );
-      }
+  // if($(".container.geral.genero")){
+  // $(".container.geral.genero").on('click',function(){
+  //   if($('.menu_busca.geral.genero').css('display')=='block'){
+  //     $('.menu_busca.geral.genero').slideUp(function(){
+  //       $('.container_mini_cabecalho').addClass('linha');
+  //     });
+  //   } else {
+  //     function menuBuscaGenero(){
+  //       $('.container_mini_cabecalho').removeClass('linha');
+  //       $('.menu_busca.geral.genero').slideDown();
+  //       $(".menu_busca.geral.genero").hover(
+  //         function(){
+  //           $('.menu_busca.geral.genero').css('display', 'block');
+  //         }, 
+  //         function(){
+  //           $('.menu_busca.geral.genero').slideUp(150,function(){
+  //             $('.container_mini_cabecalho').addClass('linha');
+  //           });
+  //         }
+  //       );
+  //     }
       
-      if($('.menu_busca.geral.cidade').css('display')=='block'){
-        $('.menu_busca.geral.cidade').slideUp(150,function(){
-          menuBuscaGenero();
-        });
-      } else {
-        menuBuscaGenero();
-      }
-    }
-  });
-  }
+  //     if($('.menu_busca.geral.cidade').css('display')=='block'){
+  //       $('.menu_busca.geral.cidade').slideUp(150,function(){
+  //         menuBuscaGenero();
+  //       });
+  //     } else {
+  //       menuBuscaGenero();
+  //     }
+  //   }
+  // });
+  // }
  
   /* POSICIONA O CURSOR NO INICIO DO CAMPO NO GUIA DE ESPETACULOS */
   configuraInputs();

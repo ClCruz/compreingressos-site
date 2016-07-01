@@ -4,35 +4,37 @@
   <head>
     <%= "<meta name='robots' content='noindex, nofollow'>" if Rails.env!="production" -%>
     <style>
-      .baixe_app{
-        background:#FFF url('/images/baixe_app.jpg') center top no-repeat;
-        background-size:100% auto;
-        width:100%;
-        height:2000px;
-        left:0;
-        top:0;
-        position:absolute;
-        z-index:9999;
-        cursor:pointer;
-        display:<%= @baixeapp.blank? ? 'none':'block'%>
+        .baixe_app
+        {
+            background:#FFF url('/images/baixe_app.jpg') center top no-repeat;
+            background-size:100% auto;
+            width:100%;
+            height:2000px;
+            left:0;
+            top:0;
+            position:absolute;
+            z-index:9999;
+            cursor:pointer;
+            display:<%= @baixeapp.blank? ? 'none':'block'%>
       }
-      .baixe_app_close{
-        color:#930606;
-        font-size:24px;
-        line-height:30px;
-        font-weight:bold;
-        width:30px;
-        height:30px;
-        position:absolute;
-        top:5px;
-        right:5px;
-        font-family:Verdana;
-        text-align:center;
-        background-color:#FFF;
-        -moz-border-radius:3px;
-        -webkit-border-radius:3px;
-        border-radius:3px;
-        cursor:pointer;
+      .baixe_app_close
+      {
+            color:#930606;
+            font-size:24px;
+            line-height:30px;
+            font-weight:bold;
+            width:30px;
+            height:30px;
+            position:absolute;
+            top:5px;
+            right:5px;
+            font-family:Verdana;
+            text-align:center;
+            background-color:#FFF;
+            -moz-border-radius:3px;
+            -webkit-border-radius:3px;
+            border-radius:3px;
+            cursor:pointer;
       }
       .baixe_app_close.navegar{
         background-color:transparent;
@@ -46,18 +48,22 @@
       body{
         overflow:hidden;
       }
-<% end -%>
+
+    <% end -%>
     </style>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
   	<meta name="description" content="<%=@description%>"/>
   	<meta name="keywords" content="<%=@keywords%>"/>
   	<link href="/favicon.ico" rel="shortcut icon"/>
+
   	<link href='/stylesheets/font-source-sans-pro.css' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/stylesheets/ci.min.css"/>
     <link rel="stylesheet" type="text/css" href="/stylesheets/icons/socicon/styles.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/icons/flaticon1/flaticon.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/ciSlider/default.css">
+
     <% if (!session[:desktop] or session[:desktop]==0) and @paginaapp.blank? -%>
-      <link rel="stylesheet" href="/stylesheets/cimobile.min.css"/>
+      <link rel="stylesheet" href="/stylesheets/cimobile.css"/>
       <script type="text/javascript">
         var mobileversion = 1;
       </script>
@@ -72,7 +78,8 @@
     <meta property="og:site_name" content="COMPREINGRESSOS.COM"/>
   	<%= "<meta property='og:image' content='#{@imagem}'/>" if @imagem %>
   	<title><%= @title.blank? ? "COMPREINGRESSOS.COM - Gestão de bilheteria e venda de ingressos para teatros e casas de show" : @title+" - COMPREINGRESSOS.COM"%></title>
-    <%= javascript_include_tag 'jquery.2.0.0.min.js', 'jquery-ui.1.10.3.min.js', 'jquery.touch-punch.min', 'jquery.shapeshift.min.js', 'masonry.pkgd.min.js', 'faro.js', 'modernizr.custom.97074.js', 'jquery.hoverdir.js', 'jquery-easing-1.3.js', 'jquery-transit-modified.js', 'jquery.galleriffic.js', 'idangerous_swiper_min.js' -%>
+    <%= javascript_include_tag 'jquery-1.11.3.min.js', 'jquery.mobile-1.4.5.min.js', 'jquery.shapeshift.min.js', 'masonry.pkgd.min.js', 'faro.js', 'modernizr.custom.97074.js', 'jquery.hoverdir.js', 'jquery-easing-1.3.js', 'jquery-transit-modified.js', 'jquery.galleriffic.js', 'idangerous_swiper_min.js' -%>
+
     <script type="text/javascript">
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-16656615-1']);
@@ -106,6 +113,7 @@
     <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=810467559012473&ev=PageView&noscript=1"/></noscript>
     <!-- End Facebook Pixel Code -->
     <% end %>
+    <script type="text/javascript" src="/javascripts/ciSlider/cislider.js"></script>
   </head>
   <link rel="stylesheet" type="text/css" href="/stylesheets/nova_home.css">
   <body>
@@ -115,7 +123,9 @@
         <div class="itens">
             <div class="primeira">
               <div class="logo">
-                <img src="../images/menu_logo.png">
+                <a href="/">
+                  <img src="../images/menu_logo.png">
+                </a>
               </div>
             </div>
             <div class="meio">
@@ -128,25 +138,24 @@
               </div>
               <div class="clearfix"></div>
               <div class="bottom">
-                <div class="local container geral cidade">
+                <div id="btnbuscaCidade" class="local container geral cidade">
                   <div class="icone flaticon-placeholder-for-map"></div>
                   <div class="txt">
                     <span>Cidade</span>
                     <span>Escolha sua cidade</span>
                   </div>
                 </div>
-                <div class="container geral genero">
+                <div id="btnbuscaGenero" class="container geral genero">
                   <div class="icone flaticon-office-list"></div>
                   <div class="txt">
                     <span>Genero</span>
                     <span>genero preferido</span>
                   </div>
                 </div>
+                <div class="clearfix"></div>
               </div>
             </div>
-
-            <span class="clearfix"></span>
-
+              <div class="clearfix"></div>
             <div class="fim">
               <div class="div_header">
                 <span class="flaticon-star"></span>
@@ -155,8 +164,11 @@
 
               <div class="bottom">
                   <div class="search">
-                      <span class="flaticon-magnifier"></span>
-                      <span><input type="text" placeholder="Espetáculo, diretor, teatro, elenco"></input></span>
+                    <form method="get" action="/espetaculos/busca">
+                        <span class="flaticon-magnifier" onclick="buscaEspetaculos();"></span>
+                        <input type="submit" id="busca-espetaculos" class="ls-tn" />
+                        <span><input name="busca" type="text" placeholder="Espetáculo, diretor, teatro, elenco"></input></span>
+                      </form>
                   </div>
                   <div class="icones">
                       <div class="icone_social">
@@ -170,18 +182,10 @@
                   </div>
                 </div>
             </div>
+            <div class="cleaner"></div>
         </div>
       </div>
-  </div> <!-- ... -->
-  <div style="clear: both;"></div>
-<% if session[:app].blank? -%>
-    <div class="baixe_app">
-      <div class="baixe_app_close">X</div>
-      <div class="baixe_app_close navegar"></div>
-    </div>
-<% end -%>
-    <div id="pai">
-    <% if !@noheaderfooter -%>
+          <% if !@noheaderfooter -%>
     <!-- item2 removed -->
 <% cache("menu") do %>
 <%
@@ -224,20 +228,20 @@
     end
   end
 -%>
-    	  <div class="menu_busca geral container cidade">
-    	    <div class="centraliza">
-    	      <a href="/espetaculos?cidade=Todas as cidades"<%=" class='ativo'" if params[:cidade]=='Todas as cidades'%>>Todas as cidades</a>
-<% for cidade in cid -%>
-              <a href="/espetaculos?cidade=<%=cidade.nome%><%= "&ordem=#{lparam(params[:ordem])}" if params[:ordem] %>" class="<%='ativo' if params[:cidade]==cidade.nome%><%=' negrito' if cidade.total.to_i>=10%>"><%=cidade.nome%> <span>(<%=cidade.total%>)</span></a>
-<% end -%>
+        <div id="buscaCidade" class="menu_busca geral container cidade">
+          <div class="centraliza">
+            <a href="/espetaculos?cidade=Todas as cidades"<%=" class='ativo'" if params[:cidade]=='Todas as cidades'%>>Todas as cidades</a>
+              <% for cidade in cid -%>
+                <a href="/espetaculos?cidade=<%=cidade.nome%><%= "&ordem=#{lparam(params[:ordem])}" if params[:ordem] %>" class="<%='ativo' if params[:cidade]==cidade.nome%><%=' negrito' if cidade.total.to_i>=10%>"><%=cidade.nome%> <span>(<%=cidade.total%>)</span></a>
+              <% end -%>
           </div>
-    	  </div>
-        <div class="menu_busca geral container genero">
+        </div>
+        <div id="buscaGenero" class="menu_busca geral container genero">
           <div class="centraliza">
             <a href="/espetaculos?cidade=<%= @cidade.blank? ? 'Todas as cidades':@cidade.nome %>&genero=Todos os gêneros"<%=" class='ativo'" if params[:genero]=='Todos os gêneros'%>>Todos os gêneros</a>
-<% for genero in gen -%>
+              <% for genero in gen -%>
               <a href="/espetaculos?<%= "cidade=#{@cidade.nome}&" if !@cidade.blank? %>genero=<%=genero.nome%><%= "&ordem=#{lparam(params[:ordem])}" if params[:ordem] %>" class="<%='ativo' if params[:genero]==genero.nome%>"><%=genero.nome%> <span>(<%=genero.total%>)</span></a>
-<% end -%>
+              <% end -%>
           </div>
         </div>
 <% end -%>
@@ -248,8 +252,73 @@
           </div>
         </div>
 <% end -%>
+  </div> <!-- fecha novo_menu -->
+  <div style="clear: both;"></div>
+<% if session[:app].blank? -%>
+    <div class="baixe_app">
+      <div class="baixe_app_close">X</div>
+      <div class="baixe_app_close navegar"></div>
+    </div>
+<% end -%>
+    <div id="pai">
     	<div id="background_holder">
-<%= yield %>
+    <script>
+
+        $(document).ready(function () {
+            t = CISlider('mainSlider',{
+                slideTo: 'right',
+                auto: true,
+                teste: { status: true, msg: 'Hello world!' },
+                defaultTime: 1,
+            });
+
+           CISlider('sSlider');
+        });
+    </script>
+<!-- novosbanners -->
+<!-- <div class="centraliza"> -->
+    <div id="mainSlider" class="ciSlider bn2">
+        <ul>
+          <li data-showtime="4">
+              <a href="#PaginaDeLink"></a>
+              <div class="img" style="background-image: url(/images/cislider/mamonas.jpg)"></div>
+              <div class="sliderTitulo">Musical dos Mamonas</div>
+          </li>
+          <li data-showtime="2">
+              <a href="#PaginaDeLink"></a>
+              <div class="img" style="background-image: url(/images/cislider/divazz.jpg)"></div>
+              <div class="sliderTitulo">Divazz</div>
+          </li>
+          <li data-showtime="2">
+              <a href="#PaginaDeLink"></a>
+              <div class="img" style="background-image: url(/images/cislider/sorte.jpg)"></div>
+              <div class="sliderTitulo">Até que a sorte nos separe</div>
+          </li>
+        </ul>
+    </div>
+
+    <div id="sSlider" class="ciSlider bn3">
+        <ul>
+            <li data-showtime="3">
+                <a href="#PaginaDeLink"></a>
+                <div class="img" style="background-image: url(/images/cislider/bn_mn1.png)"></div>
+                <div class="sliderTitulo">Notícias Populares Lorem ipsum dolro sit amet consectetur adisping elit</div>
+            </li>
+            <li data-showtime="3">
+                <a href="#PaginaDeLink"></a>
+                <div class="img" style="background-image: url(/images/cislider/bn_mn2.png)"></div>
+                <div class="sliderTitulo">Beatles</div>
+            </li>
+            <li data-showtime="3">
+                <a href="#PaginaDeLink"></a>
+                <div class="img" style="background-image: url(/images/cislider/bn_mn3.png)"></div>
+                <div class="sliderTitulo">Terça Insana</div>
+            </li>
+        </ul>
+    </div>
+  <!-- </div> -->
+<!-- ./novosbanners -->
+      <% #yield %>
     	</div>
       <%= render :partial => 'layouts/footer' %>
   	</div>
