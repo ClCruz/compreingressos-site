@@ -32,6 +32,8 @@ div.navBtn div[data-activenav="active"] {  background-color: white;  border-colo
 #sSlider div.img {  background-size: 100%;  background-position: 50% 0%;  }
 
 
+.ui-loader { display:  none;  }
+
 @media screen and (min-width: 769px) and (max-width: 1024px){
     /*.bn2 {  width: 655px;  }*/
     /*.bn3 {  width: 369px;  }*/

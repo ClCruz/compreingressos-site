@@ -4,7 +4,7 @@ function CISlider(id, paramns){
 
 $.vmouse.moveDistanceThreshold = 10;
 // $.vmouse.clickDistanceThreshold = 0.1;
-// $.vmouse.resetTimerDuration = 10000;
+$.vmouse.resetTimerDuration = 10000;
 /**
  * Configura o slider com base na estrutura HTML do parent @param {string} elementStrID
  * @member E [object] Objeto que será retornado com todas as configurações do slider.
@@ -64,6 +64,12 @@ function CISliderMain(elementStrID, newOpts)
         E.cfgUL();
         E.cfgParamns();
 
+        $(E.ul).find('a').on('vclick', function(){
+            var attr = $(this).attr('href');
+            //alert(attr);
+            // window.location = attr;
+        })
+
         //Se estiver efetuando o resize, não adicionar um novo evento para não duplicar
         if ( !paramns.resized )
         {
@@ -75,7 +81,9 @@ function CISliderMain(elementStrID, newOpts)
                     if (E.options.slideTo == 'right') 
                     {
                         E.ul.style.right = E.initialPosition + 'px';
-                    }else{
+                    }
+                    else
+                    {
                         E.ul.removeAttribute('style');
                     }
                     
@@ -88,10 +96,9 @@ function CISliderMain(elementStrID, newOpts)
         function getSize(){
             var screenSize  =$(window).width();
             
-            if (screenSize < 1024) 
-            {
-                var MOB = E.mobile;
-                //E.cfgMobile();
+            var MOB = E.mobile;
+            if (screenSize < 1024) {
+                E.navBox.style.display="none";
                 MOB.cfgTapHold();
             }
 
@@ -108,85 +115,95 @@ function CISliderMain(elementStrID, newOpts)
 
         cfgTapHold: function()
         {
-            var e = $(E.ul);
-            $(e).on('vmousedown', function(){
+            MOB = E.mobile;
+            //var E = E;
+            var ul = $(E.ul);
+
+            $(ul).on('vmousedown', function(){
+                
                 $this = $(this);
-                //console.log('Wait...');
                 clearTimeout(E.autoTime);
 
-                $(e).on('vmousemove', function(e){
-                    //console.log(e);
-                    console.log('x:'+e.pageX);
-                    MOB.freeMove(e.pageX);
-                    //console.log('y:'+e.pageY);
+                $this.on('vmousemove', function(event){
+                    E.freeMove(event.pageX);
                 })
 
                 $this.on('vmouseup', function(){
-                    //console.log('Ok, lets go!');
-                    E.__setTimeToMove();
+                    
+                    var soltoem = parseInt(E.ul.style[E.options.slideTo]);
+                    //converter posição para numero positivo. left sempre será negativo
+                    if (E.options.slideTo == 'left') { soltoem = soltoem * -1; }
+                    
+                    //Indice que deve ir
+                    var idx = E.getRealPos(Math.round(soltoem / parseInt(E.width)));
+                    
+                    E.nextPos = idx;
+                    E.prevPos = (idx - 1 < 0) ? E.lis.length-1 : idx - 1;
+
+                    E.move(true);
+
+                    MOB.prevPos = null;
+
+                    if (E.options.auto) { E.__setTimeToMove(); }
 
                     $this.unbind('vmouseup');
                     $this.unbind('mousemove');
                 })
             })
         },
+    },
 
-        freeMove: function()
+    //Movimentação com Touchscreen
+        E.freeMove = function(pos)
         {
-            //var E = E.mobile
             if (MOB.prevPos == null) { MOB.prevPos = pos; return false; }
 
-            if (MOB.options.slideTo == 'right') 
-            {
-                if (MOB.prevPos > pos) 
-                { 
-                    var resto = MOB.prevPos - pos;
-                    console.log('>>>');
-                    //E.ul.style.right = (parseInt(E.ul.style.right) + resto) + "px";
-                    //E.ul.style.right = (parseInt(E.ul.style.right) + pos) + "px";
-                }
-                else
-                {
-                    var resto = MOB.prevPos + pos;
-                    console.log('<<<');
-                    //E.ul.style.right = (parseInt(E.ul.style.right) - resto) + "px";   
-                }
-            }
-        }
-    }
+            velocidade = 4.5;
 
-    E.freeMove = function(pos){
-        if (E.mobCfgs.prevPos == null) { E.mobCfgs.prevPos = pos; return false; }
-
-        if (E.options.slideTo == 'right') 
-        {
-            if (E.mobCfgs.prevPos > pos) 
+            if ( MOB.prevPos > pos ) 
             { 
-                var resto = E.mobCfgs.prevPos - pos;
+                if (E.options.slideTo == 'right') 
+                {
+                    var moveTo = (parseInt(E.ul.style.right) + velocidade);
+                    var ultimaPosicao = (E.fullWidth - E.width); //Largura total - largura de 1 banner
+                    if ( moveTo >= ultimaPosicao ) { return false; }
+                    MOB.prevPos = pos; //definir posição anterior como a posição atual da função
+                }
+                else if (E.options.slideTo == 'left') 
+                {
+                    var moveTo = (parseInt(E.ul.style.left) - velocidade);
+                    var ultimaPosicao = (E.fullWidth - E.width) * -1; //Largura total - largura de 1 banner
 
-                console.log('>>>');
-                E.ul.style.right = (parseInt(E.ul.style.right) + resto) + "px";
-                //E.ul.style.right = (parseInt(E.ul.style.right) + pos) + "px";
+                    if ( moveTo <= ultimaPosicao ) { return false; }
+                    MOB.prevPos = pos;
+                }
             }
-            else
+            else if( MOB.prevPos < pos )
             {
-                var resto = E.mobCfgs.prevPos + pos;
-
-                console.log('<<<');
-                E.ul.style.right = (parseInt(E.ul.style.right) - resto) + "px";   
-            }
-
+                if (E.options.slideTo == 'right') 
+                {
+                    var moveTo = (parseInt(E.ul.style.right) - velocidade);
+                    if ( moveTo <= 0 ) { return false; }
+                    MOB.prevPos = pos;
+                }
+                else if (E.options.slideTo == 'left') 
+                {
+                    var moveTo = (parseInt(E.ul.style.left) + velocidade);
+                    if ( moveTo >= 0 ) { return false; }
+                    MOB.prevPos = pos; //definir posição anterior como a posição atual da função
+                }
+            }    
+            E.ul.style[E.options.slideTo] = moveTo + "px";   
         }
-    }
 
     E.cfgUL = function ()
     {
-        E.ul             = E.element.getElementsByTagName('ul')[0];              // UL principal do slider
-        E.lis            = E.ul.getElementsByTagName('li');                      // Cada LI representa um banner que será exibido conforme animação
-        E.bannersCount   = E.lis.length;                                         // Total de LIs
-        E.width          = E.element.clientWidth;                                // Largura do container de exibição
-        E.height         = E.element.clientHeight;                               // Altura do container de exibição
-        E.fullWidth      = parseInt(E.element.clientWidth) * E.bannersCount;     // Largura total do slider ( width * bannersCount )
+        E.ul             = E.element.getElementsByTagName('ul')[0];        // UL principal do slider
+        E.lis            = E.ul.getElementsByTagName('li');                // Cada LI representa um banner que será exibido conforme animação
+        E.bannersCount   = E.lis.length;                                   // Total de LIs
+        E.width          = $(E.element).outerWidth();                      // Largura do container de exibição
+        E.height         = $(E.element).outerHeight();                     // Altura do container de exibição
+        E.fullWidth      = $(E.element).outerWidth() * E.bannersCount;     // Largura total do slider ( width * bannersCount )
 
         switch(E.options.slideTo)
         {
@@ -199,7 +216,8 @@ function CISliderMain(elementStrID, newOpts)
                 break;
         }
 
-        function cfgVertical(orientation){
+        function cfgVertical(orientation)
+        {
             //TODO
         }
 
@@ -232,6 +250,7 @@ function CISliderMain(elementStrID, newOpts)
             }
             else if (orientation == 'left')
             {
+                E.ul.style.left = '0px';
                //Se for para esquerda, CFG DEFAULT 
             }
 
@@ -265,7 +284,7 @@ function CISliderMain(elementStrID, newOpts)
         }
 
         if ( E.options.hasNavigate ) { E.cfgSliderNav(); }
-        if ( E.options.auto ) { E.__setTimeToMove(); }
+        if ( E.options.auto ) { E.__setTimeToMove(true); }
 
     };
 
@@ -276,9 +295,14 @@ function CISliderMain(elementStrID, newOpts)
         E.curNavBtn.setAttribute('data-activenav','active');
     };
 
-    E.move = function ()
+    E.move = function (prevent)
     {
-        E.validateCurAndNextPos();
+        if (prevent == undefined) { prevent = false; }
+
+        if (!prevent) 
+        {
+            E.validateCurAndNextPos();
+        }
         
         /* MOVER SLIDER */
         E.cfgPersonalizeSlider();
@@ -286,10 +310,15 @@ function CISliderMain(elementStrID, newOpts)
         if ( E.options.hasNavigate ) { E.__setCurNavBtn(); }
     };
 
-    E.__setTimeToMove = function(){
+    E.__setTimeToMove = function(init){
+
+        //Se for no inicio, setar a posição inicial como a ULTIMA POSIçÃO
+        if (init) { E.curPos = E.lis.length -1; }
 
         var time = E.lis[E.getRealPos()].getAttribute('data-showtime');
+        E.log(time);
         if ( !time ) { time = parseInt(E.options.defaultTime); }
+
 
         E.autoTime = setTimeout( function () {
             
@@ -298,15 +327,14 @@ function CISliderMain(elementStrID, newOpts)
             E.__setTimeToMove();
 
         }, time * 1000 )
-        console.log('TO:'+E.autoTime);
     }
 
-    E.fn = function()
-    {
-        E.move();
-        E.curPos++;
-        E.__setTimeToMove();
-    }
+    // E.fn = function()
+    // {
+    //     E.move();
+    //     E.curPos++;
+    //     E.__setTimeToMove();
+    // }
 
     E.cfgPersonalizeSlider = function ()
     {
@@ -408,7 +436,7 @@ function CISliderMain(elementStrID, newOpts)
         {
             btn.onclick = function ()
             {
-                if ( E.options.auto )  { console.log('cleared'); clearTimeout(E.autoTime); }
+                if ( E.options.auto )  { clearTimeout(E.autoTime); }
 
                 //armazenar informação anterior de transição de slider
                 var beforeDuring = E.options.transition.during;

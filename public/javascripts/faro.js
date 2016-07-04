@@ -607,36 +607,64 @@ $(document).ready(function(){
   //     }
   //   }
   // });
-  
-var topCidade = $("#buscaCidade");
-var btnCidade = $("#btnbuscaCidade");
 
-var topGenero = $("#buscaGenero");
-var btnGenero = $("#btnbuscaGenero");
+  var topCidade = $("#buscaCidade");
+  var btnCidade = $("#btnbuscaCidade");
 
-cfgShow(btnCidade, topCidade);
-cfgShow(btnGenero, topGenero);
+  var topGenero = $("#buscaGenero");
+  var btnGenero = $("#btnbuscaGenero");
 
-function cfgShow(btn, div)
-{
+  cfgShow(btnCidade, topCidade);
+  cfgShow(btnGenero, topGenero);
+
+  function cfgShow(btn, div)
+  {
+    $(div).on('click mouseleave',function () {
+      $(this).slideUp();
+      $(this).removeAttr('data-topstatus');
+    });
+
     $(btn).click(function(){
-      var outro = $('[data-topstatus="show"]');
-      $(outro).slideUp();
 
+      var outro = $('[data-topstatus="show"]');
+
+      //Se for o mesmo, apenas esconder.
+      if (outro[0] == div[0])
+      {
+        $(div[0]).slideUp();
+        $(div[0]).removeAttr('data-topstatus');
+        return false;
+      }
+
+      //Se houver outro em exibição, esconder e depois mostrar o novo
+      if (outro[0])
+      {
+        $(outro).removeAttr('data-topstatus');
+        $(outro).slideUp('fast', function () {
+          show(div);
+        });
+      }
+      else
+      {
+        show(div);
+      }
+    });
+
+
+    function show(div)
+    {
       $div = $(div);
       var status = $div.css('display');
 
-      if (status == 'none') 
+      if (status == 'none')
       {
-        var h = $div.outerHeight();
-        $div.css('bottom', (h * -1) );
+        var menuHeight = $('#novo_menu').outerHeight();
+        $div.css('top', menuHeight );
         $div.slideDown();
         $div.attr('data-topstatus','show');
       }
-  })
-}
-
-
+    }
+  }  
 
   /* MENU CIDADE */
   // if($(".container.geral.cidade")){

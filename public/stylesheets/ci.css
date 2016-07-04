@@ -747,6 +747,7 @@ div.centraliza{
 div#pai{
   width:100%;
   overflow:hidden;
+  position: relative;
 }
 
 div#guia_espetaculos{
@@ -4925,10 +4926,10 @@ div.menu_busca.pag_especial .centraliza{
   margin:5px auto;
 }
 .bgclick{
-  top:497px;
   height:1000px;
   display:block;
   position:absolute;
+  top: 0px;
 }
 .bgclick.left{
   left:0;

@@ -51,12 +51,13 @@
 <% end -%>
     </style>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-  	<meta name="description" content="<%=@description%>"/>
-  	<meta name="keywords" content="<%=@keywords%>"/>
-  	<link href="/favicon.ico" rel="shortcut icon"/>
+    <meta name="description" content="<%=@description%>"/>
+    <meta name="keywords" content="<%=@keywords%>"/>
+    <link href="/favicon.ico" rel="shortcut icon"/>
+    <!-- <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css"> -->
 
-  	<link href='/stylesheets/font-source-sans-pro.css' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="/stylesheets/ci.min.css"/>
+    <link href='/stylesheets/font-source-sans-pro.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/stylesheets/ci.css"/>
     <link rel="stylesheet" type="text/css" href="/stylesheets/icons/socicon/styles.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/icons/flaticon1/flaticon.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/ciSlider/default.css">
@@ -167,11 +168,11 @@
                           <span class="flaticon-magnifier" onclick="buscaEspetaculos();"></span>
                           <input type="submit" id="busca-espetaculos" class="ls-tn" />
                           <span><input name="busca" type="text" placeholder="Espetáculo, diretor, teatro, elenco"></input></span>
-                        </form>
+                      </form>
                     </div>
                     <div class="icones">
                         <div class="icone_social">
-                            <a href="http://www.facebook.com/compreingressos" target="_blank"></a>
+                          <a href="http://www.facebook.com/compreingressos" target="_blank"></a>
                           <span class="socicon-facebook"></span>
                         </div>
                         <div class="icone_social">
@@ -184,9 +185,9 @@
               <div class="cleaner"></div>
           </div>
         </div>
-      </div>
+      <!-- </div> continua novo menu para inserir box de cidades e generos dentro dele -->
     <% if !@noheaderfooter -%>
-    <!-- item2 removed -->
+
 <% cache("menu") do %>
 <%
   cid = Cidade.find_by_sql('SELECT count(t.id) as total, c.id, c.nome FROM cidades as c, teatros as t, espetaculos as e WHERE t.cidade_id = c.id AND e.teatro_id = t.id AND e.ativo = 1 GROUP BY t.cidade_id ORDER BY total DESC')
@@ -244,6 +245,8 @@
               <% end -%>
           </div>
         </div>
+
+        </div> <!-- fecha nvo menu -->
 <% end -%>
 <% else -%>
         <div id="menu_topo">
@@ -260,42 +263,26 @@
       <div class="baixe_app_close navegar"></div>
     </div>
 <% end -%>
-    <div id="pai">
-    	<div id="background_holder">
-    <script>
 
-        $(document).ready(function () {
-            t = CISlider('mainSlider',{
-                slideTo: 'right',
-                auto: true,
-                teste: { status: true, msg: 'Hello world!' },
-                defaultTime: 1,
-            });
-
-           CISlider('sSlider');
-        });
-    </script>
-
-    <div id="mainSlider" class="ciSlider bn2">
+<div id="mainSlider" class="ciSlider bn2">
         <ul>
-          <li data-showtime="4">
-              <a href="#PaginaDeLink"></a>
+          <li data-showtime="7">
+              <a href="/mamonas.html"></a>
               <div class="img" style="background-image: url(/images/cislider/mamonas.jpg)"></div>
               <div class="sliderTitulo">Musical dos Mamonas</div>
           </li>
-          <li data-showtime="2">
-              <a href="#PaginaDeLink"></a>
+          <li data-showtime="1">
+              <a href="/divaz.html"></a>
               <div class="img" style="background-image: url(/images/cislider/divazz.jpg)"></div>
               <div class="sliderTitulo">Divazz</div>
           </li>
           <li data-showtime="2">
-              <a href="#PaginaDeLink"></a>
+              <a href="/sorte.html"></a>
               <div class="img" style="background-image: url(/images/cislider/sorte.jpg)"></div>
               <div class="sliderTitulo">Até que a sorte nos separe</div>
           </li>
         </ul>
     </div>
-
     <div id="sSlider" class="ciSlider bn3">
         <ul>
             <li data-showtime="3">
@@ -315,6 +302,16 @@
             </li>
         </ul>
     </div>
+
+    <div id="pai">
+    	<div id="background_holder">
+    <script>
+
+        $(document).ready(function () {
+          CISlider('mainSlider',{ slideTo: 'right' });
+          CISlider('sSlider');
+        });
+    </script>
 
     <div class="cleaner"></div>
       <%= yield %>
