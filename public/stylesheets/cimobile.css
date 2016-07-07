@@ -1,3 +1,12 @@
+@media screen and (max-width: 1024px){
+          .centraliza{
+            width: 100% !important;
+          }
+          #selos2{
+            width: 100%;
+          }
+        }
+
 @media only screen and (max-width:640px){
   body, html{
     -webkit-text-size-adjust:none;
@@ -112,93 +121,6 @@
   }
   div#busca div.container.buscar, div#busca form{
     display:none;
-  }
-  
-  div#menu_topo div.bottom div.container_busca{
-    float:left !important;
-    width:310px !important;
-  }
-  div.menu_busca a{
-    padding:0;
-    font-size:15px;
-    margin:3px 8px;
-  }
-  div.menu_busca .centraliza{
-    margin:0 auto;
-  }
-  #footer div.centraliza{
-    width:300px;
-  }
-  #footer ul{
-    width:150px;
-    margin:10px 0;
-  }
-  #footer ul li{
-    margin:0;
-    height:20px;
-  }
-  #footer ul li.title{
-    font-weight:400;
-    font-size:20px;
-    margin:0;
-    height:28px;
-  }
-  #footer ul li a{
-    font-size:12px;
-    line-height:20px;
-    padding:0;
-  }
-  #footer ul li a.minha_conta_mobile{
-    display:block;
-  }
-  #footer ul.midias_sociais{
-    float:left;
-    width:350px;
-    margin-top:0;
-  }
-  #footer ul li a.facebook, #footer ul li a.twitter {
-    font-size:12px;
-    background-size:50px 100px;
-    padding: 18px 0 2px 55px;
-    height:30px;
-    margin:6px 0 0;
-  }
-  #footer ul li a.facebook:hover, #footer ul li a.twitter:hover{
-    background-position:0 -50px;
-  }
-  #footer ul li.midia{
-    width:150px;
-    float:left;
-    height:auto;
-  }
-  #selos div.centraliza{
-    width:300px;
-    margin:0 10px;
-    display:none;
-  }
-  #selos #certsign{
-    width:70px !important;
-    float:left !important;
-    margin:17px 0 6px !important;
-  }
-  #selos #certsign tr td, #selos #certsign tr td a{
-    padding:0;
-    width:70px !important;
-  }
-  #selos div#armored_website{
-    float:left;
-    width:80px !important;
-    margin:7px 0 0 0 !important;
-  }
-  #selos div#armored_website a{
-    width:80px !important;
-  }
-  #selos div#aw_malware, #selos div#aw_malware img{
-    width:80px !important;
-  }
-  #selos p.creditos{
-    margin:5px 0;
-    font-size:11px;
   }
   a.link_adptativo{
     font-size:11px;

@@ -29,21 +29,9 @@
       <ul class="midias_sociais">
         <li class="title">Mídias Sociais</li>
         <li class="midia">
-          <a href="https://www.instagram.com/compreingressos" target="_blank" class="instagram"></a>
-          <div class="icone">
-            <span class="icon socicon-instagram" A style="cursor:pointer"> </span>
-          </div>
-        </li>
-        <li class="midia">
           <a href="http://www.facebook.com/compreingressos" target="_blank" class="facebook"></a>
           <div class="icone">
             <span class="icon socicon-facebook" A style="cursor:pointer"> </span>
-          </div>
-        </li>
-        <li class="midia">
-          <a href="https://www.youtube.com/compreingressos" target="_blank" class="youtube"></a>
-          <div class="icone">
-            <span class="icon socicon-youtube" A style="cursor:pointer"> </span>
           </div>
         </li>
         <li class="midia">
@@ -53,51 +41,67 @@
           </div>
         </li>
         <li class="midia">
+          <a href="http://blog.compreingressos.com/" target="_blank" class="wordpress"></a>
+          <div class="icone">
+            <span class="icon socicon-wordpress" A style="cursor:pointer"> </span>
+          </div>
+        </li>
+        <li class="midia">
+          <a href="https://www.instagram.com/compreingressos" target="_blank" class="instagram"></a>
+          <div class="icone">
+            <span class="icon socicon-instagram" A style="cursor:pointer"> </span>
+          </div>
+        </li>
+        <li class="midia">
+          <a href="https://www.youtube.com/compreingressos" target="_blank" class="youtube"></a>
+          <div class="icone">
+            <span class="icon socicon-youtube" A style="cursor:pointer"> </span>
+          </div>
+        </li>
+        <li class="midia">
           <a href="https://plus.google.com/b/107039038797259256027/107039038797259256027" target="_blank" class="google"></a>
           <div class="icone">
             <span class="icon socicon-googleplus" A style="cursor:pointer"> </span>
           </div>
         </li>
-        <li class="midia">
-          <!-- <a href="http://twitter.com/compreingressos" target="_blank" class="pinterest"></a> -->
-          <div class="icone">
-            <span class="icon socicon-pinterest" A style="cursor:pointer"> </span>
+        <div class="selos">
+          <!-- selos -->
+          <div id="selos2">
+            <script language='javascript'>function vopenw(){tbar='location=no,status=yes,resizable=yes,scrollbars=yes,width=560,height=535';sw=window.open('https://www.certisign.com.br/seal/splashcerti.htm','CRSN_Splash',tbar);sw.focus();}</script>
+            <table style="float:left;width:90px;">
+              <tr>
+                <td>
+                  <a href='javascript:vopenw()'>
+                    <img src="/images/100x46_fundo_branco.gif" style="width:100%;" border="0" align="center" alt="Certisign">
+                  </a>
+                </td>
+                <td>
+                  <script src=https://seal.verisign.com/getseal?host_name=www.compreingressos.com&size=S&use_flash=NO&use_transparent=getsealjs_b.js&lang=pt></script>
+                </td>
+              </tr>
+            </table>
+            <style type="text/css">
+              #aw_malware { width: 80px !important;  }
+              #selos2 table { margin-top: -3px;  }
+            </style>
+            <div id="armored_website" style="float:left;width:74px;">
+              <param id="aw_preload" value="true" />
+            </div>
+            <script type="text/javascript" src="//selo.siteblindado.com/aw.js"></script>
+            <div id="aw_malware" style="float:left;">
+            <param id="aw_malware_preload" value="true" />
+            </div>
+            <script type="text/javascript" src="//selo.siteblindado.com/aw_malware.js"></script>
           </div>
-        </li>
+          <!-- selos -->
+        </div>
       </ul>
+    </div>
+    <div class="cleaner"></div>
+    <div id="brasil">
+      <img src="/images/brasil.gif" style="display: none;">
     </div>
   </div>
 <% end %>
 <% end %>
-<div id="selos">
-  <% if Rails.env == "production" -%>
-  <div class="centraliza">
-      <script language='javascript'>function vopenw(){tbar='location=no,status=yes,resizable=yes,scrollbars=yes,width=560,height=535';sw=window.open('https://www.certisign.com.br/seal/splashcerti.htm','CRSN_Splash',tbar);sw.focus();}</script>
-      <table width='135' border='0' cellpadding='2' cellspacing='0' align='center' style="float:left;margin:17px 0 0 164px">
-        <tr>
-          <td width='135' align='center' valign='middle'>
-            <a href='javascript:vopenw()'>
-              <img src='/images/100x46_fundo_branco.gif' style='margin-right:30px;' border=0 align=center alt='Certisign'>
-            </a>
-          </td>
-          <td width=135 align=center valign=center>
-            <script src=https://seal.verisign.com/getseal?host_name=www.compreingressos.com&size=S&use_flash=NO&use_transparent=getsealjs_b.js&lang=pt></script>
-          </td>
-        </tr>
-      </table>
-      <div id="armored_website" style="float:left;width:115px;height:32px;margin:40px 34px 0px;">
-        <param id="aw_preload" value="true" />
-      </div>
-      <script type="text/javascript" src="//selo.siteblindado.com/aw.js"></script>
-      <div id="aw_malware" style="float:left;margin:36px 0 0;">
-      <param id="aw_malware_preload" value="true" />
-      </div>
-      <script type="text/javascript" src="//selo.siteblindado.com/aw_malware.js"></script>
-  </div>
-  <% end -%>
-  <div class="cleaner"></div>
-  <!-- <p class="creditos">COMPREINGRESSOS.COM 2010 © Todos os direitos reservados.</p> -->
-  <div class="legal_info">
-  </div>
-  <a href="" class="link_adptativo">visualizar na versao desktop</a>
-</div>
+  <a href="" class="link_adptativo hidden">visualizar na versao desktop</a>

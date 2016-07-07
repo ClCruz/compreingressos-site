@@ -547,66 +547,6 @@ $(document).ready(function(){
   
   /* LINK PARA VISUALIZACAO EM VERSAO DESKTOP DO SITE INTEIRO */
   desktopVersion();
-  
-  /* SCROLLA O CABECALHO/MENU SUPERIOR */
-  // $(window).scroll(function(){
-  //   if (window.innerWidth<=640 && mobileversion==1){
-  //     var mbmaximo = 0;
-  //     var mbtop = 90;
-  //     var mbfixtop = 90;
-  //     var mbfixtopguia = 303;
-  //   } else {
-  //     var mbmaximo = 56;
-  //     var mbtop = 127;
-  //     var mbfixtop = 71;
-  //     var mbfixtopguia = 303;
-  //   }
-    
-  //   // Precisa levar em consideração a altura extra se o guia de espetaculos esta aberto ou não para fixar no topo
-  //   // Guia de espetaculos fechado 
-  //   if($('#guia_espetaculos .aba').attr('class')=="aba fechado"){
-  //     if($(window).scrollTop() > mbmaximo){
-  //       $('.container_mini_cabecalho').addClass('fixed');
-  //       $('.container_mini_cabecalho').css('top','0px');
-  //       $('.menu_busca.geral').addClass('fixed');
-  //       $('.menu_busca.geral').css('top',mbfixtop+'px');
-  //     } else if($(window).scrollTop() <= mbmaximo){
-  //       $('.container_mini_cabecalho').removeClass('fixed');
-  //       $('.container_mini_cabecalho').css('top','56px');
-  //       $('.menu_busca.geral').removeClass('fixed');
-  //       $('.menu_busca.geral').css('top',mbtop+'px');
-  //     }
-  //   // Guia de espetaculos aberto
-  //   } else if($('#guia_espetaculos .aba').attr('class')=="aba aberto"){
-  //     var mbmaximo = mbmaximo+parseInt($('#guia_espetaculos').height());
-  //     if($(window).scrollTop() > mbmaximo){
-  //       $('.container_mini_cabecalho').addClass('fixed');
-  //       $('.container_mini_cabecalho').addClass('pag_especial');
-  //       $('.container_mini_cabecalho').css('top','0px');
-  //       $('.menu_busca.geral').addClass('fixed');
-  //       $('.menu_busca.geral').css('top',mbfixtop+'px');
-  //     } else if($(window).scrollTop() <= mbmaximo){
-  //       $('.container_mini_cabecalho').removeClass('fixed');
-  //       $('.container_mini_cabecalho').removeClass('pag_especial');
-  //       $('.container_mini_cabecalho').css('top','231px');
-  //       $('.menu_busca.geral').removeClass('fixed');
-  //       $('.menu_busca.geral').css('top',mbfixtopguia+'px');
-  //     }
-  //   // Caso não exista guia de espetaculos (html removido)
-  //   } else if($('#guia_espetaculos .aba').length == 0){
-  //     if($(window).scrollTop() > 0){
-  //       $('.container_mini_cabecalho').addClass('fixed');
-  //       $('.container_mini_cabecalho').css('top','0px');
-  //       $('.menu_busca.geral').addClass('fixed');
-  //       $('.menu_busca.geral').css('top','0px');
-  //     } else if($(window).scrollTop() <= 0){
-  //       $('.container_mini_cabecalho').removeClass('fixed');
-  //       $('.container_mini_cabecalho').css('top','0px');
-  //       $('.menu_busca.geral').removeClass('fixed');
-  //       $('.menu_busca.geral').css('top','70px');
-  //     }
-  //   }
-  // });
 
   var topCidade = $("#buscaCidade");
   var btnCidade = $("#btnbuscaCidade");
@@ -666,127 +606,17 @@ $(document).ready(function(){
     }
   }  
 
-  /* MENU CIDADE */
-  // if($(".container.geral.cidade")){
-  // $(".container.geral.cidade").on('click',function(){
-  //   if($('.menu_busca.geral.cidade').css('display')=='block'){
-  //     $('.menu_busca.geral.cidade').slideUp(function(){
-  //       $('.container_mini_cabecalho').addClass('linha');
-  //     });
-  //   } else {
-  //     function menuBuscaCidade(){
-  //       $('.container_mini_cabecalho').removeClass('linha');
-  //       $('.menu_busca.geral.cidade').slideDown();
-  //       $(".menu_busca.geral.cidade").hover(
-  //         function(){
-  //           $('.menu_busca.geral.cidade').css('display', 'block');
-  //         }, 
-  //         function(){
-  //           $('.menu_busca.geral.cidade').slideUp(150,function(){
-  //             $('.container_mini_cabecalho').addClass('linha');
-  //           });
-  //         }
-  //       );
-  //     }
-      
-  //     if($('.menu_busca.geral.genero').css('display')=='block'){
-  //       $('.menu_busca.geral.genero').slideUp(150,function(){
-  //         menuBuscaCidade();
-  //       });
-  //     } else {
-  //       menuBuscaCidade();
-  //     }
-  //   }
-  // });
-  // }
-  
-  /* MENU GENERO */
-  // if($(".container.geral.genero")){
-  // $(".container.geral.genero").on('click',function(){
-  //   if($('.menu_busca.geral.genero').css('display')=='block'){
-  //     $('.menu_busca.geral.genero').slideUp(function(){
-  //       $('.container_mini_cabecalho').addClass('linha');
-  //     });
-  //   } else {
-  //     function menuBuscaGenero(){
-  //       $('.container_mini_cabecalho').removeClass('linha');
-  //       $('.menu_busca.geral.genero').slideDown();
-  //       $(".menu_busca.geral.genero").hover(
-  //         function(){
-  //           $('.menu_busca.geral.genero').css('display', 'block');
-  //         }, 
-  //         function(){
-  //           $('.menu_busca.geral.genero').slideUp(150,function(){
-  //             $('.container_mini_cabecalho').addClass('linha');
-  //           });
-  //         }
-  //       );
-  //     }
-      
-  //     if($('.menu_busca.geral.cidade').css('display')=='block'){
-  //       $('.menu_busca.geral.cidade').slideUp(150,function(){
-  //         menuBuscaGenero();
-  //       });
-  //     } else {
-  //       menuBuscaGenero();
-  //     }
-  //   }
-  // });
-  // }
- 
   /* POSICIONA O CURSOR NO INICIO DO CAMPO NO GUIA DE ESPETACULOS */
   configuraInputs();
   
   /* ABRE/FECHA GUIA DE ESPETACULOS */
  var msalturadefault = parseInt($('.midias_sociais').css('top'));
-  $('#guia_espetaculos .aba').on('click',function(){
-    if($(this).attr("class") == "aba fechado"){
-      $('#guia_espetaculos').animate({
-        marginTop:"0px"
-      },500);
-      $(this).attr("class", "aba aberto");
-      
-      $('.menu_busca.geral.cidade, .menu_busca.geral.genero').animate({
-        top:"303px"
-      },500);
-      $('.container_mini_cabecalho').animate({
-        top:(parseInt($('.container_mini_cabecalho').css('top'))+175).toString()+"px"
-      },500);
-      $('.midias_sociais').animate({
-        top:(msalturadefault+175)+'px'
-      },500);
-      midiasSociais(msalturadefault-10+175);
-    }else{
-      if ($('.estadoselecionado span').css('background-position') != '0px 0px'){
-        $('.estadoselecionado span').css('background-position','0px 0px');
-        $('ul.containerestados').fadeOut();
-      }
-      $('#guia_espetaculos').animate({
-        marginTop:"-175px"
-      },500);
-      $(this).attr("class", "aba fechado");
-      
-      $('.menu_busca.geral.cidade, .menu_busca.geral.genero').animate({
-        top:"128px"
-      },500);
-      $('.container_mini_cabecalho').animate({
-        top:(parseInt($('.container_mini_cabecalho').css('top'))-175).toString()+"px"
-      },500);
-      $('.midias_sociais').animate({
-        top:msalturadefault+'px'
-      },500);
-      midiasSociais(msalturadefault-10);
-    }
-  });
   
   /* CLIQUE DO CAMPO ESTADO */
   $('.estadoselecionado').on('click',function(){
     if($('#guia_espetaculos input[name=estado]').val()=='0' || $('#guia_espetaculos input[name=uf]').val()=='undefined'){
       if($('#newsletter .container .tres .check').css('background-position')!='0px -20px'){
-        /*$('#newsletter .container .tres').css('background-position','50% 0');
-        $('#newsletter .container .tres .check').fadeOut(function(){
-          $('#newsletter .container .tres .check').css('background-position','0px -20px').fadeIn(200);
-        });*/
+          //clear
       }
     }
     if ($('.estadoselecionado span').css('background-position') == '0px 0px'){

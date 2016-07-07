@@ -3,7 +3,7 @@ function CISlider(id, paramns){
 }
 
 $.vmouse.moveDistanceThreshold = 10;
-// $.vmouse.clickDistanceThreshold = 0.1;
+$.vmouse.clickDistanceThreshold = 0.1;
 $.vmouse.resetTimerDuration = 10000;
 /**
  * Configura o slider com base na estrutura HTML do parent @param {string} elementStrID
@@ -20,7 +20,8 @@ function CISliderMain(elementStrID, newOpts)
     E.titleDiv          = null; //DIV para exibir titulo do banner que é descrito em HTML
     E.navBox            = null; //DIV de container para os botões de navegação
     E.curNavBtn         = null; //Botão de navegação ativo
-    E.curPos            = null; //int, numero que representa o banner que esta sendo exibido atualmente
+    E.curPos            = 0; //int, numero que representa o banner que esta sendo exibido atualmente
+    E.nextPos           = 1;
     E.ul                = null; //UL principal do slider
     E.lis               = null; //Cada LI representa um banner que será exibido conforme animação
 
@@ -36,17 +37,23 @@ function CISliderMain(elementStrID, newOpts)
 
     //Default options
     E.options = {
+        width: 1920,
+        height: 370,
         eID: elementStrID,
         slideTo: 'left', //Sentido que o slider irá rodar string[left, right] "falta programar orientação vertical(top, bottom)"
-        transition: { during: 'roll', onEnd: 'rollBack' }, //Forma de transição de um para outro banner | during[roll, static], onEnd[rollBack, static]
+
+        //Todo - transition - deixadoa epnas os default during[roll] e onEnd[continuous]
+        transition: { during: 'roll', onEnd: 'continuous' }, //Forma de transição de um para outro banner | during[roll, static], onEnd[continuous, rollBack, static]
+        
         auto: true, //automatico? [boolean]
         hasNavigate: true, //botões de navegação? [boolean]
-        hasTitle: true, //exibir texto de descrição do banner, div.sliderTitulo obrigatória com a descrição [boolean]
+        hasTitle: false, //exibir texto de descrição do banner, div.sliderTitulo obrigatória com a descrição [boolean]
         defaultTime: 1,
         cfgNavigate: {
             transition: 'roll', //[roll, static]
             position: 'center', //posição dos botões de navegação, por enquato, só existe center
         },
+        transitionTime: 1500,
         teste: { status: false, msg: null }
     };
 
@@ -61,14 +68,32 @@ function CISliderMain(elementStrID, newOpts)
 
         E.setDefaultOptions(E.options, newOpts);
         E.element = document.getElementById(elementStrID);
+        
         E.cfgUL();
         E.cfgParamns();
 
-        $(E.ul).find('a').on('vclick', function(){
-            var attr = $(this).attr('href');
-            //alert(attr);
-            // window.location = attr;
-        })
+        //TODO - onde colocar as configs de tapHold para ao dar resize, não exibir as bolinhas? 
+        //Se colocar depois de CFGUL e CFGPARAMS, tapHold não funciona por causa do bug do jqeury que duplica elementos
+
+        function getSize(){
+            var screenSize  =$(window).width();
+            
+            var MOB = E.mobile;
+            if (screenSize < 1024) 
+            {
+                E.log('here!');
+                E.hasNavigateBefore = E.options.hasNavigate;
+                E.options.hasNavigate = false;
+                //E.navBox.style.display="none";
+                MOB.cfgTapHold();
+            }
+            else
+            {
+                E.options.hasNavigate = true; //TODO - pegar before, mas se não existir, pegar padrão
+                //E.navBox.style.display="block";
+                $(E.ul).unbind();
+            }
+        }getSize();
 
         //Se estiver efetuando o resize, não adicionar um novo evento para não duplicar
         if ( !paramns.resized )
@@ -89,20 +114,10 @@ function CISliderMain(elementStrID, newOpts)
                     
                     E.element.removeAttribute('style');
                 }reset();
+
                 E.init(newOpts, { resized: true });      
             })
         }
-
-        function getSize(){
-            var screenSize  =$(window).width();
-            
-            var MOB = E.mobile;
-            if (screenSize < 1024) {
-                E.navBox.style.display="none";
-                MOB.cfgTapHold();
-            }
-
-        }getSize();
     };
 
 
@@ -115,8 +130,8 @@ function CISliderMain(elementStrID, newOpts)
 
         cfgTapHold: function()
         {
+            E.log('cfgtaphold');
             MOB = E.mobile;
-            //var E = E;
             var ul = $(E.ul);
 
             $(ul).on('vmousedown', function(){
@@ -133,14 +148,15 @@ function CISliderMain(elementStrID, newOpts)
                     var soltoem = parseInt(E.ul.style[E.options.slideTo]);
                     //converter posição para numero positivo. left sempre será negativo
                     if (E.options.slideTo == 'left') { soltoem = soltoem * -1; }
-                    
-                    //Indice que deve ir
+
                     var idx = E.getRealPos(Math.round(soltoem / parseInt(E.width)));
                     
                     E.nextPos = idx;
-                    E.prevPos = (idx - 1 < 0) ? E.lis.length-1 : idx - 1;
+                    E.curPos = (idx - 1 < 0) ? E.lis.length-1 : idx - 1;
 
+                    E.options.transitionTime = 500;
                     E.move(true);
+                    E.options.transitionTime = 1500;
 
                     MOB.prevPos = null;
 
@@ -158,7 +174,7 @@ function CISliderMain(elementStrID, newOpts)
         {
             if (MOB.prevPos == null) { MOB.prevPos = pos; return false; }
 
-            velocidade = 4.5;
+            velocidade = 6.5;
 
             if ( MOB.prevPos > pos ) 
             { 
@@ -192,19 +208,33 @@ function CISliderMain(elementStrID, newOpts)
                     if ( moveTo >= 0 ) { return false; }
                     MOB.prevPos = pos; //definir posição anterior como a posição atual da função
                 }
-            }    
+            }
             E.ul.style[E.options.slideTo] = moveTo + "px";   
         }
 
     E.cfgUL = function ()
     {
-        E.ul             = E.element.getElementsByTagName('ul')[0];        // UL principal do slider
-        E.lis            = E.ul.getElementsByTagName('li');                // Cada LI representa um banner que será exibido conforme animação
-        E.bannersCount   = E.lis.length;                                   // Total de LIs
-        E.width          = $(E.element).outerWidth();                      // Largura do container de exibição
-        E.height         = $(E.element).outerHeight();                     // Altura do container de exibição
-        E.fullWidth      = $(E.element).outerWidth() * E.bannersCount;     // Largura total do slider ( width * bannersCount )
+        //E.ul             = E.element.getElementsByTagName('ul')[0];        // UL principal do slider
+        // E.lis            = E.ul.getElementsByTagName('li');                // Cada LI representa um banner que será exibido conforme animação
+        
+        E.ul             = $(E.element).find('> ul')[0];        // UL principal do slider
+        E.lis            = $(E.ul).find('> li');;               // Cada LI representa um banner que será exibido conforme animação
+        E.bannersCount   = E.lis.length;                        // Total de LIs
+        E.width          = $(E.element).outerWidth();           // Largura do container de exibição
+        //E.width          = E.options.width;
 
+        /*
+            TODO - Calcular o WIDTH conforme percentual ou numero informado para o width comum em desktop e não deixar via css.
+            calcular height em percentual
+        */
+            E.percentW = E.options.width * 1920; //Pegar width em percentual - Percentual de laurgura do slider em relação a um montior
+            E.percentH = (E.options.height / E.options.width); //Percentual do HEIGHT em relação ao width - para calcular height em mobile de todas as resoluções
+            newheight         = E.width * E.percentH;
+            E.element.style.height = Math.ceil(newheight) + 'px';
+            E.height         = newheight;                     // Altura do container de exibição
+        /*calcular height em percentual*/
+        
+        E.fullWidth      = $(E.element).outerWidth() * E.bannersCount;     // Largura total do slider ( width * bannersCount )
         switch(E.options.slideTo)
         {
             case 'left': case 'right':
@@ -229,7 +259,7 @@ function CISliderMain(elementStrID, newOpts)
                 //Ler LIs e inverter posições para rodar para a direita. ou seja, a primeira LI deve ser a última.     
                 var i = 0;
                 var newlis = [];
-                var leng = E.lis.length;
+                var leng = $(E.lis).length;
                 while(i < leng)
                 {
                     var clone = E.lis[i].cloneNode(true);
@@ -239,30 +269,40 @@ function CISliderMain(elementStrID, newOpts)
                 }
 
                 //Inserir LIs com posições invertidas na UL para 
-                E.ul.innerHTML = '';
-                for (LI in newlis)
-                {
-                    E.ul.appendChild(newlis[LI]);
-                }
+                $(E.ul).html('');
+                $(newlis).each(function(){
+                    $(E.ul).append($(this));
+                })
+
+                E.lis = $(E.ul).find('> li');
 
                 //Informar que as LIs ja foram revertidas, no caso de instanciar novamente o objeto não inverter de novo as LIS
-                E.ul.setAttribute('data-reverted','true');
+                $(E.ul).attr('data-reverted','true');
             }
             else if (orientation == 'left')
             {
-                E.ul.style.left = '0px';
-               //Se for para esquerda, CFG DEFAULT 
+                //Se for para esquerda, CFG DEFAULT 
+                $(E.ul).css('left', '0px');
             }
 
-            //Configuração default para as LIs
-            for(var i = 0; i< E.bannersCount; i++)
-            {
-                E.lis[i].style.width = E.width + 'px';
-            }
+            $(E.lis).each(function(){
+                $(this).width(E.width);
 
-            E.ul.style.width = E.fullWidth + 'px';
+                //Se continer um mosaico, configurar...
+                $(this).find('ul.mosaico').each(function(){
+                    E.setMosaico($(this))
+                })
+            })
+
+            $(E.ul).width(E.fullWidth);
         }
     };
+
+    E.setMosaico = function(mosaico)
+    {
+        var parent = $(mosaico).parent();
+        $(parent).attr('class', 'hasMosaico');
+    }
 
     /**
      * @member paramns {object} - teste
@@ -283,88 +323,120 @@ function CISliderMain(elementStrID, newOpts)
             E.initialPosition = 0; //Default
         }
 
-        if ( E.options.hasNavigate ) { E.cfgSliderNav(); }
-        if ( E.options.auto ) { E.__setTimeToMove(true); }
+        if ( E.options.hasNavigate ) { E.cfgSliderNav(); } 
+        else 
+            { 
+                if (E.navBox != null) 
+                {
+                    E.navBox.style.display = 'none'; 
+                }
+            }
+        if ( E.options.auto ) { E.__setTimeToMove(); }
 
     };
 
     E.__setCurNavBtn = function () 
     {
-        E.curNavBtn.removeAttribute('data-activenav');
-        E.curNavBtn = E.navBox.getElementsByTagName('div')[E.nextPos];
-        E.curNavBtn.setAttribute('data-activenav','active');
+        //TODO - no mobile, algumas vezes curNavBtn é undefined. verificar porque.
+        if (E.curNavBtn != undefined) 
+        {
+            E.curNavBtn.removeAttribute('data-activenav');
+            E.curNavBtn = E.navBox.getElementsByTagName('div')[E.nextPos];
+            E.curNavBtn.setAttribute('data-activenav','active');
+        }
     };
 
     E.move = function (prevent)
     {
         if (prevent == undefined) { prevent = false; }
-
-        if (!prevent) 
-        {
-            E.validateCurAndNextPos();
-        }
+        if (!prevent) { E.validateCurAndNextPos(); }
         
         /* MOVER SLIDER */
-        E.cfgPersonalizeSlider();
+        E.cfgPersonalizeSlider(prevent);
+
         if ( E.options.hasTitle )  { E.showTitle(); }
         if ( E.options.hasNavigate ) { E.__setCurNavBtn(); }
+
+        //Depois de mover e exibir tudo, aumentar posição atual;
+        E.curPos++;
     };
 
-    E.__setTimeToMove = function(init){
-
-        //Se for no inicio, setar a posição inicial como a ULTIMA POSIçÃO
-        if (init) { E.curPos = E.lis.length -1; }
+    E.__setTimeToMove = function(){
 
         var time = E.lis[E.getRealPos()].getAttribute('data-showtime');
-        E.log(time);
         if ( !time ) { time = parseInt(E.options.defaultTime); }
 
+        clearTimeout(E.autoTime); //limapr qualquer timeout existente, evitar bugs
 
         E.autoTime = setTimeout( function () {
             
             E.move();
-            E.curPos++;
             E.__setTimeToMove();
 
         }, time * 1000 )
     }
 
-    // E.fn = function()
-    // {
-    //     E.move();
-    //     E.curPos++;
-    //     E.__setTimeToMove();
-    // }
-
-    E.cfgPersonalizeSlider = function ()
+    E.cfgPersonalizeSlider = function (manualScroll)
     {
-        if ( E.options.slideTo == 'right' ) 
+        clearTimeout(E.autoTime);
+        var options = {};
+
+        var pixelsNextPos = ( E.nextPos * E.width ) * -1;
+        if (E.options.slideTo == 'right') 
         {
-            if (E.nextPos == 0) 
-            {
-                pixelsNextPos = E.initialPosition;
-            }
-            else
-            {
-                pixelsNextPos = (E.initialPosition - (E.width * E.nextPos) );
-            }
-        }
-        else if( E.options.slideTo == 'left' )
-        {
-            pixelsNextPos = ( E.nextPos * E.width ) * -1;
+            if (E.nextPos == 0) { pixelsNextPos = E.initialPosition; }
+            else { pixelsNextPos = (E.initialPosition - (E.width * E.nextPos) ); }
         }
 
-        var orientation = E.options.slideTo;
+        options[E.options.slideTo] = pixelsNextPos;
 
-        if (pixelsNextPos != 0 || pixelsNextPos != E.initialPosition )
+        //Durante... Se o movimento vier de manualScroll (mobile), não executar continuous
+        if (E.nextPos > 0 || manualScroll)
         {
-            if ( E.options.transition.during == 'roll' ){ eval( '$(E.ul).animate({ '+orientation+': (pixelsNextPos) });' ); }
-            else if( E.options.transition.during == 'static' ){ E.ul.style[orientation] = (pixelsNextPos) + 'px'; }
+            $(E.ul).animate(options, E.options.transitionTime);
         }
-        else if (pixelsNextPos == 0 || pixelsNextPos == E.initialPosition )
+        //Do ultimo para o começo...
+        else
         {
-            if (E.options.transition.onEnd == 'rollBack') { eval( '$(E.ul).animate({ '+orientation+': (pixelsNextPos) });' ); }
-            else if(E.options.transition.onEnd == 'static'){ E.ul.style[orientation] = (pixelsNextPos) + 'px'; }
+            continuous(E.options.slideTo);
+        }
+
+
+        function continuous(to)
+        {
+            if (to == 'right') 
+            {
+                var cloned = E.lis[E.lis.length-1].cloneNode(true); //Pegar a ultima LI, que na verdade é a primeira
+
+                cloned.style.position = 'absolute';
+                cloned.style.left = ($(cloned).outerWidth() * -1) + "px";
+                E.ul.style.position = 'relative';
+
+                E.ul.insertBefore(cloned,E.lis[0]);
+
+                var pixelsNextPos = ( $(E.lis[0]).outerWidth() * -1 );
+                
+                $(E.ul).animate({ right: (pixelsNextPos) }, E.options.transitionTime, function(){
+
+                    E.ul.style.right = E.initialPosition+'px';
+                    cloned.parentNode.removeChild(cloned);
+                });
+            }
+            else if(to == 'left')
+            {
+                var cloned = E.lis[0].cloneNode(true); //edited
+
+                $(E.ul).append(cloned);
+                $(E.ul).width( $(E.ul).find('> li').length * E.width ); //jquery bug - o $ cria outro elemento no seletor, por isso é necessário pegar de novo as LIs
+
+                var pixelsNextPos = (parseInt(E.ul.style.width) - $(E.lis[0]).outerWidth() ) * -1;
+                
+                $(E.ul).animate({ left: (pixelsNextPos) }, E.options.transitionTime, function(){ //edited
+
+                    E.ul.style.left = E.initialPosition+'px'; //edited
+                    cloned.parentNode.removeChild(cloned);
+                });
+            }
         }
     };
 
@@ -397,7 +469,7 @@ function CISliderMain(elementStrID, newOpts)
 
     E.showTitle = function (init)
     {
-        //Na inicialização do site é necessário obrigar a pegar o titulo na posição CURPOS e não NEXTPOS pois o slider 
+        //Na inicialização do site é necessário obrigar a pegar o titulo na posição CURPOS e não NEXTPOS
         var ref = (init) ? E.curPos : undefined ;
 
         var curLI = E.lis[E.getRealPos(ref)].getElementsByClassName('sliderTitulo')[0];
@@ -416,8 +488,14 @@ function CISliderMain(elementStrID, newOpts)
         if ( E.curPos == undefined || E.curPos > realLeng ) { E.curPos = 0; } //Definir inicial ou Zerar
 
         //Se estiver no ultimo, voltar para o primeiro
-        if ( (E.curPos) == realLeng )  { E.nextPos = 0; } 
-        else { E.nextPos = (E.curPos + 1); }
+        if ( (E.curPos) == realLeng )  
+        { 
+            E.nextPos = 0; 
+        }
+        else 
+        { 
+            E.nextPos = (E.curPos + 1); 
+        }
     };
 
     E.cfgSliderNav = function  ()
@@ -436,7 +514,7 @@ function CISliderMain(elementStrID, newOpts)
         {
             btn.onclick = function ()
             {
-                if ( E.options.auto )  { clearTimeout(E.autoTime); }
+                if ( E.options.auto ) { clearTimeout(E.autoTime); }
 
                 //armazenar informação anterior de transição de slider
                 var beforeDuring = E.options.transition.during;
@@ -450,14 +528,18 @@ function CISliderMain(elementStrID, newOpts)
                 E.curNavBtn.setAttribute('data-activenav','active');
 
                 E.move();
-                E.__setTimeToMove();
+
+                if (E.options.auto) 
+                {
+                    E.__setTimeToMove();
+                }
 
                 //Voltar a transição padrão (sem click)
                 E.options.transition.during = beforeDuring;
             }
         }
 
-        E.element.appendChild(E.navBox);
+        $(E.element).append(E.navBox);
 
         /*
         * Config position of nav menu
