@@ -300,8 +300,18 @@ function CISliderMain(elementStrID, newOpts)
 
     E.setMosaico = function(mosaico)
     {
+        //var parent = $(mosaico).parent();
+        //$(parent).attr('class', 'hasMosaico');
+        //$(mosaico).find('li').first().attr('class','hasMosaico');
+        
+        //Por necessidade do ruby, a main LI deve vir dentro da UL do mosaico. Remover a primeira LI que será o banner principal 
+        //e colocar o HTML dentro da LI principal
+        
+        var main = $(mosaico).find('li').first();
+        $(main).remove();
         var parent = $(mosaico).parent();
         $(parent).attr('class', 'hasMosaico');
+        $(main.html()).insertBefore(mosaico);
     }
 
     /**

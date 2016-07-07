@@ -35,9 +35,9 @@ div.navBtn div[data-activenav="active"] {  background-color: white;  border-colo
 .ui-loader { display:  none;  }
 
 /*mosaico cfg*/
-li.hasMosaico > .img { width: 57%; float: left; }
-li.hasMosaico > a { width: 57% !important; }
-
 ul.mosaico { float: left; width: 43%; }
 ul.mosaico li { height: 100%; width: 33.3%; float: left; }
 ul.mosaico li .img { background-size: 100% 100% !important; }
+
+li.hasMosaico > .img { width: 57%; float: left; }
+li.hasMosaico > a { width: 57% !important; }
