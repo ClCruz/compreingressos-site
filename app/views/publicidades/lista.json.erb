@@ -1,0 +1,9 @@
+[
+<% @publicidades.each_with_index do |p,ip| -%>
+{
+  "imagem":"http://www.compreingressos.com/images/publicidades/<%= p.id %>/visor_mobile.jpg",
+  "url":"<%= (p.link.include? "http") ? "#{p.link}":"http://www.compreingressos.com#{p.link}" %>",
+  "descricao":<%=p.descricao.gsub('"','“').to_json%>
+}<%= (@publicidades.size-1) <= ip ? '':',' %>
+<% end -%>
+]

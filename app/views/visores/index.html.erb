@@ -1,5 +1,17 @@
 <h1>Visores</h1>
 <div id="visores">
+<div id="filtrar">  
+  <%= form_tag %>
+  <label for="posicao">Posição:</label>
+  <select name="posicao" class="select_posicao">
+    <% if !params[:posicao].blank? %>
+      <option value="<%=params[:posicao] %>"><%=params[:posicao] %></option>
+    <% end %>
+    <option value="esquerda">Esquerda</option>
+    <option value="direita">Direita</option>
+  </select>
+  <input type="submit" value="Filtrar" class="filtrar_posicao" style="margin:0 50px 0 10px;"/>
+</div><br>
 <% @visores.each do |visor| %>
   <div class="visor" id="visor_<%= visor.id %>">
     <%= link_to( image_tag(visor.imagem.url, :width => 960), visor.link, :target => (visor.blank==true ? '_blank':'_self') ) %>

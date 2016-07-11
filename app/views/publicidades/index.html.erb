@@ -1,0 +1,29 @@
+<div id="container_adm">
+  <p class="title_main">Publicidade</p>
+
+  <table>
+    <tr>
+      <th>Nome</th>      
+      <th>Status</th>
+      <th>Nova janela</th>
+      <th>Data início</th>
+      <th>Data fim</th>
+    </tr>
+
+    <% @publicidades.each do |publicidade| %>
+    <tr>
+      <td><%=h publicidade.nome %></td>
+      <td><%=h publicidade.status ? "Ativo" : "Inativo" %></td>
+      <td><%=h publicidade.blank ? "Sim" : "Não" %></td>      
+      <td><%=h publicidade.data_inicio.strftime("%d/%m/%Y") %></td>
+      <td><%=h publicidade.data_fim.strftime("%d/%m/%Y") %></td>
+      <td class="buttom"><%= link_to image_tag('/admin/botao_editar.png', :alt => 'Editar', :title => 'Editar'), edit_publicidade_path(publicidade) %></td>
+      <td class="buttom"><%= link_to image_tag('/admin/botao_excluir.png', :alt => 'Apagar', :title => 'Apagar'), publicidade, :confirm => 'Deseja realmente excluir?', :method => :delete %></td>
+    </tr>
+    <% end %>
+  </table>
+
+  <br />
+
+  <%= link_to 'Nova Publicidade', new_publicidade_path %>
+</div>

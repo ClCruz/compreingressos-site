@@ -15,7 +15,7 @@
 
 div#novo_menu{height: 185px;background: #cd1331;padding: 5px 0px 15px 0px; position: relative;}
 
-div#novo_menu .banner_1{width: 100%;height: 75px;background: rgba(255, 255, 255, 0.2);margin-bottom: 15px;}
+div#novo_menu .publicidade{width: 100%;height: 75px;background: rgba(255, 255, 255, 0.2);margin-bottom: 15px;}
 
 div#novo_menu .bottom { padding-top: 10px !important; }
 div#novo_menu .meio .bottom { padding-top: 20px !important;    text-align: center; width: 60%; margin: 0 auto; }
@@ -141,7 +141,7 @@ div#selos2 {
 @media screen and (max-width: 640px){
 	div#novo_menu .itens > div{ border: none; }
 	div#novo_menu .itens > div div.bottom { border: none;  }
-	div#novo_menu .banner_1,  
+	div#novo_menu .publicidade,  
 	div#novo_menu .meio .div_header,
 	div#menu_topo{ display: none !important; }
 

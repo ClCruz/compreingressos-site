@@ -1,5 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   
+  map.resources :publicidades
+
   map.connect 'espetaculo_ausentes/save', :controller => :espetaculo_ausentes, :action => :save
 
   map.resources :espetaculo_ausentes

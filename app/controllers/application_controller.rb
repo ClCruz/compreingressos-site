@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   before_filter :authorize
   before_filter :setSEO, :mailchimpecommerce360
   before_filter :check_desktop_version, :check_baixeapp#, :check_location
-  before_filter :set_csp
+  before_filter :set_csp, :set_publicidade
 
   filter_parameter_logging :password, :password_confirmation, :senha, :senha_confirmation # Remove do log o conteudo dos seguintes campos
   
@@ -68,6 +68,10 @@ class ApplicationController < ActionController::Base
 
   def set_csp
     response.headers['Content-Security-Policy'] = "script src 'self' #{ENVIRONMENT_VARS['host']};  media src 'none'; img src ; default src 'self' #{ENVIRONMENT_VARS['host']}"
+  end
+
+  def set_publicidade
+    @publicidade = Publicidade.first(:conditions => ["status = true AND (? between data_inicio AND data_fim)", Date.today], :order => "RAND()")
   end
 #  def check_location
 #    if session[:desktop]==1

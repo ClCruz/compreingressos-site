@@ -1,0 +1,29 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  nome: MyString
+  tempo_de_exibicao: 1
+  link: MyString
+  blank: false
+  ordem: 1
+  imagem_file_name: MyString
+  imagem_content_type: MyString
+  imagem_file_size: 1
+  imagem_updated_at: 2016-06-10 11:57:28
+  status: false
+  data_inicio: 2016-06-10
+  data_fim: 2016-06-10
+
+two:
+  nome: MyString
+  tempo_de_exibicao: 1
+  link: MyString
+  blank: false
+  ordem: 1
+  imagem_file_name: MyString
+  imagem_content_type: MyString
+  imagem_file_size: 1
+  imagem_updated_at: 2016-06-10 11:57:28
+  status: false
+  data_inicio: 2016-06-10
+  data_fim: 2016-06-10

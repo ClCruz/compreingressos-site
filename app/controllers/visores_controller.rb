@@ -5,8 +5,10 @@ class VisoresController < ApplicationController
   
   # GET /visores
   # GET /visores.xml
-  def index
-    @visores = Visor.all(:order => 'visores.order')
+  def index        
+    @visores = Visor.find(:all, 
+                          :conditions => ["posicao = ? OR posicao IS NULL", params["posicao"].blank? ? "esquerda" : params["posicao"]],
+                          :order => 'visores.order')
 
     respond_to do |format|
       format.html # index.html.erb

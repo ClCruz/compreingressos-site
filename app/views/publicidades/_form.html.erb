@@ -1,0 +1,45 @@
+<div id="container_adm">
+  <%= javascript_include_tag :defaults %>
+  <% form_for(@publicidade, :html => { :multipart => true }) do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :nome %><br />
+    <%= f.text_field :nome %>
+  </p>  
+  <p>
+    <%= f.label "#{:script} do Google" %><br />
+    <%= f.text_area :script, :rows => 3, :cols => 75 %>
+  </p>
+  <p>
+    <%= f.label :link %><br />
+    <%= f.text_field :link %>
+  </p>
+  <p>
+    <%= f.label "Abrir link em nova aba" %><br />
+    <%= f.check_box :blank %>
+  </p>
+  <p>
+    <%= f.label :imagem %><br />
+    <%= f.file_field :imagem %><br />
+    <span class="help_text">O tamanho deve ser exatamente 960x75px, o conteúdo não deve ultrapassar 960px do centro da imagem</span>
+    <% if @publicidade.imagem? %>
+      <br /><%= image_tag @publicidade.imagem.url, :style => "max-height:75px; max-width:940px;" %>
+    <% end %>
+  </p>
+  <p>
+    <%= f.label :status %><br />
+    <%= f.check_box :status %>
+  </p>
+  <p>
+    <%= f.label :data_inicio %><br />
+    <%= f.date_select :data_inicio %>
+  </p>
+  <p>
+    <%= f.label :data_fim %><br />
+    <%= f.date_select :data_fim %>
+  </p>
+  <p>
+    <%= f.submit 'Salvar' %>
+  </p>
+  <% end %>
+</div>

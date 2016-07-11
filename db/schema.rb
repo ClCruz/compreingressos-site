@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160331185613) do
+ActiveRecord::Schema.define(:version => 20160711130245) do
 
   create_table "admins", :force => true do |t|
     t.string   "nome"
@@ -144,6 +144,16 @@ ActiveRecord::Schema.define(:version => 20160331185613) do
     t.datetime "updated_at"
   end
 
+  create_table "espetaculo_ausentes", :force => true do |t|
+    t.string   "email"
+    t.string   "artista"
+    t.string   "estilo"
+    t.integer  "municipio_id"
+    t.boolean  "aceita_noticia"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "espetaculos", :force => true do |t|
     t.text     "nome"
     t.text     "sinopse"
@@ -250,6 +260,15 @@ ActiveRecord::Schema.define(:version => 20160331185613) do
 
   add_index "espetaculos_visors", ["espetaculo_id", "visor_id"], :name => "index_espetaculos_visors_on_espetaculo_id_and_visor_id"
   add_index "espetaculos_visors", ["ordem"], :name => "index_espetaculos_visors_on_ordem"
+
+  create_table "estados", :force => true do |t|
+    t.string   "nome"
+    t.string   "sigla"
+    t.integer  "regiao_geografica_id"
+    t.integer  "pais_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "eventos_realizados", :force => true do |t|
     t.string  "temporada",                   :null => false
@@ -365,6 +384,24 @@ ActiveRecord::Schema.define(:version => 20160331185613) do
 
   create_table "intensivamedcontadors", :force => true do |t|
     t.integer "total"
+  end
+
+  create_table "macacos", :force => true do |t|
+    t.string   "nome"
+    t.float    "comprimento_rabo"
+    t.integer  "idade"
+    t.boolean  "ativo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "municipios", :force => true do |t|
+    t.string   "nome"
+    t.integer  "estado_id"
+    t.integer  "pais_id"
+    t.integer  "nr_habitantes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "ocorrencias", :force => true do |t|
@@ -549,12 +586,40 @@ ActiveRecord::Schema.define(:version => 20160331185613) do
     t.datetime "updated_at"
   end
 
+  create_table "paises", :id => false, :force => true do |t|
+    t.integer "id"
+    t.text    "nome"
+  end
+
   create_table "pontosdevenda", :force => true do |t|
     t.string   "titulo"
     t.text     "texto"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "cidade_id"
+  end
+
+  create_table "publicidades", :force => true do |t|
+    t.string   "nome"
+    t.integer  "tempo_de_exibicao"
+    t.string   "link"
+    t.text     "script"
+    t.boolean  "blank"
+    t.integer  "ordem"
+    t.string   "imagem_file_name"
+    t.string   "imagem_content_type"
+    t.integer  "imagem_file_size"
+    t.datetime "imagem_updated_at"
+    t.boolean  "status"
+    t.date     "data_inicio"
+    t.date     "data_fim"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "regioes_geograficas", :id => false, :force => true do |t|
+    t.integer "id"
+    t.text    "nome"
   end
 
   create_table "servicos", :force => true do |t|
@@ -669,6 +734,8 @@ ActiveRecord::Schema.define(:version => 20160331185613) do
     t.integer  "imagem_mobile_file_size"
     t.datetime "imagem_mobile_updated_at"
     t.string   "descricao"
+    t.string   "posicao"
+    t.string   "grupo"
   end
 
   add_index "visores", ["order"], :name => "index_visores_on_order"

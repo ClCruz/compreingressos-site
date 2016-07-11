@@ -26,7 +26,7 @@ class CompreingressosController < ApplicationController
     end
     
     cidade = Cidade.find(session[:cidade_id])
-    
+        
     @visores = Visor.all(:conditions => ["data_de_expiracao >= ?", DateTime.now.in_time_zone('Brasilia')], :order => 'visores.order')
     @banner_fixos = BannerFixo.all(:order => "ordem DESC")
     @home_modulos = HomeModulo.find(:all, :conditions => ["entrada <= ? AND saida > ?", DateTime.now.in_time_zone('Brasilia'), DateTime.now.in_time_zone('Brasilia')], :order => :ordem)

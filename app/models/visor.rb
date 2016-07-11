@@ -1,5 +1,7 @@
 class Visor < ActiveRecord::Base
   KEY_TOKECOMPRE_APP = "8435D5115e46a70i6648715850882eus"
+
+  POSICAO = [["Esquerda", "esquerda"], ["Direita", "direita"]]
   
   validates_presence_of :link, :descricao, :data_de_expiracao
   
