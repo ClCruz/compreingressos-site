@@ -56,7 +56,7 @@
 		<link href="/favicon.ico" rel="shortcut icon"/>
 
 		<link href='/stylesheets/font-source-sans-pro.css' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" href="/stylesheets/ci.css"/>
+		<link rel="stylesheet" href="/stylesheets/ci.min.css"/>
 		<link rel="stylesheet" type="text/css" href="/stylesheets/icons/socicon/styles.css">
 		<link rel="stylesheet" type="text/css" href="/stylesheets/icons/flaticon1/flaticon.css">
 		<link rel="stylesheet" type="text/css" href="/stylesheets/ciSlider/default.css">
@@ -373,85 +373,89 @@
 			<div class="baixe_app_close navegar"></div>
 		</div>
 <% end -%>
-<script>
-		$(document).ready(function () {
-			CISlider
-			(
-				'mainSlider',
-				{ 
-					slideTo: 'right', 
-					auto: false,
-					width: 1370,
-					height: 368
-				}
-			);
 
-			CISlider
-			(
-				'sSlider', 
-				{
-					auto: true,
-					width: 538,
-					height: 371
-				}
-			);
-			
-		});
-</script>
-<div id="mainSlider" class="ciSlider bn2">
-	<ul>
-		<li data-showtime="4">
-			<ul class="mosaico">
-				<li>
-					<a href="#mamonas"></a>
-					<div class="img" style="background-image: url(/images/cislider/finals/ft_main.jpg)"></div>
-				</li>
-				<li>
-					<a href="#bobby"></a>
-					<div class="img" style="background-image: url(/images/cislider/finals/ft_bobby.jpg)"></div>
-				</li>
-				<li>
-					<a href="#ft_fafa"></a>
-					<div class="img" style="background-image: url(/images/cislider/finals/ft_fafa.jpg)"></div>
-				</li>
-				<li>
-					<a href="#gal"></a>
-					<div class="img" style="background-image: url(/images/cislider/finals/ft_gal.jpg)"></div>
-				</li>
-			</ul>
-		</li>
-		<li data-showtime="4">
-			<a href="#divaz"></a>
-			<div class="img" style="background-image: url(/images/cislider/divaz.jpg)"></div>
-			<div class="sliderTitulo">Divazz</div>
-		</li>
-		<li data-showtime="4">
-			<a href="#sorte"></a>
-			<div class="img" style="background-image: url(/images/cislider/lili2.jpg)"></div>
-			<div class="sliderTitulo">Até que a sorte nos separe</div>
-		</li>
-	</ul>
-</div>
+<% if request.fullpath == '/' -%>
+	<script>
+      $(document).ready(function () {
+        CISlider
+        (
+          'mainSlider',
+          { 
+            slideTo: 'right', 
+            auto: true,
+            width: 1370,
+            height: 368
+          }
+        );
 
-<div id="sSlider" class="ciSlider bn3">
-	<ul>
-		<li data-showtime="4">
-			<a href="#itau"></a>
-			<div class="img" style="background-image: url(/images/cislider/finals/mini/mini_1_ita.jpg)"></div>
-			<div class="sliderTitulo">Notícias Populares Lorem ipsum dolro sit amet consectetur adisping elit</div>
-		</li>
-		<li data-showtime="4">
-			<a href="#fim"></a>
-			<div class="img" style="background-image: url(/images/cislider/finals/mini/mini_2_fim.jpg)"></div>
-			<div class="sliderTitulo">Beatles</div>
-		</li>
-		<li data-showtime="4">
-			<a href="#mamonas"></a>
-			<div class="img" style="background-image: url(/images/cislider/finals/mini/mini_3_mam.jpg)"></div>
-			<div class="sliderTitulo">Terça Insana</div>
-		</li>
-	</ul>
-</div>
+        CISlider
+        (
+          'sSlider', 
+          {
+            auto: true,
+            width: 538,
+            height: 371
+          }
+        );
+        
+      });
+  </script>
+  <div id="mainSlider" class="ciSlider bn2">
+    <ul>
+      <li data-showtime="4">
+        <ul class="mosaico">
+          <li>
+            <a href="#mamonas"></a>
+            <div class="img" style="background-image: url(/images/cislider/finals/ft_main.jpg)"></div>
+          </li>
+          <li>
+            <a href="#bobby"></a>
+            <div class="img" style="background-image: url(/images/cislider/finals/ft_bobby.jpg)"></div>
+          </li>
+          <li>
+            <a href="#ft_fafa"></a>
+            <div class="img" style="background-image: url(/images/cislider/finals/ft_fafa.jpg)"></div>
+          </li>
+          <li>
+            <a href="#gal"></a>
+            <div class="img" style="background-image: url(/images/cislider/finals/ft_gal.jpg)"></div>
+          </li>
+        </ul>
+      </li>
+      <li data-showtime="4">
+        <a href="#divaz"></a>
+        <div class="img" style="background-image: url(/images/cislider/divaz.jpg)"></div>
+        <div class="sliderTitulo">Divazz</div>
+      </li>
+      <li data-showtime="4">
+        <a href="#sorte"></a>
+        <div class="img" style="background-image: url(/images/cislider/lili2.jpg)"></div>
+        <div class="sliderTitulo">Até que a sorte nos separe</div>
+      </li>
+    </ul>
+  </div>
+
+  <div id="sSlider" class="ciSlider bn3">
+    <ul>
+      <li data-showtime="4">
+        <a href="#itau"></a>
+        <div class="img" style="background-image: url(/images/cislider/finals/mini/mini_1_ita.jpg)"></div>
+        <div class="sliderTitulo">Notícias Populares Lorem ipsum dolro sit amet consectetur adisping elit</div>
+      </li>
+      <li data-showtime="4">
+        <a href="#fim"></a>
+        <div class="img" style="background-image: url(/images/cislider/finals/mini/mini_2_fim.jpg)"></div>
+        <div class="sliderTitulo">Beatles</div>
+      </li>
+      <li data-showtime="4">
+        <a href="#mamonas"></a>
+        <div class="img" style="background-image: url(/images/cislider/finals/mini/mini_3_mam.jpg)"></div>
+        <div class="sliderTitulo">Terça Insana</div>
+      </li>
+    </ul>
+  </div>
+<% end -%>
+
 <div id="pai">
 	<div id="background_holder">
 		<div class="cleaner"></div>
