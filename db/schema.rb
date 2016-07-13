@@ -386,15 +386,6 @@ ActiveRecord::Schema.define(:version => 20160711130245) do
     t.integer "total"
   end
 
-  create_table "macacos", :force => true do |t|
-    t.string   "nome"
-    t.float    "comprimento_rabo"
-    t.integer  "idade"
-    t.boolean  "ativo"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "municipios", :force => true do |t|
     t.string   "nome"
     t.integer  "estado_id"

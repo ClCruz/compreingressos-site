@@ -81,7 +81,6 @@ function CISliderMain(elementStrID, newOpts)
             var MOB = E.mobile;
             if (screenSize < 1024) 
             {
-                E.log('here!');
                 E.hasNavigateBefore = E.options.hasNavigate;
                 E.options.hasNavigate = false;
                 //E.navBox.style.display="none";
@@ -253,7 +252,7 @@ function CISliderMain(elementStrID, newOpts)
 
         function cfgHorizontal(orientation)
         {
-            //Inverter LIS caso vá para a DIREITA
+            //Inverter LIS caso vá para a DIREITA - data-reverted previne que inverta novamente caso de um resize
             if (orientation == 'right' && !E.ul.getAttribute('data-reverted'))
             {
                 //Ler LIs e inverter posições para rodar para a direita. ou seja, a primeira LI deve ser a última.     
@@ -263,16 +262,21 @@ function CISliderMain(elementStrID, newOpts)
                 while(i < leng)
                 {
                     var clone = E.lis[i].cloneNode(true);
+                    //console.log(clone);
                     var newpos = (leng-1) - i;
                     newlis[newpos] = clone;//E.lis[i];
                     i++;
                 }
 
                 //Inserir LIs com posições invertidas na UL para 
-                $(E.ul).html('');
-                $(newlis).each(function(){
-                    $(E.ul).append($(this));
-                })
+                E.ul.innerHTML = '';
+                var ix = 0;
+                while(ix < newlis.length)
+                {
+                    var nLi = newlis[ix];
+                    E.ul.appendChild(nLi);
+                    ix++;
+                }
 
                 E.lis = $(E.ul).find('> li');
 
@@ -403,7 +407,14 @@ function CISliderMain(elementStrID, newOpts)
         //Durante... Se o movimento vier de manualScroll (mobile), não executar continuous
         if (E.nextPos > 0 || manualScroll)
         {
-            $(E.ul).animate(options, E.options.transitionTime);
+            if (E.options.transition.during == 'roll') 
+            {
+                $(E.ul).animate(options, E.options.transitionTime);
+            }
+            else if (E.options.transition.during == 'static') 
+            {
+                E.ul.style[E.options.slideTo] = pixelsNextPos + 'px';
+            }
         }
         //Do ultimo para o começo...
         else
@@ -529,7 +540,7 @@ function CISliderMain(elementStrID, newOpts)
                 //armazenar informação anterior de transição de slider
                 var beforeDuring = E.options.transition.during;
                 //Verificar como é a transição ao clicar e atribuir
-                E.options.transition.during = E.options.cfgNavigate.transition;
+                E.options.transition.during = E.options.cfgNavigate.transition.during;
                 
                 E.curPos = i - 1;
                 
