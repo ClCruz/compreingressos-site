@@ -140,7 +140,8 @@
   div.menu_busca.pag_especial{
     background-color:<%= @pagina_especial.cor_de_fundo_do_box %>;
     width:947px;
-    top:<%= @pagina_especial.altura_de_inicio_da_listagem+220 %>px;
+    top: 92px;
+    top:<%# @pagina_especial.altura_de_inicio_da_listagem+220 %>px;
   }
   div.menu_busca.pag_especial a{
     color:<%= @pagina_especial.cor_do_link_do_box %>;
@@ -497,7 +498,7 @@
   visorMobile();
 </script>
 <% end %>
-<div class="background_pagina">
+<div class="background_pagina relative">
 <% if !@pagina_especial.mapeamento_de_imagem.blank? -%>
   <div class="centraliza">
     <map name="header_map">

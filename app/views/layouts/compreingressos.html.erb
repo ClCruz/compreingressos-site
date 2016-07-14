@@ -81,7 +81,7 @@
     <meta property="og:site_name" content="COMPREINGRESSOS.COM"/>
     <%= "<meta property='og:image' content='#{@imagem}'/>" if @imagem %>
     <title><%= @title.blank? ? "COMPREINGRESSOS.COM - Gestão de bilheteria e venda de ingressos para teatros e casas de show" : @title+" - COMPREINGRESSOS.COM"%></title>
-    <%= javascript_include_tag 'jquery-1.11.3.min.js', 'jquery-ui.1.10.3.min.js', 'jquery.mobile.custom.min.js', 'jquery.touch-punch.min', 'jquery.shapeshift.min.js', 'masonry.pkgd.min.js', 'faro.js', 'modernizr.custom.97074.js', 'jquery.hoverdir.js', 'jquery-easing-1.3.js', 'jquery-transit-modified.js', 'jquery.galleriffic.js' -%>
+    <%= javascript_include_tag 'jquery-1.11.3.min.js', 'idangerous_swiper_min.js', 'jquery-ui.1.10.3.min.js', 'jquery.mobile.custom.min.js', 'jquery.touch-punch.min', 'jquery.shapeshift.min.js', 'masonry.pkgd.min.js', 'faro.js', 'modernizr.custom.97074.js', 'jquery.hoverdir.js', 'jquery-easing-1.3.js', 'jquery-transit-modified.js', 'jquery.galleriffic.js' -%>
     <script type="text/javascript">
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-16656615-1']);
@@ -199,7 +199,7 @@
     <!-- NEWSLETTER -->
       <div id="novo_menu">
         <div class="centraliza">
-          <% if !@publicidade.nil? %>
+          <% if !@publicidade.nil? && request.fullpath == '/' -%>
             <div class="publicidade">
               <div class="anuncio">
                 <% if @publicidade.script.empty? %>
@@ -395,10 +395,9 @@
           'mainSlider',
           { 
             slideTo: 'right', 
-            auto: false,
+            auto: true,
             width: 1370,
             height: 368,
-            cfgNavigate: { transition: { during: 'static' } }
           }
         );
 

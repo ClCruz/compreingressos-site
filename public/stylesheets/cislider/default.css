@@ -22,7 +22,7 @@ body{  margin: 0px;  padding: 0px;  }
 /* plugin banner cfg */
 
 div.navBtn {  position: absolute;  bottom: 2%;  }
-div.navBtn div {  margin-right: 7px;  display: inline-block;  text-align: center;  background: maroon;  box-sizing: border-box;  border-radius: 17px;  border: 1px solid white;  width: 10px;  height: 10px;  cursor: pointer;  }
+div.navBtn div {  margin-right: 7px;  display: inline-block;  text-align: center;  background: maroon;  box-sizing: border-box;  border-radius: 17px;  border: 1px solid rgba(255, 255, 255, 0);  width: 10px;  height: 10px;  cursor: pointer;  }
 div.navBtn div[data-activenav="active"] {  background-color: white;  border-color: maroon;  }
 
 /* Cfg específica de cada banner */

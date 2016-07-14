@@ -50,6 +50,104 @@
 </div>
 <% end -%>
 <% end -%>
+<% if defined?(@cidade.parallax) and @cidade.parallax? -%>
+<!--
+<style type="text/css">
+  div#background_holder{
+    background-position:center -54px;
+  }
+</style>
+<script type="text/javascript">
+/*if (navigator.userAgent.indexOf('MSIE') != -1 || navigator.appVersion.indexOf('Trident/') > 0 || navigator.userAgent.indexOf('Safari') != -1){
+} else {
+  $(document).ready(function(){
+    $(window).scroll(function(){
+      /*if ($(window).scrollTop() > 54){*/
+        var scroll = ($(window).scrollTop()*<%= @cidade.parallax_valor %>)-54;
+        $('#background_holder').css("background-position", "center "+scroll+"px");
+      /*} else {
+        $('#background_holder').css("background-position", "center 0px");
+      }*/
+    /*});
+  });
+}*/
+</script>
+-->
+<% end -%>
+<% if defined?(@cidade.cidade_visores) and @cidade.cidade_visores.size>0 -%>
+<!--
+<div id="display" class="cidades">
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <%= render :partial => 'layouts/visor_destaque', :collection => @cidade.cidade_visores %>
+    </div>
+  </div>
+  <div class="pagination"></div>
+</div>
+<script type="text/javascript">
+  /*$(function(){
+    var swiperVisor = $('#display .swiper-container').swiper({
+      pagination:'.pagination',
+      mode:'horizontal',
+      speed:300,
+      autoplay:6000,
+      moveStartThreshold:50,
+      loop:true,
+      preventLinks:true,
+      paginationClickable:true
+    });
+  });*/
+</script>
+-->
+<% end -%>
+
+  <div id="home" class="visor_home_mobile" style="display:<%= (defined?(@cidade.cidade_visores) and @cidade.cidade_visores.size>0) ? 'block':'none' %>">
+    <div id="display">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+<% if @cidade.blank? -%>
+          <%= render :partial => 'layouts/visor_destaque', :collection => @visores %>
+<% else -%>
+          <%= render :partial => 'layouts/visor_destaque', :collection => @cidade.cidade_visores %>
+<% end -%>
+        </div>
+      </div>
+    <div class="pagination"></div>
+    </div>
+    <div id="container_banners_fixos" style="display:<%= (defined?(@cidade.cidade_visores) and @cidade.cidade_visores.size>0) ? 'none':'block' %>">
+      <div id="cont_alinha_banners_fixos">
+        <div id="alinha_banners_fixos">
+          <div id="banners_fixos">
+            <% @banner_fixos.each do |banner_fixo| %>
+              <div class="banner_fixo">
+                <% if banner_fixo.link.blank? %>
+                  <%= image_tag(banner_fixo.imagem.url, :width => 160) %>
+                <% else %>
+                  <%= link_to( image_tag(banner_fixo.imagem.url, :width => 170), banner_fixo.link, :target => (banner_fixo.blank==true ? '_blank':'_self')) %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      $(function(){
+        var swiperVisor = $('#display .swiper-container').swiper({
+          pagination:'.pagination',
+          mode:'horizontal',
+          speed:300,
+          autoplay:6000,
+          moveStartThreshold:50,
+          loop:true,
+          preventLinks:true,
+          paginationClickable:true
+        });
+        visorMobile();
+      })
+    </script>
+  </div>
+
 <div class="centraliza">
   <% if @espetaculos_vazio == 1 and params[:auto].blank? %>
   	<h1 class="espetaculos_vazio">Não foi possível encontrar nenhuma atração com o termo pesquisado.</h1>

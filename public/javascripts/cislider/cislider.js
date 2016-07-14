@@ -50,7 +50,7 @@ function CISliderMain(elementStrID, newOpts)
         hasTitle: false, //exibir texto de descrição do banner, div.sliderTitulo obrigatória com a descrição [boolean]
         defaultTime: 1,
         cfgNavigate: {
-            transition: 'roll', //[roll, static]
+            transition: { during: 'static' }, //during: [roll, static]
             position: 'center', //posição dos botões de navegação, por enquato, só existe center
         },
         transitionTime: 1500,
@@ -129,7 +129,6 @@ function CISliderMain(elementStrID, newOpts)
 
         cfgTapHold: function()
         {
-            E.log('cfgtaphold');
             MOB = E.mobile;
             var ul = $(E.ul);
 
@@ -262,7 +261,6 @@ function CISliderMain(elementStrID, newOpts)
                 while(i < leng)
                 {
                     var clone = E.lis[i].cloneNode(true);
-                    //console.log(clone);
                     var newpos = (leng-1) - i;
                     newlis[newpos] = clone;//E.lis[i];
                     i++;
@@ -364,7 +362,6 @@ function CISliderMain(elementStrID, newOpts)
     {
         if (prevent == undefined) { prevent = false; }
         if (!prevent) { E.validateCurAndNextPos(); }
-        
         /* MOVER SLIDER */
         E.cfgPersonalizeSlider(prevent);
 
@@ -403,12 +400,12 @@ function CISliderMain(elementStrID, newOpts)
         }
 
         options[E.options.slideTo] = pixelsNextPos;
-
         //Durante... Se o movimento vier de manualScroll (mobile), não executar continuous
         if (E.nextPos > 0 || manualScroll)
         {
             if (E.options.transition.during == 'roll') 
             {
+                //$(E.ul).animate(options, E.options.transitionTime);
                 $(E.ul).animate(options, E.options.transitionTime);
             }
             else if (E.options.transition.during == 'static') 
@@ -539,6 +536,7 @@ function CISliderMain(elementStrID, newOpts)
 
                 //armazenar informação anterior de transição de slider
                 var beforeDuring = E.options.transition.during;
+
                 //Verificar como é a transição ao clicar e atribuir
                 E.options.transition.during = E.options.cfgNavigate.transition.during;
                 
@@ -607,7 +605,7 @@ function CISliderMain(elementStrID, newOpts)
     },
 
     E.log = function(msg){
-        if ( E.options.eID == 'mainSlider' ) 
+        if ( E.options.eID == 'sSlider' ) 
         {
             console.log(msg);
         }
