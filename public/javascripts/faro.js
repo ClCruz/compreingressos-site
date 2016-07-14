@@ -1,4 +1,4 @@
-function buscaEspetaculos(id){
+function buscaEspetaculos(){
   $busca = $('input[name="busca"]');
   $btn = $('#busca-espetaculos');
 

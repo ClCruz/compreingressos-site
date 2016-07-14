@@ -12,6 +12,9 @@
 }
 
 .cleaner { float: none !important; width: 0px !important; height: 0px !important; clear: both !important; }
+div#novo_menu ul li { list-style: none; }
+div#novo_menu ul  { padding: 0px; margin: 0px; }
+div#novo_menu input { float: none; }
 
 div#novo_menu{height: 185px;background: #cd1331;padding: 5px 0px 15px 0px; position: relative;}
 
@@ -32,8 +35,8 @@ div#novo_menu .logo{background: #fff;padding: 25px 5px;border-radius: 30px;float
 div#novo_menu .logo img{width: 100%;}
 div#novo_menu .logo a.logo {display: block;float: left;width: 158px;height: 60px;background: transparent url(../images/menu_logo.png) 0 0 no-repeat;}
 
-div#novo_menu .meio ul.opcoes { padding-top: 11px; }
-div#novo_menu .meio ul.opcoes li{color: #fff;font-size: 0.8em;float: left; padding: 0px 15px;border-right: 1px solid #000;}
+div#novo_menu .meio ul.opcoes { padding: 0px; padding-top: 11px; }
+div#novo_menu .meio ul.opcoes li{color: #fff;font-size: 0.8em;float: left; padding: 0px 15px;border-right: 1px solid #FFF;}
 div#novo_menu .meio ul.opcoes li:first-child{padding-left: 0px;}
 div#novo_menu .meio ul.opcoes li:last-child{border-right: none;}
 div#novo_menu .meio ul.opcoes li a{transition: all 0.3s;color: inherit;font-size: inherit;}
