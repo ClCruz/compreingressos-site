@@ -50,6 +50,9 @@
       }
 <% end -%>
     </style>
+    <% if request.fullpath == "/lorenzetticultural" %>
+      <meta http-equiv="refresh" content="0;url=http://www.compreingressos.com/lorenzetticultural?hs=1" />
+    <% end %>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <meta name="description" content="<%=@description%>"/>
     <meta name="keywords" content="<%=@keywords%>"/>
@@ -59,7 +62,8 @@
     <link rel="stylesheet" href="/stylesheets/ci.min.css"/>
     <link rel="stylesheet" type="text/css" href="/stylesheets/icons/socicon/styles.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/icons/flaticon1/flaticon.css">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/ciSlider/default.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/cislider/default.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/nova_home.css">
 
     <% if (!session[:desktop] or session[:desktop]==0) and @paginaapp.blank? -%>
       <link rel="stylesheet" href="/stylesheets/cimobile.css"/>
@@ -111,9 +115,8 @@
     <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=810467559012473&ev=PageView&noscript=1"/></noscript>
     <!-- End Facebook Pixel Code -->
     <% end %>
-    <script type="text/javascript" src="/javascripts/ciSlider/cislider.js"></script>
-  </head>
-  <link rel="stylesheet" type="text/css" href="/stylesheets/nova_home.css">
+    <script type="text/javascript" src="/javascripts/cislider/cislider.js"></script>
+  </head>  
   <body>
     <!-- NEWSLETTER -->
     <div id="guia_espetaculos">
@@ -417,72 +420,31 @@
     <ul>
       <li data-showtime="4">
         <ul class="mosaico">
-          <li>
-            <a href="#mamonas"></a>
-            <div class="img" style="background-image: url(/images/cislider/def/ft_0.jpg)"></div>
-          </li>
-          <li>
-            <a href="#bobby"></a>
-            <div class="img" style="background-image: url(/images/cislider/def/ft_1.jpg)"></div>
-          </li>
-          <li>
-            <a href="#ft_fafa"></a>
-            <div class="img" style="background-image: url(/images/cislider/def/ft_2.jpg)"></div>
-          </li>
-          <li>
-            <a href="#gal"></a>
-            <div class="img" style="background-image: url(/images/cislider/def/ft_3.jpg)"></div>
-          </li>
+          <% @visores_grupo.each do |grupo| %>
+            <li>
+              <a href="<%= grupo.link %>"></a>
+              <div class="img" style="background-image: url(<%= grupo.imagem.url %>)"></div>
+            </li>
+          <% end %>          
         </ul>
       </li>
-      <li data-showtime="4">
-        <a href="#divaz"></a>
-        <div class="img" style="background-image: url(/images/cislider/def/budas.jpg)"></div>
-      </li>
-      <li data-showtime="4">
-        <a href="#sorte"></a>
-        <div class="img" style="background-image: url(/images/cislider/def/dicas.jpg)"></div>
-      </li>
-      <li data-showtime="4">
-        <a href="#sorte"></a>
-        <div class="img" style="background-image: url(/images/cislider/def/enquanto.jpg)"></div>
-      </li>
-      <li data-showtime="4">
-        <a href="#sorte"></a>
-        <div class="img" style="background-image: url(/images/cislider/def/fdq.jpg)"></div>
-      </li>
-      <li data-showtime="4">
-        <a href="#sorte"></a>
-        <div class="img" style="background-image: url(/images/cislider/def/mane.jpg)"></div>
-      </li>
-      <li data-showtime="4">
-        <a href="#sorte"></a>
-        <div class="img" style="background-image: url(/images/cislider/def/tdp.jpg)"></div>
-      </li>
-      <li data-showtime="4">
-        <a href="#sorte"></a>
-        <div class="img" style="background-image: url(/images/cislider/def/itau.jpg)"></div>
-      </li>
+      <% @visores_esquerda.each do |visor| %>
+        <li data-showtime="4">
+          <a href="<%= visor.link %>"></a>
+          <div class="img" style="background-image: url(<%= visor.imagem.url %>)"></div>
+        </li>
+      <% end %>
     </ul>
   </div>
 
   <div id="sSlider" class="ciSlider bn3">
     <ul>
-      <li data-showtime="4">
-        <a href="#itau"></a>
-        <div class="img" style="background-image: url(/images/cislider/finals/mini/mini_1_ita.jpg)"></div>
-        <div class="sliderTitulo">Notícias Populares Lorem ipsum dolro sit amet consectetur adisping elit</div>
-      </li>
-      <li data-showtime="4">
-        <a href="#fim"></a>
-        <div class="img" style="background-image: url(/images/cislider/finals/mini/mini_2_fim.jpg)"></div>
-        <div class="sliderTitulo">Beatles</div>
-      </li>
-      <li data-showtime="4">
-        <a href="#mamonas"></a>
-        <div class="img" style="background-image: url(/images/cislider/finals/mini/mini_3_mam.jpg)"></div>
-        <div class="sliderTitulo">Terça Insana</div>
-      </li>
+      <% @visores_direita.each do |visor| %>
+        <li data-showtime="4">
+          <a href="<%= visor.link %>"></a>
+          <div class="img" style="background-image: url(<%= visor.imagem.url %>)"></div>
+        </li>
+      <% end %>
     </ul>
   </div>
 <% end -%>
