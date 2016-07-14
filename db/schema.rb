@@ -386,6 +386,15 @@ ActiveRecord::Schema.define(:version => 20160711130245) do
     t.integer "total"
   end
 
+  create_table "macacos", :force => true do |t|
+    t.string   "nome"
+    t.float    "comprimento_rabo"
+    t.integer  "idade"
+    t.boolean  "ativo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "municipios", :force => true do |t|
     t.string   "nome"
     t.integer  "estado_id"
@@ -577,11 +586,6 @@ ActiveRecord::Schema.define(:version => 20160711130245) do
     t.datetime "updated_at"
   end
 
-  create_table "paises", :id => false, :force => true do |t|
-    t.integer "id"
-    t.text    "nome"
-  end
-
   create_table "pontosdevenda", :force => true do |t|
     t.string   "titulo"
     t.text     "texto"
@@ -606,11 +610,6 @@ ActiveRecord::Schema.define(:version => 20160711130245) do
     t.date     "data_fim"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "regioes_geograficas", :id => false, :force => true do |t|
-    t.integer "id"
-    t.text    "nome"
   end
 
   create_table "servicos", :force => true do |t|

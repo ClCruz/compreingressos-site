@@ -15,7 +15,7 @@ body{  margin: 0px;  padding: 0px;  }
 .ciSlider {  overflow: hidden;  position: relative;  }
 .ciSlider ul {  height: 100%;  position: relative;  }
 .ciSlider ul > li {  height: 100%;  float: left; position: relative; }
-.ciSlider ul > li a{ width: 100%;  height: 100%; position: absolute; }
+.ciSlider ul > li a{ width: 100%;  height: 100%; position: absolute; left: 0px;}
 .ciSlider ul > li div{  height:100%;  }
 .ciSlider ul > li div.sliderTitulo{  position: absolute;  }
 .ciSlider ul > li div.img{  background-repeat: no-repeat;  }
