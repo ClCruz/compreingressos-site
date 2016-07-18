@@ -5,9 +5,9 @@
     <img src="<%= card_sem_auxiliar.img_miniatura.url(:miniatura) %>" height="<%= card_sem_auxiliar.img_miniatura_height %>">
     <h3><%=card_sem_auxiliar.nome%></h3>
   </a>
-  	<p class="teatro"><%=card_sem_auxiliar.teatro.nome%></p>
-  	<p class="cidade"><%=card_sem_auxiliar.cidade.nome%> - <%=card_sem_auxiliar.cidade.estado%></p>
-  	<p class="genero"><%=card_sem_auxiliar.genero.nome%></p>
+  	<p class="teatro"><%=(!card_sem_auxiliar.teatro.nil?) ? card_sem_auxiliar.teatro.nome : "" %></p>
+  	<p class="cidade"><%=(!card_sem_auxiliar.cidade.nil?) ? card_sem_auxiliar.cidade.nome : "" %> - <%=(!card_sem_auxiliar.cidade.nil?) ? card_sem_auxiliar.cidade.estado : ""%></p>
+  	<p class="genero"><%=(!card_sem_auxiliar.genero.nil?) ? card_sem_auxiliar.genero.nome : "" %></p>
 	<div class="over">
     <% if card_sem_auxiliar.proximo_horario -%>
       <p class="linha1">Próxima apresentação</p>

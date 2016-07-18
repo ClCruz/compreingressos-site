@@ -386,7 +386,7 @@ class EspetaculosController < ApplicationController
     
     # Caso nenhum espetaculo seja encontrado
     if !@espetaculos or @espetaculos.size <= 0
-      @espetaculos = Espetaculo.find(:all, :conditions => {:ativo => true}, :order => 'relevancia DESC')
+      @espetaculos = Espetaculo.find(:all, :include => :teatro, :conditions => {:ativo => true}, :order => 'relevancia DESC')
       @espetaculos_vazio = 1
     end
     
@@ -417,7 +417,7 @@ class EspetaculosController < ApplicationController
     
     # Caso nenhum espetaculo seja encontrado
     if !@espetaculos or @espetaculos.size <= 0
-      @espetaculos = Espetaculo.find(:all, :conditions => {:ativo => true}, :order => 'relevancia DESC')
+      @espetaculos = Espetaculo.find(:all, :include => :teatro, :conditions => {:ativo => true}, :order => 'relevancia DESC')
       @espetaculos_vazio = 1
     end
     
