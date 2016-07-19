@@ -26,9 +26,8 @@ class CompreingressosController < ApplicationController
     end
     
     cidade = Cidade.find(session[:cidade_id])
-    
-    @visores_grupo =  Visor.all(:conditions => ["data_de_expiracao >= ? AND posicao = 'esquerda' AND grupo = 'mosaico'", DateTime.now.in_time_zone('Brasilia')], :order => 'visores.order')
-    @visores_esquerda = Visor.all(:conditions => ["data_de_expiracao >= ? AND posicao = 'esquerda' AND grupo = ''", DateTime.now.in_time_zone('Brasilia')], :order => 'visores.order')
+        
+    @visores_esquerda = Visor.all(:conditions => ["data_de_expiracao >= ? AND posicao = 'esquerda'", DateTime.now.in_time_zone('Brasilia')], :order => 'visores.order')
     @visores_direita = Visor.all(:conditions => ["data_de_expiracao >= ? AND posicao = 'direita'", DateTime.now.in_time_zone('Brasilia')], :order => 'visores.order')
     @banner_fixos = BannerFixo.all(:order => "ordem DESC")
     @home_modulos = HomeModulo.find(:all, :conditions => ["entrada <= ? AND saida > ?", DateTime.now.in_time_zone('Brasilia'), DateTime.now.in_time_zone('Brasilia')], :order => :ordem)

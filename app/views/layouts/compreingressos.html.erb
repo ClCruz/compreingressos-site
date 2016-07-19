@@ -402,21 +402,28 @@
 </script>
 <div id="mainSlider" class="ciSlider bn2">
   <ul>
-    <li data-showtime="4">
-      <ul class="mosaico">
-        <% @visores_grupo.each do |grupo| %>
-        <li>
-          <a href="<%= grupo.link %>"></a>
-          <div class="img" style="background-image: url(<%= grupo.imagem.url %>)"></div>
+    <% is_grupo_aberto = false %>    
+    <% @visores_esquerda.each do |visor| %>      
+      <% if visor.grupo.blank? %>
+        <% if is_grupo_aberto %>
+          <% is_grupo_aberto = false %>
+          </ul></li>
+        <% end %>
+        <li data-showtime="4">
+          <a href="<%= visor.link %>"></a>
+          <div class="img" style="background-image: url(<%= visor.imagem.url %>)"></div>
         </li>
-        <% end %>          
-      </ul>
-    </li>
-    <% @visores_esquerda.each do |visor| %>
-    <li data-showtime="4">
-      <a href="<%= visor.link %>"></a>
-      <div class="img" style="background-image: url(<%= visor.imagem.url %>)"></div>
-    </li>
+      <% else %>
+        <% if !is_grupo_aberto %>
+          <% is_grupo_aberto = true %>
+          <li data-showtime="4">
+            <ul class="mosaico">
+        <% end %>
+        <li>
+          <a href="<%= visor.link %>"></a>
+          <div class="img" style="background-image: url(<%= visor.imagem.url %>)"></div>
+        </li>
+      <% end %>
     <% end %>
   </ul>
 </div>
