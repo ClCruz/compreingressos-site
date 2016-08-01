@@ -6,7 +6,7 @@ development:
   password: 123
   pool: 20
   timeout: 50000
-  host: cpnglcsql1001
+  host: localhost
 
 test:
   adapter: mysql

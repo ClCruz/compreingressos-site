@@ -1,3 +1,4 @@
 /public
 /log/newrelic_agent.log
 /log/development.log
+.vagrant
