@@ -33,7 +33,7 @@ staging:
   encoding: utf8
   database: compreingressos_staging
   username: root
-  password: S4c1FufuB4nc0
+  password: 123
   pool: 100
   timeout: 50000
   host: localhost
