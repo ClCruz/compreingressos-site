@@ -29,7 +29,19 @@
   div.menu_busca{
     top:70px;
   }
-  <% end %>
+  <% end %>  
+  .link_site{
+    width: 100%;
+    float: left;
+    text-align: center;
+  }
+  .link_site a{
+    color:#930606;
+  }
+  .link_site a:hover{
+    background:#930606;
+    color:#FFF;
+  }
 </style>
 <% if pagina_selecionada?(@espetaculo, @espetaculo.pagina_especiais.find(:first, :conditions => {:id => 1})) %>
   <% if !@pagina_especial or @pagina_especial.tipo!=2 %>
@@ -81,6 +93,7 @@
         <p class="teatro_info"><%=@espetaculo.teatro.bairro%> - <%=link_to @espetaculo.teatro.cidade.nome, "/espetaculos?cidade=#{@espetaculo.teatro.cidade.nome}&genero="%> - <%=@espetaculo.teatro.cidade.estado%></p>
       <% end %>
   	</div>
+    <div class="link_site">Saiba mais: <%=link_to @espetaculo.site, "http://"+@espetaculo.site, :target => "__blank"%></div>
   	
     <div id="iframe">
       <% if @pagina_especial and @pagina_especial.tipo_de_botao==2 %>

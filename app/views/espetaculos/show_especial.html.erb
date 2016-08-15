@@ -42,6 +42,17 @@
       margin-top:<%= @espetaculo.altura_de_inicio_mobile %>px;
     }
   }
+  .link_site{
+    text-align: center;
+    color:<%=@espetaculo.cor_do_texto_do_cabecalho%>;
+  }
+  .link_site a{
+    color:<%=@espetaculo.cor_do_link_do_box%>;
+  }
+  .link_site a:hover{
+    background:<%=@espetaculo.cor_do_link_do_cabecalho%>;
+    color:<%= @espetaculo.cor_de_fundo %>;
+  }
   <% if @noheaderfooter %>
   #pai div#menu_topo div.bottom div.container_busca{
     margin:0;
@@ -131,7 +142,9 @@
         <p class="teatro_info"><%=@espetaculo.teatro.bairro%> - <%=link_to @espetaculo.teatro.cidade.nome, "/espetaculos?cidade=#{@espetaculo.teatro.cidade.nome}&genero="%> - <%=@espetaculo.teatro.cidade.estado%></p>
       <% end %>
   	</div>
-  	
+    <% if @espetaculo.site != "" or !@espetaculo.site.blank? %>
+    <div class="link_site">Informações complementares: <%=link_to @espetaculo.site, "http://"+@espetaculo.site, :target => "__blank"%></div>
+  	<% end %>
     <div id="iframe">
       <% if @pagina_especial and @pagina_especial.tipo_de_botao==2 %>
         <% if !@pagina_especial.saiba_mais_aviso.blank? %>
