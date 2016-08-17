@@ -184,6 +184,7 @@
     </div>
   </div>
   <!-- NEWSLETTER -->
+  <% if !@noheaderfooter -%>
   <div id="novo_menu">
     <div class="centraliza">
       <% if !@publicidade.nil? && request.fullpath == '/' -%>
@@ -296,7 +297,6 @@
       </div>
     </div>
     <!-- </div> continua novo menu para inserir box de cidades e generos dentro dele -->
-    <% if !@noheaderfooter -%>
 
     <% cache("menu") do %>
     <%
