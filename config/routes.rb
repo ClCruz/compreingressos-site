@@ -106,6 +106,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'institucional/', :controller => :textos, :action => :show, :id => 1
   map.connect 'politica/', :controller => :textos, :action => :show, :id => 2
   map.connect 'privacidade/', :controller => :textos, :action => :show, :id => 3
+  map.connect 'meia-entrada-por-regiao/', :controller => :textos, :action => :show, :id => 5
   
   map.resources :textos
 

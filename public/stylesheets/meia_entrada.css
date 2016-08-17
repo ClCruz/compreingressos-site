@@ -13,6 +13,8 @@ h1 {  color: #C80F2B !important;  font-weight: bold !important;  text-transform:
 div.container { width: 100%; }
 div.content { width: 640px; margin: 0 auto; }
 .clearfix { float: none !important; clear: both !important; }
+div#btn {background: #fff;  border-radius: 30px; width: 330px; height: 5px; padding-top: 17px; padding-bottom: 30px; }
+a.leis {color: #8F0012; }
 /*DEFAULT*/
 
 /*topo*/
