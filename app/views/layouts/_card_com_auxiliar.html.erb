@@ -1,4 +1,5 @@
 <% link = (card_com_auxiliar.link_do_redirecionamento.nil? or card_com_auxiliar.link_do_redirecionamento.empty?) ? "#{url_for card_com_auxiliar}" : "#{card_com_auxiliar.link_do_redirecionamento}" -%>
+<% hotsite = (!auxiliar.hotsite) ? "" : "&hs=1" %>
 <% blank = card_com_auxiliar.blank_de_link_do_redirecionamento ? " target='_blank'" : "" -%>
 <div class="card">
   <a href="<%=link %>?origem=<%=auxiliar.url%><%=preserv_params %>"<%= blank %>>
@@ -24,7 +25,7 @@
       
       <% if !card_com_auxiliar.especificar_data_inicial_de_venda -%>
         <% if card_com_auxiliar.cc_id and auxiliar.tipo_de_botao==1 -%>
-          <a href="<%=link %><%= '?origem='+auxiliar.url %><%=preserv_params %>" class="botao comprar" <%= blank %>></a>
+          <a href="<%=link %><%= '?origem='+auxiliar.url+hotsite %><%=preserv_params %>" class="botao comprar" <%= blank %>></a>
         <% else -%>
           <a href="<%=link %><%= '?origem='+auxiliar.url %><%=preserv_params %>" class="botao saiba_mais" <%= blank %>></a>
         <% end -%>
