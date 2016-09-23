@@ -1,4 +1,6 @@
 class PaginaEspecialVisoresController < ApplicationController
+  before_filter :authorize
+
   # GET /pagina_especial_visores
   # GET /pagina_especial_visores.xml
   def index

@@ -31,6 +31,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :pagina_especial_filtros
 
   map.connect 'pacotes/reorganiza', :controller => :pacotes, :action => :reorganiza
+
+  map.connect 'pagina_especial_visor/reorganiza', :controller => :pagina_especial_visores, :action => :reorganiza
   
   map.resources :pacotes
   

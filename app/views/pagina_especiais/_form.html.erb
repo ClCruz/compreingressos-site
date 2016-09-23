@@ -98,6 +98,10 @@
     <%= f.label :url %><br />
     <%= f.text_field :url %>
   </p>
+  <p>    
+    <%= f.check_box :hotsite %>
+    <%= f.label :hotsite %>
+  </p>
   <p>
     <%= f.check_box :ocultar_cidade %>
     <%= f.label :ocultar_cidade %>
@@ -201,7 +205,7 @@
       axis: 'y',
       update: function(){
         var order = jQuery(this).sortable('serialize');
-        jQuery.get('/pagina_especial_visores/reorganiza/?pagina_especial_id=<%=@pagina_especial.id%>', order, function(response){
+        jQuery.get('/pagina_especial_visor/reorganiza/?pagina_especial_id=<%=@pagina_especial.id%>', order, function(response){
           if(response!='true'){
             alert('Ocorreu um erro ao atualizar a ordem, tente recarregar a página');
           }
