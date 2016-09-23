@@ -1,6 +1,25 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 <%= javascript_include_tag 'idangerous_swiper_min.js' -%>
 
+<% if @pagina_especial.url == 'itaucardshows' %>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.popup').show();
+
+    $('body').css('overflow','hidden');
+    $('.popup').on('click', function(e){
+      e.stopPropagation();
+      // window.location.replace(location.protocol+'//'+location.host+"/mariah-carey-the-sweet-sweet-fantasy-tour");
+    });
+    $('.popup_close').on('click', function(e){
+      e.stopPropagation();
+      $('body').css('overflow','auto');
+      $('.popup').fadeOut(300);
+    });
+  });
+</script>
+<% end %>
+
 <style type="text/css">
 ::-webkit-input-placeholder {
    color: #000;

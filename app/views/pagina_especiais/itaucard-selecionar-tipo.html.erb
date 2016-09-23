@@ -1,3 +1,18 @@
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.popup').show();
+
+    $('body').css('overflow','hidden');
+    $('.popup').on('click', function(e){
+      e.stopPropagation();
+    });
+    $('.popup_close').on('click', function(e){
+      e.stopPropagation();
+      $('body').css('overflow','auto');
+      $('.popup').fadeOut(300);
+    });
+  });
+</script>
 <style type="text/css">
   html{
     overflow-x: hidden !important;

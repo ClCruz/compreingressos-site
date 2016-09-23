@@ -102,6 +102,15 @@
   <script type="text/javascript" src="/javascripts/cislider/cislider.js"></script>
 </head>  
 <body>
+  <div class="popup">
+    <div class="popup_close">FECHAR</div>
+    <div class="popup_close navegar"></div>
+    <div class="centraliza">
+      <a class="link-01" href="/espetaculos/7230-mariah-carey-the-sweet-sweet-fantasy">&nbsp;</a>
+      <a class="link-02" href="/espetaculos/7231-mariah-carey-the-sweet-sweet-fantasy">&nbsp;</a>
+      <a class="link-03" href="/espetaculos/7233-mariah-carey-the-sweet-sweet-fantasy">&nbsp;</a>
+    </div>
+  </div>
   <!-- NEWSLETTER -->
   <div id="guia_espetaculos">
     <div class="centraliza">
@@ -165,7 +174,7 @@
             </div>
             <div class="container status">
               <div class="segura">
-                <span class="botao">cadastrar</span>
+                <span class="botao" onclick="$('#newsletter').submit();">cadastrar</span>
                 <div class="status" onclick="$('#newsletter').submit();"></div>
                 <div class="loading"></div>
               </div>
