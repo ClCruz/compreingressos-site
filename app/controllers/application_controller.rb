@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   before_filter :authorize
   before_filter :setSEO, :mailchimpecommerce360
   before_filter :check_desktop_version, :check_baixeapp#, :check_location
-  before_filter :set_csp, :set_publicidade
+  before_filter :set_publicidade
 
   filter_parameter_logging :password, :password_confirmation, :senha, :senha_confirmation # Remove do log o conteudo dos seguintes campos
   
