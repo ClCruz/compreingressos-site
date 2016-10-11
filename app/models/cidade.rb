@@ -6,7 +6,7 @@ class Cidade < ActiveRecord::Base
   has_one :home
   has_one :visor, :through => :home
   has_one :outras_localidade, :through => :home
-  has_many :pontosdevenda, :order => :titulo
+  has_many :pontosdevenda, :order => :local
   has_many :cidade_visores, :order => 'ordem', :dependent => :destroy
   has_and_belongs_to_many :conjunto_cidades
   

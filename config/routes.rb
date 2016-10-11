@@ -114,6 +114,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :pontosdevenda
 
+  map.connect 'pontosdevendas', :controller => :pontosdevenda, :action => :admin_index
+
   map.connect 'footer', :controller => :footer, :action => :index
   
   map.resources :videos

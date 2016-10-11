@@ -1,0 +1,25 @@
+<div id="container_adm">
+  <p class="title_main">Pontos de venda</p>
+  <%= link_to 'Novo Ponto de Venda', new_pontodevenda_path %>
+  <table>
+    <tr>
+      <th>Local</th>
+      <th>Endereço</th>
+      <th>Funcionamento</th>
+      <th>Forma de Pagamento</th>
+      <th></th>
+      <th></th>
+    </tr>
+    <% @pontosdevenda.each do |ponto_de_venda| %>
+      <tr>
+        <td><%=h ponto_de_venda.local %></td>
+        <td><%=h ponto_de_venda.endereco %></td>
+        <td><%=h ponto_de_venda.funcionamento %></td>
+        <td><%=h ponto_de_venda.forma_de_pagamento %></td>
+        <td class="buttom"><%= link_to image_tag('/admin/botao_editar.png', :alt => 'Editar', :title => 'Editar'), edit_pontodevenda_path(ponto_de_venda) %></td>
+        <td class="buttom"><%= link_to image_tag('/admin/botao_excluir.png', :alt => 'Apagar', :title => 'Apagar'), ponto_de_venda, :confirm => 'Deseja realmente excluir?', :method => :delete %></td>
+      </tr>
+    <% end %>
+  </table>
+  <%= link_to 'Novo Ponto de Venda', new_pontodevenda_path %>
+</div>

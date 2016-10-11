@@ -6,25 +6,33 @@ class PontosdevendaController < ApplicationController
   # GET /pontosdevenda
   # GET /pontosdevenda.xml
   def index
-    @cidades = []
-    cidades = Cidade.all
-    for cidade in cidades
-      if cidade.pontosdevenda.size > 0
-        @cidades << cidade
+    @estados = []
+    estados = Estado.all
+    for estado in estados
+      if estado.pontosdevenda.size > 0
+        @estados << estado
       end
     end
     
-    if params[:cidade]
-      @cid = Cidade.find_by_nome(params[:cidade])
-      @pontosdevenda = @cid.pontosdevenda
+    if params[:estado] && params[:estado] != 0
+      @est = Estado.find(params[:estado])
+      @pontosdevenda = @est.pontosdevenda
     else
-      @cid = Cidade.first
-      @pontosdevenda = @cid.pontosdevenda
-    end
-    
+      @pontosdevenda = Pontodevenda.all
+    end    
 
     respond_to do |format|
       format.html # index.html.erb
+      format.xml  { render :xml => @pontosdevenda }
+    end
+  end
+
+  # GET /pontosdevenda
+  # GET /pontosdevenda.xml
+  def admin_index 
+    @pontosdevenda = Pontodevenda.all
+    respond_to do |format|
+      format.html { render :layout => 'compreingressos_antigo' }
       format.xml  { render :xml => @pontosdevenda }
     end
   end
@@ -65,7 +73,7 @@ class PontosdevendaController < ApplicationController
     respond_to do |format|
       if @pontodevenda.save
         flash[:notice] = 'Pontodevenda was successfully created.'
-        format.html { redirect_to(@pontodevenda) }
+        format.html { redirect_to('/pontosdevendas') }
         format.xml  { render :xml => @pontodevenda, :status => :created, :location => @pontodevenda }
       else
         format.html { render :action => "new" }
@@ -82,7 +90,7 @@ class PontosdevendaController < ApplicationController
     respond_to do |format|
       if @pontodevenda.update_attributes(params[:pontodevenda])
         flash[:notice] = 'Pontodevenda was successfully updated.'
-        format.html { redirect_to(@pontodevenda) }
+        format.html { redirect_to('/pontosdevendas') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -98,7 +106,7 @@ class PontosdevendaController < ApplicationController
     @pontodevenda.destroy
 
     respond_to do |format|
-      format.html { redirect_to(pontosdevenda_url) }
+      format.html { redirect_to('/pontosdevendas') }
       format.xml  { head :ok }
     end
   end

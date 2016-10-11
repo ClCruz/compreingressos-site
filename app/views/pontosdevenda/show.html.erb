@@ -1,13 +1,13 @@
 <p>
   <b>Titulo:</b>
-  <%=h @pontodevenda.titulo %>
+  <%=h @pontodevenda.local %>
 </p>
 
 <p>
   <b>Texto:</b>
-  <%=h @pontodevenda.texto %>
+  <%=h @pontodevenda.endereco %>
 </p>
 
 
 <%= link_to 'Edit', edit_pontodevenda_path(@pontodevenda) %> |
-<%= link_to 'Back', pontosdevenda_path %>
+<%= link_to 'Back', '/pontosdevendas' %>

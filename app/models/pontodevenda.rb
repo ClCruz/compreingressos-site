@@ -1,5 +1,5 @@
 class Pontodevenda < ActiveRecord::Base
-  validates_presence_of :titulo,:texto,:cidade_id
+  validates_presence_of :local,:endereco,:funcionamento,:estado_id
   
-  belongs_to :cidade
+  belongs_to :estado
 end

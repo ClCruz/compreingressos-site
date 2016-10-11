@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160711130245) do
+ActiveRecord::Schema.define(:version => 20161007115125) do
 
   create_table "admins", :force => true do |t|
     t.string   "nome"
@@ -546,6 +546,7 @@ ActiveRecord::Schema.define(:version => 20160711130245) do
     t.string   "link_do_regulamento"
     t.string   "cor_de_link_do_regulamento"
     t.boolean  "blank_de_link_do_regulamento"
+    t.boolean  "hotsite",                             :default => false
   end
 
   add_index "pagina_especiais", ["url"], :name => "index_pagina_especiais_on_url"
@@ -586,18 +587,17 @@ ActiveRecord::Schema.define(:version => 20160711130245) do
     t.datetime "updated_at"
   end
 
-  create_table "paises", :id => false, :force => true do |t|
-    t.integer "id"
-    t.text    "nome"
-  end
-
   create_table "pontosdevenda", :force => true do |t|
-    t.string   "titulo"
-    t.text     "texto"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "cidade_id"
+    t.string   "local"
+    t.string   "endereco"
+    t.string   "funcionamento"
+    t.string   "forma_de_pagamento"
+    t.integer  "estado_id"
   end
+
+  add_index "pontosdevenda", ["estado_id"], :name => "index_pontosdevenda_on_estado_id"
 
   create_table "publicidades", :force => true do |t|
     t.string   "nome"
@@ -615,11 +615,6 @@ ActiveRecord::Schema.define(:version => 20160711130245) do
     t.date     "data_fim"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "regioes_geograficas", :id => false, :force => true do |t|
-    t.integer "id"
-    t.text    "nome"
   end
 
   create_table "servicos", :force => true do |t|

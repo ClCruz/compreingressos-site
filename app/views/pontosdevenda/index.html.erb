@@ -1,37 +1,159 @@
+<style type="text/css">
+  body{
+    background-color: #cd1331 !important;
+  }
+  #pai #background_holder{
+    background-color: #cd1331 !important;
+    background-image: none !important;
+  }
+  #pai #background_holder #espetaculo{
+    color: #FFF;
+    margin-bottom: 50px;
+  }
+  #pai #background_holder #espetaculo table{
+    width: 100%;
+    border-spacing: 0px;
+    font-size: 12px;
+  }
+  #pai #background_holder #espetaculo table thead th{
+    text-transform: uppercase;
+    text-align: left;
+  }
+  #pai #background_holder #espetaculo table .center{
+    text-align: center;
+  }
+  #pai #background_holder #espetaculo table thead tr{
+    line-height: 50px;
+  }
+  #pai #background_holder #espetaculo table tbody tr{
+    line-height: 20px;
+  }
+  #pai #background_holder #espetaculo table tbody tr:nth-child(odd){
+    background-color: #ab001c;
+  }
+  #pai #background_holder #espetaculo span{
+    text-transform: uppercase;
+    color: #FFF;
+    margin-top: 10px;
+    font-size: 10px;
+  }
+  #background_holder #espetaculo #ficha_tecnica{
+    margin-top: 0px;
+    margin-bottom: 10px;
+  }
+  #background_holder #detalhes_busca{
+    background-color: #ab001c;
+    margin-top: 0px;
+    padding: 6px 10px;
+    width: 940px;
+  }
+  #background_holder #detalhes_busca .detalhes{
+    width: 427px;
+    float: left;
+    height: 80px;
+  }
+  #background_holder #detalhes_busca .detalhes p.nome{
+    font-size: 32px;
+    font-weight: 300;
+    line-height: 32px;
+    margin: 10px 0px;
+    color: #FFFFFF;
+  }
+  #background_holder #detalhes_busca .detalhes p.total{
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0;
+    color: #FFFFFF;
+  }
+  #background_holder #detalhes_busca .filtros{
+    width: 454px;
+    float: right;
+    height: 80px;
+  }
+  #background_holder #detalhes_busca div#busca div.container.buscar{
+    width: 380px;
+    margin-top: 15px;
+    float: right;
+  }
+  #background_holder #detalhes_busca div#busca div.container.buscar select {
+    width: 100px;
+    margin-right: 15px;
+    float: left;
+  }
+  #background_holder #detalhes_busca div#busca div.container.buscar input {
+    width: 165px;
+  }
+  #background_holder #detalhes_busca div#busca div.container.buscar input[type="submit"] {
+    width: 70px;
+  }
+  #footer{
+    display: none;
+  }
+  #banner{
+    background: url('/images/pontos_de_venda.jpg') center top no-repeat;
+    height: 359px;
+  }
+</style>
+<div id="banner"></div>
+<div class="centraliza">
+  <div id="detalhes_busca">
+    <div class="detalhes">
+      <p class="nome">Pontos de Venda</p>
+      <p class="total"><%= @pontosdevenda.count %> encontrados</p>
+    </div>
+    <div class="filtros">
+      <div id="busca">
+        <form method="get" action="/pontosdevenda" id="frmpontosdevenda">
+          <div class="container buscar">
+            <select name="estado" onchange="javascript:document.getElementById('frmpontosdevenda').submit;">
+              <%
+                @estados = [] 
+                for estado in Estado.find(:all, :order => 'nome')
+                  if estado.pontosdevenda.size > 0
+                    @estados << estado
+                  end
+                end
+              %>
+              <option value="0">Todos Estados</option>
+              <% for estado in @estados %>
+              <option value="<%= estado.id %>"><%= estado.nome %></option>
+              <% end %>
+            </select>
+            <input type="text" value="local, endereço, funcionamento..." onblur="if(this.value=='') this.value='local, endereço, funcionamento...';" onfocus="if(this.value=='local, endereço, funcionamento...') this.value='';" name="busca">
+            <input type="submit" class="submit" value="buscar" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="cleaner"></div>
 <div class="centraliza">
   <div id="espetaculo">
-  	<div id="center_left">
-  		<p class="titulo">Pontos de Venda</p>
-  		<p class="help_titulo">Selecione a cidade abaixo para listar seus pontos de venda:</p>
-  		
-  		<% if session[:admin_id] %>
-  			<%= link_to 'Novo Ponto de Venda', new_pontodevenda_path %>
-  		<% end %>
-  		
-  		<div id="servicos_left">
-  			<% for cidade in @cidades %>
-  			<h2><a href="?cidade=<%=cidade.nome%>"><%=cidade.nome%></a></h2>
-  			<% end %>
-  		</div>					
-  	</div>
-  	<div id="center_right">
-  		<% if @cid %>
-  			<div id="contato">
-  				<h1>Pontos de venda em <%=@cid.nome%></h1>
-  				<p class="help_text">Veja abaixo aonde comprar seus ingressos fisicamente:</p>
-  			</div>
-  			
-  			<div id="ficha_tecnica">
-  				<% for pdv in @pontosdevenda %>
-  				<h2><%=pdv.titulo%></h2>
-  				<%=nl2br pdv.texto%>
-  				<% if session[:admin_id] %>
-  				<p><%= link_to image_tag('/admin/botao_editar.png', :alt => 'Editar', :title => 'Editar'), edit_pontodevenda_path(pdv) %>&nbsp;
-  	    		<%= link_to image_tag('/admin/botao_excluir.png', :alt => 'Apagar', :title => 'Apagar'), pdv, :confirm => 'Deseja realmente excluir?', :method => :delete %></p>
-  				<% end %>
-  				<% end %>
-  			</div>
-  		<% end %>
-  	</div>
+    <div id="centraliza">
+      <div id="ficha_tecnica">
+        <table>
+          <thead>
+            <tr>
+              <th>Local</th>
+              <th>Endereço</th>
+              <th>Funcionamento</th>
+              <th>Forma de Pagamento</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for pdv in @pontosdevenda %>
+            <tr>
+              <td><%=pdv.local%></td>
+              <td><%=pdv.endereco%></td>
+              <td><%=pdv.funcionamento%></td>
+              <td class="center"><%=pdv.forma_de_pagamento%></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <span>*para o benefício de meia entrada itaucard consulte as bilheterias participantes</span>
+    </div>
   </div>
 </div>
