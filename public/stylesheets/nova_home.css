@@ -1,6 +1,5 @@
 /** Popup em destaque **/
-.popup {
-	background:#f1f1f1 url('/images/mariah_carey.jpg') center top no-repeat;
+.popup {	
 	background-size:100% auto;
 	width:100%;
 	height:2000px;
@@ -119,7 +118,7 @@ div#novo_menu .meio ul.opcoes li a:hover{transition: all 0.3s;color: #930606;}
 div#novo_menu .meio .bottom > div {width: 50%;float: left; cursor: pointer; }
 
 div#novo_menu .meio .bottom > div *:before{ transition: color 0.4s;  }
-div#novo_menu .meio .bottom > div:hover *:before { color: #930606; !important; }
+div#novo_menu .meio .bottom > div:hover *:before { color: #930606 !important; }
 
 div#novo_menu .meio .bottom > div .icone {    margin-right: 10px;    line-height: 40px;    color: #fff;}
 

@@ -237,10 +237,15 @@
         <% end -%>
         
         <% if pagina_selecionada?(@espetaculo, @espetaculo.pagina_especiais.find(:first, :conditions => {:id => 1})) -%>
+        <% 
+          mariah_carey = [7230, 7231, 7233]
+          if !mariah_carey.include? @espetaculo.id
+        %>
         <div class="container g">
           <h2>Promoção Itaucard</h2>
           <p class="desconto">50% de desconto para clientes Itaucard.<br /><br />Promoção pessoal e intransferível para o titular do cartão na compra de um ingresso inteiro. Válido somente para 1 apresentação do espetáculo, mediante pagamento com cartões participantes da promoção.</p>
         </div>
+        <% end -%>
         <% end -%>
         
         <% if !@espetaculo.desconto.blank? -%>

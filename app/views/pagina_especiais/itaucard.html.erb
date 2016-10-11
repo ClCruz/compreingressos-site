@@ -5,8 +5,9 @@
 <script type="text/javascript">
   $(document).ready(function(){
     $('.popup').show();
-
-    $('body').css('overflow','hidden');
+    if(window.innerWidth >= 500){
+      $('body').css('overflow','hidden');
+    }
     $('.popup').on('click', function(e){
       e.stopPropagation();
       // window.location.replace(location.protocol+'//'+location.host+"/mariah-carey-the-sweet-sweet-fantasy-tour");
@@ -21,6 +22,9 @@
 <% end %>
 
 <style type="text/css">
+.popup{
+    background:#f1f1f1 url('https://s3-sa-east-1.amazonaws.com/app-passbook/mariah_carey.jpg') center top no-repeat;
+  }
 ::-webkit-input-placeholder {
    color: #000;
    font-style: italic !important;
