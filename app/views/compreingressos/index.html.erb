@@ -19,7 +19,8 @@
                   <% if i <= home_modulo.exibir and me.espetaculo.ativo == true %>
                     <div class="card">
                       <a href="<%=url_for me.espetaculo%><%=!@completaurl.nil? ? '?'+@completaurl : ''%>">
-                        <%= image_tag me.espetaculo.img_miniatura.url(:miniatura), :height => me.espetaculo.img_miniatura_height %>
+                        <% image = (File.exist? me.espetaculo.img_miniatura.url(:miniatura)) ? me.espetaculo.img_miniatura.url(:miniatura) : "/images/espetaculos/padrao/miniatura.jpg" %>
+                        <%= image_tag image, :height => me.espetaculo.img_miniatura_height %>
                         <h3><%=me.espetaculo.nome%></h3>
                         <% if !home_modulo.ocultar_teatro %>
                           <p class="teatro"><%=me.espetaculo.teatro.nome%></p>

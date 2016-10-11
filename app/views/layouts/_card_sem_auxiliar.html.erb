@@ -1,8 +1,9 @@
 <% link = (card_sem_auxiliar.link_do_redirecionamento.nil? or card_sem_auxiliar.link_do_redirecionamento.empty?) ? "#{url_for card_sem_auxiliar}" : "#{card_sem_auxiliar.link_do_redirecionamento}" -%>
 <% blank = card_sem_auxiliar.blank_de_link_do_redirecionamento ? " target='_blank'" : "" -%>
+<% image = (File.exist? card_sem_auxiliar.img_miniatura.url(:miniatura)) ? card_sem_auxiliar.img_miniatura.url(:miniatura) : "/images/espetaculos/padrao/miniatura.jpg" %>
 <div class="card">
   <a href="<%=link %>"<%= blank %>>
-    <img src="<%= card_sem_auxiliar.img_miniatura.url(:miniatura) %>" height="<%= card_sem_auxiliar.img_miniatura_height %>">
+    <img src="<%=image %>" height="<%= card_sem_auxiliar.img_miniatura_height %>">
     <h3><%=card_sem_auxiliar.nome%></h3>
   </a>
   	<p class="teatro"><%=(!card_sem_auxiliar.teatro.nil?) ? card_sem_auxiliar.teatro.nome : "" %></p>
