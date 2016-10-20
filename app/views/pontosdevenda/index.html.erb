@@ -71,17 +71,17 @@
     height: 80px;
   }
   #background_holder #detalhes_busca div#busca div.container.buscar{
-    width: 380px;
+    width: 420px;
     margin-top: 15px;
     float: right;
   }
   #background_holder #detalhes_busca div#busca div.container.buscar select {
-    width: 100px;
+    width: 120px;
     margin-right: 15px;
     float: left;
   }
   #background_holder #detalhes_busca div#busca div.container.buscar input {
-    width: 165px;
+    width: 185px;
   }
   #background_holder #detalhes_busca div#busca div.container.buscar input[type="submit"] {
     width: 70px;
@@ -90,11 +90,32 @@
     display: none;
   }
   #banner{
-    background: url('/images/pontos_de_venda.jpg') center top no-repeat;
+    background: url('/images/pontos_de_venda.jpg') center top no-repeat; 
     height: 359px;
   }
+  #banner .download{
+    width: 50%;
+    margin-left: 50%;
+    height: 359px;
+  }
+  #banner .download a{
+    display: block;
+    width: 100%;
+    height: 70%;
+  }
 </style>
-<div id="banner"></div>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#estado").on('change', function(){
+      $("#frmpontosdevenda").submit();
+    })
+  })
+</script>
+<div id="banner">
+  <div class="centraliza">
+    <div class="download"><a href="/app"></a></div>
+  </div>
+</div>
 <div class="centraliza">
   <div id="detalhes_busca">
     <div class="detalhes">
@@ -105,7 +126,7 @@
       <div id="busca">
         <form method="get" action="/pontosdevenda" id="frmpontosdevenda">
           <div class="container buscar">
-            <select name="estado" onchange="javascript:document.getElementById('frmpontosdevenda').submit;">
+            <select name="estado" id="estado">
               <%
                 @estados = [] 
                 for estado in Estado.find(:all, :order => 'nome')
@@ -114,9 +135,9 @@
                   end
                 end
               %>
-              <option value="0">Todos Estados</option>
+              <option <%="selected" if (params[:estado] == 0) %> value="0">Todos Estados</option>
               <% for estado in @estados %>
-              <option value="<%= estado.id %>"><%= estado.nome %></option>
+              <option <%="selected" if (params[:estado].to_i == estado.id) %> value="<%= estado.id %>"><%= estado.nome %></option>
               <% end %>
             </select>
             <input type="text" value="local, endereço, funcionamento..." onblur="if(this.value=='') this.value='local, endereço, funcionamento...';" onfocus="if(this.value=='local, endereço, funcionamento...') this.value='';" name="busca">

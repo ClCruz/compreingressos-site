@@ -1,25 +1,30 @@
 class PontosdevendaController < ApplicationController
-  before_filter :authorize
+  before_filter :authorize, :except => [:index]
   newrelic_ignore_apdex
   layout 'compreingressos'
   
   # GET /pontosdevenda
   # GET /pontosdevenda.xml
   def index
-    @estados = []
-    estados = Estado.all
-    for estado in estados
-      if estado.pontosdevenda.size > 0
-        @estados << estado
+    if params[:estado]
+      busca = params[:busca] == "local, endereço, funcionamento..." ? "" : params["busca"]
+      estado = params[:estado]      
+      if params[:estado] != "0"
+        if busca == ""
+          @pontosdevenda = Pontodevenda.find(:all, :conditions => ["pontosdevenda.estado_id = :estado", {:estado => "#{estado}"}], :order => "pontosdevenda.local")
+        else
+          @pontosdevenda = Pontodevenda.find(:all, :conditions => ["(pontosdevenda.local LIKE :busca OR pontosdevenda.endereco LIKE :busca OR pontosdevenda.funcionamento LIKE :busca) AND (pontosdevenda.estado_id = :estado)", {:busca => "%#{busca}%", :estado => "#{estado}"}], :order => "pontosdevenda.local")
+        end
+      else
+        if busca == ""
+          @pontosdevenda = Pontodevenda.find(:all, :conditions => ["(pontosdevenda.local LIKE :busca OR pontosdevenda.endereco LIKE :busca OR pontosdevenda.funcionamento LIKE :busca)", {:busca => "%#{busca}%"}], :order => "pontosdevenda.local")
+        else
+          @pontosdevenda = Pontodevenda.find(:all, :order => "pontosdevenda.local")
+        end
       end
-    end
-    
-    if params[:estado] && params[:estado] != 0
-      @est = Estado.find(params[:estado])
-      @pontosdevenda = @est.pontosdevenda
     else
-      @pontosdevenda = Pontodevenda.all
-    end    
+      @pontosdevenda = Pontodevenda.find(:all, :order => "pontosdevenda.local")
+    end
 
     respond_to do |format|
       format.html # index.html.erb
