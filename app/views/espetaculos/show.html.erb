@@ -149,15 +149,21 @@
             <% if @pagina_especial and @pagina_especial.url=='brasilprev' %>
                 <p class="compre_fone_num"><img src="/images/ico_telefone.png" />(11) 2626-5710</p>
             <% else %>
-              <% if @espetaculo.teatro.cidade.estado.upcase=='RJ' and @espetaculo.id!=4970 %>
-                    <% if params[:origem] and params[:origem]=="itaucard" %>
-                        <p class="compre_fone_num"><img src="/images/ico_telefone.png" />(21) 3005-4104</p>
-                    <% else %>
-                        <p class="compre_fone_num"><img src="/images/ico_telefone.png" />(21) 3005-3432</p>
-                    <% end %>
-                <% else %>
-                    <p class="compre_fone_num"><img src="/images/ico_telefone.png" /><%=@espetaculo.teatro.telefone%></p>
+              <% if @espetaculo.teatro.nome == 'Teatro Riachuelo Rio' %>
+                <p class="compre_fone_num"><img src="/images/ico_telefone.png" />(21) 3005-3432</p>
+              <% else %>
+                <% if @espetaculo.teatro.cidade.estado.upcase=='RJ' and @espetaculo.id!=4970 %>
+                      <% if params[:origem] and params[:origem]=="itaucard" %>
+                          <p class="compre_fone_num"><img src="/images/ico_telefone.png" />(21) 3005-4104</p>
+                      <% elsif @espetaculo.id == 7402 %>
+                          <p class="compre_fone_num"><img src="/images/ico_telefone.png" />(21) 3005-7489</p>
+                      <% else %>
+                          <p class="compre_fone_num"><img src="/images/ico_telefone.png" />(21) 3005-2701</p>
+                      <% end %>
+                  <% else %>
+                      <p class="compre_fone_num"><img src="/images/ico_telefone.png" /><%=@espetaculo.teatro.telefone%></p>
                 <% end %>
+              <% end %>
             <% end %>
         <% end %>
       </div>
