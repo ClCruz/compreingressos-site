@@ -22,6 +22,9 @@
   #pai #background_holder #espetaculo table .center{
     text-align: center;
   }
+  #pai #background_holder #espetaculo table .medium{
+    width: 200px;
+  }
   #pai #background_holder #espetaculo table thead tr{
     line-height: 50px;
   }
@@ -103,6 +106,32 @@
     width: 100%;
     height: 70%;
   }
+  @media(max-width: 768px) {
+    #banner{
+      background: url('/images/pontos_de_venda_mobile.jpg') center top no-repeat;
+    }
+    #pai #background_holder #espetaculo table thead tr{
+      line-height: 20px;
+    }
+    #background_holder #detalhes_busca .filtros{
+      display: none;
+    }
+    #banner .download{
+      width: 100%;
+      margin-left: 0px;
+      height: 359px;
+    }
+    #banner .download a{
+      height: 100%;
+    }
+    #background_holder #espetaculo #ficha_tecnica{
+      margin-left: 0.5em;
+      margin-right: 0.5em;
+    }
+    .center-mobile{
+      text-align: center;
+    }
+  }
 </style>
 <script type="text/javascript">
   $(document).ready(function(){
@@ -157,18 +186,18 @@
           <thead>
             <tr>
               <th>Local</th>
-              <th>Endereço</th>
-              <th>Funcionamento</th>
-              <th>Forma de Pagamento</th>
+              <th class="center-mobile">Endereço</th>
+              <th class="center-mobile">Funcionamento</th>
+              <th class="center">Forma de Pagamento</th>
             </tr>
           </thead>
           <tbody>
             <% for pdv in @pontosdevenda %>
             <tr>
               <td><%=pdv.local%></td>
-              <td><%=pdv.endereco%></td>
-              <td><%=pdv.funcionamento%></td>
-              <td class="center"><%=pdv.forma_de_pagamento%></td>
+              <td class="center-mobile"><%=pdv.endereco%></td>
+              <td class="center-mobile"><%=pdv.funcionamento%></td>
+              <td class="center medium"><%=pdv.forma_de_pagamento%></td>
             </tr>
             <% end %>
           </tbody>
