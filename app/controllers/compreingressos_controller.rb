@@ -46,13 +46,33 @@ class CompreingressosController < ApplicationController
   end
   
   def newsletter
-    begin
-      gb = Gibbon::API.new()
-      gb.lists.subscribe({:id => "e17c7d7d48", :email => {:email => params[:email]}, :merge_vars => {:NOME => params[:nome], :UF => params[:uf], :ORIGEM => 1}, :double_optin => false})
-      resp = 1
-    rescue Gibbon::MailChimpError => e
-      resp = e.code
+    require 'rest-client'
+    require 'json'
+    #method=get_token&output=json&username=compreingressos_allinapi&password=NE7@NUPu
+    response = RestClient.get(ENVIRONMENT_VARS["allin_host"], {:params => {'method' => 'get_token', 'output' => 'json', 'username' => ENVIRONMENT_VARS["allin_user"], 'password' => ENVIRONMENT_VARS["allin_pass"]}})
+    if response.code == 200 
+      json = JSON.parse(response.body)
+      begin
+        #{'nm_lista'=>'teste_site', 'campos'=>'nm_email;nome', 'valor'=>'edicarlosbarbosa@gmail.com;edicarlos'}
+        dados = "[dados_email]{'nm_lista':'teste_site', 'campos':'nm_email;nome', 'valor':'edicarlosbarbosa@gmail.com;edicarlos'}"
+        response = RestClient.post("#{ENVIRONMENT_VARS["allin_host"]}/?method=inserir_email_base&output=json&token=#{json["token"]}", {:params => {'[dados_email]' => "{'nm_lista':'teste_site'}"}})
+        #, {:content_type => :json, :accept => :json}
+        if response.code == 200          
+          logger.warn(response)
+          resp = 1
+        end      
+      rescue => e
+        logger.error(e.response)
+        resp = e.code
+      end
     end
+    #begin
+    #  gb = Gibbon::API.new()
+    #  gb.lists.subscribe({:id => "e17c7d7d48", :email => {:email => params[:email]}, :merge_vars => {:NOME => params[:nome], :UF => params[:uf], :ORIGEM => 1}, :double_optin => false})
+    #  resp = 1
+    #rescue Gibbon::MailChimpError => e
+    #  resp = e.code
+    #end
     
     respond_to do |format|
       format.html { render :text => resp }

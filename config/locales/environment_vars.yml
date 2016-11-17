@@ -20,6 +20,10 @@ development:
   ftp_compra_password3: 'Ftp@upload*'
   ftp_compra_images_dir3: 'evento'
 
+  allin_host: 'https://painel02.allinmail.com.br/allinapi'
+  allin_user: 'compreingressos_allinapi'
+  allin_pass: 'NE7@NUPu'
+
 test:
   host: 'http://compreingressos.faroestudio.com.br'
   host_compra: 'http://186.237.201.132:81/compreingressos2'
@@ -54,8 +58,8 @@ production:
 
 staging:
   host: 'http://www.compreingressos.com'
-  host_compra: 'http://186.237.201.150:8081/compreingressos2'
-  host_json: 'http://186.237.201.150:8081/compreingressos2'
+  host_compra: 'http://homolog.compreingressos.com:8081'
+  host_json: 'http://homolog.compreingressos.com:8081'
   ftp_compra_host1: '179.124.45.101'
   ftp_compra_port1: '211'
   ftp_compra_username1: 'ftpupld'

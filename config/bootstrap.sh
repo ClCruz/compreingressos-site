@@ -73,6 +73,7 @@ rvmsudo gem install treetop -v 1.4.15 --no-ri --no-RDoc
 rvmsudo gem install tzinfo -v 0.3.45 --no-ri --no-RDoc
 rvmsudo gem install whenever -v 0.9.4 --no-ri --no-RDoc
 rvmsudo gem install rdoc-data -v 4.1.0 --no-ri --no-RDoc
+rvmsudo gem install rest-client -v 1.6.9 --no-ri --no-RDoc
 
 # apache
 apt-get -y install apache2

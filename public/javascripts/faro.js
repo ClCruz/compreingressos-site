@@ -404,8 +404,8 @@ function validaNewsletter(campo){
     } else {
       $('#newsletter .container.status .status').fadeOut(50,function(){
         $('#newsletter .container.status .loading').fadeIn(50,function(){
-          //$.post('/compreingressos/newsletter', {nome: nome, email: email, uf: estado}, function(resposta){
-          $.get('http://www.faroestudio.com.br/MailChimp.php', {nome: nome, email: email, uf: estado}, function(resposta){
+          $.post('/compreingressos/newsletter', {nome: nome, email: email, uf: estado}, function(resposta){
+          //$.get('http://www.faroestudio.com.br/MailChimp.php', {nome: nome, email: email, uf: estado}, function(resposta){
             $('#newsletter .container.status .loading').fadeOut(50,function(){
               $('#newsletter .container.status .status').css('background-position','50% -92px').fadeIn(200);
               /*if(resposta=='1'){
