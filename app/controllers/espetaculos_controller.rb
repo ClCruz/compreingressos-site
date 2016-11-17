@@ -841,6 +841,8 @@ class EspetaculosController < ApplicationController
       @espetaculo.img_principal.clear
     elsif params[:tipo]=='img_miniatura'
       @espetaculo.img_miniatura.clear
+    elsif params[:tipo]=='img_destaque'
+      @espetaculo.img_destaque.clear
     end
     @espetaculo.save
     redirect_to(edit_espetaculo_path(@espetaculo))

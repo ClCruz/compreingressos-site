@@ -1,0 +1,36 @@
+<div id="container_adm">
+<%= javascript_include_tag :defaults %>
+
+<% form_for(@newsletter, :html => {:multipart => true}) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :data %><br />
+    <%= f.text_field :data %>
+  </p>
+  <p>
+    <%= f.label :img_destaque %><br />
+    <%= f.file_field :img_destaque, :style => "width:400px;" %><br />
+    <span class="help_text">A largura da imagem deve ser exatamente de 600px</span><br />
+    <% if @newsletter.img_destaque? %>
+      <%= image_tag @newsletter.img_destaque.url(:destaque), :width => "600" %><br />
+      <a href="/newsletters/excluir_img/<%= @newsletter.id %>">Excluir imagem destaque</a>
+    <% end %>
+  </p>
+  <p>
+    <%= f.label :texto_do_destaque %><br />
+    <%= f.text_field :texto_do_destaque %>
+  </p>
+  <p>
+    <%= f.label :link_do_destaque %><br />
+    <%= f.text_field :link_do_destaque %>
+  </p>
+  <p>
+    <%= f.label :horario_do_destaque %><br />
+    <%= f.text_field :horario_do_destaque %>
+  </p>
+  <p>
+    <%= f.submit 'Salvar' %>
+  </p>
+<% end %>
+</div>

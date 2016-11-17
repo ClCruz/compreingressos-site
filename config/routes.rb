@@ -1,5 +1,9 @@
 ActionController::Routing::Routes.draw do |map|
   
+  map.resources :newsletters
+
+  map.connect 'newsletters/excluir_img/:id', :controller => :newsletters, :action => :excluir_img
+  
   map.resources :publicidades
 
   map.connect 'espetaculo_ausentes/save', :controller => :espetaculo_ausentes, :action => :save

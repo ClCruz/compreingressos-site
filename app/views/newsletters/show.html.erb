@@ -1,0 +1,287 @@
+<table width="600" align="center" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+	<tr>
+		<td>
+			<table border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td bgcolor="#FFFFFF" style="padding:10px 0 20px;">
+						<table border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<td>
+									<table border="0" cellpadding="0" cellspacing="0" valign="middle">
+										<tr>
+											<td width="20"></td>
+											<td width="170">
+												<a href="http://www.compreingressos.com/" target="_blank"><img src="/images/logo_newsletter.jpg" width="170" height="41" style="display:block" border="0" alt="Visite nosso site www.compreingressos.com" title="Visite nosso site www.compreingressos.com"/></a>
+											</td>
+											<td width="320">
+												<table width="310" border="0" cellpadding="0" cellspacing="0" style="text-align:right">
+													<tr>
+														<td>
+															<span style="font-family:Arial,Verdana;font-size:11px;color:#000000;line-height:16px;font-style:italic;-webkit-text-size-adjust:none">
+																<img src="/images/ico_telefone_newsletter.jpg" width="17" height="17" alt="Telefone" title="Telefone" style="vertical-align:bottom" />
+																(11)<span style="font-size:16px">  2122-4070
+															</span>
+														</span>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<span style="font-family:Arial,Verdana;font-size:11px;color:#000000;line-height:13px;font-style:italic;-webkit-text-size-adjust:none">
+															<%= @data_inicial.strftime('%d/%m/%Y') %> até <%= @data_final.strftime('%d/%m/%Y') %>
+														</span>
+													</td>
+												</tr>
+											</table>
+										</td>
+										<td>
+											<a href="http://twitter.com/compreingressos" target="_blank" style="margin-left:8px"><img src="/images/ico_twitter_newsletter.jpg" width="30" height="30" alt="Twitter" title="Twitter" style="vertical-align:bottom;border:0" /></a>
+											<a href="http://www.facebook.com/compreingressos" target="_blank" style="margin-left:5px"><img src="/images/ico_facebook_newsletter.jpg" width="30" height="30" alt="Facebook" title="Facebook" style="vertical-align:bottom;border:0" /></a>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td style="padding-top:17px;">
+								<% if @newsletter.img_destaque? %>
+								<% image_d = @newsletter.img_destaque.url(:destaque) %>
+								<%= link_to image_tag (image_d ,:width => "600", :height => "500", :border => "0", :style => "display:block;", :alt => @newsletter.texto_do_destaque, :title => @newsletter.texto_do_destaque ), @newsletter.link_do_destaque.to_s %>
+								<% else %>
+								<% image_d = @destaque.img_destaque.url(:destaque) %>
+								<%= link_to image_tag (image_d ,:width => "600", :height => "500", :border => "0", :style => "display:block;", :alt => @destaque.nome, :title => @destaque.nome ), "/espetaculos/"+ @destaque.id.to_s %>
+								<% end %>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<table border="0" cellpadding="0" cellspacing="0" width="600">
+									<tr>
+										<td width="320" height="30" align="right" valign="bottom">
+											<table border="0" cellpadding="0" cellspacing="0" width="320">
+												<tr>
+													<td height="18" align="right" style="font-family:Arial,Verdana;font-size:14px;line-height:18px;color:#555555;-webkit-text-size-adjust:none">
+														<%= @newsletter.texto_do_destaque? ? @newsletter.texto_do_destaque : @destaque.nome %>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td height="12" align="right" style="font-family:Arial,Verdana;font-size:11px;line-height:12px;color:#555555;-webkit-text-size-adjust:none">
+													<%= @destaque.teatro.nome %> - <%= @destaque.teatro.cidade.nome %> - <%= @destaque.teatro.cidade.estado %>
+												</td>
+												</tr>
+											</table>
+										</td>
+										<td width="10" height="10" align="center" valign="top">
+											<table border="0" cellpadding="0" cellspacing="0" width="10" height="30" >
+												<tr>
+													<td align="center" valign="middle" height="30">
+
+													</td>
+												</tr>
+											</table>
+										</td>
+										<td width="200" height="30" valign="bottom">
+											<span style="font-family:Arial,Verdana;font-size:12px;line-height:13px;float:left;color:#000000;text-transform:lowercase;-webkit-text-size-adjust:none">
+												<% if @destaque.horarios != nil && @destaque.horarios.first != nil%>
+													<% if @destaque.horarios.first.data == @destaque.horarios.last.data %>
+														<%= @destaque.horarios.first.data.strftime("%d %b") %>
+													<% else %>
+														<%= @destaque.horarios.first.data.strftime("%d %b") %> <%= @destaque.horarios.last.data.strftime("%d %b") %>
+													<% end %>
+													<br />
+												<% end %>
+												<%= @newsletter.horario_do_destaque? ? @newsletter.horario_do_destaque : @destaque.horario %>
+											</span>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+
+
+						<tr>
+							<td style="padding-top:20px;">
+								<% image_d1 = @destaque1.img_principal.url(:principal) %>
+								<%= link_to image_tag (image_d1 ,:width => "600", :height => "125", :border => "0", :style => "display:block;", :alt => @destaque1.nome, :title => @destaque1.nome ), "/espetaculos/"+ @destaque1.id.to_s %>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<table border="0" cellpadding="0" cellspacing="0" width="600">
+									<tr>
+										<td width="320" height="30" align="right" valign="bottom">
+											<table border="0" cellpadding="0" cellspacing="0" width="320">
+												<tr>
+													<td height="18" align="right" style="font-family:Arial,Verdana;font-size:14px;line-height:18px;color:#555555;-webkit-text-size-adjust:none">
+														<%= @destaque1.nome %>
+													</td>
+												</tr>
+												<tr>
+													<td height="12" align="right" style="font-family:Arial,Verdana;font-size:11px;line-height:12px;color:#555555;-webkit-text-size-adjust:none">
+														<%= @destaque1.teatro.nome %> - <%= @destaque1.teatro.cidade.nome %> - <%= @destaque1.teatro.cidade.estado %>
+													</td>
+												</tr>
+											</table>
+										</td>
+										<td width="160" height="30" align="center" valign="top">
+											<table border="0" cellpadding="0" cellspacing="0" width="146" height="30" style="margin:0 7px">
+												<tr>
+													<td bgcolor="#930606" align="center">
+													<%= link_to "Não perca", "/espetaculos/"+ @destaque1.id.to_s, :target => "_blank", :style => "font-family:Arial,Verdana;font-size:12px;color:#FFFFFF;line-height:16px;font-style:italic;text-decoration:none;-webkit-text-size-adjust:none" %>
+													</td>
+												</tr>
+											</table>
+										</td>
+										<td width="120" height="30" valign="bottom">
+											<span style="font-family:Arial,Verdana;font-size:12px;line-height:13px;float:left;color:#000000;text-transform:lowercase;-webkit-text-size-adjust:none">
+												<% if @destaque1.horarios != nil && @destaque1.horarios.first != nil %>
+													<% if @destaque1.horarios.first.data == @destaque1.horarios.last.data %>
+														<%= @destaque1.horarios.first.data.strftime("%d %b") %>
+													<% else %>
+														<%= @destaque1.horarios.first.data.strftime("%d %b") %> <%= @destaque1.horarios.last.data.strftime("%d %b") %>
+													<% end %>
+													<br />
+												<% end %>
+												<%= @destaque1.horario %>
+											</span>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+
+
+
+
+						<tr>
+							<td style="padding-top:20px;">
+								<% image_d2 = @destaque2.img_principal.url(:principal) %>							
+								<%= link_to image_tag (image_d2 ,:width => "600", :height => "125", :border => "0", :style => "display:block;", :alt => @destaque2.nome, :title => @destaque2.nome ), "/espetaculos/"+ @destaque2.id.to_s %>								
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<table border="0" cellpadding="0" cellspacing="0" width="600">
+									<tr>
+										<td width="320" height="30" align="right" valign="bottom">
+											<table border="0" cellpadding="0" cellspacing="0" width="320">
+												<tr>
+													<td height="18" align="right" style="font-family:Arial,Verdana;font-size:14px;line-height:18px;color:#555555;-webkit-text-size-adjust:none">
+														<%= @destaque2.nome %>
+													</td>
+												</tr>
+												<tr>
+													<td height="12" align="right" style="font-family:Arial,Verdana;font-size:11px;line-height:12px;color:#555555;-webkit-text-size-adjust:none">
+														<%= @destaque2.teatro.nome %> - <%= @destaque2.teatro.cidade.nome %> - <%= @destaque2.teatro.cidade.estado %>
+													</td>
+												</tr>
+											</table>
+										</td>
+										<td width="160" height="30" align="center" valign="top">
+											<table border="0" cellpadding="0" cellspacing="0" width="146" height="30" style="margin:0 7px">
+												<tr>
+													<td bgcolor="#930606" align="center">
+													<%= link_to "Não perca", "/espetaculos/"+ @destaque2.id.to_s, :target => "_blank", :style => "font-family:Arial,Verdana;font-size:12px;color:#FFFFFF;line-height:16px;font-style:italic;text-decoration:none;-webkit-text-size-adjust:none" %>
+													</td>
+												</tr>
+											</table>
+										</td>
+										<td width="120" height="30" valign="bottom">
+											<span style="font-family:Arial,Verdana;font-size:12px;line-height:13px;float:left;color:#000000;text-transform:lowercase;-webkit-text-size-adjust:none">
+												<% if @destaque2.horarios != nil && @destaque2.horarios.first != nil %>
+													<% if @destaque2.horarios.first.data == @destaque2.horarios.last.data %>
+														<%= @destaque2.horarios.first.data.strftime("%d %b") %>
+													<% else %>
+														<%= @destaque2.horarios.first.data.strftime("%d %b") %> <%= @destaque2.horarios.last.data.strftime("%d %b") %>
+													<% end %>
+													<br />
+												<% end %>
+												<%= @destaque2.horario %>
+											</span>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</td>
+</tr>
+<tr>
+	<td style="padding:10px 0 20px;">
+		<table border="0" cellpadding="0" cellspacing="0" width="600" align="center">
+			<tr>				
+				<% count = 0 %>
+				<% for @e in @espetaculos %>
+					<% if @e.horarios != nil && @e.horarios.first != nil %>
+					<% if @e.horarios.first.data > @data_inicial && @e.horarios.first.data < @data_final %>
+					<% if count == 4 %>
+						<% count = 0 %>
+						<% break %>
+						<!--/tr><tr-->
+					<% end %>
+					<td width="20"></td>
+					<% image = @e.img_miniatura.url(:miniatura) %>
+					<td width="120" valign="top">
+						<%= link_to image_tag(image, :width => "120", :height => "135", :border => "0", :style => "margin-bottom: 10px;", :alt => @e.nome, :title => @e.nome), "/espetaculos/"+ @e.id.to_s, :target => "_blank", :style => "display: block;" %>
+						<p style="font-family:Arial,Verdana;font-size:11px;line-height:12px;color:#000000;width:100%;display:block;margin:0;text-transform:lowercase;font-weight:bold;display:block;margin-bottom:4px;-webkit-text-size-adjust:none">
+							<%= @e.horario %>
+						</p>
+						<%= link_to @e.nome, "/espetaculos/"+@e.id.to_s, :target => "_blank", :style => "font-family:Arial,Verdana;font-size:11px;color:#930606;line-height:12px;text-decoration:none;display:block;-webkit-text-size-adjust:none; font-weight:bold;" %>
+						<p style="font-family:Arial,Verdana;font-size:11px;line-height:12px;color:#777777;width:100%;display:block;margin:0;display:block;margin:4px 0;-webkit-text-size-adjust:none">
+							<%= @e.teatro.nome %>
+						</p>
+						<p style="font-family:Arial,Verdana;font-size:11px;line-height:12px;color:#777777;width:100%;display:block;margin:0;display:block;-webkit-text-size-adjust:none">
+							<%= @e.teatro.cidade.nome %> - <%= @e.teatro.cidade.estado %> 
+						</p>
+					</td>
+					<td width="20"></td>
+					<% count = count + 1 %>
+					<% end %>
+					<% end %>
+				<% end %>				
+			</tr>
+		</table>
+	</td>
+</tr>
+
+
+</tr>
+<tr>
+	<td style="padding:10px 0;">
+		<a href="http://www.compreingressos.com/app" target="_blank"><img src="http://emkt.compreingressos.com/marketing/20160202-cosi/selo_facebook.jpg" width="600" height="150" border="0" style="display:block;" alt="milhares de ingressos grátis" title="milhares de ingressos grátis"></a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<table border="0" cellpadding="0" cellspacing="0" align="center" width="600">
+			<tr>
+				<td align="left" valign="top" style="padding:10px 75px 30px 75px">
+					<span style="font-family:Arial,Verdana;font-size:11px;line-height:18px;color:#555555;display:block;width:100%;float:left;-webkit-text-size-adjust:none">
+
+
+						<b>Central de Atendimento SAC</b><br>
+						(11) 2122-4070 - Horário de Funcionamento: de segunda a domingo das 9h às 21h.<br /><br />
+						Para receber com sucesso nossas mensagens, é importante adicionar nosso e-mail <b>marketing@compreingressos.com</b> em sua lista de contatos.
+						<br><br>
+						Confira atentamente os dados do seu pedido (espetáculo, dia, horário, quantidades, setor) antes da confirmação de sua compra. Não serão permitidos cancelamentos, troca ou devolução de ingressos. O seu ingresso é um produto único, ou seja, após sua compra ele não está mais disponível para venda. Em caso de arrependimento do cliente, o reembolso do valor do ingresso será efetuado, descontadas as taxas de serviço (conveniência) e entrega (se houver), desde que esse direito seja requisitado em até 7 (sete) dias da data da compra e que seja em até 48 (quarenta e oito) horas antes da data do espetáculo ou evento.
+						<br><br>
+						Para sua segurança, todas as compras, via telefone ou internet, somente poderão ser entregues ao proprietário do cartão de crédito utilizado na compra (o nome do titular do cartão deve ser o mesmo nome de cadastro do pedido na internet), mediante a apresentação dos seguintes documentos: Cartão de Crédito original, Documento de Identidade e senha personalizada de sua compra recebida após confirmação de seu pedido.
+
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<td align="center" style="padding-bottom:0 75px 30px 75px">
+					<span style="font-family:Arial,Verdana;font-size:10px;line-height:20px;color:#555555;-webkit-text-size-adjust:none">
+						Dúvidas? Fale Conosco.<br>
+						Confira nossa <a href="http://www.compreingressos.com/privacidade" target="_blank" style="color:#930606;text-decoration:none">Política de Privacidade.</a>
+					</span>
+				</td>
+			</tr>
+		</table>
+	</td>
+</tr>
+</table>

@@ -187,6 +187,10 @@
     <%= f.check_box :blank_de_link_do_redirecionamento %><br />
     <%= f.label :blank_de_link_do_redirecionamento %>
   </p>
+  <p>
+    <%= f.check_box :destaque_newsletter %><br />
+    <%= f.label :destaque_newsletter, 'Destaque na Newsletter Quinzenal do Theatro Municipal' %>
+  </p>
   <div class="data_inicial_venda" style="display:<%= @espetaculo.especificar_data_inicial_de_venda ? 'block':'none' %>;">
     <p>
       <%= f.label :data_inicial_de_venda %><br />
@@ -252,6 +256,15 @@
     <% if @espetaculo.img_miniatura? %>
       <%= image_tag @espetaculo.img_miniatura.url(:miniatura), :width => "100" %><br />
       <a href="/espetaculos/excluir_img/<%= @espetaculo.id %>/img_miniatura">Excluir imagem miniatura</a>
+    <% end %>
+  </p>
+  <p>
+    <%= f.label :img_destaque %><br />
+    <%= f.file_field :img_destaque, :style => "width:400px;" %><br />
+    <span class="help_text">A largura da imagem deve ser exatamente de 600px</span><br />
+    <% if @espetaculo.img_destaque? %>
+      <%= image_tag @espetaculo.img_destaque.url(:destaque), :width => "600" %><br />
+      <a href="/espetaculos/excluir_img/<%= @espetaculo.id %>/img_destaque">Excluir imagem destaque</a>
     <% end %>
   </p>
   <hr color="#C7C7C7">

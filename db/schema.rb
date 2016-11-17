@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20161007115125) do
+ActiveRecord::Schema.define(:version => 20161117162228) do
 
   create_table "admins", :force => true do |t|
     t.string   "nome"
@@ -211,6 +211,11 @@ ActiveRecord::Schema.define(:version => 20161007115125) do
     t.string   "texto_de_link_do_redirecionamento"
     t.string   "link_do_redirecionamento"
     t.boolean  "blank_de_link_do_redirecionamento"
+    t.string   "img_destaque_file_name"
+    t.string   "img_destaque_content_type"
+    t.integer  "img_destaque_file_size"
+    t.datetime "img_destaque_updated_at"
+    t.boolean  "destaque_newsletter"
   end
 
   add_index "espetaculos", ["ativo"], :name => "index_espetaculos_on_ativo"
@@ -402,6 +407,19 @@ ActiveRecord::Schema.define(:version => 20161007115125) do
     t.integer  "nr_habitantes"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "newsletters", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.date     "data"
+    t.string   "texto_do_destaque"
+    t.string   "link_do_destaque"
+    t.string   "horario_do_destaque"
+    t.string   "img_destaque_file_name"
+    t.string   "img_destaque_content_type"
+    t.integer  "img_destaque_file_size"
+    t.datetime "img_destaque_updated_at"
   end
 
   create_table "ocorrencias", :force => true do |t|

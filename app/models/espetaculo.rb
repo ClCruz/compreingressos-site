@@ -74,6 +74,11 @@ class Espetaculo < ActiveRecord::Base
   #QUERY TO MEASURE THE SIZE OF THE BACKGROUND IMAGES IN SPECIAL SHOWS
   #SELECT e.id, e.nome, concat(round(round((e.fundo_file_size/1000))/1000,2),'mb') as img, t.nome  FROM espetaculos AS e, teatros AS t WHERE e.teatro_id = t.id AND especial = 1 ORDER BY e.fundo_file_size  DESC
   
+  validates_attachment_content_type :img_destaque, :content_type => ["image/x-png", "image/pjpeg", "image/jpg", "image/jpeg", "image/png", "image/gif"], :message => "deve estar em algum dos seguintes formatos: JPG, GIF ou PNG"
+  has_attached_file :img_destaque,
+                    :path => ":rails_root/public/images/espetaculos/:id/destaque.:extension",
+                    :url => "/images/espetaculos/:id/destaque.:extension"
+  
                     
   accepts_nested_attributes_for :galerias, :allow_destroy => true
   accepts_nested_attributes_for :imagems, :allow_destroy => true
