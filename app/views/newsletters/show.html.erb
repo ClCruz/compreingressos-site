@@ -101,7 +101,7 @@
 
 						<tr>
 							<td style="padding-top:20px;">
-								<% image_d1 = @destaque1.img_principal.url(:principal) %>
+								<% image_d1 = @destaque1.img_destaque.url(:destaque) %>
 								<%= link_to image_tag (image_d1 ,:width => "600", :height => "125", :border => "0", :style => "display:block;", :alt => @destaque1.nome, :title => @destaque1.nome ), "/espetaculos/"+ @destaque1.id.to_s %>
 							</td>
 						</tr>
@@ -155,7 +155,7 @@
 
 						<tr>
 							<td style="padding-top:20px;">
-								<% image_d2 = @destaque2.img_principal.url(:principal) %>							
+								<% image_d2 = @destaque2.img_destaque.url(:destaque) %>							
 								<%= link_to image_tag (image_d2 ,:width => "600", :height => "125", :border => "0", :style => "display:block;", :alt => @destaque2.nome, :title => @destaque2.nome ), "/espetaculos/"+ @destaque2.id.to_s %>								
 							</td>
 						</tr>
