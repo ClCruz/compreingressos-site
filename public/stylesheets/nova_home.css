@@ -188,6 +188,10 @@ div#selos2 {
     padding-top: 25px;
     clear: both;
 }
+div#escrito {
+	text-align: center;
+	color: #ffffff;
+}
 
 @media only screen and (min-width: 641px) and (max-width: 959px){
 	
