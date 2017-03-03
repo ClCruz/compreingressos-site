@@ -34,7 +34,11 @@ class PacotesController < ApplicationController
   # GET /pacotes/new.xml
   def new
     @pacote = Pacote.new
-    @espetaculos = Espetaculo.find(:all, :select => "espetaculos.id, espetaculos.nome, teatros.nome", :include => :teatro, :order => 'espetaculos.nome').map{|e| ["#{e.nome.gsub('"',"'")} (#{e.teatro.nome})",e.id]}
+    @espetaculos = Espetaculo.find(:all, 
+                                   :select => "espetaculos.id, espetaculos.nome, teatros.nome", 
+                                   :include => :teatro, 
+                                   :conditions => "teatros.id is not null",
+                                   :order => 'espetaculos.nome').map{ |e| ["#{e.nome.gsub('"',"'")} (#{e.teatro.nome.gsub('"',"'")})", e.id] }
     if params[:id]
       @pacote.pagina_de_pacote_id = params[:id]
     end
@@ -48,14 +52,22 @@ class PacotesController < ApplicationController
   # GET /pacotes/1/edit
   def edit
     @pacote = Pacote.find(params[:id])
-    @espetaculos = Espetaculo.find(:all, :select => "espetaculos.id, espetaculos.nome, teatros.nome", :include => :teatro, :order => 'espetaculos.nome').map{|e| ["#{e.nome.gsub('"',"'")} (#{e.teatro.nome})",e.id]}
+    @espetaculos = Espetaculo.find(:all, 
+                                   :select => "espetaculos.id, espetaculos.nome, teatros.nome", 
+                                   :include => :teatro, 
+                                   :conditions => "teatros.id is not null",
+                                   :order => 'espetaculos.nome').map{ |e| ["#{e.nome.gsub('"',"'")} (#{e.teatro.nome.gsub('"',"'")})", e.id] }
   end
 
   # POST /pacotes
   # POST /pacotes.xml
   def create
     @pacote = Pacote.new(params[:pacote])
-    @espetaculos = Espetaculo.find(:all, :select => "espetaculos.id, espetaculos.nome, teatros.nome", :include => :teatro, :order => 'espetaculos.nome').map{|e| ["#{e.nome.gsub('"',"'")} (#{e.teatro.nome})",e.id]}
+    @espetaculos = Espetaculo.find(:all, 
+                                   :select => "espetaculos.id, espetaculos.nome, teatros.nome", 
+                                   :include => :teatro, 
+                                   :conditions => "teatros.id is not null",
+                                   :order => 'espetaculos.nome').map{ |e| ["#{e.nome.gsub('"',"'")} (#{e.teatro.nome.gsub('"',"'")})", e.id] }
     
     # ROTINA PARA PEGAR O ID DA PRIMEIRA APRESENTAÇÃO, POIS PACOTES SÓ TEM 1 ID DE APRESENTAÇÃO E
     # ELE VAI PARA O CAMPO QUE GERA O LINK QUE MANDA O USUARIO PARA A PARTE DE COMPRA
