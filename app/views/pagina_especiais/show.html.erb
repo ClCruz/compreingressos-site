@@ -1,4 +1,10 @@
 <style type="text/css">
+  div.assinatura_municipal a.botao.ver_pacotes{
+    background-image:url('../images/bot_assinaturas_assinar_2017.png');  
+  }
+  div.assinatura_municipal {
+    width: 100%;
+  }
   div.background_pagina{
     background:<%= @pagina_especial.cor_de_fundo %> url('<%= @pagina_especial.imagem.url %>') top center no-repeat;
   }
@@ -22,7 +28,7 @@
     display:block;
     height:<%= @pagina_especial.altura_de_inicio_da_listagem %>px;
   }
-  div.menu_busca.pag_especial{2
+  div.menu_busca.pag_especial{
     background-color:<%= @pagina_especial.cor_de_fundo_do_box %>;
     width:947px;
     top:<%= @pagina_especial.altura_de_inicio_da_listagem+220 %>px;
@@ -292,18 +298,18 @@
       </div>
       -->
 
-      <!--
-      <div class="assinatura_municipal right">
+      
+      <div class="assinatura_municipal">
         <p class="titulo">Conheça os pacotes</p>
-        <p>
+<!--         <p>
           As novas assinaturas já começaram<br />
           a ser vendidas a partir do dia 01/12/2014,<br />
           aproveite e garanta já sua para<br />
           a temporada 2015 clicando no botão abaixo.
-        </p>
-        <a href="/theatromunicipaldesaopaulo/assinaturas" class="botao ver_pacotes"></a>
+        </p> -->
+        <a href="/theatromunicipaldesaopaulo/assinaturas/concertos" class="botao ver_pacotes"></a>
       </div>
-      -->
+      
       
       <!--
       <div class="assinatura_municipal right">
