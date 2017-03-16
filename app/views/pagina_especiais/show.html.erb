@@ -16,6 +16,8 @@
   }
   div.background_pagina div#detalhes_busca div.ordem a{
     color:<%= @pagina_especial.cor_do_link_do_box %>;
+    border-left: 1px solid #000;
+    padding-left: 14px;
   }
   div.background_pagina div#detalhes_busca div.ordem a:hover{
     background-color:<%= @pagina_especial.cor_do_link_do_box %>;
@@ -70,6 +72,20 @@
   .pag_especial_filtros div#busca div.container.buscar input {
     width: <%=@tt==360 ? '301':'165'%>px;
   }
+  div#busca div.flaticon-placeholder-for-map {
+  	float:left;
+  	padding-right:10px;
+  	padding-top: 4px;
+  }
+  div#busca div.flaticon-office-list{
+  	float: left;
+  	padding-right:10px;
+  	padding-top: 4px;
+  }
+  div#busca{
+  	width: 522px !important;
+  }
+
   /* CONDITIONAL STYLES */
 <% if @pagina_especial.nome_tamanho_da_fonte? -%>
   div.background_pagina div#detalhes_busca div.detalhes p.nome{
@@ -211,7 +227,7 @@
     background-size:auto 60px;
   }
   div.menu_busca.pag_especial{
-    top:<%= (@pagina_especial.altura_de_inicio_da_listagem)+163 %>px !important;
+    top:<%= (@pagina_especial.altura_de_inicio_da_listagem)+92 %>px !important;
     /* PAGINA PRIVADA NAO MOBILE */
   }
   @media only screen and (max-width:640px) {
@@ -330,7 +346,7 @@
       </div>
       <div class="ordem">
 <% if !params[:busca] -%>
-        organizado por
+        organizado por:
         <a href="/<%= @pagina_especial.url %>?<%= "pecidade=#{@pecidade.nome}" if !@pecidade.blank? %><%= "&pegenero=#{@pegenero.nome}" if !@pegenero.blank? %><%= "&filtro=#{@pef.url}" if !params[:filtro].blank? %>&ordem=destaques"<%= "class='ativo'" if params[:ordem]=='destaques' or (params[:ordem].blank? and @pagina_especial.organizado_por==1) %>>destaques</a>
         <a href="/<%= @pagina_especial.url %>?<%= "pecidade=#{@pecidade.nome}" if !@pecidade.blank? %><%= "&pegenero=#{@pegenero.nome}" if !@pegenero.blank? %><%= "&filtro=#{@pef.url}" if !params[:filtro].blank? %>&ordem=alfabetica"<%= "class='ativo'" if params[:ordem]=='alfabetica' or (params[:ordem].blank? and @pagina_especial.organizado_por==2) %>>alfabética</a>
         <a href="/<%= @pagina_especial.url %>?<%= "pecidade=#{@pecidade.nome}" if !@pecidade.blank? %><%= "&pegenero=#{@pegenero.nome}" if !@pegenero.blank? %><%= "&filtro=#{@pef.url}" if !params[:filtro].blank? %>&ordem=data"<%= "class='ativo'" if params[:ordem]=='data' or (params[:ordem].blank? and @pagina_especial.organizado_por==3) %>>próximas apresentações</a>
@@ -342,15 +358,17 @@
       <div class="pag_especial_filtros">
         <div id="busca">
 <% if @pagina_especial.filtro_cidade -%>
+		  <div class="flaticon-placeholder-for-map"></div>
           <div class="container pag_especial cidade">
-            <p>cidade</p>
-            <p class="help<%=@pecidade.blank? ? '':' ativo'%>"><%=@pecidade.blank? ? 'Escolha sua cidade':@pecidade.nome%></p>
+            	<p>cidade</p>
+            	<p class="help<%=@pecidade.blank? ? '':' ativo'%>"><%=@pecidade.blank? ? 'Escolha sua cidade':@pecidade.nome%></p>
           </div>
 <% end -%>
 <% if @pagina_especial.filtro_genero -%>
+          <div class="flaticon-office-list"></div>
           <div class="container pag_especial genero">
-            <p>gênero</p>
-            <p class="help<%=@pegenero.blank? ? '':' ativo'%>"><%=@pegenero.blank? ? 'Escolha o gênero':@pegenero.nome%></p>
+            	<p>gênero</p>
+            	<p class="help<%=@pegenero.blank? ? '':' ativo'%>"><%=@pegenero.blank? ? 'Escolha o gênero':@pegenero.nome%></p>
           </div>
 <% end -%>
 <% if @pagina_especial.busca -%>
