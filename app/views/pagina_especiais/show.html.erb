@@ -357,7 +357,7 @@
       </div>
       <div class="ordem">
 <% if !params[:busca] -%>
-        organizado por:
+        organizar por:
         <a href="/<%= @pagina_especial.url %>?<%= "pecidade=#{@pecidade.nome}" if !@pecidade.blank? %><%= "&pegenero=#{@pegenero.nome}" if !@pegenero.blank? %><%= "&filtro=#{@pef.url}" if !params[:filtro].blank? %>&ordem=destaques"<%= "class='ativo'" if params[:ordem]=='destaques' or (params[:ordem].blank? and @pagina_especial.organizado_por==1) %>>destaques</a>
         <a href="/<%= @pagina_especial.url %>?<%= "pecidade=#{@pecidade.nome}" if !@pecidade.blank? %><%= "&pegenero=#{@pegenero.nome}" if !@pegenero.blank? %><%= "&filtro=#{@pef.url}" if !params[:filtro].blank? %>&ordem=alfabetica"<%= "class='ativo'" if params[:ordem]=='alfabetica' or (params[:ordem].blank? and @pagina_especial.organizado_por==2) %>>alfabética</a>
         <a href="/<%= @pagina_especial.url %>?<%= "pecidade=#{@pecidade.nome}" if !@pecidade.blank? %><%= "&pegenero=#{@pegenero.nome}" if !@pegenero.blank? %><%= "&filtro=#{@pef.url}" if !params[:filtro].blank? %>&ordem=data"<%= "class='ativo'" if params[:ordem]=='data' or (params[:ordem].blank? and @pagina_especial.organizado_por==3) %>>próximas apresentações</a>
