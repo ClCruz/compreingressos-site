@@ -1,11 +1,16 @@
 @media screen and (max-width: 1024px){
-          .centraliza{
-            width: 100% !important;
-          }
-          #selos2{
-            width: 100%;
-          }
-        }
+  .centraliza{
+    width: 100% !important;
+  }
+  #selos2{
+    width: 100%;
+  }
+  div.background_pagina div#detalhes_busca{
+    width: auto;
+    padding: 6px 10px;
+    margin: 0 13px 10px auto;
+  }
+}
 
 @media only screen and (max-width:640px){
   body, html{
@@ -155,10 +160,9 @@
   #pai div#background_holder div#detalhes_busca div.ordem{
     margin:0;
     color:#4D4D4D;
-    float:left;
     width:100%;
-    font-size:11px;
-    text-align:left;
+    font-size:8px;
+    text-align:right;
     font-weight:normal;
   }
   div.ordem a{
@@ -827,7 +831,29 @@
   .container_theatromunicipal.left div{
     margin:0 0 10px !important;
   }
+  .flaticon-placeholder-for-map{
+    margin-left: 50px;
+    display: none;
+  }
+  .flaticon-office-list{
+    padding-right: 0px;
+    float: right;
+    display: none;
+  }
+
 }
+
+@media only screen and (min-width:360px) and (max-width:479px){
+    div.centraliza{
+    width: 320px !important;   
+    }
+  }
+
+  @media only screen and (min-height:360px) and (max-height:420px){
+    div.centraliza{
+    width: auto !important;   
+    }
+  }
 
 
 @media only screen and (min-width:480px) and (max-width:640px){
