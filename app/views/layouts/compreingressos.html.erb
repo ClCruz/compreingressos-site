@@ -411,8 +411,14 @@
 </script>
 <div id="mainSlider" class="ciSlider bn2">
   <ul>
-    <% is_grupo_aberto = false %>    
-    <% @visores_esquerda.each do |visor| %>      
+    <% is_grupo_aberto = false %>
+    <% nome_grupo = "" %>
+    <% @visores_esquerda.each do |visor| %>
+      <% if !visor.grupo.blank? && nome_grupo != visor.grupo && is_grupo_aberto == true %>
+        <% is_grupo_aberto = false %>
+        </ul></li>
+      <% end %>
+
       <% if visor.grupo.blank? %>
         <% if is_grupo_aberto %>
           <% is_grupo_aberto = false %>
@@ -432,6 +438,7 @@
           <a href="<%= visor.link %>"></a>
           <div class="img" style="background-image: url(<%= visor.imagem.url %>)"></div>
         </li>
+        <% nome_grupo = visor.grupo %>
       <% end %>
     <% end %>
   </ul>
