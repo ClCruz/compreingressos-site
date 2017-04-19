@@ -26,7 +26,7 @@ div.navBtn div {  margin-right: 7px;  display: inline-block;  text-align: center
 div.navBtn div[data-activenav="active"] {  background-color: white;  border-color: maroon;  }
 
 /* Cfg específica de cada banner */
-.bn2, .bn3 {  height: 370px;  float: left;  }
+.bn2, .bn3 {  height: 370px;  float: left;  margin-top: 117px;}
 .bn2 {  width: 72%; border-right: 1px solid #fff; box-sizing: border-box; }
 .bn3 {  width: 28%;  }
 #mainSlider ul > li div.img { background-size: 101%;  }
