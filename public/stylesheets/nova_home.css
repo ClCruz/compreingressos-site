@@ -89,7 +89,7 @@ div#novo_menu ul li { list-style: none; }
 div#novo_menu ul  { padding: 0px; margin: 0px; }
 div#novo_menu input { float: none; }
 
-div#novo_menu{background: #cd1331;padding: 0px 0px 7px 0px; position: fixed; width: 100%; margin: 0 auto; z-index: 9;}
+div#novo_menu{background: #cd1331;padding: 0px 0px 7px 0px; width: 100%; margin: 0 auto; z-index: 999;}
 
 div#novo_menu .publicidade{width: 100%;height: 75px;background: rgba(255, 255, 255, 0.2);margin-bottom: 15px;}
 
@@ -189,7 +189,7 @@ div#selos2 {
     clear: both;
 }
 
-@media only screen and (min-width: 641px) and (max-width: 959px){
+/*@media only screen and (min-width: 641px) and (max-width: 959px){
 	
 	#novo_menu .itens, #novo_menu .centraliza { width: 100% !important; }
 	#novo_menu { width: 767px; }
@@ -200,7 +200,7 @@ div#selos2 {
 
 	div#novo_menu .itens > div.meio { width: 56%; }
 	div#novo_menu .itens > div.fim { width: 42%; }
-}
+}*/
 
 @media only screen and (min-width: 768px) and (max-width: 979px) {
   #footer ul.midias_sociais { width: 195px; }
@@ -214,13 +214,10 @@ div#selos2 {
 	div#novo_menu .fim { float: left; width: 70%; margin: 0px; padding: 0px; height: auto; }
 }
 
-@media screen and (max-width: 640px){
+@media screen and (max-width: 1024px){
 	div#novo_menu .itens > div{ border: none; }
 	div#novo_menu .itens > div div.bottom { border: none;  }
 	div#novo_menu .publicidade,  
-	div#novo_menu .meio .div_header,
-	div#menu_topo{ display: none !important; }
-
 	.fim .div_header, .fim .bottom .icones, .fim .bottom [class*="flaticon"] { display: none; }
 	.primeira { padding: 0px !important; vertical-align: top !important; }
 	#novo_menu .fim .search{ float: none; }
@@ -229,13 +226,43 @@ div#selos2 {
 	div#novo_menu { height: 100px;  }
 }
 
+/*@media only screen and (min-width: 1025px) and (max-width: 1365px) {
+	div#novo_menu{
+		position: relative;
+	}
+}*/
+
 @media screen and (max-width: 767px){
 	.popup {
 		background:#F1F1F1 url('/images/mariah_carey_mobile.jpg') center top no-repeat;
 	}
 }
 
-@media screen and (max-width: 479px){
+@media screen and (min-width: 320px) and (max-width: 666px){
+	div#menu_topo, div#novo_menu .meio .div_header{ display: none !important; }
+}
+
+@media screen and (min-width: 667px){
+	div#novo_menu .meio .div_header{
+		width: 250%;
+		margin-left: 43px;
+	}
+	div#novo_menu .meio .bottom {
+	width: 60%;
+	}
+	div#btnbuscaGenero{
+
+	}
+
+	div#novo_menu .meio .bottom div {
+	margin-left: 11px;
+	}
+	div#novo_menu .meio .bottom > div{
+		width: 40%;
+	}
+}
+
+@media screen and (max-width: 1024px){
 
 	div#novo_menu .meio .bottom > div .txt span:first-child {
 	    padding-top: 15px;	
@@ -247,7 +274,7 @@ div#selos2 {
 	    float: none !important;
 	    display: block !important;
 	    margin: 0px;
-	    padding: 25px 5px 0 5px;
+	    padding: 10px 5px 0 5px;
 	}
 
 	div#novo_menu .itens > div.primeira {
@@ -258,10 +285,16 @@ div#selos2 {
 	div#novo_menu .bottom { padding-top: 0px !important;  }
 	.primeira { display: block !important;		width: 100%; }
 
-	div#novo_menu { height: 160px; }
+	div#novo_menu { height: 160px; position: relative;}
 	div#novo_menu .logo { margin: 5px auto !important; float: none !important; }
 	div#novo_menu .itens > div{ float: left; }
 	div#novo_menu .meio .bottom > div .icone, div#novo_menu .meio .bottom > div .txt { margin: 0 auto; }
 	div#novo_menu .meio .bottom > div .icone, div#novo_menu .meio .bottom > div .txt { float: none;		text-align: center; }
-	div#novo_menu .bottom input { width: 97%; }
+	div#novo_menu .bottom input { width: 300px; float: right; margin-right: 10px; }
+	
+}
+
+.fixar {
+    position:fixed;
+    margin-top: 0px !important;
 }

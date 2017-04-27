@@ -849,4 +849,15 @@ $(document).ready(function(){
     setCookie('baixeapp',1,0);
     window.location.replace(location.protocol+'//'+location.host+"/app");
   });
+
+var offset = $('#novo_menu').offset().top;
+var $meuMenu = $('#novo_menu');
+$(document).on('scroll', function () {
+    if (offset < $(window).scrollTop()) {
+        $meuMenu.addClass('fixar');
+    } else {
+        $meuMenu.removeClass('fixar');
+    }
+});
+
 });
