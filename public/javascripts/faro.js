@@ -850,14 +850,16 @@ $(document).ready(function(){
     window.location.replace(location.protocol+'//'+location.host+"/app");
   });
 
-var offset = $('#novo_menu').offset().top;
-var $meuMenu = $('#novo_menu');
-$(document).on('scroll', function () {
-    if (offset < $(window).scrollTop()) {
-        $meuMenu.addClass('fixar');
-    } else {
-        $meuMenu.removeClass('fixar');
-    }
-});
+  var $meuMenu = $('#novo_menu');
+  if($meuMenu.length > 0) {
+    var offset = $('#novo_menu').offset().top;
+    $(document).on('scroll', function () {
+        if (offset < $(window).scrollTop()) {
+            $meuMenu.addClass('fixar');
+        } else {
+            $meuMenu.removeClass('fixar');
+        }
+    });
+  }
 
 });
