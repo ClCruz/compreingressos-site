@@ -114,7 +114,10 @@
       <a class="link-03" href="/espetaculos/7233-mariah-carey-the-sweet-sweet-fantasy">&nbsp;</a>
     </div>
   </div>
-  <!-- NEWSLETTER -->
+
+  <% if !@noheaderfooter -%>
+  <div id="novo_menu">
+    <!-- NEWSLETTER -->
   <div id="guia_espetaculos">
     <div class="centraliza">
       <div class="container">
@@ -193,8 +196,6 @@
     </div>
   </div>
   <!-- NEWSLETTER -->
-  <% if !@noheaderfooter -%>
-  <div id="novo_menu">
     <div class="centraliza">
       <% if !@publicidade.nil? && request.fullpath == '/' -%>
       <div class="publicidade">
