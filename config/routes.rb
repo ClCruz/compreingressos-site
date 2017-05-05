@@ -114,6 +114,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'privacidade/', :controller => :textos, :action => :show, :id => 3
   map.connect 'regulamento/', :controller => :textos, :action => :show, :id => 6
   map.connect 'meia-entrada-por-regiao/', :controller => :textos, :action => :show, :id => 5
+  map.connect 'politicacancelamento/', :controller => :textos, :action => :show, :id => 7
   
   map.resources :textos
 
