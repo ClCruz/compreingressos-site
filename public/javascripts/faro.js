@@ -404,9 +404,7 @@ function validaNewsletter(campo){
     } else {
       $('#newsletter .container.status .status').fadeOut(50,function(){
         $('#newsletter .container.status .loading').fadeIn(50,function(){
-          console.log("Vai Corinthians");
           $.post('/compreingressos/newsletter', {nome: nome, email: email, uf: estado}, function(resposta){
-            console.log("Paulistão 2017");
           //$.get('http://www.faroestudio.com.br/MailChimp.php', {nome: nome, email: email, uf: estado}, function(resposta){
             $('#newsletter .container.status .loading').fadeOut(50,function(){
               $('#newsletter .container.status .status').css('background-position','50% -92px').fadeIn(200);
