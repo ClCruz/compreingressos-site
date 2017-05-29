@@ -435,6 +435,7 @@ class EspetaculosController < ApplicationController
   # GET /espetaculos/1
   # GET /espetaculos/1.xml
   def show
+
     @espetaculo = Espetaculo.find(params[:id], :include => :horarios_disponiveis)
     @title = @espetaculo.nome
     @keywords = @espetaculo.keywords
@@ -582,8 +583,9 @@ class EspetaculosController < ApplicationController
 
     
     # Check if it's time to update the dates and/or allow the selling
-    datetimenow = DateTime.now.in_time_zone.-2.hours
+    datetimenow = DateTime.now.in_time_zone.-3.hours
     #logger.warn "\n\n\n\n\n\n############"
+    #logger.info datetimenow
     #logger.warn "#{@espetaculo.especificar_data_inicial_de_venda} #{@espetaculo.data_inicial_de_venda} <= #{datetimenow} = #{@espetaculo.data_inicial_de_venda<=datetimenow ? 'sim':'nao'}"
     if @espetaculo.cc_id# and (Rails.env=="production" or Rails.env=="staging")
       if !@espetaculo.especificar_data_inicial_de_venda and @espetaculo.horario_cache<(datetimenow-30.minutes)
