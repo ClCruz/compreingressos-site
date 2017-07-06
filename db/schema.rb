@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20161117162228) do
+ActiveRecord::Schema.define(:version => 20170706170003) do
 
   create_table "admins", :force => true do |t|
     t.string   "nome"
@@ -216,6 +216,7 @@ ActiveRecord::Schema.define(:version => 20161117162228) do
     t.integer  "img_destaque_file_size"
     t.datetime "img_destaque_updated_at"
     t.boolean  "destaque_newsletter"
+    t.integer  "ordem_newsletter",                                :default => 100
   end
 
   add_index "espetaculos", ["ativo"], :name => "index_espetaculos_on_ativo"
@@ -603,6 +604,7 @@ ActiveRecord::Schema.define(:version => 20161117162228) do
     t.datetime "imagem_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "data_de_expiracao"
   end
 
   create_table "pontosdevenda", :force => true do |t|

@@ -7,7 +7,7 @@
     <%= f.label :tipo %><br />
     <%= f.select :tipo, PaginaEspecial::TIPOS %>
   </p>
-  
+
   <div class="especial" style="display:<%= @pagina_especial.tipo==2 ? 'block':'none' %>;float:left;width:100%;">
     <p style="margin-top:0;">
       <%= f.label :logo %><br />
@@ -54,17 +54,17 @@
     <%= f.check_box :busca %>
     <%= f.label :busca %>
   </p>
-  
+
   <p>
     <%= f.label :organizado_por %><br />
     <%= f.select :organizado_por, PaginaEspecial::ORGANIZADOPOR %>
   </p>
-  
+
   <p>
     <%= f.label :tipo_de_botao %><br />
     <%= f.select :tipo_de_botao, PaginaEspecial::TIPOBOTAO %>
   </p>
-  
+
   <div class="saiba_mais_aviso" style="display:<%= @pagina_especial.tipo_de_botao==2 ? 'block':'none' %>;float:left;width:100%;">
     <p style="margin-top:0;">
       <%= f.label :saiba_mais_aviso %><br />
@@ -84,7 +84,7 @@
     };
     });
   </script>
-  
+
   <p>
     <%= f.label :nome %><br />
     <%= f.text_field :nome %>
@@ -98,7 +98,7 @@
     <%= f.label :url %><br />
     <%= f.text_field :url %>
   </p>
-  <p>    
+  <p>
     <%= f.check_box :hotsite %>
     <%= f.label :hotsite %>
   </p>
@@ -187,10 +187,13 @@
             <br /><%= image_tag cv.object.imagem.url, :width => '100%' %>
           <% end %>
         </p>
+        <%= link_to 'Editar', edit_pagina_especial_visor_path(cv.object) %>
+        <span>|</span>
         <%= remove_link_unless_new_record(cv) %>
+        <p>Expiração: <%= l cv.object.data_de_expiracao, :format => :datahora unless cv.object.data_de_expiracao.nil? %></p>
       </div>
       <hr width="600px" align="left">
-    </div>  
+    </div>
     <% end %>
   </div>
   <p>
@@ -240,7 +243,7 @@
         <%= remove_link_unless_new_record(cv) %>
       </div>
       <hr width="600px" align="left">
-    </div>  
+    </div>
     <% end %>
   </div>
   <p>

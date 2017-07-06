@@ -32,6 +32,10 @@
     <%= f.datetime_select :imagem_updated_at %>
   </p>
   <p>
+    <%= f.label :data_de_expiracao %><br />
+    <%= f.datetime_select(:data_de_expiracao, :order => [:day, :month, :year, :hour, :minute, :second], :include_seconds => true, :date_separator => '', :datetime_separator => ' às ', :time_separator => ':', :start_year => Date.current.year, :end_year => Date.current.year+2, :include_blank => false) %><br />
+  </p>
+  <p>
     <%= f.submit 'Update' %>
   </p>
 <% end %>
