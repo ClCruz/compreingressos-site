@@ -1,18 +1,18 @@
 <% cache("teatros#{params[:teatro_cidade].blank? ? '':'/'+params[:teatro_cidade].parameterize}#{(params[:ordem].blank? or params[:ordem]=='destaques') ? '':'/'+params[:ordem].parameterize}") do -%>
-<div class="centraliza">  
+<div class="centraliza">
   <div id="teatro">
   	<h1 class='title_page'>Teatros e casas de show</h1>
     <div class="ordem">
       <% if !params[:busca] -%>
         organizado por
-        <a href="/teatros?<%= "teatro_cidade=#{@cidade.nome}" if !@cidade.blank? %>"<%="class='ativo'" if params[:ordem].blank? %>>destaques</a>
-        <a href="/teatros?<%= "teatro_cidade=#{@cidade.nome}" if !@cidade.blank? %>&ordem=alfabetica"<%="class='ativo'" if !params[:ordem].blank? %>>alfabética</a>
+        <a href="/espacos?<%= "teatro_cidade=#{@cidade.nome}" if !@cidade.blank? %>"<%="class='ativo'" if params[:ordem].blank? %>>destaques</a>
+        <a href="/espacos?<%= "teatro_cidade=#{@cidade.nome}" if !@cidade.blank? %>&ordem=alfabetica"<%="class='ativo'" if !params[:ordem].blank? %>>alfabética</a>
       <% end -%>
     </div>
   	<div class="menu_busca_teatro">
-      <a href="/teatros?<%= "&ordem=#{lparam(params[:ordem])}" if params[:ordem] %>"<%=" class='ativo'" if params[:teatro_cidade].blank?%>>Todos</a>
+      <a href="/espacos?<%= "&ordem=#{lparam(params[:ordem])}" if params[:ordem] %>"<%=" class='ativo'" if params[:teatro_cidade].blank?%>>Todos</a>
       <% for cidade in @cid %>
-        <a href="/teatros?teatro_cidade=<%=cidade.nome%><%= "&ordem=#{lparam(params[:ordem])}" if params[:ordem] %>"<%=" class='ativo'" if params[:teatro_cidade]==cidade.nome%>><%=cidade.nome%> (<%=cidade.total%>)</a>
+        <a href="/espacos?teatro_cidade=<%=cidade.nome%><%= "&ordem=#{lparam(params[:ordem])}" if params[:ordem] %>"<%=" class='ativo'" if params[:teatro_cidade]==cidade.nome%>><%=cidade.nome%> (<%=cidade.total%>)</a>
       <% end %>
     </div>
       <% i=1 %>
