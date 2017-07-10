@@ -22,7 +22,7 @@
           <a href="<%=link %>"<%= blank %> class="botao saiba_mais"></a>
         <% end -%>
       <% else -%>
-        <% if card_sem_auxiliar.cc_id and card_sem_auxiliar.data_inicial_de_venda<=DateTime.now.in_time_zone.-3.hours -%>
+        <% if card_sem_auxiliar.cc_id and card_sem_auxiliar.data_inicial_de_venda<=DateTime.now -%>
           <a href="<%=link %>"<%= blank %> class="botao comprar"></a>
         <% else -%>
           <a href="<%=link %>"<%= blank %> class="botao saiba_mais"></a>
