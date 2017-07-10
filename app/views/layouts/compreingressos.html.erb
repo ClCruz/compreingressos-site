@@ -99,11 +99,11 @@
     ['mark', 'firstbyte', (new Date()).getTime()]];
     (function(){ var s = document.getElementsByTagName('script')[0] , p = document.createElement('script'); p.async = 'async'; p.src = '//rum-static.pingdom.net/prum.min.js'; s.parentNode.insertBefore(p, s); })();
   </script>
-  <% if request.fullpath == "/itaucardteatro" or request.fullpath == "/itaucardshows" %>    
+  <% if request.fullpath == "/itaucardteatro" or request.fullpath == "/itaucardshows" %>
   <%= javascript_include_tag 'facebook.pixel.itau.js' -%>
   <% end %>
   <script type="text/javascript" src="/javascripts/cislider/cislider.js"></script>
-</head>  
+</head>
 <body>
   <div class="popup">
     <div class="popup_close">FECHAR</div>
@@ -192,7 +192,7 @@
             </div>
           </form>
         </div>
-      </div>     
+      </div>
     </div>
   </div>
   <!-- NEWSLETTER -->
@@ -201,15 +201,15 @@
       <div class="publicidade">
         <div class="anuncio">
           <% if @publicidade.script.empty? %>
-          <%= link_to image_tag(@publicidade.imagem.url, :width => 960, :height => 75), 
-          @publicidade.link, 
+          <%= link_to image_tag(@publicidade.imagem.url, :width => 960, :height => 75),
+          @publicidade.link,
           :target => @publicidade.blank? ? "_blank" : "_self" %>
           <% else %>
           <%= @publicidade.script %>
           <% end %>
         </div>
       </div>
-      <% end %>  
+      <% end %>
       <div class="itens">
         <div class="primeira">
           <div class="logo">
@@ -222,8 +222,8 @@
           <div class="div_header">
             <ul class="opcoes">
               <li><a target="_blank" href="https://compra.compreingressos.com/comprar/minha_conta.php">Cadastro/Login</a></li>
-              <li><a target="_blank" href="/espetaculos">Todos os eventos</a></li>
-              <li><a target="_blank" href="/teatros">Espaços</a></li>
+              <li><%= link_to "Todos os eventos", espetaculos_path, :target => "_blank" %></li>
+              <li><%= link_to "Espaços", teatros_path, :target => "_blank" %></li>
               <li><a href="#" onclick="showNewsLetter()">Fique por dentro</a></li>
               <li><a target="_blank" href="/ofertas">OFERTAS</a></li>
             </ul>
@@ -232,7 +232,7 @@
           <script>
             function showNewsLetter(){
               $('#guia_espetaculos').slideToggle();
-            } 
+            }
           </script>
 
           <div class="cleaner"></div>
@@ -320,7 +320,7 @@
         :group => 'generos.id',
         :order => 'total DESC')
     else
-      if @conjuntocidade 
+      if @conjuntocidade
         ccid = ConjuntoCidade.find(:all, :include => :cidades, :order => :nome)
         ccid.each_with_index do |cc, i|
           cids = cc.cidades.map{|c| "#{c.id},"}.to_s+"0"
@@ -391,8 +391,8 @@
     CISlider
     (
       'mainSlider',
-      { 
-        slideTo: 'right', 
+      {
+        slideTo: 'right',
         auto: true,
         width: 1370,
         height: 368,
@@ -401,7 +401,7 @@
 
     CISlider
     (
-      'sSlider', 
+      'sSlider',
       {
         auto: true,
         width: 538,
