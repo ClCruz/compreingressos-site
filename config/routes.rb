@@ -182,7 +182,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.connect 'espetaculos/banners', :controller => :espetaculos, :action => :banners
 
-  map.resources :espetaculos
+  map.resources :espetaculos, :as => "eventos"
 
   #map.connect 'teatros/address_lat_long', :controller => :teatros, :action => :address_lat_long
 
