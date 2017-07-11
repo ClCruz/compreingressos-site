@@ -99,11 +99,26 @@
     ['mark', 'firstbyte', (new Date()).getTime()]];
     (function(){ var s = document.getElementsByTagName('script')[0] , p = document.createElement('script'); p.async = 'async'; p.src = '//rum-static.pingdom.net/prum.min.js'; s.parentNode.insertBefore(p, s); })();
   </script>
-  <% if request.fullpath == "/itaucardteatro" or request.fullpath == "/itaucardshows" %>    
+  <% if request.fullpath == "/itaucardteatro" or request.fullpath == "/itaucardshows" %>
   <%= javascript_include_tag 'facebook.pixel.itau.js' -%>
   <% end %>
   <script type="text/javascript" src="/javascripts/cislider/cislider.js"></script>
-</head>  
+  <!-- Facebook Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '362221970839284'); // Insert your pixel ID here.
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height=""1"" width=""1"" style=""display:none""
+  src=""https://www.facebook.com/tr?id=362221970839284&ev=PageView&noscript=1""
+  /></noscript>
+  <!-- DO NOT MODIFY -->
+  <!-- End Facebook Pixel Code -->"
+</head>
 <body>
   <div class="popup">
     <div class="popup_close">FECHAR</div>
@@ -192,7 +207,7 @@
             </div>
           </form>
         </div>
-      </div>     
+      </div>
     </div>
   </div>
   <!-- NEWSLETTER -->
@@ -201,15 +216,15 @@
       <div class="publicidade">
         <div class="anuncio">
           <% if @publicidade.script.empty? %>
-          <%= link_to image_tag(@publicidade.imagem.url, :width => 960, :height => 75), 
-          @publicidade.link, 
+          <%= link_to image_tag(@publicidade.imagem.url, :width => 960, :height => 75),
+          @publicidade.link,
           :target => @publicidade.blank? ? "_blank" : "_self" %>
           <% else %>
           <%= @publicidade.script %>
           <% end %>
         </div>
       </div>
-      <% end %>  
+      <% end %>
       <div class="itens">
         <div class="primeira">
           <div class="logo">
@@ -232,7 +247,7 @@
           <script>
             function showNewsLetter(){
               $('#guia_espetaculos').slideToggle();
-            } 
+            }
           </script>
 
           <div class="cleaner"></div>
@@ -320,7 +335,7 @@
         :group => 'generos.id',
         :order => 'total DESC')
     else
-      if @conjuntocidade 
+      if @conjuntocidade
         ccid = ConjuntoCidade.find(:all, :include => :cidades, :order => :nome)
         ccid.each_with_index do |cc, i|
           cids = cc.cidades.map{|c| "#{c.id},"}.to_s+"0"
@@ -391,8 +406,8 @@
     CISlider
     (
       'mainSlider',
-      { 
-        slideTo: 'right', 
+      {
+        slideTo: 'right',
         auto: true,
         width: 1370,
         height: 368,
@@ -401,7 +416,7 @@
 
     CISlider
     (
-      'sSlider', 
+      'sSlider',
       {
         auto: true,
         width: 538,
