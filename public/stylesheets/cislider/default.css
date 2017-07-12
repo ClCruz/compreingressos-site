@@ -5,7 +5,7 @@ div#menu_topo a.logo{
 ul{ list-style: none; padding: 0px; margin: 0px; }
 ul li { padding: 0px; margin: 0px; }
 .cleaner { clear: both !important; float: none !important; display: block !important; }
-body{  margin: 0px;  padding: 0px;  }
+body{  margin: 0px;  padding: 0px; overflow-x: hidden; }
 
 .container { width: 100%; }
 
