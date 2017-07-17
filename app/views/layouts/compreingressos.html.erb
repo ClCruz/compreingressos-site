@@ -237,8 +237,8 @@
           <div class="div_header">
             <ul class="opcoes">
               <li><a target="_blank" href="https://compra.compreingressos.com/comprar/minha_conta.php">Cadastro/Login</a></li>
-              <li><a target="_blank" href="/espetaculos">Todos os eventos</a></li>
-              <li><a target="_blank" href="/teatros">Espaços</a></li>
+              <li><%= link_to "Todos os eventos", espetaculos_path, :target => "_blank" %></li>
+              <li><%= link_to "Espaços", teatros_path, :target => "_blank" %></li>
               <li><a href="#" onclick="showNewsLetter()">Fique por dentro</a></li>
               <li><a target="_blank" href="/ofertas">OFERTAS</a></li>
             </ul>
@@ -367,17 +367,17 @@
     -%>
     <div id="buscaCidade" class="menu_busca geral container cidade">
       <div class="centraliza">
-        <a href="/espetaculos?cidade=Todas as cidades"<%=" class='ativo'" if params[:cidade]=='Todas as cidades'%>>Todas as cidades</a>
+        <a href="/eventos?cidade=Todas as cidades"<%=" class='ativo'" if params[:cidade]=='Todas as cidades'%>>Todas as cidades</a>
         <% for cidade in cid -%>
-        <a href="/espetaculos?cidade=<%=cidade.nome%><%= "&ordem=#{lparam(params[:ordem])}" if params[:ordem] %>" class="<%='ativo' if params[:cidade]==cidade.nome%><%=' negrito' if cidade.total.to_i>=10%>"><%=cidade.nome%> <span>(<%=cidade.total%>)</span></a>
+        <a href="/eventos?cidade=<%=cidade.nome%><%= "&ordem=#{lparam(params[:ordem])}" if params[:ordem] %>" class="<%='ativo' if params[:cidade]==cidade.nome%><%=' negrito' if cidade.total.to_i>=10%>"><%=cidade.nome%> <span>(<%=cidade.total%>)</span></a>
         <% end -%>
       </div>
     </div>
     <div id="buscaGenero" class="menu_busca geral container genero">
       <div class="centraliza">
-        <a href="/espetaculos?cidade=<%= @cidade.blank? ? 'Todas as cidades':@cidade.nome %>&genero=Todos os gêneros"<%=" class='ativo'" if params[:genero]=='Todos os gêneros'%>>Todos os gêneros</a>
+        <a href="/eventos?cidade=<%= @cidade.blank? ? 'Todas as cidades':@cidade.nome %>&genero=Todos os gêneros"<%=" class='ativo'" if params[:genero]=='Todos os gêneros'%>>Todos os gêneros</a>
         <% for genero in gen -%>
-        <a href="/espetaculos?<%= "cidade=#{@cidade.nome}&" if !@cidade.blank? %>genero=<%=genero.nome%><%= "&ordem=#{lparam(params[:ordem])}" if params[:ordem] %>" class="<%='ativo' if params[:genero]==genero.nome%>"><%=genero.nome%> <span>(<%=genero.total%>)</span></a>
+        <a href="/eventos?<%= "cidade=#{@cidade.nome}&" if !@cidade.blank? %>genero=<%=genero.nome%><%= "&ordem=#{lparam(params[:ordem])}" if params[:ordem] %>" class="<%='ativo' if params[:genero]==genero.nome%>"><%=genero.nome%> <span>(<%=genero.total%>)</span></a>
         <% end -%>
       </div>
     </div>

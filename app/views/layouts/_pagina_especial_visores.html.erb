@@ -12,6 +12,10 @@
     <%= f.file_field :imagem %><br />
     <span class="help_text">O tamanho deve ser exatamente 180x369px</span>
   </p>
+  <p>
+    <%= f.label :data_de_expiracao %><br />
+    <%= f.datetime_select(:data_de_expiracao, :order => [:day, :month, :year, :hour, :minute, :second], :include_seconds => true, :date_separator => '', :datetime_separator => ' às ', :time_separator => ':', :start_year => Date.current.year, :end_year => Date.current.year+2, :include_blank => false) %><br />
+  </p>
   <%= link_to_function "Remover este visor", "$(this).up('.pagina_especial_visor').remove()" %>
 <% end %>
 <hr width="600px" align="left">
