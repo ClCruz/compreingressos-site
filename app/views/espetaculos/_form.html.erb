@@ -104,8 +104,8 @@
     };
     });
   </script>
-  
-  
+
+
 	<p>
 		<%= f.label :teatro_id, "Teatro: "%><br />
 		<%= f.select :teatro_id, Teatro.all(:order => 'nome').collect {|c| [ c.nome, c.id ] } %><br />
@@ -132,11 +132,11 @@
   </p>
   <p>
   	<%= f.label :keywords, 'SEO keywords' %><br />
-  	<%= f.text_field :keywords, :size => 100 %>
+  	<%= f.text_area :keywords %>
 	</p>
   <p>
   	<%= f.label :description, 'SEO description' %><br />
-  	<%= f.text_field :description, :size => 100 %>
+  	<%= f.text_area :description %>
 	</p>
 	<p>
 		<%= f.label :sinopse %><br />
@@ -211,9 +211,9 @@
     };
     });
   </script>
-	<hr color="#C7C7C7">	
-	
-	
+	<hr color="#C7C7C7">
+
+
 	<div class="campos" id="entradas">
 		<h2>Ficha Técnica:</h2>
 		<% f.fields_for :entradas do |entrada_form| %>
@@ -226,18 +226,18 @@
 				<br />
         <%= entrada_form.label :valor, 'Valor'%><br />
         <%= entrada_form.text_area :valor, :cols => 40, :rows => 5, :class => 'mceEditor'%><br />
-        
+
 				<%= remove_link_unless_new_record(entrada_form) %>
 			</p>
-		</div>	
+		</div>
 		<% end %>
 	</div>
 		<p>
 			<%= add_entrada_link "Adicionar Entrada", f %>
 		</p>
 	<hr color="#C7C7C7">
-	
-	
+
+
   <h2>Imagens:</h2>
   <p>
     <%= f.label :img_principal %><br />
@@ -268,13 +268,13 @@
     <% end %>
   </p>
   <hr color="#C7C7C7">
-    
-    
+
+
   <div class="campos" id="imagems">
     <h2>Galeria:</h2>
     <% f.fields_for :galerias do |imagem_form| %>
       <div class="galeria">
-        <p>            
+        <p>
           <%= imagem_form.label 'Arquivo', 'Selecione o arquivo de imagem para substituir esta foto:' %><br />
           <%= imagem_form.file_field :imagem %><br />
           <span class="help_text">O tamanho deve ser exatamente 465x274px</span><br />
@@ -286,16 +286,16 @@
           <%= imagem_form.text_field :legenda%><br />
           <%= remove_link_unless_new_record(imagem_form) %>
         </p>
-      </div>  
-      <hr width="600px" align="left"> 
+      </div>
+      <hr width="600px" align="left">
     <% end %>
   </div>
 	<p>
 	  <%= add_imagem_link "Adicionar Imagem", f %>
 	</p>
 	<hr color="#C7C7C7">
-	
-	
+
+
 	<div id="videos">
 		<h2>Vídeos:</h2>
 		<% f.fields_for :videos do |video_form| %>
