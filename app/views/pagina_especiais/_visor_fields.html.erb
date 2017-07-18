@@ -1,0 +1,28 @@
+<%#
+  Este arquivo é um 'partial' (http://guides.rubyonrails.org/layouts_and_rendering.html#using-partials)
+
+  Utilizado para inserir o formulário de cadastro de um Visor de Página Especial
+  em uma Página Especial.
+
+  Para mais detalhes (http://railscasts.com/episodes/196-nested-model-form-part-1)
+%>
+<p>
+  <%= f.label :link %><br />
+  <%= f.text_field :link %>
+</p>
+<p>
+  <%= f.check_box :blank %><%= f.label :blank %>
+</p>
+<p>
+  <%= f.label :imagem, 'Selecione a imagem:' %><br />
+  <%= f.file_field :imagem %><br />
+  <span class="help_text">O tamanho deve ser exatamente 1920x369px</span>
+  <% unless f.object.new_record? %>
+    <br /><%= image_tag f.object.imagem.url, :width => '100%' %>
+  <% end %>
+</p>
+<p>
+  <%= f.label :data_de_expiracao %><br />
+  <%= f.datetime_select(:data_de_expiracao, :order => [:day, :month, :year, :hour, :minute, :second], :include_seconds => true, :date_separator => '', :datetime_separator => ' às ', :time_separator => ':', :start_year => Date.current.year, :end_year => Date.current.year+2, :include_blank => false) %><br />
+</p>
+<%= remove_link_unless_new_record(f) %>
