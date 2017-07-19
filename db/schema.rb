@@ -168,15 +168,15 @@ ActiveRecord::Schema.define(:version => 20170718195121) do
     t.integer  "teatro_id"
     t.integer  "classificacao_id"
     t.integer  "genero_id"
-    t.string   "keywords",                          :limit => 2000
-    t.string   "description",                       :limit => 2000
+    t.string   "keywords"
+    t.string   "description"
     t.boolean  "mais_vendido"
-    t.integer  "visitas",                                           :default => 0
+    t.integer  "visitas",                                         :default => 0
     t.integer  "cc_id"
     t.integer  "aba_inicial"
     t.date     "data_maxima"
-    t.boolean  "privado",                                           :default => false
-    t.integer  "relevancia",                                        :default => 1
+    t.boolean  "privado",                                         :default => false
+    t.integer  "relevancia",                                      :default => 1
     t.text     "desconto"
     t.date     "data_inicial"
     t.string   "duracao",                           :limit => 50
@@ -216,7 +216,7 @@ ActiveRecord::Schema.define(:version => 20170718195121) do
     t.integer  "img_destaque_file_size"
     t.datetime "img_destaque_updated_at"
     t.boolean  "destaque_newsletter"
-    t.integer  "ordem_newsletter",                                  :default => 100
+    t.integer  "ordem_newsletter",                                :default => 100
   end
 
   add_index "espetaculos", ["ativo"], :name => "index_espetaculos_on_ativo"
