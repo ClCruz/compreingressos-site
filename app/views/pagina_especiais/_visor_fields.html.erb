@@ -14,11 +14,20 @@
   <%= f.check_box :blank %><%= f.label :blank %>
 </p>
 <p>
-  <%= f.label :imagem, 'Selecione a imagem:' %><br />
+  <%= f.label :imagem, 'Imagem:' %><br />
   <%= f.file_field :imagem %><br />
   <span class="help_text">O tamanho deve ser exatamente 1920x369px</span>
   <% unless f.object.new_record? %>
     <br /><%= image_tag f.object.imagem.url, :width => '100%' %>
+  <% end %>
+</p>
+<p>
+  <%= f.label :imagem_mobile, 'Imagem mobile:' %><br />
+  <%= f.file_field :imagem_mobile %><br />
+  <% if f.object.imagem_mobile? %>
+    <br />
+    <%= image_tag f.object.imagem_mobile.url, :style => "max-height:156px; max-width:570px;" %>
+    <div style="border-right:1px solid red;border-left:1px solid red;width:321px;height:156px;position:absolute;margin:-172px 123px 0px;"></div>
   <% end %>
 </p>
 <p>
