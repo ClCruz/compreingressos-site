@@ -58,6 +58,10 @@
   <meta name="keywords" content="<%=@keywords%>"/>
   <link href="/favicon.ico" rel="shortcut icon"/>
 
+  <!-- manifest file
+      https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/ -->
+  <link rel="manifest" href="/manifest.json" />
+
   <link href='/stylesheets/font-source-sans-pro.css' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="/stylesheets/ci.min.css"/>
   <link rel="stylesheet" type="text/css" href="/stylesheets/icons/socicon/styles.css">
@@ -118,6 +122,8 @@
   /></noscript>
   <!-- DO NOT MODIFY -->
   <!-- End Facebook Pixel Code -->
+  <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
+  <%= javascript_include_tag :defaults %>
 </head>
 <body>
   <div class="popup">
