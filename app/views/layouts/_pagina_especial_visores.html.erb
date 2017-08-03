@@ -13,6 +13,15 @@
     <span class="help_text">O tamanho deve ser exatamente 180x369px</span>
   </p>
   <p>
+    <%= f.label :imagem_mobile, 'Imagem mobile:' %><br />
+    <%= f.file_field :imagem_mobile %><br />
+    <% if f.object.imagem_mobile? %>
+      <br />
+      <%= image_tag f.object.imagem_mobile.url, :style => "max-height:156px; max-width:570px;" %>
+      <div style="border-right:1px solid red;border-left:1px solid red;width:321px;height:156px;position:absolute;margin:-172px 123px 0px;"></div>
+    <% end %>
+  </p>
+  <p>
     <%= f.label :data_de_expiracao %><br />
     <%= f.datetime_select(:data_de_expiracao, :order => [:day, :month, :year, :hour, :minute, :second], :include_seconds => true, :date_separator => '', :datetime_separator => ' às ', :time_separator => ':', :start_year => Date.current.year, :end_year => Date.current.year+2, :include_blank => false) %><br />
   </p>

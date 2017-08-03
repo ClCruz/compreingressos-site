@@ -39,8 +39,8 @@
   #espetaculos-ausentes{
     width: 100%;
     float: left;
-  }     
-  .foto_itau{     
+  }
+  .foto_itau{
     width: 100%;
     height: 220px;
     position: relative;
@@ -49,7 +49,7 @@
   .foto_itau .box_texto {
     width: 300px;
     float: right;
-    text-align: center;    
+    text-align: center;
   }
   .foto_itau .form-espetaculos-ausentes {
     width: 100%;
@@ -133,7 +133,7 @@
   .foto_itau input[name="btn-enviar"]:hover { transition: all 0.3s; background-color: #00AAC0; }
 
   input[name="espetaculo_ausente[aceita_noticia]"] { height: auto !important; transition: height 0.3s; width: 14px; }
-  
+
   div.separadopor_menor{
     width: 780px !important;
   }
@@ -357,7 +357,7 @@
     div.home_module{
       display: none;
     }
-    
+
     /* CONDITIONAL MOBILE STYLES */
 <% if @pagina_especial.mapeamento_de_imagem.blank? and @pagina_especial.url != "theatromunicipaldesaopaulo" and (!session[:desktop] or session[:desktop]==0) -%>
     div#background_holder div#detalhes_busca{
@@ -447,12 +447,12 @@
   @media only screen and (max-width:1279px){
    .foto_itau .foto {
     background-image: url('images/background_eventos_ausentes_320px.png');
-    background-position: 50% 35%; 
+    background-position: 50% 35%;
   }
   }
   @media only screen and (max-width:320px){
   .foto_itau {
-    height: 480px;  
+    height: 480px;
   }
   .foto_itau .foto{
     background-image: url('images/background_eventos_ausentes_320px.png');
@@ -497,22 +497,22 @@
 <script type="text/javascript">
   function visorMobile(){
     function mobile(){
-      if ($('div.swiper-wrapper').length > 0){    
+      if ($('div.swiper-wrapper').length > 0){
         if (window.innerWidth<=640 && mobileversion==1){
           $('div.swiper-wrapper').children().each(function(){
             /*if($(this).attr('class')=='swiper-slide'){
               $(this).remove();
             }*/
-            $(this).children().attr('style', $(this).children().attr('style').replace('.jpg','m.jpg'));
+            $(this).children().attr('style', $(this).children().attr('style').replace('visor.jpg','visor_mobile.jpg'));
           })
         } else {
           $('div.swiper-wrapper').children().each(function(){
-            $(this).children().attr('style', $(this).children().attr('style').replace('m.jpg','.jpg'));
+            $(this).children().attr('style', $(this).children().attr('style').replace('visor_mobile.jpg','visor.jpg'));
           })
         }
       }
     }
-    
+
     mobile();
     $(window).resize(function(){
       mobile();
@@ -629,7 +629,7 @@
         <div class="separadopor mes1 <%=(@pagina_especial.pagina_especial_banners.length > 0) ? ' separadopor_menor' : '' -%>">
         <h1><%= @m1.size>0 ? l(@m1.first.proximo_horario.data, :format => :mes):'' %></h1>
         <div class="espetaculos">
-          <%= render :partial => 'layouts/card_com_auxiliar', :collection => @m1, :locals => {:auxiliar => @pagina_especial} -%>         
+          <%= render :partial => 'layouts/card_com_auxiliar', :collection => @m1, :locals => {:auxiliar => @pagina_especial} -%>
         </div>
       </div>
 <% end -%>
@@ -650,8 +650,8 @@
         <% if link_exibe -%>
           <%=link_to @pagina_especial.texto_de_link_do_regulamento, @pagina_especial.link_do_regulamento, :class => 'link_do_regulamento', :target => (@pagina_especial.blank_de_link_do_regulamento==true ? '_blank':'_self') %>
           <% link_exibe = false -%>
-        <% end -%>      
-      <% end -%>    
+        <% end -%>
+      <% end -%>
     </div>
   </div>
 <% end -%>
@@ -702,7 +702,7 @@
                   });
                 },
         minLength: 3,
-        select: function( event, ui ) {    
+        select: function( event, ui ) {
           event.preventDefault();
           $("#cidade_id").val(ui.item.value);
           $("#cidade").val(ui.item.label);
@@ -731,7 +731,7 @@
 
           // $.get('http://www.faroestudio.com.br/MailChimp.php', {nome: email, email: email, uf: estado});
         }
-      });      
+      });
     });
     function validaEspetaculosAusentes(){
       var email=$("#espetaculo_ausente_email");
@@ -850,8 +850,8 @@
         }
       });
     }
-  </script>  
-  
+  </script>
+
 </div>
 <div class="cleaner"></div>
 <% if @pagina_especial.url == 'itaucardshows' %>
@@ -861,7 +861,7 @@
     URL of the webpage where the tag is expected to be placed: http://www.compreingressos.com/itaucardshows
     This tag must be placed between the <body> and </body> tags, as close as possible to the opening tag.
     Creation Date: 04/12/2016
-  -->   
+  -->
   <script type="text/javascript">
     var axel = Math.random() + "";
     var a = axel * 10000000000000;
@@ -871,7 +871,7 @@
     <iframe src="https://4898329.fls.doubleclick.net/activityi;src=4898329;type=itauc000;cat=itauc00;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;ord=1?" width="1" height="1" frameborder="0" style="display:none"></iframe>
   </noscript>
   <!-- End of DoubleClick Floodlight Tag: Please do not remove -->
-<% end %> 
+<% end %>
 
 
 <% if @pagina_especial.url == 'itaucardteatro' %>
@@ -891,7 +891,7 @@
     <iframe src="https://4898329.fls.doubleclick.net/activityi;src=4898329;type=itauc000;cat=itauc000;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;ord=1?" width="1" height="1" frameborder="0" style="display:none"></iframe>
   </noscript>
 <!-- End of DoubleClick Floodlight Tag: Please do not remove -->
-<% end %> 
+<% end %>
 
 <% if @pagina_especial.url == 'itaucardshows' %>
 <div class="foto_itau">
@@ -909,7 +909,7 @@
     <label class="resultado"><span><span/></label>
       <% @espetaculo_ausente = EspetaculoAusente.new %>
       <% form_for(@espetaculo_ausente, :html => {:name => "form-espetaculos-ausentes"}) do |f| %>
-        <%= f.error_messages %>  
+        <%= f.error_messages %>
         <%= f.text_field :email, :placeholder =>"Seu e-mail" %>
         <%= f.text_field :artista, :placeholder =>"Nome do Artista ou Banda" %>
         <%= f.text_field :estilo, :placeholder =>"Seu estilo favorito" %>
@@ -921,9 +921,9 @@
         </label>
         <%= f.submit "Enviar",:name =>'btn-enviar',:id =>"btn-enviar" %>
       <% end %>
-      
+
     </div>
   </div>
 </div>
-<% end %> 
+<% end %>
 

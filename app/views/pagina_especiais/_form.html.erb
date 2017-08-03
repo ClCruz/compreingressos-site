@@ -169,31 +169,11 @@
   <div class="campos" id="pagina_especial_visores">
     <h2 style="margin-bottom:0;">Visores:</h2>
     <span class="help_text">Ao adicionar 1 visor a "Altura de inicio" é desconsiderada e o box vem logo abaixo dos visores</span>
-    <% f.fields_for :pagina_especial_visores do |cv| %>
-    <div class="pagina_especial_visor" id="pagina_especial_visor_<%=cv.object.id%>">
-      <div>
-        <p>
-          <%= cv.label :link %><br />
-          <%= cv.text_field :link %>
-        </p>
-        <p>
-          <%= cv.check_box :blank %><%= cv.label :blank %>
-        </p>
-        <p>
-          <%= cv.label :imagem, 'Selecione a imagem:' %><br />
-          <%= cv.file_field :imagem %><br />
-          <span class="help_text">O tamanho deve ser exatamente 1920x369px</span>
-          <% unless cv.object.new_record? %>
-            <br /><%= image_tag cv.object.imagem.url, :width => '100%' %>
-          <% end %>
-        </p>
-        <%= link_to 'Editar', edit_pagina_especial_visor_path(cv.object) %>
-        <span>|</span>
-        <%= remove_link_unless_new_record(cv) %>
-        <p>Expiração: <%= l cv.object.data_de_expiracao, :format => :datahora unless cv.object.data_de_expiracao.nil? %></p>
+    <% f.fields_for :pagina_especial_visores do |builder| %>
+      <div class="pagina_especial_visor" id="pagina_especial_visor_<%=builder.object.id%>">
+        <div><%= render "visor_fields", :f => builder %></div>
+        <hr width="600px" align="left">
       </div>
-      <hr width="600px" align="left">
-    </div>
     <% end %>
   </div>
   <p>
