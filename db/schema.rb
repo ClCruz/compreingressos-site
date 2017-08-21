@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170706170003) do
+ActiveRecord::Schema.define(:version => 20170718195121) do
 
   create_table "admins", :force => true do |t|
     t.string   "nome"
@@ -605,6 +605,10 @@ ActiveRecord::Schema.define(:version => 20170706170003) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "data_de_expiracao"
+    t.string   "imagem_mobile_file_name"
+    t.string   "imagem_mobile_content_type"
+    t.integer  "imagem_mobile_file_size"
+    t.datetime "imagem_mobile_updated_at"
   end
 
   create_table "pontosdevenda", :force => true do |t|

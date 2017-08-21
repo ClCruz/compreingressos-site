@@ -1,5 +1,15 @@
-<div class="swiper-slide<%= " mobile_image" if defined?(visor_destaque.imagem_mobile) and visor_destaque.imagem_mobile? %>">
-  <div style="background-image:url('<%=visor_destaque.imagem.url%>');">
-    <a href="<%=visor_destaque.link%>" target="<%=visor_destaque.blank==true ? '_blank':'_self'%>"></a>
+ <% if visor_destaque.respond_to? :data_de_expiracao %>
+  <% if visor_destaque.data_de_expiracao >= DateTime.now() %>
+    <div class="swiper-slide<%= " mobile_image" if defined?(visor_destaque.imagem_mobile) and visor_destaque.imagem_mobile? %>">
+      <div style="background-image:url('<%=visor_destaque.imagem.url%>');">
+        <a href="<%=visor_destaque.link%>" target="<%=visor_destaque.blank==true ? '_blank':'_self'%>"></a>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <div class="swiper-slide<%= " mobile_image" if defined?(visor_destaque.imagem_mobile) and visor_destaque.imagem_mobile? %>">
+    <div style="background-image:url('<%=visor_destaque.imagem.url%>');">
+      <a href="<%=visor_destaque.link%>" target="<%=visor_destaque.blank==true ? '_blank':'_self'%>"></a>
+    </div>
   </div>
-</div>
+<% end %>
