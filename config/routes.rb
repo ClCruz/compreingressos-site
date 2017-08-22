@@ -182,13 +182,13 @@ ActionController::Routing::Routes.draw do |map|
 
   map.connect 'espetaculos/banners', :controller => :espetaculos, :action => :banners
 
-  map.resources :espetaculos, :as => "eventos"
+  map.resources :espetaculos
 
   #map.connect 'teatros/address_lat_long', :controller => :teatros, :action => :address_lat_long
 
   map.connect 'teatros/resize', :controller => :teatros, :action => :resize
 
-  map.resources :teatros, :as => "espacos"
+  map.resources :teatros
 
   map.connect 'cidades/excluir_img/:id/:tipo', :controller => :cidades, :action => :excluir_img
 
@@ -239,8 +239,8 @@ ActionController::Routing::Routes.draw do |map|
   # Install the default routes as the lowest priority.
   # Note: These default routes make all actions in every controller accessible via GET requests. You should
   # consider removing or commenting them out if you're using named routes and resources.
-  # map.connect ':controller/:action/:id'
-  # map.connect ':controller/:action/:id.:format'
+  map.connect ':controller/:action/:id'
+  map.connect ':controller/:action/:id.:format'
   map.connect ':url', :controller => :pagina_especiais, :action => :show
   map.connect ':url/edit', :controller => :pagina_especiais, :action => :edit
 end
