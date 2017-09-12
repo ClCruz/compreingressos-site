@@ -65,6 +65,8 @@
   <link rel="stylesheet" type="text/css" href="/stylesheets/cislider/default.css">
   <link rel="stylesheet" type="text/css" href="/stylesheets/nova_home.css">
 
+  <%= auto_discovery_link_tag(:rss, {:controller => "espetaculos", :action => "feed_espetaculos"}) %>
+
   <% if (!session[:desktop] or session[:desktop]==0) and @paginaapp.blank? -%>
   <link rel="stylesheet" href="/stylesheets/cimobile.css"/>
   <script type="text/javascript">
