@@ -1,5 +1,5 @@
 class EspetaculosController < ApplicationController
-  before_filter :authorize, :except => [:index, :busca, :show, :home, :nobuilder, :paineis]
+  before_filter :authorize, :except => [:index, :busca, :show, :home, :nobuilder, :paineis, :feed_espetaculos]
   newrelic_ignore :except => [:index, :busca, :show, :home, :nobuilder, :paineis]
   layout 'compreingressos_antigo'
   
