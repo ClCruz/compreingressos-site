@@ -182,6 +182,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.connect 'espetaculos/banners', :controller => :espetaculos, :action => :banners
 
+  map.connect  'espetaculos/feed', :controller => :espetaculos, :action => :feed_espetaculos
+
   map.resources :espetaculos
 
   #map.connect 'teatros/address_lat_long', :controller => :teatros, :action => :address_lat_long

@@ -1,5 +1,5 @@
 class EspetaculosController < ApplicationController
-  before_filter :authorize, :except => [:index, :busca, :show, :home, :nobuilder, :paineis]
+  before_filter :authorize, :except => [:index, :busca, :show, :home, :nobuilder, :paineis, :feed_espetaculos]
   newrelic_ignore :except => [:index, :busca, :show, :home, :nobuilder, :paineis]
   layout 'compreingressos_antigo'
   
@@ -882,36 +882,10 @@ class EspetaculosController < ApplicationController
     @espetaculos = Espetaculo.find_by_sql("SELECT c.estado AS 'estado', c.nome AS 'cidaden', t.nome AS 'teatron', e.nome AS 'espetaculo', g.nome AS 'generon', e.data_inicial AS 'tinicio', e.data_maxima AS 'ttermino', e.sinopse AS 'sinopse' FROM cidades AS c, teatros AS t, espetaculos AS e, generos AS g WHERE e.teatro_id = t.id AND t.cidade_id = c.id AND e.genero_id = g.id AND e.ativo = 1 AND g.id NOT IN (5,40,75) ORDER BY c.estado, c.nome, t.nome, e.nome, g.nome")
     #SELECT c.estado AS 'Estado', c.nome AS 'Cidade', t.nome AS 'Teatro', e.nome AS 'Espetáculo', g.nome AS 'Gênero', e.data_inicial AS 'Temporada inicio', e.data_maxima AS 'Temporada término', e.sinopse AS 'Sinopse' FROM cidades AS c, teatros AS t, espetaculos AS e, generos AS g WHERE e.teatro_id = t.id AND t.cidade_id = c.id AND e.genero_id = g.id AND e.ativo = 1 AND g.id NOT IN (5,40,75) ORDER BY c.estado, c.nome, t.nome, e.nome, g.nome
     
-    replacements = [
-                    ['"', '“'],
-                    ["<br>", "\r\n"],
-                    ["<br />", "\r\n"],
-                    ["<strong>", ""],
-                    ["</strong>", ""],
-                    ["<b>", ""],
-                    ["</b>", ""],
-                    ["<i>", ""],
-                    ["</i>", ""],
-                    ["<u>", ""],
-                    ["</u>", ""],
-                    ["<em>", ""],
-                    ["</em>", ""],
-                    ["<p>", ""],
-                    ["<p class=“p1“>", ""],
-                    ["<p class=“p2“>", ""],
-                    ["</p>", ""],
-                    ["<div>", ""],
-                    ["</div>", ""],
-                    ["<span>", ""],
-                    ["</span>", ""],
-                    ["<span lang=“PT“>", ""],
-                    ["<span style=“white-space: pre;“>", ""],
-                    ["<div class=“page“ title=“Page 1“>", ""],
-                    ["<div class=“layoutArea“>", ""],
-                    ["<div class=“column“>", ""]
-                   ]
-    @espetaculos.each_with_index do |e,i|
-      replacements.each {|replacement| e.sinopse.gsub!(replacement[0], replacement[1])}
+    # remove html markup from 'sinopse'
+    strip_html_tags()
+    
+    @espetaculos.each_with_index do |e, i|
       @espetaculos[i].tinicio = "0000-00-00" if e.tinicio.blank?
       @espetaculos[i].ttermino = "0000-00-00" if e.ttermino.blank?
       @espetaculos[i].sinopse = Hpricot.uxs(CGI.unescapeHTML(e.sinopse))
@@ -920,6 +894,18 @@ class EspetaculosController < ApplicationController
     #render :layout => false
     respond_to do |format|
       format.csv
+    end
+  end
+
+  # feed para integração com a Criteo
+  def feed_espetaculos
+    @espetaculos = Espetaculo.all(:limit => 650, :order => "created_at DESC", :include => [:teatro, :cidade, :genero])
+    
+    # remove html markup from 'sinopse'
+    strip_html_tags()
+
+    respond_to do |format|
+      format.rss { render :layout => false }
     end
   end
   
@@ -970,6 +956,42 @@ class EspetaculosController < ApplicationController
     else
       # Exclude the past appearances
       Horario.delete_all(["espetaculo_id = ?",@espetaculo.id])
+    end
+  end
+
+  def strip_html_tags
+    # patterns to be removed
+    replacements = [
+                    ['"', '“'],
+                    ["<br>", "\r\n"],
+                    ["<br />", "\r\n"],
+                    ["<strong>", ""],
+                    ["</strong>", ""],
+                    ["<b>", ""],
+                    ["</b>", ""],
+                    ["<i>", ""],
+                    ["</i>", ""],
+                    ["<u>", ""],
+                    ["</u>", ""],
+                    ["<em>", ""],
+                    ["</em>", ""],
+                    ["<p>", ""],
+                    ["<p class=“p1“>", ""],
+                    ["<p class=“p2“>", ""],
+                    ["</p>", ""],
+                    ["<div>", ""],
+                    ["</div>", ""],
+                    ["<span>", ""],
+                    ["</span>", ""],
+                    ["<span lang=“PT“>", ""],
+                    ["<span style=“white-space: pre;“>", ""],
+                    ["<div class=“page“ title=“Page 1“>", ""],
+                    ["<div class=“layoutArea“>", ""],
+                    ["<div class=“column“>", ""]
+                   ]
+    
+    @espetaculos.each do |e|
+      replacements.each { |replacement| e.sinopse.gsub!(replacement[0], replacement[1]) }
     end
   end
 
