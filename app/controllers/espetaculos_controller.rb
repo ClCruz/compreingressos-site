@@ -907,6 +907,7 @@ class EspetaculosController < ApplicationController
     respond_to do |format|
       format.rss { render :layout => false }
     end
+
   end
   
   private

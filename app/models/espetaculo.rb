@@ -22,6 +22,9 @@ class Espetaculo < ActiveRecord::Base
   ]
 
   attr_accessor :datas
+  attr_accessor :g_price
+  attr_accessor :g_sale_price
+  
   belongs_to :teatro
   acts_as_mappable :through => :teatro
   
@@ -41,8 +44,6 @@ class Espetaculo < ActiveRecord::Base
   has_many :pacotes_espetaculos, :order => :data
   has_and_belongs_to_many :pagina_especiais
   has_and_belongs_to_many :pagina_especial_filtros
-
-
 
   validates_presence_of :nome, :relevancia, :teatro_id, :keywords
   validates_presence_of :aba_inicial, :cor_dos_botoes, :cor_de_fundo, :altura_de_inicio, :altura_de_inicio_mobile, :cor_do_texto_do_cabecalho, :cor_do_link_do_cabecalho, :cor_da_borda_das_imagens, :cor_de_fundo_do_box, :cor_do_texto_do_box, :cor_do_link_do_box, :if => :especial?
@@ -78,20 +79,16 @@ class Espetaculo < ActiveRecord::Base
   has_attached_file :img_destaque,
                     :path => ":rails_root/public/images/espetaculos/:id/destaque.:extension",
                     :url => "/images/espetaculos/:id/destaque.:extension"
-  
-                    
+      
   accepts_nested_attributes_for :galerias, :allow_destroy => true
   accepts_nested_attributes_for :imagems, :allow_destroy => true
   accepts_nested_attributes_for :entradas, :allow_destroy => true
   accepts_nested_attributes_for :videos, :allow_destroy => true
 
-
-
   before_save :send_miniatura_ftp, :strip_nome_espetaculo, :update_horario_cache
   after_save :destroy_original
   after_post_process :save_image_dimensions
   after_commit :reset_cache
-
 
   # Salva a altura da miniatura para o plugin que embaralha os espetaculos calcular a altura correta se não
   # ele fica recalculando após carregar cada imagem causando erros visuais momentaneos no browser do usuario
@@ -240,5 +237,13 @@ class Espetaculo < ActiveRecord::Base
     
     objects = find( (1..max_index).map { ids.delete_at( ids.size * rand ) } )
     return objects.sort_by{rand}
+  end
+
+  def after_find
+    price = []
+    self.preco.gsub(/\d+,\d+/) { |match| price << match.gsub(',', '.').to_f }
+    price.sort!
+    self.g_price = price.last
+    self.g_sale_price = price.first
   end
 end
