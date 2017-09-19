@@ -33,6 +33,15 @@ class CompreingressosController < ApplicationController
     @home_modulos = HomeModulo.find(:all, :conditions => ["entrada <= ? AND saida > ?", DateTime.now.in_time_zone('Brasilia'), DateTime.now.in_time_zone('Brasilia')], :order => :ordem)
     #@hm_last = HomeModulo.first(:select => :updated_at, :conditions => ["entrada <= ? AND saida > ?", DateTime.now.in_time_zone('Brasilia'), DateTime.now.in_time_zone('Brasilia')], :order => 'updated_at DESC').updated_at.to_i
     
+    # criteo scripts
+    @crieto_script_tag = "window.criteo_q = window.criteo_q || []; 
+                          window.criteo_q.push( 
+                            { event: 'setAccount', account: {{CriteoPartnerID}} },
+                            { event: 'setEmail', email: {{email}} },
+                            { event: 'setSiteType', type: {{CriteoSiteType}} },
+                            { event: 'viewHome' }
+                          );"
+
     respond_to do |format|
       format.html { render :template => "compreingressos/index.html.erb" }
     end 
