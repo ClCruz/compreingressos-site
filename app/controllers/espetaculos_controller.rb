@@ -1,5 +1,6 @@
 class EspetaculosController < ApplicationController
   before_filter :authorize, :except => [:index, :busca, :show, :home, :nobuilder, :paineis, :feed_espetaculos]
+  before_filter :criteo_category_script, :only => [:index, :home]
   newrelic_ignore :except => [:index, :busca, :show, :home, :nobuilder, :paineis]
   layout 'compreingressos_antigo'
   
@@ -993,6 +994,20 @@ class EspetaculosController < ApplicationController
     
     @espetaculos.each do |e|
       replacements.each { |replacement| e.sinopse.gsub!(replacement[0], replacement[1]) }
+    end
+  end
+
+  def criteo_category_script
+    if params[:genero].present?
+      @crieto_script_tag = "window.criteo_q = window.criteo_q || [];
+                            window.criteo_q.push(
+                             { event: 'setAccount', account: {{CriteoPartnerID}} },
+                             { event: 'setEmail', email: {{Email}} },
+                             { event: 'setSiteType', type: {{CriteoSiteType}} },
+                             { event: 'viewList', item: {{CriteoProductIDList}} }
+                            );"
+    else
+      @crieto_script_tag = nil
     end
   end
 
