@@ -34,7 +34,7 @@ class CompreingressosController < ApplicationController
     #@hm_last = HomeModulo.first(:select => :updated_at, :conditions => ["entrada <= ? AND saida > ?", DateTime.now.in_time_zone('Brasilia'), DateTime.now.in_time_zone('Brasilia')], :order => 'updated_at DESC').updated_at.to_i
     
     # criteo scripts
-    @crieto_script_tag = "window.criteo_q = window.criteo_q || []; 
+    @criteo_script_tag = "window.criteo_q = window.criteo_q || []; 
                           window.criteo_q.push( 
                             { event: 'setAccount', account: {{CriteoPartnerID}} },
                             { event: 'setEmail', email: {{email}} },
