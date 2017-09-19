@@ -1,6 +1,7 @@
 class EspetaculosController < ApplicationController
   before_filter :authorize, :except => [:index, :busca, :show, :home, :nobuilder, :paineis, :feed_espetaculos]
   before_filter :criteo_category_script, :only => [:index, :home]
+  before_filter :criteo_product_script, :only => [:show]
   newrelic_ignore :except => [:index, :busca, :show, :home, :nobuilder, :paineis]
   layout 'compreingressos_antigo'
   
@@ -999,7 +1000,7 @@ class EspetaculosController < ApplicationController
 
   def criteo_category_script
     if params[:genero].present?
-      @crieto_script_tag = "window.criteo_q = window.criteo_q || [];
+      @criteo_script_tag = "window.criteo_q = window.criteo_q || [];
                             window.criteo_q.push(
                              { event: 'setAccount', account: {{CriteoPartnerID}} },
                              { event: 'setEmail', email: {{Email}} },
@@ -1007,8 +1008,18 @@ class EspetaculosController < ApplicationController
                              { event: 'viewList', item: {{CriteoProductIDList}} }
                             );"
     else
-      @crieto_script_tag = nil
+      @criteo_script_tag = nil
     end
+  end
+
+  def criteo_product_script
+    @criteo_script_tag = "window.criteo_q = window.criteo_q || [];
+                          window.criteo_q.push(
+                           { event: 'setAccount', account: {{CriteoPartnerID}} },
+                           { event: 'setHashedEmail', email: {{HashedEmail}} },
+                           { event: 'setSiteType', type: {{CriteoSiteType}} },
+                           { event: 'viewItem', item: {{CriteoProductID}} }
+                          );"
   end
 
 #  def setaalturadeiniciomobile
