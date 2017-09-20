@@ -37,7 +37,7 @@ class CompreingressosController < ApplicationController
     @criteo_script_tag = "window.criteo_q = window.criteo_q || []; 
                           window.criteo_q.push( 
                             { event: 'setAccount', account: {{CriteoPartnerID}} },
-                            { event: 'setEmail', email: {{email}} },
+                            { event: 'setHashedEmail', email: {{HashedEmail}} },
                             { event: 'setSiteType', type: {{CriteoSiteType}} },
                             { event: 'viewHome' }
                           );"

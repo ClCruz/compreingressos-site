@@ -1003,7 +1003,7 @@ class EspetaculosController < ApplicationController
       @criteo_script_tag = "window.criteo_q = window.criteo_q || [];
                             window.criteo_q.push(
                              { event: 'setAccount', account: {{CriteoPartnerID}} },
-                             { event: 'setEmail', email: {{Email}} },
+                             { event: 'setHashedEmail', email: {{HashedEmail}} },
                              { event: 'setSiteType', type: {{CriteoSiteType}} },
                              { event: 'viewList', item: {{CriteoProductIDList}} }
                             );"
