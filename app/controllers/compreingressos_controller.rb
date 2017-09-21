@@ -1,3 +1,5 @@
+require 'digest'
+
 class CompreingressosController < ApplicationController
   skip_before_filter :authorize
   newrelic_ignore :only => [:desativaentradasprogramadas]
@@ -34,13 +36,10 @@ class CompreingressosController < ApplicationController
     #@hm_last = HomeModulo.first(:select => :updated_at, :conditions => ["entrada <= ? AND saida > ?", DateTime.now.in_time_zone('Brasilia'), DateTime.now.in_time_zone('Brasilia')], :order => 'updated_at DESC').updated_at.to_i
     
     # criteo scripts
-    @criteo_script_tag = "window.criteo_q = window.criteo_q || []; 
-                          window.criteo_q.push( 
-                            { event: 'setAccount', account: {{CriteoPartnerID}} },
-                            { event: 'setHashedEmail', email: {{HashedEmail}} },
-                            { event: 'setSiteType', type: {{CriteoSiteType}} },
-                            { event: 'viewHome' }
-                          );"
+    @criteo_script_tag = "dataLayer.push({
+                          'PageType': 'Homepage', 
+                          'HashedEmail': '#{hashed_email_criteo}'
+                        });"
 
     respond_to do |format|
       format.html { render :template => "compreingressos/index.html.erb" }
@@ -108,4 +107,12 @@ class CompreingressosController < ApplicationController
     
     #render :text => "#### SUCESSO ####"
   end
+
+  def hashed_email_criteo
+    md5 = Digest::MD5.new
+    md5 << 'test@gmail.com'
+
+    md5.hexdigest
+  end
+
 end
