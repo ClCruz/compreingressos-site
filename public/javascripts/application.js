@@ -23,7 +23,7 @@ messaging.requestPermission()
   console.log(token);
 })
 .catch(function(err) {
-  console.log("Push Notification denied by user");
+  console.log(err);
 });
 
 messaging.onMessage(function(payload) {
