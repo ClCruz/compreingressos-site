@@ -38,7 +38,7 @@ class CompreingressosController < ApplicationController
     # criteo scripts
     @criteo_script_tag = "dataLayer.push({
                           'PageType': 'Homepage', 
-                          'HashedEmail': '#{hashed_email_criteo}'
+                          'HashedEmail': ''
                         });"
 
     respond_to do |format|
@@ -106,13 +106,6 @@ class CompreingressosController < ApplicationController
     end
     
     #render :text => "#### SUCESSO ####"
-  end
-
-  def hashed_email_criteo
-    md5 = Digest::MD5.new
-    md5 << 'test@gmail.com'
-
-    md5.hexdigest
   end
 
 end

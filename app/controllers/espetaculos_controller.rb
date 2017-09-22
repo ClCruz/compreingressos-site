@@ -21,7 +21,7 @@ class EspetaculosController < ApplicationController
       @espetaculos = Espetaculo.find(:all, :include => :teatro, :select => "espetaculos.id, espetaculos.nome, espetaculos.teatro_id", :conditions => {:especial => true}, :order => :nome)
       @totalativos = Espetaculo.find(:all, :select => "espetaculos.id", :conditions => {:especial => true, :ativo => true})
     else
-      @espetaculos = Espetaculo.find(:all, :include => :teatro, :select => "espetaculos.id, espetaculos.nome, espetaculos.teatro_id", :order => :nome)
+      @espetaculos = Espetaculo.find(:all, :include => :teatro, :select => "espetaculos.id, espetaculos.nome, espetaculos.teatro_id, espetaculos.preco", :order => :nome)
       @totalativos = Espetaculo.find(:all, :select => "espetaculos.id", :conditions => {:ativo => true})
     end
   end
@@ -1011,7 +1011,7 @@ class EspetaculosController < ApplicationController
     if params[:genero].present?
        "dataLayer.push({
           'PageType': 'Listingpage',
-          'HashedEmail': '#{hashed_email_criteo}}', 
+          'HashedEmail': '', 
           'ProductIDList': [#{productIDList.join(',')}]
         });"
     else
@@ -1020,21 +1020,12 @@ class EspetaculosController < ApplicationController
   end
 
   def criteo_product_script
-    md5 = Digest::MD5.new
-    md5 << 'test@gmail.com'
-    
+        
     "dataLayer.push({
       'PageType': 'Productpage',
-      'HashedEmail': '#{hashed_email_criteo}', 
+      'HashedEmail': '', 
       'ProductID': '#{@espetaculo.id unless @espetaculo.nil? }'
     });"
-  end
-
-  def hashed_email_criteo
-    md5 = Digest::MD5.new
-    md5 << 'test@gmail.com'
-
-    md5.hexdigest
   end
 
 #  def setaalturadeiniciomobile
