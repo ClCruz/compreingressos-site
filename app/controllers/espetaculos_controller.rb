@@ -64,8 +64,9 @@ class EspetaculosController < ApplicationController
         if params[:ordem]!='data'
           @espetaculos = Espetaculo.find(:all,
                                          :select => 'espetaculos.*',
-                                         :conditions => ["espetaculos.ativo = 1"],
-                                         :joins => ["INNER JOIN teatros ON teatros.id = espetaculos.teatro_id",
+                                         :conditions => ["espetaculos.ativo = 1 AND horarios.data >= ?", DateTime.now],
+                                         :joins => ["INNER JOIN horarios ON horarios.espetaculo_id = espetaculos.id",
+                                                    "INNER JOIN teatros ON teatros.id = espetaculos.teatro_id",
                                                     "INNER JOIN cidades ON teatros.cidade_id = cidades.id AND cidades.id in (#{@cids})"],
                                          :order => order)
                                          
@@ -91,8 +92,9 @@ class EspetaculosController < ApplicationController
           # Requesta os espetaculos que não tem data definida e os organiza por data exibindo por ultimo na listagem de espetaculos
           espetaculos = Espetaculo.find(:all,
                                         :select => 'espetaculos.*',
-                                        :conditions => ["espetaculos.ativo = 1 AND espetaculos.id NOT IN (#{ids})"],
-                                        :joins => ["INNER JOIN teatros ON teatros.id = espetaculos.teatro_id",
+                                        :conditions => ["espetaculos.ativo = 1 AND horarios.data >= ? AND espetaculos.id NOT IN (#{ids})", DateTime.now],
+                                        :joins => ["INNER JOIN horarios ON horarios.espetaculo_id = espetaculos.id",
+                                                   "INNER JOIN teatros ON teatros.id = espetaculos.teatro_id",
                                                    "INNER JOIN cidades ON teatros.cidade_id = cidades.id AND cidades.id in (#{@cids})"],
                                         :order => 'espetaculos.relevancia DESC, espetaculos.nome ASC')
           # Adiciona os espetaculos ao hash de espetaculos
@@ -109,8 +111,9 @@ class EspetaculosController < ApplicationController
           if params[:ordem]!='data'
             @espetaculos = Espetaculo.find(:all,
                                            :select => 'espetaculos.*',
-                                           :conditions => ["espetaculos.ativo = 1"],
-                                           :joins => ["INNER JOIN teatros ON teatros.id = espetaculos.teatro_id",
+                                           :conditions => ["espetaculos.ativo = 1 AND horarios.data >= ?", DateTime.now],
+                                           :joins => ["INNER JOIN horarios ON horarios.espetaculo_id = espetaculos.id",
+                                                      "INNER JOIN teatros ON teatros.id = espetaculos.teatro_id",
                                                       "INNER JOIN cidades ON teatros.cidade_id = cidades.id AND cidades.id = #{@cidade.id}"],
                                            :order => order)
                                            
@@ -136,15 +139,16 @@ class EspetaculosController < ApplicationController
             # Requesta os espetaculos que não tem data definida e os organiza por data exibindo por ultimo na listagem de espetaculos
             espetaculos = Espetaculo.find(:all,
                                           :select => 'espetaculos.*',
-                                          :conditions => ["espetaculos.ativo = 1 AND espetaculos.id NOT IN (#{ids})"],
-                                          :joins => ["INNER JOIN teatros ON teatros.id = espetaculos.teatro_id",
+                                          :conditions => ["espetaculos.ativo = 1 AND horarios.data >= ? AND espetaculos.id NOT IN (#{ids})", DateTime.now],
+                                          :joins => ["INNER JOIN horarios ON horarios.espetaculo_id = espetaculos.id",
+                                                    "INNER JOIN teatros ON teatros.id = espetaculos.teatro_id",
                                                      "INNER JOIN cidades ON teatros.cidade_id = cidades.id AND cidades.id = #{@cidade.id}"],
                                           :order => 'espetaculos.relevancia DESC, espetaculos.nome ASC')
             # Adiciona os espetaculos ao hash de espetaculos
             espetaculos.each do |e|
               @espetaculos << e
             end
-          end          
+          end
         end
       end
 
@@ -157,7 +161,8 @@ class EspetaculosController < ApplicationController
         
         # Caso não seja ordenado por data
         if params[:ordem]!='data'
-          @espetaculos = Espetaculo.find(:all, :conditions => {:ativo => true, :genero_id => @genero.id}, :order => order)
+          # @espetaculos = Espetaculo.all(:, :conditions => {:ativo => true, :genero_id => @genero.id}, :order => order)
+          @espetaculos = Espetaculo.all(:joins => :horarios, :conditions => ["ativo = ? AND genero_id = ? AND horarios.data >= ?", 1, DateTime.now, @genero.id], :order => order)
           
         # Caso seja ordenado por data
         else
@@ -179,7 +184,8 @@ class EspetaculosController < ApplicationController
           # Requesta os espetaculos que não tem data definida e os organiza por data exibindo por ultimo na listagem de espetaculos
           espetaculos = Espetaculo.find(:all,
                                         :select => 'espetaculos.*',
-                                        :conditions => ["espetaculos.ativo = 1 AND espetaculos.id NOT IN (#{ids}) AND espetaculos.genero_id = ?", @genero.id],
+                                        :conditions => ["espetaculos.ativo = 1 AND espetaculos.id NOT IN (#{ids}) AND espetaculos.genero_id = ? AND horarios.data >= ?", @genero.id, DateTime.now],
+                                        :joins => ["INNER JOIN horarios ON horarios.espetaculo_id = espetaculos.id"],
                                         :order => 'espetaculos.relevancia DESC')
           # Adiciona os espetaculos ao hash de espetaculos
           espetaculos.each do |e|
@@ -209,11 +215,14 @@ class EspetaculosController < ApplicationController
         
         # Caso não seja ordenado por data
         if params[:ordem]!='data'
-          @espetaculos = Espetaculo.find(:all, 
-                                         :conditions => {:ativo => true, :genero_id => @genero.id},
-                                         :joins => ["INNER JOIN teatros ON teatros.id = espetaculos.teatro_id",
-                                                    "INNER JOIN cidades ON cidades.id = teatros.cidade_id AND cidades.id in (#{@cids})"],
-                                         :order => order)                                         
+          @espetaculos = Espetaculo.find(:all,
+                                        :select => 'espetaculos.*, min(horarios.data)',
+                                        :conditions => ["espetaculos.ativo = 1 AND horarios.data >= ? AND espetaculos.genero_id = ?", DateTime.now, @genero.id],
+                                        :joins => ["INNER JOIN horarios ON horarios.espetaculo_id = espetaculos.id",
+                                                   "INNER JOIN teatros ON teatros.id = espetaculos.teatro_id",
+                                                   "INNER JOIN cidades ON cidades.id = teatros.cidade_id AND cidades.id in (#{@cids})"],
+                                        :group => :espetaculo_id,
+                                        :order => order)                                         
         # Caso seja ordenado por data
         else
           @espetaculos = []
@@ -236,8 +245,9 @@ class EspetaculosController < ApplicationController
           # Requesta os espetaculos que não tem data definida e os organiza por data exibindo por ultimo na listagem de espetaculos
           espetaculos = Espetaculo.find(:all,
                                         :select => 'espetaculos.*',
-                                        :conditions => ["espetaculos.ativo = 1 AND espetaculos.id NOT IN (#{ids}) AND espetaculos.genero_id = ?", @genero.id],
-                                        :joins => ["INNER JOIN teatros ON teatros.id = espetaculos.teatro_id",
+                                        :conditions => ["espetaculos.ativo = 1 AND horarios.data >= ? AND espetaculos.genero_id = ?", DateTime.now, @genero.id],
+                                        :joins => ["INNER JOIN horarios ON horarios.espetaculo_id = espetaculos.id",
+                                                  "INNER JOIN teatros ON teatros.id = espetaculos.teatro_id",
                                                    "INNER JOIN cidades ON cidades.id = teatros.cidade_id AND cidades.id in (#{@cids})"],
                                         :order => 'espetaculos.relevancia DESC')
           # Adiciona os espetaculos ao hash de espetaculos
@@ -255,8 +265,9 @@ class EspetaculosController < ApplicationController
           # Caso não seja ordenado por data
           if params[:ordem]!='data'
             @espetaculos = Espetaculo.find(:all, 
-                                           :conditions => {:ativo => true, :genero_id => @genero.id},
-                                           :joins => ["INNER JOIN teatros ON teatros.id = espetaculos.teatro_id",
+                                           :conditions => ["espetaculos.ativo = 1 AND horarios.data >= ? AND espetaculos.genero_id = ?", DateTime.now, @genero.id],
+                                           :joins => ["INNER JOIN horarios ON horarios.espetaculo_id = espetaculos.id",
+                                                      "INNER JOIN teatros ON teatros.id = espetaculos.teatro_id",
                                                       "INNER JOIN cidades ON cidades.id = teatros.cidade_id AND cidades.id = #{@cidade.id.to_s}"],
                                            :order => order)
                                            
@@ -282,8 +293,9 @@ class EspetaculosController < ApplicationController
             # Requesta os espetaculos que não tem data definida e os organiza por data exibindo por ultimo na listagem de espetaculos
             espetaculos = Espetaculo.find(:all,
                                           :select => 'espetaculos.*',
-                                          :conditions => ["espetaculos.ativo = 1 AND espetaculos.id NOT IN (#{ids}) AND espetaculos.genero_id = ?", @genero.id],
-                                          :joins => ["INNER JOIN teatros ON teatros.id = espetaculos.teatro_id",
+                                          :conditions => ["espetaculos.ativo = 1 AND horarios.data >= ? AND espetaculos.genero_id = ?", DateTime.now, @genero.id],
+                                          :joins => ["INNER JOIN horarios ON horarios.espetaculo_id = espetaculos.id",
+                                                     "INNER JOIN teatros ON teatros.id = espetaculos.teatro_id",
                                                      "INNER JOIN cidades ON cidades.id = teatros.cidade_id AND cidades.id = #{@cidade.id.to_s}"],
                                           :order => 'espetaculos.relevancia DESC')
             # Adiciona os espetaculos ao hash de espetaculos
@@ -304,7 +316,8 @@ class EspetaculosController < ApplicationController
       
       # Caso não seja ordenado por data
       if params[:ordem]!='data'
-        @espetaculos = Espetaculo.find(:all, :conditions => {:ativo => true}, :order => order)
+        # @espetaculos = Espetaculo.find(:all, :conditions => {:ativo => true}, :order => order)
+        @espetaculos = Espetaculo.all(:joins => :horarios, :conditions => ["ativo = ? AND horarios.data >= ?", 1, DateTime.now], :order => order)
         
       # Caso seja ordenado por data
       else
@@ -325,7 +338,8 @@ class EspetaculosController < ApplicationController
         
         # Requesta os espetaculos que não tem data definida e os organiza por data exibindo por ultimo na listagem de espetaculos
         espetaculos = Espetaculo.find(:all,
-                                      :conditions => ["espetaculos.ativo = 1 AND espetaculos.id NOT IN (#{ids})"],
+                                      :conditions => ["espetaculos.ativo = 1 AND horarios.data >= ? AND espetaculos.id NOT IN (#{ids})", DateTime.now],
+                                      :joins => ["INNER JOIN horarios ON horarios.espetaculo_id = espetaculos.id"],
                                       :order => 'espetaculos.relevancia DESC')
         # Adiciona os espetaculos ao hash de espetaculos
         espetaculos.each do |e|
@@ -352,10 +366,17 @@ class EspetaculosController < ApplicationController
     if !pgenero.blank?
       if params[:genero].downcase=='teatros'
         if params[:ordem]!='data'
+          # @espetaculos = Espetaculo.find(:all,
+          #                               :conditions => ["espetaculos.ativo = ? AND (teatros.nome LIKE ? OR espetaculos.genero_id = ?)", TRUE, "%teatro%", 72],
+          #                               :joins => ["INNER JOIN teatros ON teatros.id = espetaculos.teatro_id"], 
+          #                               :order => order)
           @espetaculos = Espetaculo.find(:all,
-                                        :conditions => ["espetaculos.ativo = ? AND (teatros.nome LIKE ? OR espetaculos.genero_id = ?)", TRUE, "%teatro%", 72],
-                                        :joins => ["INNER JOIN teatros ON teatros.id = espetaculos.teatro_id"], 
-                                        :order => order)
+                                        :select => 'espetaculos.*, min(horarios.data)',
+                                        :conditions => ["espetaculos.ativo = ? AND ((horarios.data >= ? AND teatros.nome LIKE ?) OR espetaculos.genero_id = ?)", TRUE, DateTime.now, "%teatro%", 72],
+                                        :joins => ["INNER JOIN horarios ON horarios.espetaculo_id = espetaculos.id",
+                                                   "INNER JOIN teatros ON teatros.id = espetaculos.teatro_id"],
+                                        :group => :espetaculo_id, 
+                                        :order => "min(horarios.data) ASC, espetaculos.relevancia DESC, espetaculos.nome ASC")
         else
           @espetaculos = Espetaculo.find(:all,
                                         :select => 'espetaculos.*, min(horarios.data)',
@@ -370,11 +391,14 @@ class EspetaculosController < ApplicationController
         if params[:ordem]!='data'
           @espetaculos = Espetaculo.find(:all,
                                         #:conditions => ["espetaculos.ativo = ? AND espetaculos.genero_id IN (25, 2)", TRUE],
-                                        :conditions => ["espetaculos.ativo = ? AND espetaculos.genero_id IN (25,61,65,91)", TRUE],
+                                        # :conditions => ["espetaculos.ativo = ? AND espetaculos.genero_id IN (25,61,65,91)", TRUE],
+                                        :conditions => ["espetaculos.ativo = ? AND espetaculos.genero_id IN (25,61,65,91) AND horarios.data >= ?", TRUE, DateTime.now],
+                                        :joins => ["INNER JOIN horarios ON horarios.espetaculo_id = espetaculos.id"],
+                                        :group => :espetaculo_id,
                                         :order => order)
         else
           @espetaculos = Espetaculo.find(:all,
-                                        :select => 'espetaculos.*, min(horarios.data)',
+                                        #:select => 'espetaculos.*, min(horarios.data)',
                                         #:conditions => ["espetaculos.ativo = ? AND espetaculos.genero_id IN (25, 2) AND horarios.data >= ?", TRUE, DateTime.now],
                                         :conditions => ["espetaculos.ativo = ? AND espetaculos.genero_id IN (25,61,65,91) AND horarios.data >= ?", TRUE, DateTime.now],
                                         :joins => ["INNER JOIN horarios ON horarios.espetaculo_id = espetaculos.id"],
@@ -386,7 +410,7 @@ class EspetaculosController < ApplicationController
     
     # Caso nenhum espetaculo seja encontrado
     if !@espetaculos or @espetaculos.size <= 0
-      @espetaculos = Espetaculo.find(:all, :conditions => {:ativo => true}, :order => 'relevancia DESC')
+      @espetaculos = Espetaculo.all(:joins => :horarios, :conditions => ["ativo = ? AND horarios.data >= ?", 1, DateTime.now])
       @espetaculos_vazio = 1
     end
     
