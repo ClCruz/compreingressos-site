@@ -240,10 +240,19 @@ class Espetaculo < ActiveRecord::Base
   end
 
   def after_find
-    price = []
-    self.preco.gsub(/\d+,\d+/) { |match| price << match.gsub(',', '.').to_f }
-    price.sort!
-    self.g_price = price.last
-    self.g_sale_price = price.first
+    begin
+      set_price_for_criteo
+    rescue
+      return
+    end
   end
+
+  private
+    def set_price_for_criteo
+      price = []
+      self.preco.gsub(/\d+,\d+/) { |match| price << match.gsub(',', '.').to_f }
+      price.sort!
+      self.g_price = price.last
+      self.g_sale_price = price.first
+    end
 end
