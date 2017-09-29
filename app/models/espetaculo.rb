@@ -91,12 +91,13 @@ class Espetaculo < ActiveRecord::Base
   after_commit :reset_cache
 
   # define scopes to filter Spetacles based on Status, Gender, City and Expiration Date
-  named_scope :ativo, :conditions => { :ativo => true }
+  named_scope :ativo, lambda { |order| {:joins => :horarios, :conditions => { :ativo => true }, :group => "espetaculos.id", :order => order } }
   named_scope :nao_expirado, :conditions => ["data_maxima > ?", DateTime.now]
   named_scope :por_genero, lambda { |gender| { :joins => :genero, :conditions => { :generos => {:nome => gender} } } }
   named_scope :por_cidade, lambda { |city| { :joins => { :teatro => :cidade }, :conditions => { :cidades => { :nome => city } } } }
-  named_scope :prox_apresentacao, :joins => :horarios, :conditions => ["horarios.data >= ?", DateTime.now]
+  named_scope :por_conjunto_cidade, lambda { |city_region| { :joins => { :teatro => :cidade }, :conditions => ["cidades.id IN (?)", city_region] } }
   named_scope :ordenar_por, lambda { |order| { :order => order } }
+  # Espetaculo.count(:joins => {:teatro => :cidade}, :conditions => {:ativo => true}, :group => "cidades.id")
 
   # Salva a altura da miniatura para o plugin que embaralha os espetaculos calcular a altura correta se não
   # ele fica recalculando após carregar cada imagem causando erros visuais momentaneos no browser do usuario
