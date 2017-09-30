@@ -73,7 +73,7 @@ class EspetaculosController < ApplicationController
       :per_page => 1000
     end
 
-    # # GENEROS FORA DO PADRAO PARA RESPONDER AO APP
+    # GENEROS FORA DO PADRAO PARA RESPONDER AO APP
     if !pgenero.blank?
       @espetaculos = Espetaculo.ativo.nao_expirado.ordenar_por(order) if @espetaculos.empty?    
       if params[:genero].downcase == 'teatros'
@@ -81,6 +81,12 @@ class EspetaculosController < ApplicationController
       elsif params[:genero].downcase=='classicos' or params[:genero].downcase=='clássicos'
         @espetaculos = @espetaculos.all(:conditions => ["espetaculos.genero_id IN (25,61,65,91)"])
       end
+    end
+
+    # Caso tenha latitude e longitude
+    if params[:latitude] and params[:longitude]
+      @espetaculos = Espetaculo.ativo.nao_expirado if @espetaculos.empty?
+      @espetaculos = @espetaculos.all(:origin => [params[:latitude],params[:longitude]], :within=>100, :order=>'distance ASC, espetaculos.relevancia DESC, espetaculos.nome ASC')
     end
 
     @espetaculos.uniq!
