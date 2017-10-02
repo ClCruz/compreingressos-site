@@ -44,23 +44,43 @@ class EspetaculosController < ApplicationController
     elsif params[:ordem]=='data'
       order = 'min(horarios.data) ASC, espetaculos.relevancia DESC, espetaculos.nome ASC'
     end
-
-    @conjuntocidade = ConjuntoCidade.first(:include => :conjunto_cidade_visores, :joins => :cidades, :conditions => { :cidades => { :nome => pcidade } })
-    @genero = Genero.find_by_nome(pgenero)
-
+    
     @espetaculos = Espetaculo.ativo.nao_expirado
     
-    if(pcidade and @conjuntocidade)
+    if(pcidade)
       @cidade = Cidade.find_by_nome(pcidade, :include => :cidade_visores)
-      @cids = @conjuntocidade.cidade_ids
-      @espetaculos = @espetaculos.por_conjunto_cidade(@cids)
-    else
-      @espetaculos = @espetaculos.por_cidade(pcidade) unless pcidade.nil? or pcidade.empty?
+      @conjuntocidade = ConjuntoCidade.first(:include => [:conjunto_cidade_visores, :cidades], :joins => :cidades, :conditions => { :cidades => { :nome => pcidade } })
+      
+      if(@conjuntocidade)
+        @cids = @conjuntocidade.cidade_ids.push(0).join(",")
+        @espetaculos = @espetaculos.por_conjunto_cidade(@conjuntocidade.cidade_ids)
+      else
+        @espetaculos = @espetaculos.por_cidade(pcidade)
+      end      
     end
     
-    @espetaculos = @espetaculos.por_genero(pgenero) unless pgenero.nil? or pgenero.empty?
-    @espetaculos = @espetaculos.ordenar_por(order)
+    if(pgenero)
+      @genero = Genero.find_by_nome(pgenero)
+      @espetaculos = @espetaculos.por_genero(pgenero)
+    end
     
+    # GENEROS FORA DO PADRAO PARA RESPONDER AO APP
+    if !pgenero.blank?
+      if params[:genero].downcase == 'teatros'
+        @espetaculos = Espetaculo.ativo.nao_expirado if @espetaculos.empty?
+        @espetaculos = @espetaculos.all(:joins => :teatro, :conditions => ["(teatros.nome LIKE ? OR espetaculos.genero_id = ?)", "%teatro%", 72])
+      elsif params[:genero].downcase=='classicos' or params[:genero].downcase=='clássicos'
+        @espetaculos = Espetaculo.ativo.nao_expirado if @espetaculos.empty?
+        @espetaculos = @espetaculos.all(:conditions => ["espetaculos.genero_id IN (25,61,65,91)"])
+      end
+    end
+
+    # Caso tenha latitude e longitude
+    if params[:latitude] and params[:longitude]
+      @espetaculos = Espetaculo.ativo.nao_expirado if @espetaculos.empty?
+      @espetaculos = @espetaculos.all(:origin => [params[:latitude],params[:longitude]], :within=>100, :order=>'distance ASC, espetaculos.relevancia DESC, espetaculos.nome ASC')
+    end
+
     if !params[:busca].blank?
       busca = params[:busca].first(50).split(' ').select{|w| w.length >= 2}.join(' ') if params[:busca]!='Nome da peça, teatro, local, elenco...'
       params[:busca] = busca
@@ -73,28 +93,13 @@ class EspetaculosController < ApplicationController
       :per_page => 1000
     end
 
-    # GENEROS FORA DO PADRAO PARA RESPONDER AO APP
-    if !pgenero.blank?
-      @espetaculos = Espetaculo.ativo.nao_expirado.ordenar_por(order) if @espetaculos.empty?    
-      if params[:genero].downcase == 'teatros'
-        @espetaculos = @espetaculos.all(:joins => :teatro, :conditions => ["(teatros.nome LIKE ? OR espetaculos.genero_id = ?)", "%teatro%", 72])
-      elsif params[:genero].downcase=='classicos' or params[:genero].downcase=='clássicos'
-        @espetaculos = @espetaculos.all(:conditions => ["espetaculos.genero_id IN (25,61,65,91)"])
-      end
-    end
-
-    # Caso tenha latitude e longitude
-    if params[:latitude] and params[:longitude]
-      @espetaculos = Espetaculo.ativo.nao_expirado if @espetaculos.empty?
-      @espetaculos = @espetaculos.all(:origin => [params[:latitude],params[:longitude]], :within=>100, :order=>'distance ASC, espetaculos.relevancia DESC, espetaculos.nome ASC')
-    end
-
-    @espetaculos.uniq!
-
     if !@espetaculos or @espetaculos.size <= 0
       @espetaculos = Espetaculo.ativo.nao_expirado
       @espetaculos_vazio = 1
     end
+
+    @espetaculos.uniq!
+    @espetaculos = @espetaculos.ordenar_por(order)
 
     # Seleciona os visores e banners fixos para o modo mobile
     @visores = Visor.all(:conditions => ["data_de_expiracao >= ?", DateTime.now.in_time_zone('Brasilia')], :order => 'visores.order')
