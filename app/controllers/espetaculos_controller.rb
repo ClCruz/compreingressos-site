@@ -19,8 +19,8 @@ class EspetaculosController < ApplicationController
       @espetaculos = Espetaculo.find(:all, :include => :teatro, :select => "espetaculos.id, espetaculos.nome, espetaculos.teatro_id", :conditions => {:especial => true}, :order => :nome)
       @totalativos = Espetaculo.find(:all, :select => "espetaculos.id", :conditions => {:especial => true, :ativo => true})
     else
-      @espetaculos = Espetaculo.find(:all, :include => :teatro, :select => "espetaculos.id, espetaculos.nome, espetaculos.teatro_id", :order => :nome)
-      @totalativos = Espetaculo.find(:all, :select => "espetaculos.id", :conditions => {:ativo => true})
+      @espetaculos = Espetaculo.find(:all, :include => :teatro, :select => "espetaculos.id, espetaculos.nome, espetaculos.teatro_id, espetaculos.preco", :order => :nome)
+      @totalativos = Espetaculo.find(:all, :select => "espetaculos.id, espetaculos.preco", :conditions => {:ativo => true})
     end
   end
   
