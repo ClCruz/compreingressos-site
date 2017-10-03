@@ -335,43 +335,12 @@
     <% cache("menu") do %>
     <%
     cid = Cidade.find_by_sql('SELECT count(t.id) as total, c.id, c.nome FROM cidades as c, teatros as t, espetaculos as e WHERE t.cidade_id = c.id AND e.teatro_id = t.id AND e.ativo = 1 GROUP BY t.cidade_id ORDER BY total DESC')
-    if @cidade.blank? or params[:cidade]=='Todas as cidades'
-      gen = Genero.find(:all,
+    gen = Genero.find(:all,
         :select => "count(1) as total, generos.nome",
-        :conditions => "espetaculos.ativo = 1",
+        :conditions => "espetaculos.ativo = 1 AND espetaculos.data_maxima >= '#{DateTime.now}'",
         :joins => "INNER JOIN espetaculos ON espetaculos.genero_id = generos.id",
         :group => 'generos.id',
         :order => 'total DESC')
-    else
-      if @conjuntocidade
-        ccid = ConjuntoCidade.find(:all, :include => :cidades, :order => :nome)
-        ccid.each_with_index do |cc, i|
-          cids = cc.cidades.map{|c| "#{c.id},"}.to_s+"0"
-          ccid[i].total = Espetaculo.find(:first,
-            :select => "count(espetaculos.id) as total",
-            :joins => ["INNER JOIN teatros ON espetaculos.teatro_id = teatros.id",
-             "INNER JOIN cidades ON cidades.id = teatros.cidade_id"],
-             :conditions => "espetaculos.ativo = 1 AND cidades.id IN (#{cids})").total.to_i
-        end
-        gen = Genero.find(:all,
-          :select => "count(1) as total, generos.nome",
-          :conditions => ["espetaculos.ativo = 1"],
-          :joins => ["INNER JOIN espetaculos ON espetaculos.genero_id = generos.id",
-           "INNER JOIN teatros ON espetaculos.teatro_id = teatros.id",
-           "INNER JOIN cidades ON cidades.id = teatros.cidade_id AND cidades.id in (#{@cids})"],
-           :group => 'generos.id',
-           :order => 'total DESC')
-      else
-        gen = Genero.find(:all,
-          :select => "count(1) as total, generos.nome",
-          :conditions => ["espetaculos.ativo = 1 AND cidades.nome = ?",@cidade.nome],
-          :joins => ["INNER JOIN espetaculos ON espetaculos.genero_id = generos.id",
-           "INNER JOIN teatros ON espetaculos.teatro_id = teatros.id",
-           "INNER JOIN cidades ON cidades.id = teatros.cidade_id"],
-           :group => 'generos.id',
-           :order => 'total DESC')
-      end
-    end
     -%>
     <div id="buscaCidade" class="menu_busca geral container cidade">
       <div class="centraliza">
@@ -383,9 +352,9 @@
     </div>
     <div id="buscaGenero" class="menu_busca geral container genero">
       <div class="centraliza">
-        <a href="/espetaculos?cidade=<%= @cidade.blank? ? 'Todas as cidades':@cidade.nome %>&genero=Todos os gêneros"<%=" class='ativo'" if params[:genero]=='Todos os gêneros'%>>Todos os gêneros</a>
+        <a href="/espetaculos?genero=Todos os gêneros"<%=" class='ativo'" if params[:genero]=='Todos os gêneros'%>>Todos os gêneros</a>
         <% for genero in gen -%>
-        <a href="/espetaculos?<%= "cidade=#{@cidade.nome}&" if !@cidade.blank? %>genero=<%=genero.nome%><%= "&ordem=#{lparam(params[:ordem])}" if params[:ordem] %>" class="<%='ativo' if params[:genero]==genero.nome%>"><%=genero.nome%> <span>(<%=genero.total%>)</span></a>
+        <a href="/espetaculos?genero=<%=genero.nome%><%= "&ordem=#{lparam(params[:ordem])}" if params[:ordem] %>" class="<%='ativo' if params[:genero]==genero.nome%>"><%=genero.nome%> <span>(<%=genero.total%>)</span></a>
         <% end -%>
       </div>
     </div>

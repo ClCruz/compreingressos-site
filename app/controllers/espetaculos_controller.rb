@@ -36,21 +36,21 @@ class EspetaculosController < ApplicationController
     pgenero = params[:genero] == 'Todos os gêneros' ? '' : params[:genero]
     pdireto = params[:direto]
 
+    @espetaculos = Espetaculo.ativo.nao_expirado
+
     # Define a ordem das queries
     if params[:ordem]=='destaques' or params[:ordem].blank?
       order = 'espetaculos.relevancia DESC, espetaculos.nome ASC'
     elsif params[:ordem]=='alfabetica'
       order = 'espetaculos.nome ASC'
     elsif params[:ordem]=='data'
-      order = 'min(horarios.data) ASC, espetaculos.relevancia DESC, espetaculos.nome ASC'
+      order = 'min(horarios.data)'
     end
-    
-    @espetaculos = Espetaculo.ativo.nao_expirado
-    
-    if(pcidade)
+
+    unless(pcidade.blank? or !params[:cidade].present?)
       @cidade = Cidade.find_by_nome(pcidade, :include => :cidade_visores)
       @conjuntocidade = ConjuntoCidade.first(:include => [:conjunto_cidade_visores, :cidades], :joins => :cidades, :conditions => { :cidades => { :nome => pcidade } })
-      
+
       if(@conjuntocidade)
         @cids = @conjuntocidade.cidade_ids.push(0).join(",")
         @espetaculos = @espetaculos.por_conjunto_cidade(@conjuntocidade.cidade_ids)
@@ -59,7 +59,7 @@ class EspetaculosController < ApplicationController
       end      
     end
     
-    if(pgenero)
+    unless(pgenero.blank?)
       @genero = Genero.find_by_nome(pgenero)
       @espetaculos = @espetaculos.por_genero(pgenero)
     end
@@ -93,17 +93,19 @@ class EspetaculosController < ApplicationController
       :per_page => 1000
     end
 
-    if !@espetaculos or @espetaculos.size <= 0
-      @espetaculos = Espetaculo.ativo.nao_expirado
-      @espetaculos_vazio = 1
-    end
-
-    @espetaculos.uniq!
-    @espetaculos = @espetaculos.ordenar_por(order)
-
     # Seleciona os visores e banners fixos para o modo mobile
     @visores = Visor.all(:conditions => ["data_de_expiracao >= ?", DateTime.now.in_time_zone('Brasilia')], :order => 'visores.order')
     @banner_fixos = BannerFixo.all(:order => "ordem DESC")
+
+    if !@espetaculos or @espetaculos.size <= 0
+      @espetaculos = Espetaculo.ativo.nao_expirado
+      @espetaculos_vazio = 1
+      @cidade = nil
+      @conjuntocidade = nil
+    end
+
+    @espetaculos = @espetaculos.all(:joins => :horarios, :group => :id, :conditions => ["horarios.data >= ?", DateTime.now], :order => order)
+    @espetaculos.sort_by { |e| Date.parse(e.horarios.first.data.to_s) }
 
     @title = "Espetáculos"
     respond_to do |format|
