@@ -104,8 +104,14 @@ class EspetaculosController < ApplicationController
       @conjuntocidade = nil
     end
 
-    @espetaculos = @espetaculos.all(:joins => :horarios, :group => :id, :conditions => ["horarios.data >= ?", DateTime.now], :order => order)
-    @espetaculos.sort_by { |e| Date.parse(e.horarios.first.data.to_s) }
+    # Define a ordem das queries
+    if params[:ordem]=='destaques' or params[:ordem].blank?
+      @espetaculos = @espetaculos.all(:order => 'espetaculos.relevancia DESC, espetaculos.nome ASC')
+    elsif params[:ordem]=='alfabetica'
+      @espetaculos = @espetaculos.all(:order => 'espetaculos.nome ASC')
+    elsif params[:ordem]=='data'
+      @espetaculos = @espetaculos.all(:joins => :horarios, :group => :id, :conditions => ["horarios.data >= ?", DateTime.now], :order => 'min(horarios.data)')
+    end
 
     @title = "Espetáculos"
     respond_to do |format|
