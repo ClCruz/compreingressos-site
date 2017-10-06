@@ -92,7 +92,7 @@ class Espetaculo < ActiveRecord::Base
 
   # define scopes to filter Spetacles based on Status, Gender, City and Expiration Date
   named_scope :ativo, :conditions => { :ativo => true }
-  named_scope :nao_expirado, :conditions => ["data_maxima >= ?", DateTime.now]
+  named_scope :nao_expirado, :conditions => ["data_maxima >= ?", DateTime.now.to_date]
   named_scope :por_genero, lambda { |gender| { :joins => :genero, :conditions => { :generos => { :nome => gender } } } }
   named_scope :por_cidade, lambda { |city| { :joins => { :teatro => :cidade }, :conditions => { :cidades => { :nome => city } } } }
   named_scope :por_conjunto_cidade, lambda { |city_region| { :joins => { :teatro => :cidade }, :group => 'espetaculos.id', :conditions => ["cidades.id IN (?)", city_region] } }
