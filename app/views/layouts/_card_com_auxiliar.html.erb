@@ -1,3 +1,4 @@
+<%# card_com_auxuliar é um objeto da classe Espetáculo %>
 <% link = (card_com_auxiliar.link_do_redirecionamento.nil? or card_com_auxiliar.link_do_redirecionamento.empty?) ? "#{url_for card_com_auxiliar}" : "#{card_com_auxiliar.link_do_redirecionamento}" -%>
 <% hotsite = (!auxiliar.hotsite) ? "" : "&hs=1" %>
 <% blank = card_com_auxiliar.blank_de_link_do_redirecionamento ? " target='_blank'" : "" -%>
@@ -14,7 +15,7 @@
       <p class="cidade"><%=card_com_auxiliar.cidade.nome%> - <%=card_com_auxiliar.cidade.estado%></p>
     <% end -%>
     <% if !auxiliar.ocultar_genero -%>
-      <p class="genero"><%=card_com_auxiliar.genero.nome%></p>
+      <p class="genero"><%= card_com_auxiliar.genero.nome unless card_com_auxiliar.genero.nil? %></p>
     <% end -%>
   <div class="over">
     <% if card_com_auxiliar.proximo_horario -%>

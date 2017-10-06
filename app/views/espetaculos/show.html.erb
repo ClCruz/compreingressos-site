@@ -63,9 +63,9 @@
         <span class="origem"><a href="/<%=@pacote.url%>/assinaturas">Voltar para <%=@pacote.nome%></a></span>
       <% end %>
       <% if @pagina_especial and @pagina_especial.tipo==2 %>
-        <span class="genero"><%= @espetaculo.genero.nome %></span>
+        <span class="genero"><%= @espetaculo.genero.nome unless @espetaculo.genero.nil? %></span>
       <% else %>
-        <span class="genero"><%= link_to @espetaculo.genero.nome, "/espetaculos?cidade=&genero=#{@espetaculo.genero.nome}" %></span>
+        <span class="genero"><%= link_to @espetaculo.genero.nome, "/espetaculos?cidade=&genero=#{@espetaculo.genero.nome}" unless @espetaculo.genero.nil? %></span>
   	  <% end %>
   	  <span class="classificacao"><%=@espetaculo.classificacao.nome%></span>
       <% if !@espetaculo.duracao.blank? %>
@@ -207,7 +207,7 @@
           <div class="top">
             <div class="fechar"></div>
             <div class="container_mini_topo">
-              <span class="genero"><%= link_to @espetaculo.genero.nome, "/espetaculos?cidade=&genero=#{@espetaculo.genero.nome}" %></span>
+              <span class="genero"><%= link_to @espetaculo.genero.nome, "/espetaculos?cidade=&genero=#{@espetaculo.genero.nome}" unless @espetaculo.genero.nil? %></span>
               <span class="classificacao"><%=@espetaculo.classificacao.nome%></span>
               <% if !@espetaculo.duracao.blank? %>
               <span class="duracao"><%=@espetaculo.duracao%></span>

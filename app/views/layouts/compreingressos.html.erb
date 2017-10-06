@@ -339,7 +339,7 @@
                               GROUP BY t.cidade_id ORDER BY total DESC')
     gen = Genero.find(:all,
         :select => "count(1) as total, generos.nome",
-        :conditions => "espetaculos.ativo = 1 AND espetaculos.data_maxima >= '#{DateTime.now}'",
+        :conditions => "espetaculos.ativo = 1 AND espetaculos.data_maxima >= '#{DateTime.now.to_date}'",
         :joins => "INNER JOIN espetaculos ON espetaculos.genero_id = generos.id",
         :group => 'generos.id',
         :order => 'total DESC')
