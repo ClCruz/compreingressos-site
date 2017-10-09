@@ -63,17 +63,6 @@ class EspetaculosController < ApplicationController
       @genero = Genero.find_by_nome(pgenero)
       @espetaculos = @espetaculos.por_genero(pgenero)
     end
-    
-    # GENEROS FORA DO PADRAO PARA RESPONDER AO APP
-    if !pgenero.blank?
-      if params[:genero].downcase == 'teatros'
-        @espetaculos = Espetaculo.ativo.nao_expirado if @espetaculos.empty?
-        @espetaculos = @espetaculos.all(:joins => :teatro, :conditions => ["(teatros.nome LIKE ? OR espetaculos.genero_id = ?)", "%teatro%", 72])
-      elsif params[:genero].downcase=='classicos' or params[:genero].downcase=='clássicos'
-        @espetaculos = Espetaculo.ativo.nao_expirado if @espetaculos.empty?
-        @espetaculos = @espetaculos.all(:conditions => ["espetaculos.genero_id IN (25,61,65,91)"])
-      end
-    end
 
     # Caso tenha latitude e longitude
     if params[:latitude] and params[:longitude]
@@ -111,6 +100,17 @@ class EspetaculosController < ApplicationController
       @espetaculos = @espetaculos.all(:order => 'espetaculos.nome ASC')
     elsif params[:ordem]=='data'
       @espetaculos = @espetaculos.all(:joins => :horarios, :group => :id, :conditions => ["horarios.data >= ?", DateTime.now], :order => 'min(horarios.data)')
+    end
+    
+    # GENEROS FORA DO PADRAO PARA RESPONDER AO APP
+    if !pgenero.blank?
+      if params[:genero].downcase == 'teatros'
+        @espetaculos = Espetaculo.ativo.nao_expirado
+        @espetaculos = @espetaculos.all(:joins => :teatro, :conditions => ["(teatros.nome LIKE ? OR espetaculos.genero_id = ?)", "%teatro%", 72])
+      elsif params[:genero].downcase=='classicos' or params[:genero].downcase=='clássicos'
+        @espetaculos = Espetaculo.ativo.nao_expirado
+        @espetaculos = @espetaculos.all(:conditions => ["espetaculos.genero_id IN (25,61,65,91)"])
+      end
     end
 
     @title = "Espetáculos"
