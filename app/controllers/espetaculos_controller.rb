@@ -38,15 +38,6 @@ class EspetaculosController < ApplicationController
 
     @espetaculos = Espetaculo.ativo.nao_expirado
 
-    # Define a ordem das queries
-    if params[:ordem]=='destaques' or params[:ordem].blank?
-      order = 'espetaculos.relevancia DESC, espetaculos.nome ASC'
-    elsif params[:ordem]=='alfabetica'
-      order = 'espetaculos.nome ASC'
-    elsif params[:ordem]=='data'
-      order = 'min(horarios.data)'
-    end
-
     unless(pcidade.blank? or !params[:cidade].present?)
       @cidade = Cidade.find_by_nome(pcidade, :include => :cidade_visores)
       @conjuntocidade = ConjuntoCidade.first(:include => [:conjunto_cidade_visores, :cidades], :joins => :cidades, :conditions => { :cidades => { :nome => pcidade } })
@@ -70,28 +61,9 @@ class EspetaculosController < ApplicationController
       @espetaculos = @espetaculos.all(:origin => [params[:latitude],params[:longitude]], :within=>100, :order=>'distance ASC, espetaculos.relevancia DESC, espetaculos.nome ASC')
     end
 
-    if !params[:busca].blank?
-      busca = params[:busca].first(50).split(' ').select{|w| w.length >= 2}.join(' ') if params[:busca]!='Nome da peça, teatro, local, elenco...'
-      params[:busca] = busca
-      @espetaculos = Espetaculo.search busca,
-      :field_weights => {:nome => 100, :genero =>80, :teatro_nome => 80, :cidade => 70, :estado => 70, :keywords => 70, :endereco => 50, :bairro => 50, :entradas => 30},
-      :match_mode => :any,
-      :sort_mode => :extended,
-      :order => "@relevance DESC",
-      :index => "ativo",
-      :per_page => 1000
-    end
-
     # Seleciona os visores e banners fixos para o modo mobile
     @visores = Visor.all(:conditions => ["data_de_expiracao >= ?", DateTime.now.in_time_zone('Brasilia')], :order => 'visores.order')
     @banner_fixos = BannerFixo.all(:order => "ordem DESC")
-
-    if !@espetaculos or @espetaculos.size <= 0
-      @espetaculos = Espetaculo.ativo.nao_expirado
-      @espetaculos_vazio = 1
-      @cidade = nil
-      @conjuntocidade = nil
-    end
 
     # Define a ordem das queries
     if params[:ordem]=='destaques' or params[:ordem].blank?
@@ -100,6 +72,18 @@ class EspetaculosController < ApplicationController
       @espetaculos = @espetaculos.all(:order => 'espetaculos.nome ASC')
     elsif params[:ordem]=='data'
       @espetaculos = @espetaculos.all(:joins => :horarios, :group => :id, :conditions => ["horarios.data >= ?", DateTime.now], :order => 'min(horarios.data)')
+    end
+
+    if !params[:busca].blank?
+      busca = params[:busca].first(50).split(' ').select{ |w| w.length >= 2 }.join(' ') if params[:busca] != 'Nome da peça, teatro, local, elenco...'
+      params[:busca] = busca
+      @espetaculos = Espetaculo.search busca,
+      :field_weights => {:nome => 100, :genero =>80, :teatro_nome => 80, :cidade => 70, :estado => 70, :keywords => 70, :endereco => 50, :bairro => 50, :entradas => 30},
+      :match_mode => :any,
+      :sort_mode => :extended,
+      :order => "@relevance DESC",
+      :index => "ativo",
+      :per_page => 1000
     end
     
     # GENEROS FORA DO PADRAO PARA RESPONDER AO APP
@@ -111,6 +95,13 @@ class EspetaculosController < ApplicationController
         @espetaculos = Espetaculo.ativo.nao_expirado
         @espetaculos = @espetaculos.all(:conditions => ["espetaculos.genero_id IN (25,61,65,91)"])
       end
+    end
+
+    if @espetaculos.nil? or !@espetaculos or @espetaculos.size <= 0
+      @espetaculos = Espetaculo.ativo.nao_expirado
+      @espetaculos_vazio = 1
+      @cidade = nil
+      @conjuntocidade = nil
     end
 
     @title = "Espetáculos"
