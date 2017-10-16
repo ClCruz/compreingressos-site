@@ -37,23 +37,23 @@ test:
 production:
   host: 'http://www.compreingressos.com'
   host_compra: 'https://compra.compreingressos.com'
-  host_json: 'http://179.124.45.101'
-  ftp_compra_host1: '179.124.45.101'
-  ftp_compra_port1: '211'
+  host_json: 'http://10.0.37.2'
+  ftp_compra_host1: '10.0.37.2'
+  ftp_compra_port1: '21'
   ftp_compra_username1: 'ftpupld'
-  ftp_compra_password1: 'Ftp@upload*'
+  ftp_compra_password1: 'IdkxvFgCC@'
   ftp_compra_images_dir1: 'evento'
   
-  ftp_compra_host2: '179.124.45.101'
-  ftp_compra_port2: '212'
+  ftp_compra_host2: '10.0.37.3'
+  ftp_compra_port2: '21'
   ftp_compra_username2: 'ftpupld'
-  ftp_compra_password2: 'Ftp@upload*'
+  ftp_compra_password2: 'IdkxvFgCC@'
   ftp_compra_images_dir2: 'evento'
   
-  ftp_compra_host3: '179.124.45.101'
-  ftp_compra_port3: '213'
+  ftp_compra_host3: '10.0.37.4'
+  ftp_compra_port3: '21'
   ftp_compra_username3: 'ftpupld'
-  ftp_compra_password3: 'Ftp@upload*'
+  ftp_compra_password3: 'IdkxvFgCC@'
   ftp_compra_images_dir3: 'evento'
 
 staging:
