@@ -908,7 +908,7 @@ class EspetaculosController < ApplicationController
 
   # feed para integração com a Criteo
   def feed_espetaculos
-    @espetaculos = Espetaculo.all(:limit => 650, :order => "created_at DESC", :include => [:teatro, :cidade, :genero])
+    @espetaculos = Espetaculo.ativo.nao_expirado.all(:limit => 650, :order => "created_at DESC", :include => [:teatro, :cidade, :genero])
     
     # remove html markup from 'sinopse'
     strip_html_tags()
@@ -1006,7 +1006,7 @@ class EspetaculosController < ApplicationController
   end
 
   def criteo_category_script
-    productIDList = @espetaculos.map { |item| item.id.to_s }
+    productIDList = @espetaculos.map { |item| item.cc_id.to_s }
 
     if params[:genero].present?
        "dataLayer.push({
@@ -1024,7 +1024,7 @@ class EspetaculosController < ApplicationController
     "dataLayer.push({
       'PageType': 'Productpage',
       'HashedEmail': '', 
-      'ProductID': '#{@espetaculo.id unless @espetaculo.nil? }'
+      'ProductID': '#{@espetaculo.cc_id unless @espetaculo.nil? }'
     });"
   end
 
