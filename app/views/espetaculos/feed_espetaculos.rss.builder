@@ -8,12 +8,12 @@ xml.rss :version => "2.0", "xmlns:g" => "http://base.google.com/ns/1.0" do
 
 		@espetaculos.each do |esp|
 			xml.item do
-				xml.tag! "g:id", esp.id
+				xml.tag! "g:id", esp.cc_id
 				xml.tag! "g:title", esp.nome
 				xml.tag! ("g:description") { xml.cdata! esp.sinopse }
 				xml.tag! "g:google_product_category", "499969" # Artes e entretenimento > Ingressos de eventos
 				xml.tag! "g:link", espetaculo_url(esp)
-				xml.tag! "g:image_link", "http://compreingressos.com#{esp.img_principal.url}" if esp.img_principal?
+				xml.tag! "g:image_link", "https://compreingressos.com#{esp.fundo.url}" if esp.fundo?
 				xml.tag! "g:price", "%5.2f" % esp.g_price.round(2) unless esp.g_price.nil?
 				xml.tag! "g:sale_price", "%5.2f" % esp.g_sale_price.round(2) unless esp.g_sale_price.nil?
 				xml.tag! "g:brand", "Compre Ingressos"
