@@ -31,10 +31,10 @@ class PaginaEspeciaisController < ApplicationController
       # Page type conditionals
       if @pagina_especial.tipo == 1
         #cond = "espetaculos.ativo = 1 AND espetaculos.privado = 0" # Até 04/2015 era proibido exibir espetaculos privados ativos nas páginas especiais normais
-        cond = "espetaculos.ativo = 1"
+        cond = "(espetaculos.ativo = 1 AND espetaculos.data_maxima >= '#{DateTime.now.to_date}')"
       elsif @pagina_especial.tipo == 2
         #cond = "(espetaculos.ativo = 1 AND espetaculos.privado = 1) OR espetaculos.ativo = 1 OR espetaculos.privado = 1"
-        cond = "(espetaculos.ativo = 1 OR espetaculos.privado = 1)"
+        cond = "((espetaculos.ativo = 1 AND espetaculos.data_maxima >= '#{DateTime.now.to_date}') OR espetaculos.privado = 1)"
         #cond = "1=1"
         @noheaderfooter = 1
       end

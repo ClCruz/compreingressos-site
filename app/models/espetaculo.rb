@@ -90,10 +90,17 @@ class Espetaculo < ActiveRecord::Base
   after_post_process :save_image_dimensions
   after_commit :reset_cache
 
+  # define scopes to filter Spetacles based on Status, Gender, City and Expiration Date
+  named_scope :ativo, :conditions => { :ativo => true }
+  named_scope :nao_expirado, :conditions => ["data_maxima >= ?", DateTime.now.to_date]
+  named_scope :por_genero, lambda { |gender| { :joins => :genero, :conditions => { :generos => { :nome => gender } } } }
+  named_scope :por_cidade, lambda { |city| { :joins => { :teatro => :cidade }, :conditions => { :cidades => { :nome => city } } } }
+  named_scope :por_conjunto_cidade, lambda { |city_region| { :joins => { :teatro => :cidade }, :group => 'espetaculos.id', :conditions => ["cidades.id IN (?)", city_region] } }
+  named_scope :ordenar_por, lambda { |order| { :joins => :horarios, :group => :id, :conditions => ["horarios.data >= ?", DateTime.now], :order => order } }
+
   # Salva a altura da miniatura para o plugin que embaralha os espetaculos calcular a altura correta se não
   # ele fica recalculando após carregar cada imagem causando erros visuais momentaneos no browser do usuario
   def save_image_dimensions
-    # Verifica se o arquivo original da miniatura foi enviado, caso sim ele salva a altura da imagem.
     # Lembrando que para a miniatura não existe outros tamanhos de imagem além do original
     if img_miniatura.queued_for_write[:original]
       geo = Paperclip::Geometry.from_file(img_miniatura.queued_for_write[:original])
@@ -104,6 +111,7 @@ class Espetaculo < ActiveRecord::Base
   def reset_cache
     Rails.cache.delete("views/menu")
     Rails.cache.delete("views/espetaculos")
+    # Verifica se o arquivo original da miniatura foi enviado, caso sim ele salva a altura da imagem.
     Rails.cache.delete("views/espetaculos/alfabetica")
     Rails.cache.delete("views/espetaculos/data")
     Rails.cache.delete("views/espetaculos/#{self.cidade.nome.parameterize}")
@@ -240,10 +248,19 @@ class Espetaculo < ActiveRecord::Base
   end
 
   def after_find
-    price = []
-    self.preco.gsub(/\d+,\d+/) { |match| price << match.gsub(',', '.').to_f }
-    price.sort!
-    self.g_price = price.last
-    self.g_sale_price = price.first
+    begin
+      set_price_for_criteo
+    rescue
+      return
+    end
   end
+
+  private
+    def set_price_for_criteo
+      price = []
+      self.preco.gsub(/\d+,\d+/) { |match| price << match.gsub(',', '.').to_f }
+      price.sort!
+      self.g_price = price.last
+      self.g_sale_price = price.first
+    end
 end
