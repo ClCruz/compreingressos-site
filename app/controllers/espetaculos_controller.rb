@@ -1,3 +1,4 @@
+require 'digest'
 class EspetaculosController < ApplicationController
   before_filter :authorize, :except => [:index, :busca, :show, :home, :nobuilder, :paineis, :feed_espetaculos]
   newrelic_ignore :except => [:index, :busca, :show, :home, :nobuilder, :paineis]
@@ -114,6 +115,9 @@ class EspetaculosController < ApplicationController
     end
 
     @title = "Espetáculos"
+
+    @criteo_script_tag = criteo_category_script()
+    
     respond_to do |format|
       format.html { render :layout => 'compreingressos', :action => @conjuntocidade ? 'index2' : 'index' }
       format.json if params[:key] == Espetaculo::KEY_TOKECOMPRE_APP # Para visualizar o json URL /espetaculos.json?key=8435D5115e46a70i6648715850882eus ainda é possivel filtrar por &cidade=, &genero= e por busca com o parametro &busca=
@@ -319,6 +323,8 @@ class EspetaculosController < ApplicationController
         @espetaculo = Espetaculo.find_by_id(params[:id], :include => :horarios_disponiveis)
       end
     end
+
+    @criteo_script_tag = criteo_product_script()
     #logger.warn "############ \n\n\n\n\n\n"
     #logger.info @espetaculo.pagina_especiais.map { |d| d.nome}
     
@@ -535,6 +541,8 @@ class EspetaculosController < ApplicationController
       espetaculos.each do |e|
         @espetaculos_home << e
       end
+
+      @criteo_script_tag = criteo_category_script
     # Caso seja uma busca
     else
       busca = params[:busca]=='Nome da peça, teatro, local, elenco...' ? '':params[:busca].first(50)
@@ -713,6 +721,29 @@ class EspetaculosController < ApplicationController
     @espetaculos.each do |e|
       replacements.each { |replacement| e.sinopse.gsub!(replacement[0], replacement[1]) }
     end
+  end
+
+  def criteo_category_script
+    productIDList = @espetaculos.map { |item| item.cc_id.to_s }
+
+    if params[:genero].present?
+       "dataLayer.push({
+          'PageType': 'Listingpage',
+          'HashedEmail': '', 
+          'ProductIDList': [#{productIDList.join(',')}]
+        });"
+    else
+      nil
+    end
+  end
+
+  def criteo_product_script
+        
+    "dataLayer.push({
+      'PageType': 'Productpage',
+      'HashedEmail': '', 
+      'ProductID': '#{@espetaculo.cc_id unless @espetaculo.nil? }'
+    });"
   end
 
 #  def setaalturadeiniciomobile

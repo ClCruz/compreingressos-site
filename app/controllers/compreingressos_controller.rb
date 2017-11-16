@@ -1,3 +1,5 @@
+require 'digest'
+
 class CompreingressosController < ApplicationController
   skip_before_filter :authorize
   newrelic_ignore :only => [:desativaentradasprogramadas]
@@ -32,7 +34,13 @@ class CompreingressosController < ApplicationController
     @banner_fixos = BannerFixo.all(:order => "ordem DESC")
     @home_modulos = HomeModulo.find(:all, :conditions => ["entrada <= ? AND saida > ?", DateTime.now.in_time_zone('Brasilia'), DateTime.now.in_time_zone('Brasilia')], :order => :ordem)
     #@hm_last = HomeModulo.first(:select => :updated_at, :conditions => ["entrada <= ? AND saida > ?", DateTime.now.in_time_zone('Brasilia'), DateTime.now.in_time_zone('Brasilia')], :order => 'updated_at DESC').updated_at.to_i
-    
+
+    # criteo scripts
+    @criteo_script_tag = "dataLayer.push({
+                          'PageType': 'Homepage', 
+                          'HashedEmail': ''
+                        });"
+                        
     respond_to do |format|
       format.html { render :template => "compreingressos/index.html.erb" }
     end 
