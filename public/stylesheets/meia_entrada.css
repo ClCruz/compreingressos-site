@@ -7,7 +7,7 @@ a:visited{ color: inherit; text-decoration: none; }
 .strong { font-weight: bold; }
 .upper { text-transform: uppercase; }
 .txt {  color: #fff;  text-align: justify;  font-size: 16px;  line-height: 29px; font-family: 'Arial';  }
-.txt.black { color: #989898; }
+.txt.red { color: #c80f2b; }
 h1 {  color: #C80F2B !important;  font-weight: bold !important;  text-transform: uppercase !important;  font-family: 'Arial black' !important;  font-size: 44px !important;  margin: 0px;  padding: 30px 0px;  }
 .white { color: #fff !important; }
 div.container { width: 100%; }
@@ -19,7 +19,7 @@ a.leis {color: #8F0012; }
 
 /*topo*/
 div#topo {  background-image: url(../images/meia_entrada/topo_bg.jpg);  padding-top: 40px;  padding-bottom: 105px; }
-div#topo .logo {  text-align: center;  }
+div#topo .logo img {  margin-right: 30px; margin-left: 30px;  }
 div#topo .titulo {  text-align: center;  margin-bottom: 20px;  }
 div#topo .titulo img {  width: 100%;  }
 div#topo .txt {  width: 80%;  margin: 0 auto;  }
