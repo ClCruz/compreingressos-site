@@ -474,7 +474,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 <%= render :partial => 'layouts/footer' %> 
 <script type="text/javascript">
-  dataLayer = [];
+   var dataLayer = dataLayer || [];
   <%= @criteo_script_tag unless @criteo_script_tag.nil? %>
 </script>
 <!-- Chat do FreshDesk comentado porque o mesmo está desabilitado -->
