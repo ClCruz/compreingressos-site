@@ -20,7 +20,7 @@ xml.rss :version => "2.0", "xmlns:g" => "http://base.google.com/ns/1.0" do
 				xml.tag! "g:adult", "FALSE"
 				xml.tag! ("g:product_type") { xml.cdata! "Artes e entretenimento > Ingressos de eventos" }
 				xml.tag! "g:mobile_link", espetaculo_url(esp)
-				xml.tag! ("g:filters") { xml.cdata! "cidade=#{esp.cidade.nome}, teatro=#{esp.teatro.nome}, gênero=#{esp.genero.nome}" }
+				xml.tag! ("g:filters") { xml.cdata! "cidade=#{!esp.cidade.nil? ? esp.cidade.nome: ''}, teatro=#{!esp.teatro.nil? ? esp.teatro.nome: ''}, gênero=#{!esp.genero.nil? ? esp.genero.nome: ''}" }
 			end
 		end
 	end 

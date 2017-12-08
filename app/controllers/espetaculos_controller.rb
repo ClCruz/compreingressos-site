@@ -620,7 +620,7 @@ class EspetaculosController < ApplicationController
 
   # feed para integração com a Criteo
   def feed_espetaculos
-    @espetaculos = Espetaculo.ativo.nao_expirado.all(:limit => 650, :order => "created_at DESC", :include => [:teatro, :cidade, :genero])
+    @espetaculos = Espetaculo.all(:limit => 20000, :order => "created_at DESC", :include => [:teatro, :cidade, :genero])
     
     # remove html markup from 'sinopse'
     strip_html_tags()
