@@ -374,7 +374,7 @@ function CISliderMain(elementStrID, newOpts)
 
     E.__setTimeToMove = function(){
 
-        var time = E.lis[E.getRealPos()].getAttribute('data-showtime');
+        var time = parseInt(4);
         if ( !time ) { time = parseInt(E.options.defaultTime); }
 
         clearTimeout(E.autoTime); //limapr qualquer timeout existente, evitar bugs
