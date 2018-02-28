@@ -18,7 +18,7 @@
                 <% home_modulo.home_modulo_espetaculos.each do |me| %>
                   <% if (i <= home_modulo.exibir) and (me.espetaculo.ativo == true) and (me.espetaculo.data_maxima > DateTime.now) %>
                     <div class="card">
-                      <a href="<%=url_for me.espetaculo%><%=!@completaurl.nil? ? '?'+@completaurl : ''%><%=!me.espetaculo.origem.nil? ? '?origem='+me.espetaculo.origem : ''%>">
+                      <a href="<%=url_for me.espetaculo%><%=!@completaurl.nil? ? '?'+@completaurl : ''%><%=!me.espetaculo.origem.blank? ? '?origem='+me.espetaculo.origem : ''%>">
                         <% image = me.espetaculo.img_miniatura.url(:miniatura) %>
                         <%= image_tag image, :height => me.espetaculo.img_miniatura_height %>
                         <h3><%=me.espetaculo.nome%></h3>
@@ -40,16 +40,16 @@
                             <p class="linha3"><%= l me.espetaculo.proximo_horario.data, :format => :short %></p>                            
                             <% logger.info "\n" + me.espetaculo.especificar_data_inicial_de_venda.to_s %>
                             <% if me.espetaculo.especificar_data_inicial_de_venda %>
-                              <a href="<%=url_for me.espetaculo%><%=!me.espetaculo.origem.nil? ? '?origem='+me.espetaculo.origem : ''%>" class="botao <%= (me.espetaculo.data_inicial_de_venda > dataatual) ? 'saiba_mais':'comprar'%>"></a>
+                              <a href="<%=url_for me.espetaculo%><%=!me.espetaculo.origem.blank? ? '?origem='+me.espetaculo.origem : ''%>" class="botao <%= (me.espetaculo.data_inicial_de_venda > dataatual) ? 'saiba_mais':'comprar'%>"></a>
                             <% else %>
-                              <a href="<%=url_for me.espetaculo%><%=!me.espetaculo.origem.nil? ? '?origem='+me.espetaculo.origem : ''%>" class="botao <%= me.espetaculo.cc_id.blank?  ? 'saiba_mais':'comprar'%>"></a>
+                              <a href="<%=url_for me.espetaculo%><%=!me.espetaculo.origem.blank? ? '?origem='+me.espetaculo.origem : ''%>" class="botao <%= me.espetaculo.cc_id.blank?  ? 'saiba_mais':'comprar'%>"></a>
                             <% end %>
                             <% else %>
                             <% logger.info "\n" + me.espetaculo.data_inicial_de_venda.to_s %>
                             <% if me.espetaculo.especificar_data_inicial_de_venda %>
-                              <a href="<%=url_for me.espetaculo%><%=!me.espetaculo.origem.nil? ? '?origem='+me.espetaculo.origem : ''%>" class="botao <%= (me.espetaculo.data_inicial_de_venda > dataatual) ? 'saiba_mais semdata':'comprar semdata'%>"></a>
+                              <a href="<%=url_for me.espetaculo%><%=!me.espetaculo.origem.blank? ? '?origem='+me.espetaculo.origem : ''%>" class="botao <%= (me.espetaculo.data_inicial_de_venda > dataatual) ? 'saiba_mais semdata':'comprar semdata'%>"></a>
                             <% else %>
-                              <a href="<%=url_for me.espetaculo%><%=!me.espetaculo.origem.nil? ? '?origem='+me.espetaculo.origem : ''%>" class="botao <%= (me.espetaculo.cc_id.blank? or me.espetaculo.proximo_horario.blank?) ? 'saiba_mais semdata':'comprar semdata'%>"></a>
+                              <a href="<%=url_for me.espetaculo%><%=!me.espetaculo.origem.blank? ? '?origem='+me.espetaculo.origem : ''%>" class="botao <%= (me.espetaculo.cc_id.blank? or me.espetaculo.proximo_horario.blank?) ? 'saiba_mais semdata':'comprar semdata'%>"></a>
                             <% end %>
                           <% end %>
                         </div>
