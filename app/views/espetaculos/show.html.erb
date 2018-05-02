@@ -141,31 +141,6 @@
         <p class="googlemaps">
           <a href="http://maps.google.com/maps?f=q&source=s_q&hl=es&geocode=&q=<%=@espetaculo.teatro.endereco%>, <%=@espetaculo.teatro.bairro%> - <%=@espetaculo.teatro.cidade.nome%> - <%=@espetaculo.teatro.cidade.estado%>&ie=UTF8&z=15&t=m&iwloc=near&output=embed" target="_blank">ver google maps</a>
         </p>
-        <% if pagina_selecionada?(@espetaculo, @espetaculo.pagina_especiais.find_by_url('unibescultural')) %>
-            <p class="compre_fone">Informações pelo telefone</p>
-            <p class="compre_fone_num"><img src="/images/ico_telefone.png" />(11) 3065-4333</p>
-        <% else %>
-            <p class="compre_fone">Compre pelo telefone de segunda a sábado das 11h às 19h</p>
-            <% if @pagina_especial and @pagina_especial.url=='brasilprev' %>
-                <p class="compre_fone_num"><img src="/images/ico_telefone.png" />(11) 2626-5710</p>
-            <% else %>
-              <% if @espetaculo.teatro.nome == 'Teatro Riachuelo Rio' %>
-                <p class="compre_fone_num"><img src="/images/ico_telefone.png" />(21) 3005-3432</p>
-              <% else %>
-                <% if @espetaculo.teatro.cidade.estado.upcase=='RJ' and @espetaculo.id!=4970 %>
-                      <% if params[:origem] and params[:origem]=="itaucard" %>
-                          <p class="compre_fone_num"><img src="/images/ico_telefone.png" />(21) 3005-4104</p>
-                      <% elsif @espetaculo.id == 7402 %>
-                          <p class="compre_fone_num"><img src="/images/ico_telefone.png" />(21) 3005-7489</p>
-                      <% else %>
-                          <p class="compre_fone_num"><img src="/images/ico_telefone.png" />(21) 3005-2701</p>
-                      <% end %>
-                  <% else %>
-                      <p class="compre_fone_num"><img src="/images/ico_telefone.png" /><%=@espetaculo.teatro.telefone%></p>
-                <% end %>
-              <% end %>
-            <% end %>
-        <% end %>
       </div>
       
       <div class="container g">
