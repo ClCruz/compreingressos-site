@@ -313,7 +313,7 @@ class PaginaEspeciaisController < ApplicationController
       end
     end
     
-    if @pagina_especial.url=="itaucardshows" or @pagina_especial.url=="itaucardteatro"
+    if @pagina_especial.url=="itaucardshows" or @pagina_especial.url=="itaucardteatro" or @pagina_especial.url=="itaucard"
     #if @pagina_especial.url=="itaucard"
       @m1 = []
       @m2 = []
@@ -352,10 +352,10 @@ class PaginaEspeciaisController < ApplicationController
         else
           if @pagina_especial.id==49 and params[:filtro].blank?
             format.html { render :layout => 'compreingressos', :action => 'unibescultural' }
-          elsif @pagina_especial.url=="itaucardshows" or @pagina_especial.url=="itaucardteatro"
+          elsif @pagina_especial.url=="itaucardshows" or @pagina_especial.url=="itaucardteatro" or @pagina_especial.url=="itaucard"
             format.html { render :layout => 'compreingressos', :action => 'itaucard' }
-          elsif @pagina_especial.url=="itaucard"
-            format.html { render :layout => 'compreingressos', :action => 'itaucard-selecionar-tipo' }
+          #elsif @pagina_especial.url=="itaucard"
+          #  format.html { render :layout => 'compreingressos', :action => 'itaucard-selecionar-tipo' }
           #elsif @pagina_especial.url=="itaucard"
           #  format.html { render :layout => 'compreingressos', :action => 'itaucard' }
           else

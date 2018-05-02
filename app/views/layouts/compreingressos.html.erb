@@ -107,7 +107,7 @@
     ['mark', 'firstbyte', (new Date()).getTime()]];
     (function(){ var s = document.getElementsByTagName('script')[0] , p = document.createElement('script'); p.async = 'async'; p.src = '//rum-static.pingdom.net/prum.min.js'; s.parentNode.insertBefore(p, s); })();
   </script>
-  <% if request.fullpath == "/itaucardteatro" or request.fullpath == "/itaucardshows" %>
+  <% if request.fullpath == "/itaucardteatro" or request.fullpath == "/itaucardshows" or request.fullpath == "/itaucard" %>
   <%= javascript_include_tag 'facebook.pixel.itau.js' -%>
   <% end %>
   <script type="text/javascript" src="/javascripts/cislider/cislider.js"></script>

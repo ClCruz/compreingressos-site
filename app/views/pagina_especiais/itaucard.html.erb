@@ -459,7 +459,7 @@
   }
 }
 </style>
-<% if @pagina_especial.url == 'itaucardshows' or @pagina_especial.url == 'itaucardteatro' %>
+<% if @pagina_especial.url == 'itaucardshows' or @pagina_especial.url == 'itaucardteatro' or @pagina_especial.url == 'itaucard' %>
 <div id="display">
   <div class="swiper-container">
     <div class="swiper-wrapper">
@@ -469,7 +469,7 @@
         <% else -%>
           <%= render :partial => 'layouts/visor_destaque', :collection => @pagina_especial.pagina_especial_visores %>
         <% end -%>
-      <% elsif @pagina_especial.url == 'itaucardteatro' %>
+      <% elsif @pagina_especial.url == 'itaucard' %>
         <% if @pagina_especial.blank? -%>
           <%= render :partial => 'layouts/visor_destaque', :collection => @visores %>
         <% else -%>
@@ -874,11 +874,11 @@
 <% end %>
 
 
-<% if @pagina_especial.url == 'itaucardteatro' %>
+<% if @pagina_especial.url == 'itaucard' %>
   <!--
     1Start of DoubleClick Floodlight Tag: Please do not remove
     Activity name of this tag: Itaucard_Parceiro_CompreIngressoTeatro
-    URL of the webpage where the tag is expected to be placed: http://www.compreingressos.com/itaucardteatro
+    URL of the webpage where the tag is expected to be placed: http://www.compreingressos.com/itaucard
     This tag must be placed between the <body> and </body> tags, as close as possible to the opening tag.
     Creation Date: 04/12/2016
   -->
