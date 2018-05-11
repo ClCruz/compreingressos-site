@@ -85,7 +85,7 @@ class Espetaculo < ActiveRecord::Base
   accepts_nested_attributes_for :entradas, :allow_destroy => true
   accepts_nested_attributes_for :videos, :allow_destroy => true
 
-  before_save :send_miniatura_ftp, :strip_nome_espetaculo, :update_horario_cache
+  before_save :strip_nome_espetaculo, :update_horario_cache
   after_save :destroy_original
   after_post_process :save_image_dimensions
   after_commit :reset_cache
