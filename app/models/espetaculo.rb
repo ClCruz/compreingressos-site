@@ -138,7 +138,8 @@ class Espetaculo < ActiveRecord::Base
   end
   
   def send_miniatura_ftp
-    if self.cc_id and Rails.env=="production"
+    #removido
+    if self.cc_id and Rails.env=="production" and 1==2
       begin
         require 'net/ftp'
 
