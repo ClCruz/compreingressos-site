@@ -19,7 +19,7 @@ class Pacote < ActiveRecord::Base
   
   
   before_create :definir_ordem
-  before_save :send_miniatura_ftp
+  #before_save :send_miniatura_ftp
   
   def definir_ordem
     obj = Pacote.find(:last, :conditions => {:pagina_de_pacote_id => self.pagina_de_pacote_id}, :order => :ordem)

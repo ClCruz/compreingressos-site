@@ -1,7 +1,7 @@
 [
 <% @visores.each_with_index do |v,iv| -%>
 {
-  "imagem":"http://www.compreingressos.com/images/visores/<%= v.id %>/visor_mobile.jpg",
+  "imagem":"https://www.compreingressos.com/images/visores/<%= v.id %>/visor_mobile.jpg",
   "url":"<%= (v.link.include? "http") ? "#{v.link}":"http://www.compreingressos.com#{v.link}" %>",
   "descricao":<%=v.descricao.gsub('"','“').to_json%>
 }<%= (@visores.size-1) <= iv ? '':',' %>

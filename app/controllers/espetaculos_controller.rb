@@ -152,22 +152,22 @@ class EspetaculosController < ApplicationController
   # GET /espetaculos/1
   # GET /espetaculos/1.xml
   def show
-    logger.error("1. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
+    #logger.error("1. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
 
     @espetaculo = Espetaculo.find(params[:id], :include => :horarios_disponiveis)
 
-    logger.error("2. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
+    #logger.error("2. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
 
     @title = @espetaculo.nome
     @keywords = @espetaculo.keywords
     @description = @espetaculo.description
     @pagina = flash[:pagina]
 
-    logger.error("3. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
+    #logger.error("3. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
 
     @imagem = ENVIRONMENT_VARS['host']+@espetaculo.img_miniatura.url(:miniatura)
 
-    logger.error("4. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
+    #logger.error("4. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
 
     # Conta visitas
     #sql = "UPDATE espetaculos SET visitas = visitas+1 WHERE id = #{@espetaculo.id};"
@@ -179,7 +179,7 @@ class EspetaculosController < ApplicationController
       maximo_outros_espetaculos = 6
     end
 
-    logger.error("5. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
+    #logger.error("5. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
 
     # Variavel auxiliar para evitar que os espetaculos que já foram selecionados não sejam repetidos caso tenha a necessidade de ser executada uma nova query até completar o máximo de 4
     oe_ids = @espetaculo.id.to_s
@@ -195,7 +195,7 @@ class EspetaculosController < ApplicationController
       @pacote = PaginaDePacote.find_by_url(params[:origem])
     end
     
-    logger.error("6. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
+    #logger.error("6. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
 
     # Caso o usuário tenha vindo de uma página especial
     if @pagina_especial
@@ -224,7 +224,7 @@ class EspetaculosController < ApplicationController
           @tt = @tt+368
         end
       end
-      logger.error("7. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
+      #logger.error("7. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
 
     # Caso o usuário não tenha vindo de uma página especial
     else
@@ -237,7 +237,7 @@ class EspetaculosController < ApplicationController
       @outros_espetaculos.each do |esp|                                 
         oe_ids << ",#{esp.id}"
 
-      logger.error("8. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
+      #logger.error("8. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
 
       end
                                             
@@ -257,7 +257,7 @@ class EspetaculosController < ApplicationController
           end
         end
 
-        logger.error("9. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
+        #logger.error("9. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
 
       end
       
@@ -277,7 +277,7 @@ class EspetaculosController < ApplicationController
           end
         end
 
-        logger.error("10. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
+        #logger.error("10. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
       end
       
       # Espetaculos randomicamente
@@ -292,7 +292,7 @@ class EspetaculosController < ApplicationController
             @outros_espetaculos << esp
           end
         end
-        logger.error("11. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
+        #logger.error("11. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
       end
 
     end
@@ -306,7 +306,7 @@ class EspetaculosController < ApplicationController
       a1 = @espetaculo.data_inicial.strftime('%Y')
       a2 = @espetaculo.data_maxima.strftime('%Y')
 
-      logger.error("12. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
+      #logger.error("12. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
       
       if a1!=a2
         @temporada = "#{l @espetaculo.data_inicial, :format => "%d de %B de %Y"} a #{l @espetaculo.data_maxima, :format => "%d de %B de %Y"}"
@@ -325,7 +325,7 @@ class EspetaculosController < ApplicationController
       @temporada = ''
     end
 
-    logger.error("13. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
+    #logger.error("13. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
     
     # Check if it's time to update the dates and/or allow the selling
     datetimenow = DateTime.now.in_time_zone.-3.hours
@@ -333,36 +333,36 @@ class EspetaculosController < ApplicationController
     #logger.info datetimenow
     #logger.warn "#{@espetaculo.especificar_data_inicial_de_venda} #{@espetaculo.data_inicial_de_venda} <= #{datetimenow} = #{@espetaculo.data_inicial_de_venda<=datetimenow ? 'sim':'nao'}"
     if @espetaculo.cc_id# and (Rails.env=="production" or Rails.env=="staging")
-      logger.error("13.1. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
+      #logger.error("13.1. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
       if !@espetaculo.especificar_data_inicial_de_venda and @espetaculo.horario_cache<(datetimenow-30.minutes)
-        logger.error("13.2. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
+        #logger.error("13.2. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
         updatedates
-        logger.error("13.3. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
+        #logger.error("13.3. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
         Rails.logger.level = 0 # at any time
         @espetaculo.save false
-        logger.error("13.4. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
+        #logger.error("13.4. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
         @espetaculo = Espetaculo.find_by_id(params[:id], :include => :horarios_disponiveis)
-        logger.error("13.5. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))        
+        #logger.error("13.5. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))        
       elsif @espetaculo.especificar_data_inicial_de_venda and @espetaculo.data_inicial_de_venda <= datetimenow
-        logger.error("13.6. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
+        #logger.error("13.6. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
         updatedates
-        logger.error("13.7. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
+        #logger.error("13.7. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
         @espetaculo.especificar_data_inicial_de_venda = false
-        logger.error("13.8. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
+        #logger.error("13.8. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
         @espetaculo.save false
-        logger.error("13.9. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
+        #logger.error("13.9. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
         @espetaculo = Espetaculo.find_by_id(params[:id], :include => :horarios_disponiveis)
-        logger.error("13.10. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
+        #logger.error("13.10. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
       end
     end
 
-    logger.error("14. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
+    #logger.error("14. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
 
     @criteo_script_tag = criteo_product_script()
     #logger.warn "############ \n\n\n\n\n\n"
     #logger.info @espetaculo.pagina_especiais.map { |d| d.nome}
 
-    logger.error("15. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
+    #logger.error("15. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
     
     respond_to do |format|
       if @espetaculo.especial
@@ -372,7 +372,7 @@ class EspetaculosController < ApplicationController
       end
     end
 
-    logger.error("16. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
+    #logger.error("16. - " + DateTime.now.in_time_zone('Brasilia').strftime("Printed on %m/%d/%Y at %H:%M:%S"))
   end
   
   # GET /espetaculos/new
@@ -406,7 +406,7 @@ class EspetaculosController < ApplicationController
       if @espetaculo.save
         updatedates
 
-        @espetaculo.send_miniatura_ftp
+        #@espetaculo.send_miniatura_ftp
 
         flash[:notice] = 'Espetaculo was successfully created.'
         format.html { redirect_to("/espetaculos/datas?id=#{@espetaculo.id}") }
@@ -428,7 +428,7 @@ class EspetaculosController < ApplicationController
       if @espetaculo.update_attributes(params[:espetaculo])
         updatedates
 
-        @espetaculo.send_miniatura_ftp
+        #@espetaculo.send_miniatura_ftp
 
         flash[:notice] = 'Espetaculo was successfully updated.'
         format.html { redirect_to(@espetaculo) }
