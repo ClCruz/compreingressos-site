@@ -17,7 +17,7 @@
                 <% i = 1 %>
                 <% home_modulo.home_modulo_espetaculos.each do |me| %>
                   <% if (i <= home_modulo.exibir) and (me.espetaculo.ativo == true) and (me.espetaculo.data_maxima > DateTime.now) %>
-                    <div class="card">
+                    <div class="card cardextended">
                       <a href="<%=url_for me.espetaculo%><%=!@completaurl.nil? ? '?'+@completaurl : ''%><%=!me.espetaculo.origem.blank? ? '?origem='+me.espetaculo.origem : ''%>">
                         <% image = me.espetaculo.img_miniatura.url(:miniatura) %>
                         <%= image_tag image, :height => me.espetaculo.img_miniatura_height %>
@@ -32,7 +32,7 @@
                           <p class="genero"><%=me.espetaculo.genero.nome%></p>
                         <% end %>
                         <% dataatual = DateTime.now.in_time_zone.-3.hours %>
-                        <div class="over">
+                        <div class="over overextended">
                           <% if me.espetaculo.proximo_horario %>
                             <% logger.info "\n" + me.espetaculo.data_inicial_de_venda.to_s %>
                             <p class="linha1">Próxima apresentação</p>
@@ -121,7 +121,7 @@ $(document).ready(function($){
 <% if Dir.glob("#{RAILS_ROOT}/public/images/home_bg/*").first -%>
 <style>
   div.background_personalizado{
-    background:transparent url('/images/home_bg/bg<%= File.extname(Dir.glob("#{RAILS_ROOT}/public/images/home_bg/*").first) %>') center top no-repeat;
+    background:transparent url('/images/home_bg/bg<%= File.extname(Dir.glob("#{RAILS_ROOT}/public/images/home_bg/*").first) %>') center top repeat;
     background-color:<%= HomeBackground.find(1).bgcolor %>;
   }
   div.modulo h1, div.modulo div.separador{

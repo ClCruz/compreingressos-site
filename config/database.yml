@@ -26,7 +26,7 @@ production:
   password: SNq3mhh5Tyb59J
   pool: 100
   timeout: 50000
-  host: 186.202.34.138
+  host: localhost
 
 staging:
   adapter: mysql

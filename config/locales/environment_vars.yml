@@ -37,7 +37,7 @@ test:
 production:
   host: 'http://www.compreingressos.com'
   host_compra: 'https://compra.compreingressos.com'
-  host_json: 'http://10.0.37.2'
+  host_json: 'https://compra.compreingressos.com'
   ftp_compra_host1: '10.0.37.2'
   ftp_compra_port1: '21'
   ftp_compra_username1: 'ftpupld'

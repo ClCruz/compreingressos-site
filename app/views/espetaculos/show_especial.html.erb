@@ -351,24 +351,6 @@
         });
       }
   	</script>
-    <% if !@noheaderfooter %>
-    <div class="midias_sociais">
-      <div class="addthis_toolbox addthis_default_style">
-        <a class="addthis_button_facebook"></a>
-        <a class="addthis_button_twitter"></a>
-        <a class="addthis_button_email"></a>
-      </div>
-      <script type="text/javascript">var addthis_config = {ui_language:"pt"}</script>
-      <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=xa-4c8561805a96e24d"></script>
-    </div>
-    <script type="text/javascript">
-      <% if pagina_selecionada?(@espetaculo, @espetaculo.pagina_especiais.find(:first, :conditions => {:id => 1})) -%>
-        midiasSociais(70);
-      <% else -%>
-        midiasSociais(20);
-      <% end -%>
-    </script>
-    <% end %>
   </div>
 </div>
 <% if @espetaculo.id == 4043 %><img height="1" width="1" style="border-style:none;" alt="" src="http://googleads.g.doubleclick.net/pagead/viewthroughconversion/936059195/?value=0&amp;guid=ON&amp;script=0"/><% end %>

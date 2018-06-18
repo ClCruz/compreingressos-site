@@ -35,7 +35,7 @@ test:
 production:
   host: 'http://www.compreingressos.com'
   host_compra: 'https://compra.compreingressos.com'
-  host_json: 'https://179.124.45.101'
+  host_json: 'https://compra.compreingressos.com'
 #  host_json: 'https://192.168.13.2' IP interno C&C server
 #  ftp_compra_host1: '192.168.13.2' IP interno C&C server
 #  ftp_compra_port1: '221'

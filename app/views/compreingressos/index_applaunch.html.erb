@@ -1,7 +1,7 @@
 <% cache("home") do -%>
 <style>
 div.background_personalizado {
-    background: url("/images/home_bg/bg_mobile_test.jpg") no-repeat scroll center top #540202 !important;
+    background: url("/images/home_bg/bg_mobile_test.jpg") repeat scroll center top #540202 !important;
 }
 </style>
 <% if !session[:desktop] or session[:desktop]==0 -%>
@@ -176,7 +176,7 @@ $(document).ready(function($){
 <% if Dir.glob("#{RAILS_ROOT}/public/images/home_bg/*").first -%>
 <style>
   div.background_personalizado{
-    background:transparent url('/images/home_bg/bg<%= File.extname(Dir.glob("#{RAILS_ROOT}/public/images/home_bg/*").first) %>') center top no-repeat;
+    background:transparent url('/images/home_bg/bg<%= File.extname(Dir.glob("#{RAILS_ROOT}/public/images/home_bg/*").first) %>') center top repeat;
     background-color:<%= HomeBackground.find(1).bgcolor %>;
   }
   div.modulo h1, div.modulo div.separador{
