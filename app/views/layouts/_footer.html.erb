@@ -11,7 +11,7 @@ ttChatLoaderS.src = 'https://compreingressos.tomticket.com/scripts-chat/chat.min
 + '&d=compreingressos'
 + '&ts=' + new Date().getTime()
 + '&ref=' + encodeURIComponent(document.URL);
-document.body.appendChild(ttChatLoaderS);
+ //document.body.appendChild(ttChatLoaderS);
 //]]>
 </script>
 <% if !@noheaderfooter %>
@@ -38,7 +38,7 @@ document.body.appendChild(ttChatLoaderS);
         <li><a href="/faqs">Perguntas frequentes</a></li>
         <li><a href="/politica">Política de venda</a></li>
         <li><a href="/privacidade">Privacidade</a></li>
-        <li><a href="/meiaentrada" rel="publisher" target="_blank">Política de Meia Entrada</a></li>
+        <li><a href="/meia_entrada" rel="publisher" target="_blank">Política de Meia Entrada</a></li>
         <li><a href="/pontosdevenda" rel="publisher">Pontos de Venda</a></li>
         <li><a href="/politicacancelamento" rel="publisher">Política de Cancelamento</a></li>
         <li><a class="minha_conta_mobile" href="<%=ENVIRONMENT_VARS['host_compra']%>/comprar/minha_conta.php">Minha conta</a>
