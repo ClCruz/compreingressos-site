@@ -1,4 +1,6 @@
 class Espetaculo < ActiveRecord::Base
+  include MultiHelper
+
   KEY_FACEBOOK_APP = "5092c5225f46a69e6519315850882ebe"
   KEY_TOKECOMPRE_APP = "8435D5115e46a70i6648715850882eus"
   KEY_PAINEIS_TEATROS = "b12fa2e6c650eafe870209e7eadb13f2"
@@ -60,12 +62,18 @@ class Espetaculo < ActiveRecord::Base
 
   validates_attachment_content_type :img_miniatura, :content_type => ["image/x-png", "image/pjpeg", "image/jpg", "image/jpeg", "image/png", "image/gif"], :message => "deve estar em algum dos seguintes formatos: JPG, GIF ou PNG"
   validates_attachment_presence :img_miniatura, :message => "precisa ser enviada"
+  #has_attached_file :img_miniatura,
+  #                  :styles => {:miniatura => {:geometry => '160', :format => 'jpg'}, :miniatura2x => {:geometry => '320', :format => 'jpg'}},
+  #                  :path => ":rails_root/public/images/espetaculos/:id/:style.:extension",
+  #                  :url => "/images/espetaculos/:id/:style.:extension",
+  #                  :default_url => "/images/espetaculos/padrao/miniatura.jpg"
+  
   has_attached_file :img_miniatura,
-                    :styles => {:miniatura => {:geometry => '160', :format => 'jpg'}, :miniatura2x => {:geometry => '320', :format => 'jpg'}},
+                    :styles => {:miniatura => {:geometry => MultiHelper.SizeOfMiniature, :format => 'jpg'}, :miniatura2x => {:geometry => '320', :format => 'jpg'}},
                     :path => ":rails_root/public/images/espetaculos/:id/:style.:extension",
                     :url => "/images/espetaculos/:id/:style.:extension",
                     :default_url => "/images/espetaculos/padrao/miniatura.jpg"
-                    
+                 
   validates_attachment_content_type :fundo, :content_type => ["image/x-png", "image/pjpeg", "image/jpg", "image/jpeg", "image/png", "image/gif"], :message => "deve estar em algum dos seguintes formatos: JPG, GIF ou PNG", :if => :especial?
   #validates_attachment_size :fundo, :less_than => 600.kilobytes, :message => "o tamanho da imagem excede o máximo de 600kb"
   has_attached_file :fundo,

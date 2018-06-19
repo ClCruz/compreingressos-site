@@ -1,6 +1,7 @@
 require 'digest'
 
 class EspetaculosController < ApplicationController
+  include MultiHelper
   before_filter :authorize, :except => [:index, :busca, :show, :home, :nobuilder, :paineis, :feed_espetaculos]
   newrelic_ignore :except => [:index, :busca, :show, :home, :nobuilder, :paineis]
   layout 'compreingressos_antigo'

@@ -41,7 +41,8 @@ class Imagem < ActiveRecord::Base
     case tipo
       when 'thumb'
         filename = "#{RAILS_ROOT}/public/cache/#{id}_thumb.jpg"
-        size = "80x120"
+        #size = "80x120"
+        size = "320x120" #mudar aqui
       when 'visor'
         filename = "#{RAILS_ROOT}/public/cache/#{id}_visor.jpg"
         size = "940x180"
@@ -53,6 +54,7 @@ class Imagem < ActiveRecord::Base
         size = "220x140"
     end
    
+    
     if (!File.exists?(filename) || File.new(filename).mtime <= File.new("#{RAILS_ROOT}/public/cache/#{id}.jpg").mtime)
       image = MiniMagick::Image.from_file("#{RAILS_ROOT}/public/cache/#{id}.jpg")
       image.resize(size)
