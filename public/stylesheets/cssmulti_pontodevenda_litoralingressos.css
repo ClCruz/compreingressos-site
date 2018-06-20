@@ -1,0 +1,103 @@
+#pai #background_holder{
+    background-color: #002a7c !important;
+    background-image: none !important;
+  }
+  #pai #background_holder #espetaculo{
+    color: #FFF;
+    margin-bottom: 50px;
+  }
+  #pai #background_holder #espetaculo table{
+    width: 100%;
+    border-spacing: 0px;
+    font-size: 12px;
+  }
+  #pai #background_holder #espetaculo table thead th{
+    text-transform: uppercase;
+    text-align: left;
+  }
+  #pai #background_holder #espetaculo table .center{
+    text-align: center;
+  }
+  #pai #background_holder #espetaculo table .medium{
+    width: 200px;
+  }
+  #pai #background_holder #espetaculo table thead tr{
+    line-height: 50px;
+  }
+  #pai #background_holder #espetaculo table tbody tr{
+    line-height: 20px;
+  }
+  #pai #background_holder #espetaculo table tbody tr:nth-child(odd){
+    background-color: #02143a;
+  }
+  #pai #background_holder #espetaculo span{
+    text-transform: uppercase;
+    color: #FFF;
+    margin-top: 10px;
+    font-size: 10px;
+  }
+  #background_holder #espetaculo #ficha_tecnica{
+    margin-top: 0px;
+    margin-bottom: 10px;
+  }
+  #background_holder #detalhes_busca{
+    background-color: #02143a;
+    margin-top: 0px;
+    padding: 6px 10px;
+    width: 940px;
+  }
+  #background_holder #detalhes_busca .detalhes{
+    width: 427px;
+    float: left;
+    height: 80px;
+  }
+  #background_holder #detalhes_busca .detalhes p.nome{
+    font-size: 32px;
+    font-weight: 300;
+    line-height: 32px;
+    margin: 10px 0px;
+    color: #FFFFFF;
+  }
+  #background_holder #detalhes_busca .detalhes p.total{
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0;
+    color: #FFFFFF;
+  }
+  #background_holder #detalhes_busca .filtros{
+    width: 454px;
+    float: right;
+    height: 80px;
+  }
+  #background_holder #detalhes_busca div#busca div.container.buscar{
+    width: 420px;
+    margin-top: 15px;
+    float: right;
+  }
+  #background_holder #detalhes_busca div#busca div.container.buscar select {
+    width: 120px;
+    margin-right: 15px;
+    float: left;
+  }
+  #background_holder #detalhes_busca div#busca div.container.buscar input {
+    width: 185px;
+  }
+  #background_holder #detalhes_busca div#busca div.container.buscar input[type="submit"] {
+    width: 70px;
+  }
+
+  @media(max-width: 768px) {
+    #pai #background_holder #espetaculo table thead tr{
+      line-height: 20px;
+    }
+    #background_holder #detalhes_busca .filtros{
+      display: none;
+    }
+    #background_holder #espetaculo #ficha_tecnica{
+      margin-left: 0.5em;
+      margin-right: 0.5em;
+    }
+    .center-mobile{
+      text-align: center;
+    }
+  }

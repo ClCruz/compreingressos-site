@@ -1,4 +1,10 @@
-/public
+/public/images/espetaculos/
+/public/images/visores/
+/public/images/teatros/
+/public/images/publicidades/
+/public/images/pagina_especial_banner/
+/public/images/pagina_especial_visores/
+/public/images/paginas_especiais/
 /log/newrelic_agent.log
 /log/development.log
 .vagrant

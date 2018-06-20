@@ -6,6 +6,7 @@ class EspetaculosController < ApplicationController
   newrelic_ignore :except => [:index, :busca, :show, :home, :nobuilder, :paineis]
   layout 'compreingressos_antigo'
   
+  
   # GET /espetaculos
   # GET /espetaculos.xml
   def admin_index
