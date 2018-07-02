@@ -56,7 +56,7 @@
   <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
   <meta name="description" content="<%=@description%>"/>
   <meta name="keywords" content="<%=@keywords%>"/>
-  <link href="/favicon.ico" rel="shortcut icon"/>
+  <link href="<%=MultiHelper.getFavico%>" rel="shortcut icon"/>
 
   <!-- manifest file
       https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/ -->
@@ -83,11 +83,11 @@
     var mobileversion = 0;
   </script>
   <% end -%>
-  <meta property="og:title" content="<%= @title.blank? ? "COMPREINGRESSOS.COM - Gestão de bilheteria e venda de ingressos para teatros e casas de show" : @title %>"/>
+  <meta property="og:title" content="<%= @title.blank? ? MultiHelper.getTitulo : @title %>"/>
   <meta property="og:locale" content="pt_BR" />
   <meta property="og:site_name" content="COMPREINGRESSOS.COM"/>
   <%= "<meta property='og:image' content='#{@imagem}'/>" if @imagem %>
-  <title><%= @title.blank? ? "COMPREINGRESSOS.COM - Gestão de bilheteria e venda de ingressos para teatros e casas de show" : @title+" - COMPREINGRESSOS.COM"%></title>
+  <title><%= @title.blank? ? MultiHelper.getTitulo : @title+MultiHelper.getName%></title>
   <%= javascript_include_tag 'jquery-1.11.3.min.js', 'idangerous_swiper_min.js', 'jquery-ui.1.10.3.min.js', 'jquery.mobile.custom.min.js', 'jquery.touch-punch.min', 'jquery.shapeshift.min.js', 'masonry.pkgd.min.js', 'faro.js', 'modernizr.custom.97074.js', 'jquery.hoverdir.js', 'jquery-easing-1.3.js', 'jquery-transit-modified.js', 'jquery.galleriffic.js' -%>
   <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
   <%= javascript_include_tag 'application.js' %>
@@ -293,42 +293,54 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="fim">
           <div class="div_header">
             <ul class="midias_sociais">
+              <%if MultiHelper.getFacebook != ''%>
               <li class="midia">
-                <a href="http://www.facebook.com/compreingressos" target="_blank" class="facebook"></a>
+                <a href="<%=MultiHelper.getFacebook%>" target="_blank" class="facebook"></a>
                 <div class="icone">
                   <span class="icon socicon-facebook" A style="cursor:pointer"> </span>
                 </div>
               </li>
+              <%end%>
+              <%if MultiHelper.getTwitter != ''%>
               <li class="midia">
-                <a href="http://twitter.com/compreingressos" target="_blank" class="twitter"></a>
+                <a href="<%=MultiHelper.getTwitter%>" target="_blank" class="twitter"></a>
                 <div class="icone">
                   <span class="icon socicon-twitter" A style="cursor:pointer"> </span>
                 </div>
               </li>
+              <%end%>
+              <%if MultiHelper.getBlog != ''%>
               <li class="midia">
-                <a href="http://blog.compreingressos.com/" target="_blank" class="wordpress"></a>
+                <a href="<%=MultiHelper.getBlog%>" target="_blank" class="wordpress"></a>
                 <div class="icone">
                   <span class="icon socicon-wordpress" A style="cursor:pointer"> </span>
                 </div>
               </li>
+              <%end%>
+              <%if MultiHelper.getInstagram != ''%>
               <li class="midia">
-                <a href="https://www.instagram.com/compreingressos" target="_blank" class="instagram"></a>
+                <a href="<%=MultiHelper.getInstagram%>" target="_blank" class="instagram"></a>
                 <div class="icone">
                   <span class="icon socicon-instagram" A style="cursor:pointer"> </span>
                 </div>
               </li>
+              <%end%>
+              <%if MultiHelper.getYoutube != ''%>
               <li class="midia">
-                <a href="https://www.youtube.com/compreingressos" target="_blank" class="youtube"></a>
+                <a href="<%=MultiHelper.getYoutube%>" target="_blank" class="youtube"></a>
                 <div class="icone">
                   <span class="icon socicon-youtube" A style="cursor:pointer"> </span>
                 </div>
               </li>
+              <%end%>
+              <%if MultiHelper.getGooglePlus != ''%>
               <li class="midia">
-                <a href="https://plus.google.com/b/107039038797259256027/107039038797259256027" target="_blank" class="google"></a>
+                <a href="<%=MultiHelper.getGooglePlus%>" target="_blank" class="google"></a>
                 <div class="icone">
                   <span class="icon socicon-googleplus" A style="cursor:pointer"> </span>
                 </div>
               </li>
+              <%end%>
             </ul>
           </div>
 

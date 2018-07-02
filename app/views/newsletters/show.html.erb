@@ -34,8 +34,12 @@
 											</table>
 										</td>
 										<td>
-											<a href="http://twitter.com/compreingressos" target="_blank" style="margin-left:8px"><img src="/images/ico_twitter_newsletter.jpg" width="30" height="30" alt="Twitter" title="Twitter" style="vertical-align:bottom;border:0" /></a>
-											<a href="http://www.facebook.com/compreingressos" target="_blank" style="margin-left:5px"><img src="/images/ico_facebook_newsletter.jpg" width="30" height="30" alt="Facebook" title="Facebook" style="vertical-align:bottom;border:0" /></a>
+											<%if MultiHelper.getTwitter != ''%>	
+											<a href="<%=MultiHelper.getTwitter%>" target="_blank" style="margin-left:8px"><img src="/images/ico_twitter_newsletter.jpg" width="30" height="30" alt="Twitter" title="Twitter" style="vertical-align:bottom;border:0" /></a>
+											<%end%>
+											<%if MultiHelper.getFacebook != ''%>
+											<a href="<%=MultiHelper.getFacebook%>" target="_blank" style="margin-left:5px"><img src="/images/ico_facebook_newsletter.jpg" width="30" height="30" alt="Facebook" title="Facebook" style="vertical-align:bottom;border:0" /></a>
+											<%end%>
 										</td>
 									</tr>
 								</table>
