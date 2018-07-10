@@ -64,6 +64,10 @@ module MultiHelper
     def getHasMidiaSocial
         getFacebook != '' && getTwitter != ''
     end
+    def getURICadastro
+        #'https://compra.compreingressos.com/comprar/minha_conta.php' #compreingressos
+        'https://compra.ingressoslitoral.com/comprar/minha_conta.php' #ingressoslitoral
+    end
     
     #module_function :SizeOfMiniature :getLogo
 end

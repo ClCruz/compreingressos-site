@@ -307,3 +307,23 @@ div#background_holder div.cidade_especial div#detalhes_busca div.ordem a {
     height: 262px;
 }
 
+div#iframe a.botao.saiba_mais, div.over a.botao.saiba_mais {
+    width: 150px;
+    height: 52px;
+    margin: 110px;
+    text-indent: -20000px;
+    background: url(../images/multi_litoralingressos/btn_saibamais.png) no-repeat;
+}
+div#iframe a.botao.saiba_mais:hover, div.over a.botao.saiba_mais:hover {
+    width: 150px;
+    height: 52px;
+    margin: 110px;
+    text-indent: -20000px;
+    background: url(../images/multi_litoralingressos/btn_saibamais_hover.png) no-repeat;
+}
+div.espetaculo_em_cartaz div.container_infos div.botao.saiba_mais a {
+    background: url(../images/multi_litoralingressos/btn_saibamais.png) no-repeat;
+}
+div.espetaculo_em_cartaz div.container_infos div.botao.saiba_mais a:hover {
+    background: url(../images/multi_litoralingressos/btn_saibamais_hover.png) no-repeat;
+}
