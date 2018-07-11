@@ -2,7 +2,7 @@
 <% blank = card_sem_auxiliar.blank_de_link_do_redirecionamento ? " target='_blank'" : "" -%>
 <% image = card_sem_auxiliar.img_miniatura.url(:miniatura) %>
 <!--MUDAR AQUI cardextended-->
-<div class="card cardextended">
+<div class="card <%if MultiHelper.getSite == "ingressoslitoral"%>cardextended<%end%>">
   <a href="<%=link %>"<%= blank %>>
     <img src="<%=image %>" height="<%= card_sem_auxiliar.img_miniatura_height %>">
     <h3><%=card_sem_auxiliar.nome%></h3>
@@ -11,7 +11,7 @@
   	<p class="cidade"><%=(!card_sem_auxiliar.cidade.nil?) ? card_sem_auxiliar.cidade.nome : "" %> - <%=(!card_sem_auxiliar.cidade.nil?) ? card_sem_auxiliar.cidade.estado : ""%></p>
   	<p class="genero"><%= card_sem_auxiliar.genero.nome unless card_sem_auxiliar.genero.nil? %></p>
   <!--MUDAR AQUI overextended-->
-  <div class="over overextended">
+  <div class="over <%if MultiHelper.getSite == "ingressoslitoral"%>overextended<%end%>">
     <% if card_sem_auxiliar.proximo_horario -%>
       <p class="linha1">Próxima apresentação</p>
       <p class="linha2"><%= card_sem_auxiliar.proximo_horario.data==Date.today ? 'Hoje':l(card_sem_auxiliar.proximo_horario.data, :format => :weekday)%></p>

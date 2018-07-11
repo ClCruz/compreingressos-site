@@ -18,7 +18,7 @@
                 <% home_modulo.home_modulo_espetaculos.each do |me| %>
                   <% if (i <= home_modulo.exibir) and (me.espetaculo.ativo == true) and (me.espetaculo.data_maxima > DateTime.now) %>
                     <!--MUDAR AQUI cardextended-->
-                    <div class="card cardextended">
+                    <div class="card <%if MultiHelper.getSite == "ingressoslitoral"%>cardextended<%end%>">
                       <a href="<%=url_for me.espetaculo%><%=!@completaurl.nil? ? '?'+@completaurl : ''%><%=!me.espetaculo.origem.blank? ? '?origem='+me.espetaculo.origem : ''%>">
                         <% image = me.espetaculo.img_miniatura.url(:miniatura) %>
                         <%= image_tag image, :height => me.espetaculo.img_miniatura_height %>
@@ -34,7 +34,7 @@
                         <% end %>
                         <% dataatual = DateTime.now.in_time_zone.-3.hours %>
                         <!--MUDAR AQUI overextended-->
-                        <div class="over overextended">
+                        <div class="over <%if MultiHelper.getSite == "ingressoslitoral"%>overextended<%end%>">
                           <% if me.espetaculo.proximo_horario %>
                             <% logger.info "\n" + me.espetaculo.data_inicial_de_venda.to_s %>
                             <p class="linha1">Próxima apresentação</p>
