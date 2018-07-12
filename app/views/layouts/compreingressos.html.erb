@@ -400,10 +400,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div> <!-- fecha novo_menu -->
 <div style="clear: both;"></div>
 <% if session[:app].blank? -%>
+<% if MultiHelper.getSite == "compreingressos" %>
 <div class="baixe_app">
   <div class="baixe_app_close">X</div>
   <div class="baixe_app_close navegar"></div>
 </div>
+<%end%>
 <% end -%>
 
 <% if request.fullpath == '/' -%>
