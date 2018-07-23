@@ -262,7 +262,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <li><a target="_blank" href="<%=MultiHelper.getURICadastro%>">Cadastro/Login</a></li>
               <li><%= link_to "Todos os eventos", espetaculos_path, :target => "_blank" %></li>
               <li><%= link_to "Espaços", teatros_path, :target => "_blank" %></li>
-              <li><a href="#" onclick="showNewsLetter()">Fique por dentro</a></li>
+              <%if MultiHelper.getSite() == "compreingressos"%><li><a href="#" onclick="showNewsLetter()">Fique por dentro</a></li><%end%>
               <li><a target="_blank" href="/ofertas">OFERTAS</a></li>
             </ul>
           </div>
@@ -411,7 +411,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <% if request.fullpath == '/' -%>
 <script>
   $(document).ready(function () {
-    CISlider
+    try { CISlider
     (
       'mainSlider',
       {
@@ -421,8 +421,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         height: 368,
       }
       );
+    } catch (e) { }
 
-    CISlider
+    try { CISlider
     (
       'sSlider',
       {
@@ -431,6 +432,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         height: 371
       }
       );
+      } catch (e) { }
 
   });
 </script>

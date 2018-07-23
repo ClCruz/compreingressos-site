@@ -327,3 +327,13 @@ div.espetaculo_em_cartaz div.container_infos div.botao.saiba_mais a {
 div.espetaculo_em_cartaz div.container_infos div.botao.saiba_mais a:hover {
     background: url(../images/multi_litoralingressos/btn_saibamais_hover.png) no-repeat;
 }
+@media only screen and (max-width:640px) {
+    div#novo_menu .fim {
+        padding-left: 15px;
+        width: 30%;
+        height: 57px !important;
+    }
+    body {
+        overflow: auto !important;
+    }
+}
