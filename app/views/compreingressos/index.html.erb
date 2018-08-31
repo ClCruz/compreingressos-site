@@ -16,7 +16,7 @@
               <div class="espetaculos masonry js-masonry" data-masonry-options='{ "columnWidth":1 }'>
                 <% i = 1 %>
                 <% home_modulo.home_modulo_espetaculos.each do |me| %>
-                  <% if (i <= home_modulo.exibir) and (me.espetaculo.ativo == true) and (me.espetaculo.data_maxima > DateTime.now) %>
+                  <% if (i <= home_modulo.exibir) and (me.espetaculo.ativo == true) and (me.espetaculo.data_maxima > Date.today) %>
                     <!--MUDAR AQUI cardextended-->
                     <div class="card <%if MultiHelper.getSite == "ingressoslitoral"%>cardextended<%end%>">
                       <a href="<%=url_for me.espetaculo%><%=!@completaurl.nil? ? '?'+@completaurl : ''%><%=!me.espetaculo.origem.blank? ? '?origem='+me.espetaculo.origem : ''%>">

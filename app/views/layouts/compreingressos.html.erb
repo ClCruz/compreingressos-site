@@ -411,7 +411,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <% if request.fullpath == '/' -%>
 <script>
   $(document).ready(function () {
-    try { CISlider
+    CISlider
     (
       'mainSlider',
       {
@@ -421,9 +421,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         height: 368,
       }
       );
-    } catch (e) { }
+    
 
-    try { CISlider
+    CISlider
     (
       'sSlider',
       {
@@ -432,7 +432,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         height: 371
       }
       );
-      } catch (e) { }
+      
 
   });
 </script>

@@ -22,11 +22,11 @@ production:
   adapter: mysql
   encoding: utf8
   database: compreingressos_production
-  username: compreingressos
+  username: php
   password: SNq3mhh5Tyb59J
   pool: 100
   timeout: 50000
-  host: localhost
+  host: 192.168.81.15,4003
 
 staging:
   adapter: mysql

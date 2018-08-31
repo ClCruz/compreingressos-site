@@ -43,7 +43,7 @@ function CISliderMain(elementStrID, newOpts)
         slideTo: 'left', //Sentido que o slider irá rodar string[left, right] "falta programar orientação vertical(top, bottom)"
 
         //Todo - transition - deixadoa epnas os default during[roll] e onEnd[continuous]
-        transition: { during: 'roll', onEnd: 'continuous' }, //Forma de transição de um para outro banner | during[roll, static], onEnd[continuous, rollBack, static]
+        transition: { during: 'static', onEnd: 'continuous' }, //Forma de transição de um para outro banner | during[roll, static], onEnd[continuous, rollBack, static]
         
         auto: true, //automatico? [boolean]
         hasNavigate: true, //botões de navegação? [boolean]
@@ -104,7 +104,7 @@ function CISliderMain(elementStrID, newOpts)
 
                     if (E.options.slideTo == 'right') 
                     {
-                        E.ul.style.right = E.initialPosition + 'px';
+                        E.ul.style.right = (E.initialPosition) + 'px';
                     }
                     else
                     {
@@ -328,7 +328,7 @@ function CISliderMain(elementStrID, newOpts)
         if (E.options.slideTo == 'right') 
         {
             E.initialPosition = (E.fullWidth - E.lis[0].clientWidth);
-            E.ul.style.right = E.initialPosition + 'px';
+            E.ul.style.right = (E.initialPosition) + 'px';
         }
         else if( E.options.slideTo == 'left' )
         {
@@ -397,6 +397,9 @@ function CISliderMain(elementStrID, newOpts)
         {
             if (E.nextPos == 0) { pixelsNextPos = E.initialPosition; }
             else { pixelsNextPos = (E.initialPosition - (E.width * E.nextPos) ); }
+            if (E.width == 973) {
+                pixelsNextPos=pixelsNextPos-55;
+            }
         }
 
         options[E.options.slideTo] = pixelsNextPos;
@@ -434,9 +437,9 @@ function CISliderMain(elementStrID, newOpts)
 
                 var pixelsNextPos = ( $(E.lis[0]).outerWidth() * -1 );
                 
-                $(E.ul).animate({ right: (pixelsNextPos) }, E.options.transitionTime, function(){
+                $(E.ul).animate({ right: ((pixelsNextPos)) }, E.options.transitionTime, function(){
 
-                    E.ul.style.right = E.initialPosition+'px';
+                    E.ul.style.right = (E.initialPosition)+'px';
                     cloned.parentNode.removeChild(cloned);
                 });
             }
@@ -578,7 +581,7 @@ function CISliderMain(elementStrID, newOpts)
 
         /* Cfg CSS botão ativo */
         E.curNavBtn = E.navBox.getElementsByTagName('div')[0];
-        E.curNavBtn.setAttribute('data-activenav','active');
+        //E.curNavBtn.setAttribute('data-activenav','active');
     };
 
     E.setDefaultOptions = function (initial, news)
