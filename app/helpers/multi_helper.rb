@@ -1,7 +1,8 @@
 module MultiHelper
     module_function
     #@@site = "compreingressos"
-    @@site = "ingressoslitoral"
+    #@@site = "ingressoslitoral"
+    @@site = "CIAdeingressos"
 
     def getSite
         @@site
@@ -12,6 +13,8 @@ module MultiHelper
             '160'
         when 'ingressoslitoral'
             '320'
+        when 'CIAdeingressos'
+            '320'
         end
     end
     def getLogo
@@ -20,6 +23,8 @@ module MultiHelper
             '../images/menu_logo.png'
         when 'ingressoslitoral'
             '../images/multi_litoralingressos/logo_header.png'
+        when 'CIAdeingressos'
+            '../images/multi_ciadeingressos/logo_header.jpg'
         end
     end
     def getFavico
@@ -28,6 +33,8 @@ module MultiHelper
             '/favicon.ico'
         when 'ingressoslitoral'
             '/images/multi_litoralingressos/favicon.ico'
+        when 'CIAdeingressos'
+            '/images/multi_ciadeingressos/favicon.ico'
         end
     end
     def getTitulo
@@ -36,6 +43,8 @@ module MultiHelper
             'COMPREINGRESSOS.COM - Gestão de bilheteria e venda de ingressos para teatros e casas de show'
         when 'ingressoslitoral'
             'INGRESSOSLITORAL.COM - Venda de ingressos para teatros e casas de show'
+        when 'CIAdeingressos'
+            'CIADEINGRESSOS.COM - Venda de ingressos para teatros e casas de show'
         end
     end
     def getName
@@ -44,6 +53,8 @@ module MultiHelper
             'COMPREINGRESSOS.COM'
         when 'ingressoslitoral'
             'INGRESSOSLITORAL.COM'
+        when 'CIAdeingressos'
+            'CIADEINGRESSOS.COM'
         end
     end
     def getFacebook
@@ -111,6 +122,8 @@ module MultiHelper
             'https://compra.compreingressos.com/comprar/minha_conta.php'
         when 'ingressoslitoral'
             'https://compra.ingressoslitoral.com/comprar/minha_conta.php'
+        when 'CIAdeingressos'
+            'https://compra.ciadeingressos.com/comprar/minha_conta.php'
         end
     end
     def borderoWebURI
@@ -119,6 +132,8 @@ module MultiHelper
             'https://compra.compreingressos.com/comprar/loginBordero.php?redirect=..%2Fadmin%2F%3Fp%3DrelatorioBordero'
         when 'ingressoslitoral'
             'https://compra.ingressoslitoral.com/comprar/loginBordero.php?redirect=..%2Fadmin%2F%3Fp%3DrelatorioBordero'
+        when 'CIAdeingressos'
+            'https://compra.ciadeingressos.com/comprar/loginBordero.php?redirect=..%2Fadmin%2F%3Fp%3DrelatorioBordero'
         end
     end
     def meiaEntradaURI
@@ -126,6 +141,8 @@ module MultiHelper
         when 'compreingressos'
             '/meia_entrada'
         when 'ingressoslitoral'
+            '/meia-entrada-por-regiao'
+        when 'CIAdeingressos'
             '/meia-entrada-por-regiao'
         end
     end
@@ -135,6 +152,49 @@ module MultiHelper
         when 'compreingressos'
             true
         when 'ingressoslitoral'
+            case nome
+            when 'SERVIÇOS'
+                true
+            when 'Captação de patrocínio'
+                false
+            when 'Catracas online e offline'
+                false
+            when 'Central de vendas'
+                false
+            when 'Credenciamento'
+                true
+            when 'Gestão de bilheteria'
+                true
+            when 'Ingressos'
+                true
+            when 'Vendas para grupos'
+                false
+            when 'Vendas pela internet'
+                true
+            when 'Vantagens do sistema'
+                true
+            when 'AJUDA'
+                true
+            when 'Borderô web'
+                true
+            when 'Institucional'
+                false
+            when 'Lei 6103/11'
+                true
+            when 'Perguntas frequentes'
+                false
+            when 'Política de venda'
+                false
+            when 'Privacidade'
+                false
+            when 'Política de Meia Entrada'
+                true
+            when 'Pontos de Venda'
+                false
+            when 'Política de Cancelamento'
+                true
+            end
+        when 'CIAdeingressos'
             case nome
             when 'SERVIÇOS'
                 true

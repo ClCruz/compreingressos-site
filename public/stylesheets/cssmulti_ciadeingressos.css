@@ -1,0 +1,345 @@
+/* clara: #19336e */
+/* escura: #02143a */
+div#novo_menu {
+    background: #19336e !important;
+}
+div#novo_menu .itens {
+    background: #19336e !important;
+}
+div#novo_menu a {
+    color: #FFF;
+}
+div#buscaCidade a {
+    color: #19336e;
+}
+div#buscaCidade a:hover {
+    color: #FFF;
+    background: #19336e;
+}
+div#buscaGenero a {
+    color: #19336e;
+}
+div#buscaGenero a:hover {
+    color: #FFF;
+    background: #19336e;
+}
+
+div#novo_menu .meio ul.opcoes li a:hover{ color: #02143a !important; }
+div#novo_menu .meio .bottom > div:hover *:before { color: #02143a !important; }
+
+div#novo_menu .bottom input { 
+    background-color: #02143a !important;
+    border: 1px solid #19336e !important;
+    box-shadow: 0px 0px 10px #02143a !important; 
+}
+
+li.midia:hover .icone{  background-color: #02143a !important;}
+li.midia span { color: #19336e !important;}
+
+a {
+    color: #0b2049;
+}
+
+div .ordem a:hover {
+    background: #02143a !important;
+    color: #FFF !important;
+}
+div.navBtn div {  
+    margin-right: 7px;
+    display: inline-block;
+    text-align: center;
+    background: #02143a;
+    box-sizing: border-box;
+    border-radius: 17px;
+    border: 1px solid rgba(255, 255, 255, 0);
+    width: 10px;
+    height: 10px;
+    cursor: pointer;
+}
+div.navBtn div[data-activenav="active"] {  
+    background-color: white; 
+     border-color: #02143a !important; 
+}
+.bn2 { 
+    width: 72%;
+    border-right: 0px solid #fff;
+    box-sizing: border-box;
+}
+.bn3 {  
+    width: 28%;
+}
+
+#footer {
+    background-color: #19336e;
+}
+#footer ul .title {
+    list-style: none;
+    margin: 0 0 4px;
+    color: #FFF !important;
+    text-transform: uppercase;
+}
+
+div#menu_topo a.logo{
+    display:block;
+    float:left;
+    width:158px;
+    height:60px;
+    background:transparent url('../images/multi_litoralingressos/logo_header.png') 0 0 no-repeat;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;
+}
+
+#teatro div.container_teatro a.teatro_nome {
+    float: right;
+    width: 184px;
+    font-size: 20px;
+    color: #19336e;
+    line-height: 1.1em;
+    margin: 5px 5px 0 0;
+    padding: 0 3px;
+}
+#teatro div.container_teatro a.teatro_nome:hover {
+    color: #ffffff;
+    background-color: #19336e;
+}
+#teatro div.container_teatro div.container_espetaculos a:hover {
+    color: #ffffff;
+    background-color: #19336e;
+}
+
+div#guia_espetaculos {
+    width: 100%;
+    height: 190px;
+    padding: 5px 0;
+    display: none;
+    background: url(../images/multi_litoralingressos/bg_fundo_guia.jpg) center bottom #19336e;
+    position: relative;
+    z-index: 9999;
+}
+
+div#guia_espetaculos div.right div.container.status div.segura span.botao {
+    display: block;
+    height: 85px;
+    text-align: center;
+    line-height: 86px;
+    color: #0b2049;
+    background-color: #fff;
+    border-radius: 87px;
+    width: 86px;
+    margin: 0 auto;
+    font-weight: 700;
+    font-size: 1.2em;
+    border: 6px double #19336e;
+}
+
+div#iframe a.botao.comprar, div.over a.botao.comprar {
+    background: url(../images/multi_litoralingressos/btn_comprar.png) no-repeat;
+}
+div#iframe a.botao.comprar, div.over a.botao.comprar:hover {
+    background: url(../images/multi_litoralingressos/btn_comprar_hover.png) no-repeat;
+}
+
+a.botao.data {
+    line-height: 1em;
+    background-image: url(../images/multi_litoralingressos/btn_data.png);
+}
+a.botao.data:hover {
+    line-height: 1em;
+    background-image: url(../images/multi_litoralingressos/btn_data_hover.png);
+}
+a.botao:hover span.dia_hora {
+    color: #19336e;
+}
+a.botao:hover span.comprar, a.botao:hover span.dia_hora {
+    color: #19336e;
+}
+a.botao:hover {
+    background-position: 0;
+}
+#espetaculo div.cont_teatro a:hover, #espetaculo div.container_mini_topo a:hover, #espetaculo div.detalhes_espetaculo.especial div#sinopse p a:hover, #espetaculo div.detalhes_espetaculo.especial div.container a:hover {
+    background: #19336e;
+    color: #FFF;
+}
+
+div.container_mini_topo span.sinopse {
+    background-image: url(../images/multi_litoralingressos/icon_sinopse.svg);
+}
+div.container_mini_topo span.sinopse:hover {
+    background-image: url(../images/multi_litoralingressos/icon_sinopse_hover.svg);
+}
+div.container_mini_topo span.icone {
+    vertical-align: middle;
+    font-size: 14px;
+    color: #19336e;
+    padding: 4px 0 4px 28px;
+    margin: 0 10px;
+    text-transform: lowercase;
+    background-position: 0 0;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    height: 18px;
+    cursor: pointer;
+}
+div.container_mini_topo span.icone:hover {
+    color: #0b2049;
+}
+#overlay div.centraliza div.fechar {
+    width: 150px;
+    height: 53px;
+    text-indent: -99999px;
+    display: block;
+    cursor: pointer;
+    margin: 0 auto 10px;
+    background: url(../images/multi_litoralingressos/btn_fechar.png) no-repeat;
+}
+#overlay div.centraliza div.fechar:hover {
+    background: url(../images/multi_litoralingressos/btn_fechar_hover.png) no-repeat;
+}
+#overlay p.teatro_info a {
+    background-color: #fff;
+}
+div.card a image { 
+    height: 180px;
+}
+
+div.card img {
+    width: 320px;
+    margin: 9px 9px 5px;
+}
+
+div.cardextended {
+    float: left;
+    width: 371px;
+    color: #4D4D4D;
+    margin: 0 6px 6px 0;
+    border: 1px solid #CCC;
+    background-color: #FFF;
+    overflow: hidden;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    /* height: 400px; */
+}
+div.cardextended a img {
+    max-width: 320px;
+}
+div.cardextended h3, div.cardextended h3 a, div.cardextended p {
+    width: 350px;
+}
+div#iframe a.botao.comprar, div.overextended a.botao.comprar {
+    width: 150px;
+    height: 52px;
+    margin-top: 30px;
+    margin-right: 92px;
+    margin-bottom: 92px;
+    margin-left: 110px;
+    text-indent: -20000px;
+}
+div.overextended p.linha1 {
+    font-size: 14px;
+    margin-top: 26px;
+    margin-right: 0px;
+    margin-bottom: 4px;
+    margin-left: 11px;
+}
+div.overextended p.linha2 {
+    margin-left: 11px;
+}
+div.overextended p.linha3 {
+    margin-left: 11px;
+}
+div#busca div.container.buscar input.submit {
+    float: left;
+    font-size: 12px;
+    height: 42px;
+    line-height: 40px;
+    padding: 0;
+    outline: 0;
+    border: 0;
+    width: 61px;
+    margin: 1px 0 0 -3px;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    text-indent: -20000px;
+    background: url(../images/multi_litoralingressos/ico_busca.png) no-repeat;
+}
+div.botoes_sessoes.claro a.botao.sinopse {
+    background-image: url(../images/multi_litoralingressos/ico_especial_sinopse_white.png);
+}
+div.botoes_sessoes.claro a.botao.informacoes {
+    background-image: url(../images/multi_litoralingressos/ico_especial_informacoes_white.png);
+}
+
+div#novo_menu .logo {
+    height: auto !important;
+    padding: 15px 15px !important;
+    width: 70px;
+}
+
+a.botao.todasdatas {
+    background-image: url(../images/multi_litoralingressos/btn_all_dates.png);
+}
+a.botao.todasdatas:hover {
+    background-image: url(../images/multi_litoralingressos/btn_all_dates_hover.png);
+}
+#pai #espetaculo div.cont_teatro a, #pai #espetaculo div.container_mini_topo a {
+    color: #fff !important;
+}
+#pai #espetaculo div.cont_teatro a, #pai #espetaculo div.container_mini_topo a :hover {
+    color: #fff !important;
+}
+#pai #espetaculo div.cont_teatro a, #pai #espetaculo div.container_mini_topo a {
+    background: #19336e;
+}
+#pai #espetaculo div.cont_teatro a, #pai #espetaculo div.container_mini_topo a :hover {
+    background: #19336e !important;
+}
+
+div#background_holder div.cidade_especial div#detalhes_busca div.ordem a {
+    color: #02143a;
+}
+#display .swiper-pagination-switch {
+    background: url(../images/multi_litoralingressos/ico_paginacao_visor.png) no-repeat;
+    cursor: pointer;
+    display: inline-block;
+    height: 10px;
+    margin: 0 3px;
+    width: 10px;
+}
+#sSlider {
+    height: 262px;
+}
+
+div#iframe a.botao.saiba_mais, div.over a.botao.saiba_mais {
+    width: 150px;
+    height: 52px;
+    margin: 110px;
+    text-indent: -20000px;
+    background: url(../images/multi_litoralingressos/btn_saibamais.png) no-repeat;
+}
+div#iframe a.botao.saiba_mais:hover, div.over a.botao.saiba_mais:hover {
+    width: 150px;
+    height: 52px;
+    margin: 110px;
+    text-indent: -20000px;
+    background: url(../images/multi_litoralingressos/btn_saibamais_hover.png) no-repeat;
+}
+div.espetaculo_em_cartaz div.container_infos div.botao.saiba_mais a {
+    background: url(../images/multi_litoralingressos/btn_saibamais.png) no-repeat;
+}
+div.espetaculo_em_cartaz div.container_infos div.botao.saiba_mais a:hover {
+    background: url(../images/multi_litoralingressos/btn_saibamais_hover.png) no-repeat;
+}
+@media only screen and (max-width:640px) {
+    div#novo_menu .fim {
+        padding-left: 15px;
+        width: 30%;
+        height: 57px !important;
+    }
+    body {
+        overflow: auto !important;
+    }
+}
